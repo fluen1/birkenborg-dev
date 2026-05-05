@@ -3,3 +3,11 @@ compatibility_date = "2026-05-05"
 
 [assets]
 directory = "./site/dist"
+
+[[routes]]
+pattern = "birkenborg.dev"
+custom_domain = true
+
+[[routes]]
+pattern = "www.birkenborg.dev"
+custom_domain = true
