@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const all = await getCollection('projekter', ({ data }) => data.status !== 'archived');
+const sorted = all.sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Projekter · birkenborg.dev" description="Hvad jeg har bygget — herunder retsklar.dk og ChainHub i alpha.">
+  <Header />
+  <main class="page">
+    <div class="container">
+      <header class="page-head">
+        <h1>Projekter</h1>
+        <p>Hvad jeg har shipped, hvad jeg er ved at bygge, og hvad jeg lærer undervejs.</p>
+      </header>
+      <div class="grid">
+        {sorted.map(p => (
+          <ProjectCard
+            href={`/projekter/${p.id.replace(/\.md$/, '')}`}
+            title={p.data.title}
+            pillLabel={p.data.pill_label}
+            status={p.data.status}
+            summary={p.data.summary}
+            featured={p.data.featured}
+          />
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .page-head { margin-bottom: 48px; max-width: 720px; }
+  .page-head h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 350;
+    letter-spacing: -.02em;
+    margin: 0 0 16px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .page-head p { font-size: 18px; color: var(--gray-700); margin: 0; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>
