@@ -1,0 +1,75 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const all = await getCollection('projekter');
+  return all.map(p => ({
+    params: { slug: p.id.replace(/\.md$/, '') },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+<Base title={`${project.data.title} · Projekter`} description={project.data.summary}>
+  <Header />
+  <main class="page">
+    <article class="container">
+      <header class="head">
+        <span class={`pill ${project.data.status}`}>{project.data.pill_label}</span>
+        <h1>{project.data.title}</h1>
+        <p class="summary">{project.data.summary}</p>
+        {project.data.external_url && (
+          <a class="external" href={project.data.external_url} target="_blank" rel="noopener">{project.data.external_url} →</a>
+        )}
+      </header>
+      <div class="body">
+        <Content />
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .head { max-width: 720px; margin: 0 auto 48px; }
+  .pill {
+    display: inline-block;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px; font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .pill.shipped  { background: rgba(120,140,93,.16); color: var(--sage); }
+  .pill.alpha    { background: rgba(217,119,87,.14); color: var(--clay-deep); }
+  .pill.internal { background: rgba(106,155,204,.14); color: #3a6a99; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 350;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin: 0 0 16px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .summary { font-family: var(--font-serif); font-size: 19px; color: var(--gray-700); margin: 0 0 16px; line-height: 1.55; }
+  .external { font-size: 14px; color: var(--clay-deep); text-decoration: underline; text-underline-offset: 3px; }
+  .body {
+    max-width: 720px; margin: 0 auto;
+    font-family: var(--font-serif);
+    font-size: 18px; line-height: 1.7;
+  }
+  .body :global(h1) { display: none; }
+  .body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 400;
+    margin: 40px 0 14px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .body :global(p) { margin: 0 0 22px; }
+  .body :global(ul), .body :global(ol) { margin: 0 0 22px; padding-left: 1.4em; }
+</style>
