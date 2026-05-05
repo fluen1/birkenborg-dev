@@ -1,0 +1,101 @@
+---
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import matter from 'gray-matter';
+import { marked } from 'marked';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const nowPath = path.resolve('../content/now.md');
+const raw = await fs.readFile(nowPath, 'utf-8');
+const { data, content } = matter(raw);
+const html = marked.parse(content) as string;
+
+const formatUpdated = (d: string) => {
+  const date = new Date(d);
+  const months = ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'];
+  return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`;
+};
+---
+<Base
+  title="Now · birkenborg.dev"
+  description="Hvad Philip Birkenborg er optaget af lige nu — opdateres løbende."
+>
+  <Header />
+  <main class="now-page">
+    <section class="now-hero">
+      <div class="container">
+        <span class="kicker">Now</span>
+        <h1>Lige nu</h1>
+        <p class="meta">
+          Inspireret af <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now-bevægelsen</a>.
+          Senest opdateret <time datetime={data.updated}>{formatUpdated(data.updated)}</time>.
+        </p>
+      </div>
+    </section>
+
+    <section class="now-body">
+      <div class="container">
+        <article class="prose" set:html={html}></article>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .now-hero {
+    padding: 72px 0 32px;
+    background: var(--cream-warm);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .25em; text-transform: uppercase;
+    color: var(--clay-deep);
+    margin-bottom: 18px;
+  }
+  .kicker::before {
+    content: ""; display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--clay-deep);
+  }
+  .now-hero h1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 350;
+    line-height: 1;
+    letter-spacing: -.02em;
+    margin: 0 0 16px;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  }
+  .meta {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    color: var(--gray-700);
+    margin: 0;
+  }
+  .meta a { color: var(--clay-deep); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+  .now-body { padding: 56px 0 96px; }
+  .prose {
+    max-width: 680px; margin: 0 auto;
+    font-family: var(--font-serif);
+    font-size: 19px; line-height: 1.7;
+    color: var(--ink);
+  }
+  .prose :global(p) { margin: 0 0 24px; }
+  .prose :global(p:last-child) { margin-bottom: 0; }
+  .prose :global(a) { color: var(--clay-deep); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .prose :global(h2) {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 400;
+    margin: 48px 0 16px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 24px; padding-left: 1.4em; }
+  .prose :global(li) { margin-bottom: 8px; }
+</style>

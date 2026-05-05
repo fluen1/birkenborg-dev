@@ -72,4 +72,9 @@ tools:
   - "Claude Code"
   - "Python"
   - "GitHub Actions"
+
+# Recent — auto-opdateres via Telegram-tag "/ship <tekst>"
+recent:
+  - date: 2026-05-05
+    text: "Shippede birkenborg-agents: autonom LinkedIn-pipeline med Telegram-input og auto-PR til birkenborg-dev"
 ---

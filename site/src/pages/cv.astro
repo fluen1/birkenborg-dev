@@ -24,6 +24,7 @@ interface CV {
   education: { degree: string; school: string; years: string }[];
   languages: { name: string; level: string }[];
   tools: string[];
+  recent?: { date: string; text: string }[];
 }
 
 const cvPath = path.resolve('../content/cv.md');
@@ -36,6 +37,18 @@ const formatUpdated = (d: string) => {
   const months = ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'];
   return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`;
 };
+
+const formatShort = (d: string) => {
+  const date = new Date(d);
+  const months = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+  return `${date.getDate()}. ${months[date.getMonth()]}`;
+};
+
+// Sortér recent (nyeste først), max 8 vises
+const recentSorted = (cv.recent ?? [])
+  .slice()
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 8);
 ---
 <Base title="CV · birkenborg.dev" description="Philip Birkenborg Andersen — Cand.merc.jur., Legal Counsel hos Tandlægen.dk.">
   <Header />
@@ -81,6 +94,20 @@ const formatUpdated = (d: string) => {
         </div>
 
         <aside class="side">
+          {recentSorted.length > 0 && (
+            <div class="block">
+              <h2 class="section-label">Recent</h2>
+              <ul class="recent">
+                {recentSorted.map(r => (
+                  <li>
+                    <time datetime={r.date}>{formatShort(r.date)}</time>
+                    <p>{r.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <div class="block">
             <h2 class="section-label">Uddannelse</h2>
             <ul class="education">
@@ -325,6 +352,34 @@ const formatUpdated = (d: string) => {
   .languages li:first-child { padding-top: 0; }
   .lang-name { font-family: var(--font-display); font-weight: 500; font-size: 16px; }
   .lang-level { font-size: 13px; color: var(--gray-700); font-style: italic; }
+
+  .recent {
+    list-style: none; margin: 0; padding: 0;
+  }
+  .recent li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex; gap: 14px; align-items: baseline;
+  }
+  .recent li:last-child { border-bottom: none; padding-bottom: 0; }
+  .recent li:first-child { padding-top: 0; }
+  .recent time {
+    flex-shrink: 0;
+    width: 56px;
+    font-size: 12px;
+    color: var(--clay-deep);
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: .02em;
+  }
+  .recent p {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
 
   .tools {
     list-style: none; margin: 0; padding: 0;
