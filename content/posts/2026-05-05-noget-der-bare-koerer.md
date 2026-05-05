@@ -7,8 +7,11 @@ suggested_publish_day: monday
 rationale: "Rammer en reel følelse hos folk der bygger ved siden af et fuldtidsjob — den stille succes der ikke føles som succes. Risiko: kan glide mod selvros, men den selvkritiske åbning holder det ærligt."
 privacy_flag: false
 status: scheduled
+publish_at: 2026-06-01T09:00:00+02:00
+
 linkedin_url: null
 ---
+
 
 # Noget der bare kører
 

@@ -7,8 +7,11 @@ suggested_publish_day: friday
 rationale: "Bruger ikke inbox direkte men aktiverer jurist-bygger-paradoks-temaet med en konkret og morsom detalje (30 README'er) — risikoen er at den er lidt mere reflekterende end energisk, men åbningslinjen og slutningen er skarpe nok."
 privacy_flag: false
 status: scheduled
+publish_at: 2026-05-08T09:00:00+02:00
+
 linkedin_url: null
 ---
+
 
 Jurister dokumenterer for at det holder i retten. Jeg dokumenterer for at jeg kan huske hvad koden gør om tre måneder.
 

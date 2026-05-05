@@ -8,6 +8,7 @@ privacy_flag: false
 excerpt: "Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på tværs af 50 klinikker."
 ---
 
+
 [Placeholder. Erstattes af Philip i implementation eller næste post-generation.]
 
 ## De tre læringer

@@ -7,8 +7,11 @@ suggested_publish_day: monday
 rationale: "Inbox-detaljen om 30 minutter og auto-godkendelse er konkret og overraskende nok til at bære en post — risikoen er at den føles som en triviel sejr, men slutningen redder det ved at vende blikket indad uden prædiken."
 privacy_flag: false
 status: scheduled
+publish_at: 2026-05-25T09:00:00+02:00
+
 linkedin_url: null
 ---
+
 
 LinkedIn OAuth tog 30 minutter. Jeg troede det ville tage dage.
 

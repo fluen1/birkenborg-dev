@@ -7,8 +7,11 @@ suggested_publish_day: friday
 rationale: "Konkret kollision mellem to faglige verdener Philip faktisk lever i — undgår den abstrakte \"jurister bør lære at kode\"-fælde og går direkte til en specifik observation med praktisk konsekvens."
 privacy_flag: false
 status: scheduled
+publish_at: 2026-05-15T09:00:00+02:00
+
 linkedin_url: null
 ---
+
 
 # Juristens og developerens forhold til dokumentation er ikke det samme
 

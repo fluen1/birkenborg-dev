@@ -8,6 +8,7 @@ privacy_flag: false
 excerpt: "Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde fejl. Den fandt 14 — og overså den ene der havde betydet noget."
 ---
 
+
 Min M&A-agent kunne læse hele aftalen, men den kunne ikke tælle.
 
 Det er den korte version. Her er den lange.

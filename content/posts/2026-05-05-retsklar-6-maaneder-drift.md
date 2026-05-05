@@ -7,8 +7,11 @@ suggested_publish_day: wednesday
 rationale: "Direkte fra inbox med præcis de samme detaljer — fungerer fordi slutningen er en handling, ikke en lektie, og sammenligningen med jurister-der-overvejer er konkret uden at blive belærende."
 privacy_flag: false
 status: scheduled
+publish_at: 2026-06-10T09:00:00+02:00
+
 linkedin_url: null
 ---
+
 
 retsklar.dk har kørt i 6 måneder. Jeg har ikke åbnet repoet siden marts.
 
