@@ -1,0 +1,44 @@
+---
+const links = [
+  { href: '/skrifter', label: 'Skrifter' },
+  { href: '/projekter', label: 'Projekter' },
+  { href: '/cv', label: 'CV' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+---
+<header class="site-header">
+  <div class="container">
+    <a class="wordmark" href="/">birkenborg<span class="slash">/</span>dev</a>
+    <nav class="primary">
+      {links.map(l => <a href={l.href}>{l.label}</a>)}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 249, 245, .85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .site-header .container {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 18px; padding-bottom: 18px;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    font-variation-settings: 'opsz' 100, 'SOFT' 100;
+  }
+  .wordmark .slash { color: var(--clay); font-style: italic; }
+  nav.primary { display: flex; gap: 32px; font-size: 14px; color: var(--gray-700); }
+  nav.primary a { padding: 4px 0; transition: color .2s; }
+  nav.primary a:hover { color: var(--ink); }
+  @media (max-width: 720px) {
+    nav.primary { gap: 18px; font-size: 13px; }
+  }
+</style>
