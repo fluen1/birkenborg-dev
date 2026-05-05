@@ -1,17 +1,107 @@
 ---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import StatusPanel from '../components/StatusPanel.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import WritingItem from '../components/WritingItem.astro';
 
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+const recentPosts = allPosts
+  .sort((a, b) => +b.data.publish_at - +a.data.publish_at)
+  .slice(0, 4);
+
+const allProjects = await getCollection('projekter', ({ data }) => data.status !== 'archived');
+const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
+const featuredProjects = sortedProjects.slice(0, 3);
 ---
+<Base title="Philip Birkenborg — birkenborg.dev">
+  <Header />
+  <main>
+    <Hero />
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+    <section class="status-section">
+      <div class="container">
+        <StatusPanel
+          text="Bygger <em>ChainHub</em> — multi-agent SaaS for juridiske teams. Alpha forventet Q4 2026."
+          meta="Opdateret 5. maj"
+        />
+      </div>
+    </section>
+
+    <section class="work">
+      <div class="container">
+        <div class="section-head">
+          <h2>Hvad jeg har bygget</h2>
+          <a class="more" href="/projekter">Alle projekter →</a>
+        </div>
+        <div class="grid-projects">
+          {featuredProjects.map(p => (
+            <ProjectCard
+              href={`/projekter/${p.id.replace(/\.md$/, '')}`}
+              title={p.data.title}
+              pillLabel={p.data.pill_label}
+              status={p.data.status}
+              summary={p.data.summary}
+              featured={p.data.featured}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="writings">
+      <div class="container">
+        <div class="section-head">
+          <h2>Seneste skrifter</h2>
+          <a class="more" href="/skrifter">Alle skrifter →</a>
+        </div>
+        <div class="writings-list">
+          {recentPosts.map(p => (
+            <WritingItem
+              href={`/skrifter/${p.id.replace(/\.md$/, '')}`}
+              title={p.data.title}
+              date={p.data.publish_at}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .status-section { padding-top: 0; }
+  .work { padding: 96px 0 24px; }
+  .writings { padding: 72px 0 96px; }
+  .section-head {
+    display: flex; align-items: end; justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .section-head h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 36px;
+    margin: 0;
+    letter-spacing: -.015em;
+    font-variation-settings: 'opsz' 144;
+  }
+  .more {
+    font-size: 14px; color: var(--gray-700);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .more:hover { color: var(--ink); }
+  .grid-projects {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 900px) {
+    .grid-projects { grid-template-columns: 1fr; }
+  }
+</style>
