@@ -8,3 +8,5 @@ dist/
 .cloudflare/
 .brainstorm/
 brainstorm-birkenborg-dev/
+site/test-results/
+site/playwright-report/
