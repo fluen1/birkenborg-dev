@@ -1,0 +1,57 @@
+---
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { marked } from 'marked';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// CV.md ligger uden for src/content/ — læs den direkte fra repo-roden
+const cvPath = path.resolve('../content/cv.md');
+const raw = await fs.readFile(cvPath, 'utf-8');
+const body = raw.replace(/^---[\s\S]*?---\n/, '');
+const html = marked.parse(body);
+---
+<Base title="CV · birkenborg.dev" description="Philip Birkenborg Andersen, Cand.merc.jur. — Legal Counsel hos Tandlægen.dk.">
+  <Header />
+  <main class="page">
+    <div class="container">
+      <header class="head">
+        <h1>Curriculum vitæ</h1>
+        <p><a class="download" href="/cv.pdf" download>Download som PDF →</a></p>
+      </header>
+      <div class="cv-body" set:html={html} />
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .head { max-width: 720px; margin: 0 auto 48px; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 350;
+    letter-spacing: -.02em;
+    margin: 0 0 16px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .download { color: var(--clay-deep); text-decoration: underline; text-underline-offset: 3px; font-size: 16px; }
+  .cv-body { max-width: 720px; margin: 0 auto; font-family: var(--font-serif); font-size: 17px; line-height: 1.65; }
+  .cv-body :global(h1) { display: none; }
+  .cv-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 400;
+    margin: 48px 0 16px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .cv-body :global(h3) {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 500;
+    margin: 28px 0 8px;
+  }
+  .cv-body :global(p strong) { color: var(--gray-700); font-weight: 600; }
+  .cv-body :global(ul) { margin: 0 0 16px; padding-left: 1.2em; }
+  .cv-body :global(li) { margin-bottom: 6px; }
+</style>
