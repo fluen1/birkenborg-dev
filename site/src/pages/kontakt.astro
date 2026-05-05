@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="Kontakt · birkenborg.dev" description="Skriv til Philip Birkenborg.">
+  <Header />
+  <main class="page">
+    <div class="container">
+      <header class="head">
+        <h1>Kontakt</h1>
+      </header>
+      <div class="body">
+        <p>Skriv en mail til <a href="mailto:birkenborg.p@hotmail.com">birkenborg.p@hotmail.com</a> hvis du vil snakke om jura, AI-systemer i drift, eller noget tredje du tænker jeg bør have en mening om.</p>
+        <p>Du kan også finde mig på <a href="https://linkedin.com/in/philip-birkenborg-509794172/" target="_blank" rel="noopener">LinkedIn</a> — jeg er der lidt for ofte.</p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .head { max-width: 720px; margin: 0 auto 32px; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 350;
+    letter-spacing: -.02em;
+    margin: 0;
+    font-variation-settings: 'opsz' 144;
+  }
+  .body {
+    max-width: 720px; margin: 0 auto;
+    font-family: var(--font-serif);
+    font-size: 19px; line-height: 1.65;
+  }
+  .body p { margin: 0 0 20px; }
+  .body a { color: var(--clay-deep); text-decoration: underline; text-underline-offset: 3px; }
+</style>
