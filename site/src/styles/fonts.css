@@ -1,7 +1,5 @@
-/* Loader Fraunces (display, italic, optical-size, SOFT),
-   Source Serif 4 (body), og Geist (UI/sans) fra Google Fonts.
-   Display=swap for at undgå FOIT; preconnect i <head>. */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Geist:wght@300..700&display=swap');
+/* Font tokens — actual stylesheet loaded via <link> in Base.astro <head>
+   for non-render-blocking critical-path delivery. */
 
 :root {
   --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;

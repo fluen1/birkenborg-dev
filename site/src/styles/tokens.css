@@ -5,7 +5,8 @@
   --cream-warm:   #f5f1e8;
   --gray-100:     #e8e6dc;
   --gray-200:     #d8d5c6;
-  --gray-400:     #b0aea5;
+  --gray-400:     #6c6a5e;  /* darkened for 4.5:1 contrast on cream */
+  --gray-deco:    #b0aea5;  /* original light-mute, only for decorative use */
   --gray-700:     #5a584f;
   --ink:          #141413;
   --clay:         #d97757;
