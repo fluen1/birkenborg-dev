@@ -1,57 +1,354 @@
 ---
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { marked } from 'marked';
+import matter from 'gray-matter';
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// CV.md ligger uden for src/content/ — læs den direkte fra repo-roden
+interface Role {
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  current?: boolean;
+  bullets?: string[];
+}
+
+interface CV {
+  name: string;
+  tagline: string;
+  location: string;
+  updated: string;
+  experience: Role[];
+  education: { degree: string; school: string; years: string }[];
+  languages: { name: string; level: string }[];
+  tools: string[];
+}
+
 const cvPath = path.resolve('../content/cv.md');
 const raw = await fs.readFile(cvPath, 'utf-8');
-const body = raw.replace(/^---[\s\S]*?---\n/, '');
-const html = marked.parse(body);
+const { data } = matter(raw);
+const cv = data as unknown as CV;
+
+const formatUpdated = (d: string) => {
+  const date = new Date(d);
+  const months = ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'];
+  return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`;
+};
 ---
-<Base title="CV · birkenborg.dev" description="Philip Birkenborg Andersen, Cand.merc.jur. — Legal Counsel hos Tandlægen.dk.">
+<Base title="CV · birkenborg.dev" description="Philip Birkenborg Andersen — Cand.merc.jur., Legal Counsel hos Tandlægen.dk.">
   <Header />
-  <main class="page">
-    <div class="container">
-      <header class="head">
-        <h1>Curriculum vitæ</h1>
-        <p><a class="download" href="/cv.pdf" download>Download som PDF →</a></p>
-      </header>
-      <div class="cv-body" set:html={html} />
-    </div>
+  <main class="cv-page">
+
+    <section class="cv-hero">
+      <div class="container">
+        <span class="kicker">Curriculum vitæ</span>
+        <h1>{cv.name}</h1>
+        <p class="tagline">{cv.tagline} <span class="dotsep">·</span> {cv.location}</p>
+        <a class="download" href="/cv.pdf" download>
+          <span class="ico" aria-hidden="true">↓</span>
+          <span>Download som PDF</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="cv-body">
+      <div class="container grid">
+
+        <div class="experience">
+          <h2 class="section-label">Erfaring</h2>
+          <ol class="timeline">
+            {cv.experience.map((role) => (
+              <li class={`role ${role.current ? 'current' : ''}`}>
+                <span class="dot" aria-hidden="true"></span>
+                <div class="role-content">
+                  <div class="role-head">
+                    <h3>{role.role}</h3>
+                    {role.current && <span class="badge">Aktiv</span>}
+                  </div>
+                  <p class="company">{role.company}</p>
+                  <p class="meta">{role.period} <span class="dotsep">·</span> {role.location}</p>
+                  {role.bullets && role.bullets.length > 0 && (
+                    <ul>
+                      {role.bullets.map(b => <li>{b}</li>)}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <aside class="side">
+          <div class="block">
+            <h2 class="section-label">Uddannelse</h2>
+            <ul class="education">
+              {cv.education.map(e => (
+                <li>
+                  <p class="degree">{e.degree}</p>
+                  <p class="school">{e.school}</p>
+                  <p class="years">{e.years}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="block">
+            <h2 class="section-label">Sprog</h2>
+            <ul class="languages">
+              {cv.languages.map(l => (
+                <li>
+                  <span class="lang-name">{l.name}</span>
+                  <span class="lang-level">{l.level}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="block">
+            <h2 class="section-label">Værktøjer</h2>
+            <ul class="tools">
+              {cv.tools.map(t => <li>{t}</li>)}
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <section class="cv-foot">
+      <div class="container">
+        <p>Senest opdateret <time datetime={cv.updated}>{formatUpdated(cv.updated)}</time></p>
+      </div>
+    </section>
+
   </main>
   <Footer />
 </Base>
 
 <style>
-  .page { padding: 64px 0 96px; }
-  .head { max-width: 720px; margin: 0 auto 48px; }
-  h1 {
-    font-family: var(--font-display);
-    font-size: clamp(48px, 6vw, 72px);
-    font-weight: 350;
-    letter-spacing: -.02em;
-    margin: 0 0 16px;
-    font-variation-settings: 'opsz' 144;
-  }
-  .download { color: var(--clay-deep); text-decoration: underline; text-underline-offset: 3px; font-size: 16px; }
-  .cv-body { max-width: 720px; margin: 0 auto; font-family: var(--font-serif); font-size: 17px; line-height: 1.65; }
-  .cv-body :global(h1) { display: none; }
-  .cv-body :global(h2) {
-    font-family: var(--font-display);
-    font-size: 26px; font-weight: 400;
-    margin: 48px 0 16px; padding-bottom: 8px;
+  .cv-hero {
+    padding: 72px 0 48px;
+    background: var(--cream-warm);
     border-bottom: 1px solid var(--gray-100);
   }
-  .cv-body :global(h3) {
-    font-family: var(--font-display);
-    font-size: 20px; font-weight: 500;
-    margin: 28px 0 8px;
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .25em; text-transform: uppercase;
+    color: var(--clay-deep);
+    margin-bottom: 18px;
   }
-  .cv-body :global(p strong) { color: var(--gray-700); font-weight: 600; }
-  .cv-body :global(ul) { margin: 0 0 16px; padding-left: 1.2em; }
-  .cv-body :global(li) { margin-bottom: 6px; }
+  .kicker::before {
+    content: ""; display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--clay-deep);
+  }
+  .cv-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 350;
+    line-height: 1;
+    letter-spacing: -.025em;
+    margin: 0 0 16px;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  }
+  .tagline {
+    font-family: var(--font-serif);
+    font-size: 19px;
+    color: var(--gray-700);
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+  .dotsep {
+    display: inline-block; margin: 0 6px;
+    color: var(--gray-400); opacity: .6;
+  }
+  .download {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--cream);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    transition: transform .15s ease, box-shadow .2s;
+  }
+  .download:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(20,20,19,.18); }
+  .download .ico {
+    display: inline-flex;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--clay);
+    color: var(--cream);
+    align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+
+  .cv-body { padding: 64px 0 32px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  .section-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin: 0 0 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .timeline {
+    list-style: none; margin: 0; padding: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: ""; position: absolute;
+    left: 7px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--gray-100);
+  }
+  .role {
+    position: relative;
+    padding-left: 36px;
+    padding-bottom: 36px;
+  }
+  .role:last-child { padding-bottom: 0; }
+  .dot {
+    position: absolute;
+    left: 0; top: 6px;
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid var(--gray-200);
+  }
+  .role.current .dot {
+    border-color: var(--clay);
+    background: var(--clay);
+    box-shadow: 0 0 0 4px rgba(217,119,87,.18);
+  }
+  .role-head {
+    display: flex; align-items: center; gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .role h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+  .badge {
+    font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+    background: rgba(120,140,93,.16); color: var(--sage);
+    padding: 3px 9px; border-radius: 999px; font-weight: 600;
+  }
+  .company {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: var(--clay-deep);
+    margin: 0 0 4px;
+    font-style: italic;
+  }
+  .meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--gray-700);
+    margin: 0 0 14px;
+  }
+  .role ul {
+    list-style: none; margin: 0; padding: 0;
+    font-family: var(--font-serif);
+    font-size: 16px; line-height: 1.6;
+    color: var(--ink);
+  }
+  .role ul li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+  }
+  .role ul li::before {
+    content: "·"; position: absolute;
+    left: 4px; top: 0;
+    color: var(--clay);
+    font-weight: 700;
+  }
+
+  .side { display: flex; flex-direction: column; gap: 40px; }
+
+  .education { list-style: none; margin: 0; padding: 0; }
+  .education li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .education li:last-child { border-bottom: none; padding-bottom: 0; }
+  .education li:first-child { padding-top: 0; }
+  .education .degree {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 500;
+    margin: 0 0 4px;
+  }
+  .education .school {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--gray-700);
+    margin: 0 0 2px;
+    font-style: italic;
+  }
+  .education .years {
+    font-size: 12px;
+    color: var(--gray-400);
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .languages {
+    list-style: none; margin: 0; padding: 0;
+  }
+  .languages li {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .languages li:last-child { border-bottom: none; padding-bottom: 0; }
+  .languages li:first-child { padding-top: 0; }
+  .lang-name { font-family: var(--font-display); font-weight: 500; font-size: 16px; }
+  .lang-level { font-size: 13px; color: var(--gray-700); font-style: italic; }
+
+  .tools {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tools li {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--cream-warm);
+    border: 1px solid var(--gray-100);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .cv-foot {
+    padding: 24px 0 32px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .cv-foot p {
+    font-size: 13px;
+    color: var(--gray-400);
+    margin: 0;
+    text-align: center;
+  }
+  .cv-foot time { font-variant-numeric: tabular-nums; }
 </style>
