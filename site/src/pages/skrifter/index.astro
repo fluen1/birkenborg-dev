@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import WritingItem from '../../components/WritingItem.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+const sorted = allPosts.sort((a, b) => +b.data.publish_at - +a.data.publish_at);
+---
+<Base title="Skrifter · birkenborg.dev" description="Korte essays om jura, AI-systemer i drift og fejl jeg er løbet ind i.">
+  <Header />
+  <main class="page">
+    <div class="container">
+      <header class="page-head">
+        <h1>Skrifter</h1>
+        <p>Korte essays om jura, AI-systemer i drift og fejl jeg er løbet ind i. {sorted.length} stk.</p>
+      </header>
+      <div class="writings-list">
+        {sorted.map(p => (
+          <WritingItem
+            href={`/skrifter/${p.id.replace(/\.md$/, '')}`}
+            title={p.data.title}
+            date={p.data.publish_at}
+          />
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .page-head { margin-bottom: 48px; max-width: 720px; }
+  .page-head h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 350;
+    letter-spacing: -.02em;
+    margin: 0 0 16px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .page-head p { font-size: 18px; color: var(--gray-700); margin: 0; }
+</style>
