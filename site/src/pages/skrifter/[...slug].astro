@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { formatDate } from '../../lib/format-date';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => data.status === 'published');
+  return posts.map(p => ({
+    params: { slug: p.id.replace(/\.md$/, '') },
+    props: { post: p },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Base title={`${post.data.title} · birkenborg.dev`} description={post.data.excerpt}>
+  <Header />
+  <main class="post-page">
+    <article class="container">
+      <header class="post-head">
+        <p class="meta">{formatDate(post.data.publish_at)}</p>
+        <h1>{post.data.title}</h1>
+        {post.data.excerpt && <p class="excerpt">{post.data.excerpt}</p>}
+      </header>
+      <div class="post-body">
+        <Content />
+      </div>
+      {post.data.linkedin_url && (
+        <footer class="post-foot">
+          <a href={post.data.linkedin_url} target="_blank" rel="noopener">Læs også på LinkedIn →</a>
+        </footer>
+      )}
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .post-page { padding: 64px 0 96px; }
+  .post-head { max-width: 720px; margin: 0 auto 48px; }
+  .meta {
+    font-size: 12px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--gray-700); margin: 0 0 16px;
+  }
+  .post-head h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 350;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin: 0 0 20px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .excerpt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px; line-height: 1.55;
+    color: var(--gray-700);
+    margin: 0;
+  }
+  .post-body {
+    max-width: 720px; margin: 0 auto;
+    font-family: var(--font-serif);
+    font-size: 18px; line-height: 1.7;
+  }
+  .post-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 400;
+    margin: 48px 0 16px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .post-body :global(p) { margin: 0 0 24px; }
+  .post-body :global(a) { color: var(--clay-deep); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .post-body :global(ul), .post-body :global(ol) { margin: 0 0 24px; padding-left: 1.4em; }
+  .post-body :global(li) { margin-bottom: 8px; }
+  .post-body :global(code) {
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: .92em;
+    background: var(--gray-100);
+    padding: 1px 6px; border-radius: 4px;
+  }
+  .post-foot {
+    max-width: 720px; margin: 64px auto 0;
+    padding-top: 24px; border-top: 1px solid var(--gray-100);
+    font-size: 14px;
+  }
+  .post-foot a { color: var(--clay-deep); }
+</style>
