@@ -7,6 +7,7 @@ import Hero from '../components/Hero.astro';
 import LiveActivity from '../components/LiveActivity.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import WritingItem from '../components/WritingItem.astro';
+import ChatCta from '../components/ChatCta.astro';
 
 const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
 const recentPosts = allPosts
@@ -64,6 +65,7 @@ const featuredProjects = sortedProjects.slice(0, 3);
             />
           ))}
         </div>
+        <ChatCta />
       </div>
     </section>
   </main>
