@@ -1,0 +1,390 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Snak med Philip — birkenborg.dev" description="Stil spørgsmål til Philips skrifter. Bot'en citerer kilder og giver ikke juridisk rådgivning.">
+  <Header />
+  <main class="chat-main">
+    <div class="container">
+      <header class="chat-head">
+        <h1>Snak med Philip om hans skrifter</h1>
+        <p class="lede">
+          Bot'en kender alt på <a href="/skrifter">/skrifter</a>. Den citerer kilder.
+          Den giver ikke juridisk rådgivning. Samtalen gemmes ikke — genindlæs siden for at starte forfra.
+        </p>
+      </header>
+
+      <section class="chat-thread" data-thread aria-live="polite" aria-label="Samtale">
+        <div class="empty-hint" data-empty>
+          Skriv et spørgsmål nedenfor for at starte. Eksempler:
+          <ul>
+            <li>"Hvad mener du om GDPR i tandklinikker?"</li>
+            <li>"Hvorfor dokumenterer jurister anderledes end udviklere?"</li>
+            <li>"Hvilke agents bruger du dagligt?"</li>
+          </ul>
+        </div>
+      </section>
+
+      <form class="chat-form" data-form>
+        <textarea
+          data-input
+          name="message"
+          rows="2"
+          maxlength="2000"
+          placeholder="Skriv en besked... (Cmd/Ctrl+Enter for at sende)"
+          aria-label="Skriv din besked"
+        ></textarea>
+        <button type="submit" data-submit aria-label="Send">
+          <span data-submit-label>Send →</span>
+        </button>
+      </form>
+
+      <p class="status-line" data-status></p>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  interface Message { role: 'user' | 'assistant'; content: string; }
+  interface ErrorBody { error: string; message?: string; retryAfterSeconds?: number; }
+
+  const thread = document.querySelector<HTMLElement>('[data-thread]')!;
+  const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+  const form = document.querySelector<HTMLFormElement>('[data-form]')!;
+  const input = document.querySelector<HTMLTextAreaElement>('[data-input]')!;
+  const submit = document.querySelector<HTMLButtonElement>('[data-submit]')!;
+  const submitLabel = document.querySelector<HTMLElement>('[data-submit-label]')!;
+  const statusLine = document.querySelector<HTMLElement>('[data-status]')!;
+
+  const messages: Message[] = [];
+  let inflight = false;
+
+  // Erstatter /skrifter/<slug>-mønstre med tekst+anker DOM-fragmenter via matchAll.
+  // Bygger noder med textContent + createElement — ingen innerHTML, intet XSS-vindue.
+  function renderTextWithCitations(target: HTMLElement, text: string): void {
+    target.replaceChildren();
+    const matches = Array.from(text.matchAll(/\/skrifter\/[a-z0-9\-]+/gi));
+    let lastIdx = 0;
+    for (const m of matches) {
+      const start = m.index ?? 0;
+      if (start > lastIdx) {
+        target.appendChild(document.createTextNode(text.slice(lastIdx, start)));
+      }
+      const a = document.createElement('a');
+      a.href = m[0];
+      a.textContent = m[0];
+      target.appendChild(a);
+      lastIdx = start + m[0].length;
+    }
+    if (lastIdx < text.length) {
+      target.appendChild(document.createTextNode(text.slice(lastIdx)));
+    }
+  }
+
+  function setDimMessage(target: HTMLElement, text: string): void {
+    target.replaceChildren();
+    const em = document.createElement('em');
+    em.className = 'dim';
+    em.textContent = `[${text}]`;
+    target.appendChild(em);
+  }
+
+  function renderMessage(m: Message, streaming = false): { el: HTMLElement; bodyEl: HTMLElement } {
+    const el = document.createElement('div');
+    el.className = `bubble bubble-${m.role}`;
+    if (streaming) el.dataset.streaming = '1';
+    const label = document.createElement('span');
+    label.className = 'role';
+    label.textContent = m.role === 'user' ? 'Du' : 'Philip';
+    const body = document.createElement('div');
+    body.className = 'body';
+    if (m.content) renderTextWithCitations(body, m.content);
+    el.appendChild(label);
+    el.appendChild(body);
+    thread.appendChild(el);
+    if (empty.parentElement) empty.remove();
+    scrollToBottom();
+    return { el, bodyEl: body };
+  }
+
+  function scrollToBottom(): void {
+    requestAnimationFrame(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }));
+  }
+
+  function setStatus(text: string, kind: 'info' | 'error' = 'info'): void {
+    statusLine.textContent = text;
+    statusLine.dataset.kind = kind;
+  }
+
+  function setBusy(busy: boolean): void {
+    inflight = busy;
+    submit.disabled = busy;
+    input.disabled = busy;
+    submitLabel.textContent = busy ? 'Sender…' : 'Send →';
+  }
+
+  async function send(content: string): Promise<void> {
+    setStatus('');
+    const userMsg: Message = { role: 'user', content };
+    messages.push(userMsg);
+    renderMessage(userMsg);
+
+    const assistantMsg: Message = { role: 'assistant', content: '' };
+    const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
+
+    setBusy(true);
+
+    let res: Response;
+    try {
+      res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ messages }),
+      });
+    } catch {
+      setDimMessage(bodyEl, 'afbrudt — netværksfejl');
+      setStatus('Kunne ikke nå serveren. Prøv igen om lidt.', 'error');
+      messages.pop();
+      setBusy(false);
+      return;
+    }
+
+    if (!res.ok) {
+      let body: ErrorBody = { error: 'unknown' };
+      try { body = await res.json() as ErrorBody; } catch {}
+
+      let userText: string;
+      if (res.status === 429 && body.retryAfterSeconds) {
+        const min = Math.ceil(body.retryAfterSeconds / 60);
+        userText = `Du har sendt mange beskeder — prøv igen om ${min} minut${min === 1 ? '' : 'ter'}.`;
+      } else if (res.status === 503 && body.error === 'daily_cap') {
+        userText = 'Chatten har holdt fri i dag — kom tilbage i morgen.';
+      } else if (res.status === 503 && body.error === 'disabled') {
+        userText = 'Chatten er midlertidigt slået fra.';
+      } else if (res.status === 400) {
+        userText = `Beskeden blev afvist (${body.message ?? 'valideringsfejl'}).`;
+      } else {
+        userText = 'Noget gik galt på vores side. Prøv igen om lidt.';
+      }
+      setDimMessage(bodyEl, userText);
+      setStatus(userText, 'error');
+      messages.pop();
+      setBusy(false);
+      return;
+    }
+
+    if (!res.body) {
+      setDimMessage(bodyEl, 'afbrudt — tom respons');
+      messages.pop();
+      setBusy(false);
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let acc = '';
+
+    try {
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let idx: number;
+        while ((idx = buffer.indexOf('\n\n')) !== -1) {
+          const event = buffer.slice(0, idx);
+          buffer = buffer.slice(idx + 2);
+          const dataLine = event.split('\n').find(l => l.startsWith('data: '));
+          if (!dataLine) continue;
+          const json = dataLine.slice(6);
+          if (json === '[DONE]') continue;
+          try {
+            const obj = JSON.parse(json);
+            if (obj.type === 'content_block_delta' && obj.delta?.type === 'text_delta') {
+              acc += obj.delta.text;
+              renderTextWithCitations(bodyEl, acc);
+              scrollToBottom();
+            }
+          } catch {
+            // ignore unparseable chunks
+          }
+        }
+      }
+    } catch {
+      const trailing = document.createElement('em');
+      trailing.className = 'dim';
+      trailing.textContent = ' [afbrudt]';
+      bodyEl.appendChild(trailing);
+      setStatus('Forbindelsen blev afbrudt. Du kan sende beskeden igen.', 'error');
+      messages.pop();
+      setBusy(false);
+      return;
+    }
+
+    if (acc.length === 0) {
+      setDimMessage(bodyEl, 'tomt svar');
+      messages.pop();
+    } else {
+      assistantMsg.content = acc;
+      messages.push(assistantMsg);
+    }
+    delete assistantEl.dataset.streaming;
+    setBusy(false);
+    input.focus();
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (inflight) return;
+    const content = input.value.trim();
+    if (!content) return;
+    input.value = '';
+    void send(content);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      e.preventDefault();
+      form.requestSubmit();
+    }
+  });
+</script>
+
+<style>
+  .chat-main { padding: 56px 0 40px; }
+  .chat-head { max-width: 720px; margin: 0 auto 40px; }
+  .chat-head h1 {
+    font-family: var(--font-display);
+    font-weight: 350;
+    font-size: 42px;
+    letter-spacing: -.015em;
+    margin: 0 0 18px;
+    font-variation-settings: 'opsz' 144;
+  }
+  .chat-head .lede {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--gray-700);
+    margin: 0;
+  }
+  .chat-head .lede a { color: var(--clay-deep); }
+
+  .chat-thread {
+    max-width: 720px;
+    margin: 0 auto 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 200px;
+  }
+  .empty-hint {
+    color: var(--gray-400);
+    font-size: 14px;
+    border: 1px dashed var(--gray-100);
+    border-radius: var(--r-md);
+    padding: 22px 26px;
+    background: var(--cream-warm);
+  }
+  .empty-hint ul { margin: 10px 0 0; padding-left: 20px; }
+  .empty-hint li { margin-bottom: 4px; }
+
+  .bubble {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .bubble .role {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gray-700);
+    font-weight: 600;
+  }
+  .bubble-user .role { color: var(--ink); }
+  .bubble-assistant .role { color: var(--clay-deep); }
+  .bubble .body {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .bubble-user .body {
+    background: var(--cream-warm);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+  }
+  .bubble-assistant[data-streaming] .body::after {
+    content: "▍";
+    color: var(--clay);
+    animation: blink 1s steps(2) infinite;
+    margin-left: 2px;
+  }
+  .bubble .body a { color: var(--clay-deep); text-decoration: underline; }
+  .bubble .body em.dim { color: var(--gray-400); font-size: 14px; font-style: italic; }
+
+  .chat-form {
+    max-width: 720px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: end;
+  }
+  .chat-form textarea {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 14px 16px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-md);
+    background: var(--cream);
+    resize: vertical;
+    min-height: 56px;
+    color: var(--ink);
+  }
+  .chat-form textarea:focus {
+    outline: none;
+    border-color: var(--clay);
+    box-shadow: 0 0 0 3px rgba(217, 119, 87, .15);
+  }
+  .chat-form button {
+    padding: 14px 22px;
+    border: none;
+    border-radius: var(--r-md);
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .chat-form button:hover:not(:disabled) { background: var(--clay-deep); }
+  .chat-form button:disabled { opacity: .6; cursor: not-allowed; }
+
+  .status-line {
+    max-width: 720px;
+    margin: 14px auto 0;
+    font-size: 13px;
+    color: var(--gray-700);
+    min-height: 18px;
+  }
+  .status-line[data-kind="error"] { color: var(--clay-deep); }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  @media (max-width: 720px) {
+    .chat-main { padding: 32px 0 28px; }
+    .chat-head h1 { font-size: 32px; }
+    .chat-form { grid-template-columns: 1fr; }
+  }
+</style>
