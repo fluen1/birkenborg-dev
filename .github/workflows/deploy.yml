@@ -8,8 +8,10 @@ on:
     branches: [main]
     paths:
       - 'site/**'
+      - 'worker/**'
       - 'content/**'
       - 'wrangler.toml'
+      - 'package.json'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 

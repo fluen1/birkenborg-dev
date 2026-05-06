@@ -1,8 +1,11 @@
 name = "birkenborg-dev"
+main = "worker/index.ts"
 compatibility_date = "2026-05-05"
+compatibility_flags = ["nodejs_compat"]
 
 [assets]
 directory = "./site/dist"
+binding = "ASSETS"
 
 [[routes]]
 pattern = "birkenborg.dev"
