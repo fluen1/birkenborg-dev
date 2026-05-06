@@ -10,3 +10,4 @@ dist/
 brainstorm-birkenborg-dev/
 site/test-results/
 site/playwright-report/
+.wrangler/

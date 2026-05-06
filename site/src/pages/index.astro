@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
-import StatusPanel from '../components/StatusPanel.astro';
+import LiveActivity from '../components/LiveActivity.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import WritingItem from '../components/WritingItem.astro';
 
@@ -24,10 +24,7 @@ const featuredProjects = sortedProjects.slice(0, 3);
 
     <section class="status-section">
       <div class="container">
-        <StatusPanel
-          text="Bygger <em>ChainHub</em> — multi-agent SaaS for juridiske teams. Alpha forventet Q4 2026."
-          meta="Opdateret 5. maj"
-        />
+        <LiveActivity />
       </div>
     </section>
 
