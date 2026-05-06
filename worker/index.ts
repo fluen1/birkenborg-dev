@@ -3,13 +3,23 @@
  *
  * Routes:
  *   GET /api/activity   → JSON med GitHub-aktivitet sidste 30 dage + senest commit
+ *   POST /api/chat      → chat-endpoint (Anthropic)
  *   alt andet           → fall-through til ASSETS (Astro static build)
  */
+
+import { handleChat, type ChatEnv } from './chat';
+import type { KVNamespace } from '@cloudflare/workers-types';
 
 interface Env {
   ASSETS: Fetcher;
   GITHUB_TOKEN?: string;
   BOT_INTERNAL_TOKEN?: string;
+  CHAT_STATE: KVNamespace;
+  ANTHROPIC_API_KEY: string;
+  IP_HASH_SALT: string;
+  CHAT_DISABLED?: string;
+  DAILY_CAP?: string;
+  CHAT_MODEL?: string;
 }
 
 const GITHUB_USER = "fluen1";
@@ -43,6 +53,10 @@ export default {
 
     if (url.pathname === "/api/activity") {
       return handleActivity(req, env, ctx);
+    }
+
+    if (url.pathname === "/api/chat") {
+      return handleChat(req, env satisfies ChatEnv, ctx);
     }
 
     return env.ASSETS.fetch(req);
