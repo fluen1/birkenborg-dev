@@ -10,6 +10,10 @@ command = "node scripts/build-corpus.mjs"
 directory = "./site/dist"
 binding = "ASSETS"
 
+[[kv_namespaces]]
+binding = "CHAT_STATE"
+id = "a9e4d133b0174405accbdb594fa89b61"
+
 [[routes]]
 pattern = "birkenborg.dev"
 custom_domain = true
