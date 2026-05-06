@@ -47,14 +47,22 @@
     const hintEl = root.querySelector("[data-hint]") as HTMLElement;
     const barsEl = root.querySelector("[data-bars]") as SVGGElement;
 
-    const fmtRel = (ts: number): string => {
-      const diff = Math.floor(Date.now() / 1000) - ts;
-      if (diff < 60) return "lige nu";
-      if (diff < 3600) return `${Math.floor(diff / 60)} min siden`;
-      if (diff < 86400) return `${Math.floor(diff / 3600)} timer siden`;
-      const days = Math.floor(diff / 86400);
-      if (days === 1) return "i går";
-      return `${days} dage siden`;
+    // Beskeder vi ikke vil vise som "hvad jeg byggede" — for vague til at signalere noget
+    const isInformativeMessage = (msg: string): boolean => {
+      const lower = msg.toLowerCase();
+      if (lower.startsWith("merge ")) return false;
+      if (lower.startsWith("merge:")) return false;
+      if (lower.startsWith("merge branch")) return false;
+      if (lower.startsWith("wip")) return false;
+      if (lower.startsWith("fixup!")) return false;
+      if (lower === "fix" || lower === "update" || lower === "wip") return false;
+      return msg.length >= 8;
+    };
+
+    // Trim conventional-commit-prefix (worker:, feat(x):, fix:, etc.) for læsbarhed
+    const cleanMessage = (msg: string): string => {
+      const m = msg.match(/^[a-z]+(\([^)]+\))?:\s*(.+)$/);
+      return (m?.[2] ?? msg).trim();
     };
 
     const renderLine = (data: ActivityResponse): void => {
@@ -62,12 +70,36 @@
       const segments: Array<DocumentFragment | string> = [];
 
       if (data.lastCommit) {
+        const diff = Math.floor(Date.now() / 1000) - data.lastCommit.ts;
+        const showMessage = isInformativeMessage(data.lastCommit.message);
         const frag = document.createDocumentFragment();
-        frag.appendChild(document.createTextNode("Sidste commit på "));
+
+        let prefix: string;
+        if (diff < 6 * 3600) prefix = "Lige bygget på ";
+        else if (diff < 24 * 3600) prefix = "I dag på ";
+        else if (diff < 48 * 3600) prefix = "I går på ";
+        else if (diff < 7 * 86400) {
+          const days = Math.floor(diff / 86400);
+          prefix = `For ${days} dage siden på `;
+        } else prefix = "Sidste commit på ";
+
+        frag.appendChild(document.createTextNode(prefix));
         const em = document.createElement("em");
         em.textContent = data.lastCommit.repo;
         frag.appendChild(em);
-        frag.appendChild(document.createTextNode(` ${fmtRel(data.lastCommit.ts)}`));
+
+        if (showMessage && diff < 7 * 86400) {
+          frag.appendChild(document.createTextNode(": "));
+          frag.appendChild(document.createTextNode(cleanMessage(data.lastCommit.message)));
+        } else if (!showMessage && diff >= 7 * 86400) {
+          const days = Math.floor(diff / 86400);
+          frag.appendChild(document.createTextNode(` — ${days} dage siden`));
+        } else if (!showMessage) {
+          // Within last week, but uninteresting message — just show recency
+          if (diff < 3600) frag.appendChild(document.createTextNode(" — lige nu"));
+          else if (diff < 86400) frag.appendChild(document.createTextNode(` — ${Math.floor(diff / 3600)} timer siden`));
+        }
+
         segments.push(frag);
       }
 
