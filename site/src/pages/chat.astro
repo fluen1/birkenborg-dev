@@ -67,7 +67,6 @@ import Footer from '../components/Footer.astro';
   let stuckToBottom = true;
 
   // Distance fra viewport-bund hvor vi stadig regner brugeren som "stuck to bottom".
-  // Hvis bruger scroller højere op end dette, slipper vi auto-scrollen.
   const STICK_THRESHOLD_PX = 140;
 
   function isNearBottom(): boolean {
@@ -75,8 +74,39 @@ import Footer from '../components/Footer.astro';
     return distance < STICK_THRESHOLD_PX;
   }
 
-  window.addEventListener('scroll', () => {
-    stuckToBottom = isNearBottom();
+  // Detekter eksplicit bruger-input (ikke programmatic scrolls).
+  // Wheel: deltaY < 0 = scroll up = unstick.
+  window.addEventListener('wheel', (e) => {
+    if (e.deltaY < 0) {
+      stuckToBottom = false;
+    } else if (e.deltaY > 0 && isNearBottom()) {
+      stuckToBottom = true;
+    }
+  }, { passive: true });
+
+  // Keyboard scroll-keys.
+  window.addEventListener('keydown', (e) => {
+    if (e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLInputElement) return;
+    if (['ArrowUp', 'PageUp', 'Home'].includes(e.key)) {
+      stuckToBottom = false;
+    } else if (['ArrowDown', 'PageDown', 'End'].includes(e.key) && isNearBottom()) {
+      stuckToBottom = true;
+    }
+  });
+
+  // Touch (mobile): finger-bevægelse opad på skærmen = scroll content nedad.
+  // Modsat: finger nedad = scroller UP gennem content = unstick.
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0]?.clientY ?? 0;
+  }, { passive: true });
+  window.addEventListener('touchmove', (e) => {
+    const currentY = e.touches[0]?.clientY ?? 0;
+    if (currentY > touchStartY + 12) {
+      stuckToBottom = false;
+    } else if (currentY < touchStartY - 12 && isNearBottom()) {
+      stuckToBottom = true;
+    }
   }, { passive: true });
 
   // Plain text uden markdown, bevarer linjeskift. Bruges til user-spørgsmål.
@@ -331,213 +361,6 @@ import Footer from '../components/Footer.astro';
   .empty-hint ul { margin: 10px 0 0; padding-left: 20px; }
   .empty-hint li { margin-bottom: 4px; }
 
-  /* Screen-reader-only labels (Du:/Philip:) */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* ============== USER BUBBLE — spørgsmål som italic kapitel-overskrift ============== */
-
-  .bubble-user {
-    display: block;
-  }
-  .bubble-user .body {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 350;
-    font-size: 32px;
-    line-height: 1.2;
-    letter-spacing: -.01em;
-    color: var(--ink);
-    font-variation-settings: 'opsz' 144;
-    max-width: 600px;
-    padding-left: 18px;
-    border-left: 3px solid var(--clay);
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  /* ============== BOT BUBBLE — magazine-spread prosa ============== */
-
-  .bubble-assistant {
-    display: block;
-    position: relative;
-  }
-  .bubble-assistant::before {
-    content: "Philip Birkenborg svarer";
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--clay-deep);
-    font-weight: 500;
-    margin-bottom: 22px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--gray-200);
-  }
-
-  .bubble-assistant .body {
-    font-family: var(--font-serif);
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--ink);
-  }
-
-  /* Lede-paragraf (første paragraf i bot-svar) */
-  .bubble-assistant .body p.lede {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 26px;
-    line-height: 1.3;
-    color: var(--clay-deep);
-    margin-bottom: 0.9em;
-    font-variation-settings: 'opsz' 144;
-    letter-spacing: -.005em;
-  }
-
-  /* Almindelige paragraffer */
-  .bubble-assistant .body p {
-    margin-bottom: 0.85em;
-  }
-  .bubble-assistant .body p:last-child { margin-bottom: 0; }
-
-  /* Inline emphasis */
-  .bubble-assistant .body strong {
-    font-weight: 600;
-    color: var(--ink);
-  }
-  .bubble-assistant .body em {
-    font-style: italic;
-    color: var(--clay-deep);
-  }
-  .bubble-assistant .body a {
-    color: var(--clay-deep);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-  .bubble-assistant .body a:hover { color: var(--clay); }
-
-  /* Nummererede lister med store italic Fraunces-numerals */
-  .bubble-assistant .body ol {
-    list-style: none;
-    counter-reset: prose-list;
-    margin: 1em 0;
-    padding: 0;
-  }
-  .bubble-assistant .body ol > li {
-    counter-increment: prose-list;
-    position: relative;
-    padding-left: 60px;
-    margin-bottom: 1em;
-  }
-  .bubble-assistant .body ol > li::before {
-    content: "0" counter(prose-list);
-    position: absolute;
-    left: 0;
-    top: -4px;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 32px;
-    font-weight: 350;
-    color: var(--clay);
-    font-variation-settings: 'opsz' 144;
-    width: 50px;
-  }
-
-  /* Bullet-lister */
-  .bubble-assistant .body ul {
-    list-style: none;
-    margin: 1em 0;
-    padding: 0;
-  }
-  .bubble-assistant .body ul > li {
-    position: relative;
-    padding-left: 26px;
-    margin-bottom: 0.5em;
-  }
-  .bubble-assistant .body ul > li::before {
-    content: "•";
-    position: absolute;
-    left: 6px;
-    top: 0;
-    color: var(--clay);
-    font-weight: 700;
-  }
-
-  /* Caption-style citation */
-  .bubble-assistant .body .caption {
-    margin-top: 32px;
-    padding-top: 14px;
-    border-top: 1px solid var(--gray-200);
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-  }
-  .bubble-assistant .body .caption::before {
-    content: "↳";
-    color: var(--clay);
-    font-size: 20px;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-  .bubble-assistant .body .caption .meta {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--gray-700);
-    margin-bottom: 4px;
-    font-weight: 500;
-  }
-  .bubble-assistant .body .caption .source-title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 350;
-    font-size: 17px;
-    color: var(--ink);
-    line-height: 1.3;
-    font-variation-settings: 'opsz' 144;
-    margin-bottom: 6px;
-  }
-  .bubble-assistant .body .caption a {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    color: var(--clay-deep);
-    text-decoration: none;
-  }
-  .bubble-assistant .body .caption a:hover { color: var(--clay); }
-
-  /* Streaming cursor */
-  .bubble-assistant[data-streaming] .body::after {
-    content: "▍";
-    color: var(--clay);
-    animation: chat-blink 1.4s steps(2) infinite;
-    margin-left: 2px;
-    vertical-align: baseline;
-  }
-  @keyframes chat-blink {
-    50% { opacity: 0; }
-  }
-
-  /* Dim error/status messages inside bubble */
-  .bubble .body em.dim {
-    color: var(--gray-400);
-    font-size: 14px;
-    font-style: italic;
-  }
-
   /* ============== FORM ============== */
 
   .chat-form {
@@ -588,21 +411,228 @@ import Footer from '../components/Footer.astro';
   }
   .status-line[data-kind="error"] { color: var(--clay-deep); }
 
-  /* ============== MOBILE ============== */
+  /* ============== MOBILE — template-elementer ============== */
   @media (max-width: 720px) {
     .chat-main { padding: 32px 0 28px; }
     .chat-head { margin-bottom: 32px; }
     .chat-head h1 { font-size: 32px; }
-
     .chat-thread { gap: 56px; }
-
-    .bubble-user .body { font-size: 24px; padding-left: 14px; }
-
-    .bubble-assistant .body { font-size: 16.5px; }
-    .bubble-assistant .body p.lede { font-size: 22px; }
-    .bubble-assistant .body ol > li { padding-left: 46px; }
-    .bubble-assistant .body ol > li::before { font-size: 26px; width: 38px; }
-
     .chat-form { grid-template-columns: 1fr; }
+  }
+</style>
+
+<style is:global>
+  /* ====================================================================
+     Bobler og deres indhold rendres dynamisk via JS efter Astro-build,
+     så de har ikke Astros data-astro-cid attribut. Disse regler er
+     globale men prefixet med .chat-thread så de kun rammer chat-siden.
+     ==================================================================== */
+
+  /* Screen-reader-only labels */
+  .chat-thread .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ============== USER BUBBLE — spørgsmål som italic kapitel-overskrift ============== */
+
+  .chat-thread .bubble-user {
+    display: block;
+  }
+  .chat-thread .bubble-user .body {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 350;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    font-variation-settings: 'opsz' 144;
+    max-width: 600px;
+    padding-left: 18px;
+    border-left: 3px solid var(--clay);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* ============== BOT BUBBLE — magazine-spread prosa ============== */
+
+  .chat-thread .bubble-assistant {
+    display: block;
+    position: relative;
+  }
+  .chat-thread .bubble-assistant::before {
+    content: "Philip Birkenborg svarer";
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--clay-deep);
+    font-weight: 500;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .chat-thread .bubble-assistant .body {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .chat-thread .bubble-assistant .body p.lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--clay-deep);
+    margin-bottom: 0.9em;
+    font-variation-settings: 'opsz' 144;
+    letter-spacing: -.005em;
+  }
+
+  .chat-thread .bubble-assistant .body p {
+    margin-bottom: 0.85em;
+  }
+  .chat-thread .bubble-assistant .body p:last-child { margin-bottom: 0; }
+
+  .chat-thread .bubble-assistant .body strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .chat-thread .bubble-assistant .body em {
+    font-style: italic;
+    color: var(--clay-deep);
+  }
+  .chat-thread .bubble-assistant .body a {
+    color: var(--clay-deep);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .chat-thread .bubble-assistant .body a:hover { color: var(--clay); }
+
+  .chat-thread .bubble-assistant .body ol {
+    list-style: none;
+    counter-reset: prose-list;
+    margin: 1em 0;
+    padding: 0;
+  }
+  .chat-thread .bubble-assistant .body ol > li {
+    counter-increment: prose-list;
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 1em;
+  }
+  .chat-thread .bubble-assistant .body ol > li::before {
+    content: "0" counter(prose-list);
+    position: absolute;
+    left: 0;
+    top: -4px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 32px;
+    font-weight: 350;
+    color: var(--clay);
+    font-variation-settings: 'opsz' 144;
+    width: 50px;
+  }
+
+  .chat-thread .bubble-assistant .body ul {
+    list-style: none;
+    margin: 1em 0;
+    padding: 0;
+  }
+  .chat-thread .bubble-assistant .body ul > li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 0.5em;
+  }
+  .chat-thread .bubble-assistant .body ul > li::before {
+    content: "•";
+    position: absolute;
+    left: 6px;
+    top: 0;
+    color: var(--clay);
+    font-weight: 700;
+  }
+
+  .chat-thread .bubble-assistant .body .caption {
+    margin-top: 32px;
+    padding-top: 14px;
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .chat-thread .bubble-assistant .body .caption::before {
+    content: "↳";
+    color: var(--clay);
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .chat-thread .bubble-assistant .body .caption .meta {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gray-700);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .chat-thread .bubble-assistant .body .caption .source-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 350;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.3;
+    font-variation-settings: 'opsz' 144;
+    margin-bottom: 6px;
+  }
+  .chat-thread .bubble-assistant .body .caption a {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--clay-deep);
+    text-decoration: none;
+  }
+  .chat-thread .bubble-assistant .body .caption a:hover { color: var(--clay); }
+
+  .chat-thread .bubble-assistant[data-streaming] .body::after {
+    content: "▍";
+    color: var(--clay);
+    animation: chat-blink 1.4s steps(2) infinite;
+    margin-left: 2px;
+    vertical-align: baseline;
+  }
+  @keyframes chat-blink {
+    50% { opacity: 0; }
+  }
+
+  .chat-thread .bubble .body em.dim {
+    color: var(--gray-400);
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  /* ============== MOBILE — dynamiske bobler ============== */
+  @media (max-width: 720px) {
+    .chat-thread .bubble-user .body { font-size: 24px; padding-left: 14px; }
+    .chat-thread .bubble-assistant .body { font-size: 16.5px; }
+    .chat-thread .bubble-assistant .body p.lede { font-size: 22px; }
+    .chat-thread .bubble-assistant .body ol > li { padding-left: 46px; }
+    .chat-thread .bubble-assistant .body ol > li::before { font-size: 26px; width: 38px; }
   }
 </style>
