@@ -15,3 +15,4 @@ site/playwright-report/
 worker/data/chat-corpus.json
 .mockups/
 site/src/data/chat-citations.json
+site/public/voice-samples.json

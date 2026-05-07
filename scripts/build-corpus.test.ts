@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildCorpus, buildCitations } from './build-corpus.mjs';
+import { buildCorpus, buildCitations, buildVoiceSamples } from './build-corpus.mjs';
 import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 
@@ -45,11 +45,11 @@ describe('buildCorpus', () => {
     expect(post!.body).toContain('Hovedteksten her.');
   });
 
-  it('bevarer kun title, slug, tags, body i output', async () => {
+  it('bevarer kun title, slug, tags, body, publishAt i output', async () => {
     const corpus = await buildCorpus(FIXTURES);
     const post = corpus.find(p => p.title === 'Test Post Clean');
     expect(post).toBeDefined();
-    expect(Object.keys(post!).sort()).toEqual(['body', 'slug', 'tags', 'title']);
+    expect(Object.keys(post!).sort()).toEqual(['body', 'publishAt', 'slug', 'tags', 'title']);
   });
 
   it('returnerer tom array når mappen er tom', async () => {
@@ -82,5 +82,35 @@ describe('buildCitations', () => {
     expect(citations['test-clean']).toBe('Test Post Clean');
     expect(citations['test-linkedin']).toBe('Test Post With LinkedIn');
     expect(citations['test-privat']).toBeUndefined();
+  });
+});
+
+describe('buildVoiceSamples', () => {
+  it('returnerer 3 nyeste posts sorteret på publish_at desc', async () => {
+    const corpus = await buildCorpus(FIXTURES);
+    const samples = buildVoiceSamples(corpus, 3);
+    expect(samples).toHaveLength(3);
+    const titles = samples.map(s => s.title);
+    expect(titles).toContain('Test Post Clean');
+    expect(titles).toContain('Test Post With LinkedIn');
+  });
+
+  it('returnerer max N samples selv hvis korpus er mindre', () => {
+    const small = [
+      { slug: 'a', title: 'A', tags: [], body: 'a-body', publishAt: '2026-01-01' },
+    ];
+    const samples = buildVoiceSamples(small, 5);
+    expect(samples).toHaveLength(1);
+  });
+
+  it('hver sample har slug, title, body, publishAt', async () => {
+    const corpus = await buildCorpus(FIXTURES);
+    const samples = buildVoiceSamples(corpus, 3);
+    for (const s of samples) {
+      expect(s).toHaveProperty('slug');
+      expect(s).toHaveProperty('title');
+      expect(s).toHaveProperty('body');
+      expect(s).toHaveProperty('publishAt');
+    }
   });
 });
