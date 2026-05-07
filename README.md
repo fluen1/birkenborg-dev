@@ -57,12 +57,27 @@ Cloudflare Pages, auto-deploy fra `main`-branch. Custom domain `birkenborg.dev` 
 KV-namespace:
 - `CHAT_STATE` (oprettes via `wrangler kv namespace create CHAT_STATE`)
 
-Secrets (sættes via `wrangler secret put`):
+### Manuel deploy
+
+Wrangler `[build]` håndterer kun korpus-trinnet. Site/dist skal være bygget først:
+
+```bash
+cd site && npm run build && cd ..
+npx wrangler deploy
+```
+
+(GitHub Actions-workflow `deploy.yml` kører begge trin automatisk ved push til main.)
+
+### Secrets
+
+Sættes via `wrangler secret put`:
 - `ANTHROPIC_API_KEY` — Anthropic API-key
 - `IP_HASH_SALT` — tilfældig 32-tegns hex-string til IP-hashing
 - `DAILY_CAP` (valgfrit, default 500) — global daglig request-cap
 - `CHAT_DISABLED` (valgfrit) — sæt til "1" for at slå chatten øjeblikkeligt fra
 - `CHAT_MODEL` (valgfrit, default `claude-haiku-4-5-20251001`) — skift til `claude-sonnet-4-6` hvis voice føles flad
+
+**Prompt cache:** systemprompten er `cache_control: ephemeral`. Caching aktiverer automatisk når den når threshold (~1024 input tokens for Haiku). Pt. er korpus ~921 tokens — caching er inaktiv, men hver post tilføjer ~500 tokens, så caching tænder automatisk ved 4-5 posts. Verificer via `cache_read_input_tokens > 0` i Anthropic response usage.
 
 ### Kill switch
 
