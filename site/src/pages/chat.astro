@@ -64,7 +64,7 @@ import Footer from '../components/Footer.astro';
 
   const messages: Message[] = [];
   let inflight = false;
-  let stuckToBottom = true;
+  let stuckToBottom = false;
 
   // Distance fra viewport-bund hvor vi stadig regner brugeren som "stuck to bottom".
   const STICK_THRESHOLD_PX = 140;
@@ -149,25 +149,14 @@ import Footer from '../components/Footer.astro';
     el.appendChild(body);
     thread.appendChild(el);
     if (empty.parentElement) empty.remove();
-    maybeScrollToBottom();
     return { el, bodyEl: body };
   }
 
   // Scroll kun hvis bruger allerede er ved bunden — respekterer manuel oprul.
+  // Bruges KUN under streaming. Submit og bobble-tilkomst auto-scroller ikke.
   function maybeScrollToBottom(): void {
     if (!stuckToBottom) return;
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'auto' });
-    });
-  }
-
-  // Force-scroll bruges når brugeren netop har sendt en besked — vi vil have
-  // dem til at se det nye respons-bobble dukke op.
-  function forceScrollToBottom(): void {
-    stuckToBottom = true;
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
-    });
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'auto' });
   }
 
   function setStatus(text: string, kind: 'info' | 'error' = 'info'): void {
@@ -190,9 +179,6 @@ import Footer from '../components/Footer.astro';
 
     const assistantMsg: Message = { role: 'assistant', content: '' };
     const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
-
-    // Brugeren har lige sendt — sørg for at vise det nye respons-bobble.
-    forceScrollToBottom();
 
     setBusy(true);
 
@@ -245,7 +231,34 @@ import Footer from '../components/Footer.astro';
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let buffer = '';
-    let acc = '';
+    let acc = '';            // alt tekst modtaget fra server
+    let displayLen = 0;      // hvor mange tegn vi faktisk har vist
+    let streamDone = false;
+    let typewriterId: number | null = null;
+    let drainResolve: (() => void) | null = null;
+    const drainPromise = new Promise<void>((r) => { drainResolve = r; });
+
+    // Typewriter — emitter tegn med konsistent rate via rAF, så bursts fra
+    // Anthropic ikke springer ind i UI'et. Adaptiv: stort backlog = hurtigere.
+    const tick = (): void => {
+      if (displayLen < acc.length) {
+        const remaining = acc.length - displayLen;
+        const charsThisFrame = Math.max(1, Math.ceil(remaining / 30));
+        displayLen = Math.min(displayLen + charsThisFrame, acc.length);
+        setBotMarkdown(bodyEl, acc.slice(0, displayLen));
+        maybeScrollToBottom();
+        typewriterId = requestAnimationFrame(tick);
+      } else if (streamDone) {
+        typewriterId = null;
+        drainResolve?.();
+        drainResolve = null;
+      } else {
+        typewriterId = null;
+      }
+    };
+    const kickTypewriter = (): void => {
+      if (typewriterId === null) typewriterId = requestAnimationFrame(tick);
+    };
 
     try {
       while (true) {
@@ -265,8 +278,7 @@ import Footer from '../components/Footer.astro';
             const obj = JSON.parse(json);
             if (obj.type === 'content_block_delta' && obj.delta?.type === 'text_delta') {
               acc += obj.delta.text;
-              setBotMarkdown(bodyEl, acc);
-              maybeScrollToBottom();
+              kickTypewriter();
             }
           } catch {
             // ignore unparseable chunks
@@ -274,6 +286,8 @@ import Footer from '../components/Footer.astro';
         }
       }
     } catch {
+      streamDone = true;
+      if (typewriterId !== null) cancelAnimationFrame(typewriterId);
       const trailing = document.createElement('em');
       trailing.className = 'dim';
       trailing.textContent = ' [afbrudt]';
@@ -283,6 +297,11 @@ import Footer from '../components/Footer.astro';
       setBusy(false);
       return;
     }
+
+    // Stream er færdig — vent på at typewriter er fanget op
+    streamDone = true;
+    kickTypewriter();
+    if (drainResolve) await drainPromise;
 
     if (acc.length === 0) {
       setDimMessage(bodyEl, 'tomt svar');
