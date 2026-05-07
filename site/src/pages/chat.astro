@@ -64,6 +64,20 @@ import Footer from '../components/Footer.astro';
 
   const messages: Message[] = [];
   let inflight = false;
+  let stuckToBottom = true;
+
+  // Distance fra viewport-bund hvor vi stadig regner brugeren som "stuck to bottom".
+  // Hvis bruger scroller højere op end dette, slipper vi auto-scrollen.
+  const STICK_THRESHOLD_PX = 140;
+
+  function isNearBottom(): boolean {
+    const distance = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+    return distance < STICK_THRESHOLD_PX;
+  }
+
+  window.addEventListener('scroll', () => {
+    stuckToBottom = isNearBottom();
+  }, { passive: true });
 
   // Plain text uden markdown, bevarer linjeskift. Bruges til user-spørgsmål.
   function setPlainText(target: HTMLElement, text: string): void {
@@ -104,12 +118,25 @@ import Footer from '../components/Footer.astro';
     el.appendChild(body);
     thread.appendChild(el);
     if (empty.parentElement) empty.remove();
-    scrollToBottom();
+    maybeScrollToBottom();
     return { el, bodyEl: body };
   }
 
-  function scrollToBottom(): void {
-    requestAnimationFrame(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }));
+  // Scroll kun hvis bruger allerede er ved bunden — respekterer manuel oprul.
+  function maybeScrollToBottom(): void {
+    if (!stuckToBottom) return;
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'auto' });
+    });
+  }
+
+  // Force-scroll bruges når brugeren netop har sendt en besked — vi vil have
+  // dem til at se det nye respons-bobble dukke op.
+  function forceScrollToBottom(): void {
+    stuckToBottom = true;
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+    });
   }
 
   function setStatus(text: string, kind: 'info' | 'error' = 'info'): void {
@@ -132,6 +159,9 @@ import Footer from '../components/Footer.astro';
 
     const assistantMsg: Message = { role: 'assistant', content: '' };
     const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
+
+    // Brugeren har lige sendt — sørg for at vise det nye respons-bobble.
+    forceScrollToBottom();
 
     setBusy(true);
 
@@ -205,7 +235,7 @@ import Footer from '../components/Footer.astro';
             if (obj.type === 'content_block_delta' && obj.delta?.type === 'text_delta') {
               acc += obj.delta.text;
               setBotMarkdown(bodyEl, acc);
-              scrollToBottom();
+              maybeScrollToBottom();
             }
           } catch {
             // ignore unparseable chunks
