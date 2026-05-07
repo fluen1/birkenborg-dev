@@ -33,7 +33,7 @@ import Footer from '../components/Footer.astro';
           name="message"
           rows="2"
           maxlength="2000"
-          placeholder="Skriv en besked... (Cmd/Ctrl+Enter for at sende)"
+          placeholder="Skriv en besked... (Enter sender, Shift+Enter ny linje)"
           aria-label="Skriv din besked"
         ></textarea>
         <button type="submit" data-submit aria-label="Send">
@@ -275,7 +275,8 @@ import Footer from '../components/Footer.astro';
   });
 
   input.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    // Enter sender, Shift+Enter laver ny linje (standard chat-pattern).
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
       e.preventDefault();
       form.requestSubmit();
     }
