@@ -5,6 +5,9 @@
     "gray-matter": "^4.0.3",
     "@types/node": "^22.0.0"
   },
+  "dependencies": {
+    "marked": "^18.0.3"
+  },
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
