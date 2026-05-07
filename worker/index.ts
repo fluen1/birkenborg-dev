@@ -13,7 +13,7 @@ import type { KVNamespace } from '@cloudflare/workers-types';
 interface Env {
   ASSETS: Fetcher;
   GITHUB_TOKEN?: string;
-  BOT_INTERNAL_TOKEN?: string;
+  BOT_INTERNAL_TOKEN: string;
   CHAT_STATE: KVNamespace;
   ANTHROPIC_API_KEY: string;
   IP_HASH_SALT: string;
@@ -57,6 +57,11 @@ export default {
 
     if (url.pathname === "/api/chat") {
       return handleChat(req, env satisfies ChatEnv, ctx);
+    }
+
+    if (url.pathname.startsWith("/skrifter/") && url.searchParams.has("preview")) {
+      const { handlePreview } = await import("./preview");
+      return handlePreview(url, env);
     }
 
     return env.ASSETS.fetch(req);
