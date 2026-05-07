@@ -1,5 +1,13 @@
 {
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260506.1"
+    "@cloudflare/workers-types": "^4.20260506.1",
+    "vitest": "^4.1.5",
+    "gray-matter": "^4.0.3",
+    "@types/node": "^22.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:corpus": "node scripts/build-corpus.mjs"
   }
 }

@@ -12,3 +12,4 @@ site/test-results/
 site/playwright-report/
 .wrangler/
 .deploy-secrets
+worker/data/chat-corpus.json

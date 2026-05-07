@@ -1,0 +1,31 @@
+---
+// Discrete CTA der peger på /chat-siden.
+// Placeret efter "Seneste skrifter" på forsiden — kontekstuelt nær det den handler om.
+---
+
+<aside class="chat-cta">
+  <a href="/chat">
+    Eller <em>snak med en bot</em> der kender alle Philips skrifter →
+  </a>
+</aside>
+
+<style>
+  .chat-cta {
+    max-width: 720px;
+    margin: 24px auto 0;
+    text-align: left;
+  }
+  .chat-cta a {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: var(--gray-700);
+    line-height: 1.5;
+    transition: color .15s;
+  }
+  .chat-cta a em {
+    color: var(--clay-deep);
+    font-style: italic;
+  }
+  .chat-cta a:hover { color: var(--ink); }
+  .chat-cta a:hover em { color: var(--clay); }
+</style>
