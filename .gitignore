@@ -14,3 +14,4 @@ site/playwright-report/
 .deploy-secrets
 worker/data/chat-corpus.json
 .mockups/
+site/src/data/chat-citations.json

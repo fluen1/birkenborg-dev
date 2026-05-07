@@ -37,15 +37,32 @@ export async function buildCorpus(postsDir) {
   return corpus;
 }
 
+// Extract slug→title map for client-side citation rendering.
+export function buildCitations(corpus) {
+  const out = {};
+  for (const post of corpus) {
+    out[post.slug] = post.title;
+  }
+  return out;
+}
+
 // CLI entry point
 if (fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const postsDir = join(__dirname, '..', 'content', 'posts');
-  const outDir = join(__dirname, '..', 'worker', 'data');
-  const outFile = join(outDir, 'chat-corpus.json');
+  const corpusDir = join(__dirname, '..', 'worker', 'data');
+  const corpusFile = join(corpusDir, 'chat-corpus.json');
+  const citationsDir = join(__dirname, '..', 'site', 'src', 'data');
+  const citationsFile = join(citationsDir, 'chat-citations.json');
 
   const corpus = await buildCorpus(postsDir);
-  await mkdir(outDir, { recursive: true });
-  await writeFile(outFile, JSON.stringify(corpus, null, 2), 'utf-8');
-  console.log(`Wrote ${corpus.length} posts to ${outFile}`);
+  const citations = buildCitations(corpus);
+
+  await mkdir(corpusDir, { recursive: true });
+  await writeFile(corpusFile, JSON.stringify(corpus, null, 2), 'utf-8');
+  await mkdir(citationsDir, { recursive: true });
+  await writeFile(citationsFile, JSON.stringify(citations, null, 2), 'utf-8');
+
+  console.log(`Wrote ${corpus.length} posts to ${corpusFile}`);
+  console.log(`Wrote ${Object.keys(citations).length} citations to ${citationsFile}`);
 }
