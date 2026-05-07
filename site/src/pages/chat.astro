@@ -10,7 +10,7 @@ import Footer from '../components/Footer.astro';
     <div class="container">
       <header class="chat-head">
         <h1>Snak med Philip om hans skrifter</h1>
-        <p class="lede">
+        <p class="chat-lede">
           Bot'en kender alt på <a href="/skrifter">/skrifter</a>. Den citerer kilder.
           Den giver ikke juridisk rådgivning. Samtalen gemmes ikke — genindlæs siden for at starte forfra.
         </p>
@@ -33,7 +33,7 @@ import Footer from '../components/Footer.astro';
           name="message"
           rows="2"
           maxlength="2000"
-          placeholder="Skriv en besked... (Cmd/Ctrl+Enter for at sende)"
+          placeholder="Skriv en besked... (Enter sender, Shift+Enter ny linje)"
           aria-label="Skriv din besked"
         ></textarea>
         <button type="submit" data-submit aria-label="Send">
@@ -48,6 +48,9 @@ import Footer from '../components/Footer.astro';
 </Base>
 
 <script>
+  import { renderMarkdown, updateMarkdown } from '../scripts/chat-markdown';
+  import citations from '../data/chat-citations.json';
+
   interface Message { role: 'user' | 'assistant'; content: string; }
   interface ErrorBody { error: string; message?: string; retryAfterSeconds?: number; }
 
@@ -61,27 +64,61 @@ import Footer from '../components/Footer.astro';
 
   const messages: Message[] = [];
   let inflight = false;
+  let stuckToBottom = false;
 
-  // Erstatter /skrifter/<slug>-mønstre med tekst+anker DOM-fragmenter via matchAll.
-  // Bygger noder med textContent + createElement — ingen innerHTML, intet XSS-vindue.
-  function renderTextWithCitations(target: HTMLElement, text: string): void {
+  // Distance fra viewport-bund hvor vi stadig regner brugeren som "stuck to bottom".
+  const STICK_THRESHOLD_PX = 140;
+
+  function isNearBottom(): boolean {
+    const distance = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
+    return distance < STICK_THRESHOLD_PX;
+  }
+
+  // Detekter eksplicit bruger-input (ikke programmatic scrolls).
+  // Wheel: deltaY < 0 = scroll up = unstick.
+  window.addEventListener('wheel', (e) => {
+    if (e.deltaY < 0) {
+      stuckToBottom = false;
+    } else if (e.deltaY > 0 && isNearBottom()) {
+      stuckToBottom = true;
+    }
+  }, { passive: true });
+
+  // Keyboard scroll-keys.
+  window.addEventListener('keydown', (e) => {
+    if (e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLInputElement) return;
+    if (['ArrowUp', 'PageUp', 'Home'].includes(e.key)) {
+      stuckToBottom = false;
+    } else if (['ArrowDown', 'PageDown', 'End'].includes(e.key) && isNearBottom()) {
+      stuckToBottom = true;
+    }
+  });
+
+  // Touch (mobile): finger-bevægelse opad på skærmen = scroll content nedad.
+  // Modsat: finger nedad = scroller UP gennem content = unstick.
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0]?.clientY ?? 0;
+  }, { passive: true });
+  window.addEventListener('touchmove', (e) => {
+    const currentY = e.touches[0]?.clientY ?? 0;
+    if (currentY > touchStartY + 12) {
+      stuckToBottom = false;
+    } else if (currentY < touchStartY - 12 && isNearBottom()) {
+      stuckToBottom = true;
+    }
+  }, { passive: true });
+
+  // Plain text uden markdown, bevarer linjeskift. Bruges til user-spørgsmål.
+  function setPlainText(target: HTMLElement, text: string): void {
     target.replaceChildren();
-    const matches = Array.from(text.matchAll(/\/skrifter\/[a-z0-9\-]+/gi));
-    let lastIdx = 0;
-    for (const m of matches) {
-      const start = m.index ?? 0;
-      if (start > lastIdx) {
-        target.appendChild(document.createTextNode(text.slice(lastIdx, start)));
-      }
-      const a = document.createElement('a');
-      a.href = m[0];
-      a.textContent = m[0];
-      target.appendChild(a);
-      lastIdx = start + m[0].length;
-    }
-    if (lastIdx < text.length) {
-      target.appendChild(document.createTextNode(text.slice(lastIdx)));
-    }
+    target.appendChild(document.createTextNode(text));
+  }
+
+  function setBotMarkdown(target: HTMLElement, text: string): void {
+    // Diff-rendrer på plads — bevarer stabile blokke uden flicker.
+    // Nye blokke får class="block-appear" så CSS animerer dem ind.
+    updateMarkdown(target, text, citations);
   }
 
   function setDimMessage(target: HTMLElement, text: string): void {
@@ -96,22 +133,30 @@ import Footer from '../components/Footer.astro';
     const el = document.createElement('div');
     el.className = `bubble bubble-${m.role}`;
     if (streaming) el.dataset.streaming = '1';
+
     const label = document.createElement('span');
-    label.className = 'role';
-    label.textContent = m.role === 'user' ? 'Du' : 'Philip';
+    label.className = 'role sr-only';
+    label.textContent = m.role === 'user' ? 'Du:' : 'Philip:';
+
     const body = document.createElement('div');
     body.className = 'body';
-    if (m.content) renderTextWithCitations(body, m.content);
+    if (m.content) {
+      if (m.role === 'user') setPlainText(body, m.content);
+      else setBotMarkdown(body, m.content);
+    }
+
     el.appendChild(label);
     el.appendChild(body);
     thread.appendChild(el);
     if (empty.parentElement) empty.remove();
-    scrollToBottom();
     return { el, bodyEl: body };
   }
 
-  function scrollToBottom(): void {
-    requestAnimationFrame(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }));
+  // Scroll kun hvis bruger allerede er ved bunden — respekterer manuel oprul.
+  // Bruges KUN under streaming. Submit og bobble-tilkomst auto-scroller ikke.
+  function maybeScrollToBottom(): void {
+    if (!stuckToBottom) return;
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'auto' });
   }
 
   function setStatus(text: string, kind: 'info' | 'error' = 'info'): void {
@@ -186,7 +231,34 @@ import Footer from '../components/Footer.astro';
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let buffer = '';
-    let acc = '';
+    let acc = '';            // alt tekst modtaget fra server
+    let displayLen = 0;      // hvor mange tegn vi faktisk har vist
+    let streamDone = false;
+    let typewriterId: number | null = null;
+    let drainResolve: (() => void) | null = null;
+    const drainPromise = new Promise<void>((r) => { drainResolve = r; });
+
+    // Typewriter — emitter tegn med konsistent rate via rAF, så bursts fra
+    // Anthropic ikke springer ind i UI'et. Adaptiv: stort backlog = hurtigere.
+    const tick = (): void => {
+      if (displayLen < acc.length) {
+        const remaining = acc.length - displayLen;
+        const charsThisFrame = Math.max(1, Math.ceil(remaining / 30));
+        displayLen = Math.min(displayLen + charsThisFrame, acc.length);
+        setBotMarkdown(bodyEl, acc.slice(0, displayLen));
+        maybeScrollToBottom();
+        typewriterId = requestAnimationFrame(tick);
+      } else if (streamDone) {
+        typewriterId = null;
+        drainResolve?.();
+        drainResolve = null;
+      } else {
+        typewriterId = null;
+      }
+    };
+    const kickTypewriter = (): void => {
+      if (typewriterId === null) typewriterId = requestAnimationFrame(tick);
+    };
 
     try {
       while (true) {
@@ -206,8 +278,7 @@ import Footer from '../components/Footer.astro';
             const obj = JSON.parse(json);
             if (obj.type === 'content_block_delta' && obj.delta?.type === 'text_delta') {
               acc += obj.delta.text;
-              renderTextWithCitations(bodyEl, acc);
-              scrollToBottom();
+              kickTypewriter();
             }
           } catch {
             // ignore unparseable chunks
@@ -215,6 +286,8 @@ import Footer from '../components/Footer.astro';
         }
       }
     } catch {
+      streamDone = true;
+      if (typewriterId !== null) cancelAnimationFrame(typewriterId);
       const trailing = document.createElement('em');
       trailing.className = 'dim';
       trailing.textContent = ' [afbrudt]';
@@ -224,6 +297,11 @@ import Footer from '../components/Footer.astro';
       setBusy(false);
       return;
     }
+
+    // Stream er færdig — vent på at typewriter er fanget op
+    streamDone = true;
+    kickTypewriter();
+    if (drainResolve) await drainPromise;
 
     if (acc.length === 0) {
       setDimMessage(bodyEl, 'tomt svar');
@@ -247,7 +325,8 @@ import Footer from '../components/Footer.astro';
   });
 
   input.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    // Enter sender, Shift+Enter laver ny linje (standard chat-pattern).
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
       e.preventDefault();
       form.requestSubmit();
     }
@@ -255,8 +334,16 @@ import Footer from '../components/Footer.astro';
 </script>
 
 <style>
+  /* ====================================================================
+     Chat-side · Magazine spread layout
+     ==================================================================== */
+
   .chat-main { padding: 56px 0 40px; }
-  .chat-head { max-width: 720px; margin: 0 auto 40px; }
+
+  .chat-head {
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
   .chat-head h1 {
     font-family: var(--font-display);
     font-weight: 350;
@@ -265,23 +352,24 @@ import Footer from '../components/Footer.astro';
     margin: 0 0 18px;
     font-variation-settings: 'opsz' 144;
   }
-  .chat-head .lede {
+  .chat-head .chat-lede {
     font-family: var(--font-serif);
     font-size: 17px;
     line-height: 1.55;
     color: var(--gray-700);
     margin: 0;
   }
-  .chat-head .lede a { color: var(--clay-deep); }
+  .chat-head .chat-lede a { color: var(--clay-deep); }
 
   .chat-thread {
     max-width: 720px;
-    margin: 0 auto 28px;
+    margin: 0 auto 32px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 80px;
     min-height: 200px;
   }
+
   .empty-hint {
     color: var(--gray-400);
     font-size: 14px;
@@ -293,42 +381,7 @@ import Footer from '../components/Footer.astro';
   .empty-hint ul { margin: 10px 0 0; padding-left: 20px; }
   .empty-hint li { margin-bottom: 4px; }
 
-  .bubble {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .bubble .role {
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--gray-700);
-    font-weight: 600;
-  }
-  .bubble-user .role { color: var(--ink); }
-  .bubble-assistant .role { color: var(--clay-deep); }
-  .bubble .body {
-    font-family: var(--font-serif);
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--ink);
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-  .bubble-user .body {
-    background: var(--cream-warm);
-    border: 1px solid var(--gray-100);
-    border-radius: var(--r-md);
-    padding: 14px 18px;
-  }
-  .bubble-assistant[data-streaming] .body::after {
-    content: "▍";
-    color: var(--clay);
-    animation: blink 1s steps(2) infinite;
-    margin-left: 2px;
-  }
-  .bubble .body a { color: var(--clay-deep); text-decoration: underline; }
-  .bubble .body em.dim { color: var(--gray-400); font-size: 14px; font-style: italic; }
+  /* ============== FORM ============== */
 
   .chat-form {
     max-width: 720px;
@@ -378,13 +431,249 @@ import Footer from '../components/Footer.astro';
   }
   .status-line[data-kind="error"] { color: var(--clay-deep); }
 
-  @keyframes blink {
+  /* ============== MOBILE — template-elementer ============== */
+  @media (max-width: 720px) {
+    .chat-main { padding: 32px 0 28px; }
+    .chat-head { margin-bottom: 32px; }
+    .chat-head h1 { font-size: 32px; }
+    .chat-thread { gap: 56px; }
+    .chat-form { grid-template-columns: 1fr; }
+  }
+</style>
+
+<style is:global>
+  /* ====================================================================
+     Bobler og deres indhold rendres dynamisk via JS efter Astro-build,
+     så de har ikke Astros data-astro-cid attribut. Disse regler er
+     globale men prefixet med .chat-thread så de kun rammer chat-siden.
+     ==================================================================== */
+
+  /* Screen-reader-only labels */
+  .chat-thread .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ============== USER BUBBLE — spørgsmål som italic kapitel-overskrift ============== */
+
+  .chat-thread .bubble-user {
+    display: block;
+  }
+  .chat-thread .bubble-user .body {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 350;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    font-variation-settings: 'opsz' 144;
+    max-width: 600px;
+    padding-left: 18px;
+    border-left: 3px solid var(--clay);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* ============== BOT BUBBLE — magazine-spread prosa ============== */
+
+  .chat-thread .bubble-assistant {
+    display: block;
+    position: relative;
+  }
+  .chat-thread .bubble-assistant::before {
+    content: "Philip Birkenborg svarer";
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--clay-deep);
+    font-weight: 500;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .chat-thread .bubble-assistant .body {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .chat-thread .bubble-assistant .body p.lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--clay-deep);
+    margin-bottom: 0.9em;
+    font-variation-settings: 'opsz' 144;
+    letter-spacing: -.005em;
+  }
+
+  .chat-thread .bubble-assistant .body p {
+    margin-bottom: 0.85em;
+  }
+  .chat-thread .bubble-assistant .body p:last-child { margin-bottom: 0; }
+
+  .chat-thread .bubble-assistant .body strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .chat-thread .bubble-assistant .body em {
+    font-style: italic;
+    color: var(--clay-deep);
+  }
+  .chat-thread .bubble-assistant .body a {
+    color: var(--clay-deep);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .chat-thread .bubble-assistant .body a:hover { color: var(--clay); }
+
+  .chat-thread .bubble-assistant .body ol {
+    list-style: none;
+    counter-reset: prose-list;
+    margin: 1em 0;
+    padding: 0;
+  }
+  .chat-thread .bubble-assistant .body ol > li {
+    counter-increment: prose-list;
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 1em;
+  }
+  .chat-thread .bubble-assistant .body ol > li::before {
+    content: "0" counter(prose-list);
+    position: absolute;
+    left: 0;
+    top: -4px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 32px;
+    font-weight: 350;
+    color: var(--clay);
+    font-variation-settings: 'opsz' 144;
+    width: 50px;
+  }
+
+  .chat-thread .bubble-assistant .body ul {
+    list-style: none;
+    margin: 1em 0;
+    padding: 0;
+  }
+  .chat-thread .bubble-assistant .body ul > li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 0.5em;
+  }
+  .chat-thread .bubble-assistant .body ul > li::before {
+    content: "•";
+    position: absolute;
+    left: 6px;
+    top: 0;
+    color: var(--clay);
+    font-weight: 700;
+  }
+
+  .chat-thread .bubble-assistant .body .caption {
+    margin-top: 32px;
+    padding-top: 14px;
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .chat-thread .bubble-assistant .body .caption::before {
+    content: "↳";
+    color: var(--clay);
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .chat-thread .bubble-assistant .body .caption .meta {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gray-700);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .chat-thread .bubble-assistant .body .caption .source-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 350;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.3;
+    font-variation-settings: 'opsz' 144;
+    margin-bottom: 6px;
+  }
+  .chat-thread .bubble-assistant .body .caption a {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--clay-deep);
+    text-decoration: none;
+  }
+  .chat-thread .bubble-assistant .body .caption a:hover { color: var(--clay); }
+
+  .chat-thread .bubble-assistant[data-streaming] .body::after {
+    content: "▍";
+    color: var(--clay);
+    animation: chat-blink 1.4s steps(2) infinite;
+    margin-left: 2px;
+    vertical-align: baseline;
+  }
+  @keyframes chat-blink {
     50% { opacity: 0; }
   }
 
+  /* Subtle fade-in for nye blokke (kun ved første tilkomst). */
+  @keyframes chat-block-appear {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .chat-thread .bubble-assistant .body .block-appear {
+    animation: chat-block-appear 320ms cubic-bezier(.2, .8, .25, 1) both;
+  }
+  /* Hele bot-bubble (label + body) animerer også ind ved første render */
+  .chat-thread .bubble-user,
+  .chat-thread .bubble-assistant {
+    animation: chat-block-appear 280ms cubic-bezier(.2, .8, .25, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chat-thread .bubble-user,
+    .chat-thread .bubble-assistant,
+    .chat-thread .bubble-assistant .body .block-appear {
+      animation: none;
+    }
+  }
+
+  .chat-thread .bubble .body em.dim {
+    color: var(--gray-400);
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  /* ============== MOBILE — dynamiske bobler ============== */
   @media (max-width: 720px) {
-    .chat-main { padding: 32px 0 28px; }
-    .chat-head h1 { font-size: 32px; }
-    .chat-form { grid-template-columns: 1fr; }
+    .chat-thread .bubble-user .body { font-size: 24px; padding-left: 14px; }
+    .chat-thread .bubble-assistant .body { font-size: 16.5px; }
+    .chat-thread .bubble-assistant .body p.lede { font-size: 22px; }
+    .chat-thread .bubble-assistant .body ol > li { padding-left: 46px; }
+    .chat-thread .bubble-assistant .body ol > li::before { font-size: 26px; width: 38px; }
   }
 </style>

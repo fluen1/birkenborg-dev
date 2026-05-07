@@ -6,7 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "predev": "node ../scripts/build-corpus.mjs",
     "dev": "astro dev",
+    "prebuild": "node ../scripts/build-corpus.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@vitest/ui": "^4.1.5",
+    "happy-dom": "^20.9.0",
     "vitest": "^4.1.5"
   }
 }
