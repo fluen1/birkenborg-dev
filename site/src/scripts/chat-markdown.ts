@@ -147,6 +147,92 @@ export function renderMarkdown(text: string, citations: Citations): DocumentFrag
   return fragment;
 }
 
+// Diff-baseret opdatering: opdaterer eksisterende DOM på plads i stedet for
+// at smide alt væk og rebygge. Stabile blokke flickerer ikke. Nye blokke
+// får class="block-appear" så CSS kan animere dem ind.
+export function updateMarkdown(
+  target: HTMLElement,
+  text: string,
+  citations: Citations,
+): void {
+  const blocks = parseMarkdown(text);
+  const existing = Array.from(target.children) as HTMLElement[];
+
+  for (let i = 0; i < blocks.length; i++) {
+    const block = blocks[i]!;
+    const existingEl = existing[i];
+
+    if (existingEl) {
+      if (!updateBlockInPlace(existingEl, block, citations)) {
+        // Block-kind ændret (fx paragraph → olist): erstat
+        const fresh = renderBlock(block, citations);
+        fresh.classList.add('block-appear');
+        existingEl.replaceWith(fresh);
+      }
+    } else {
+      // Helt ny blok
+      const fresh = renderBlock(block, citations);
+      fresh.classList.add('block-appear');
+      target.appendChild(fresh);
+    }
+  }
+
+  // Fjern overskydende blokke (sker normalt ikke under streaming)
+  for (let i = blocks.length; i < existing.length; i++) {
+    existing[i]!.remove();
+  }
+}
+
+// Opdater eksisterende blok-element til ny block-AST. Returner false hvis
+// element-typen ikke matcher (caller skal erstatte).
+function updateBlockInPlace(el: HTMLElement, block: Block, citations: Citations): boolean {
+  switch (block.kind) {
+    case 'lede':
+    case 'paragraph': {
+      if (el.tagName !== 'P') return false;
+      const isLede = el.classList.contains('lede');
+      const wantLede = block.kind === 'lede';
+      if (isLede !== wantLede) return false;
+      el.replaceChildren();
+      appendInlines(el, block.inlines);
+      return true;
+    }
+    case 'olist': {
+      if (el.tagName !== 'OL') return false;
+      syncListItems(el, block.items);
+      return true;
+    }
+    case 'ulist': {
+      if (el.tagName !== 'UL') return false;
+      syncListItems(el, block.items);
+      return true;
+    }
+    case 'citation': {
+      if (!el.classList.contains('caption')) return false;
+      const a = el.querySelector('a');
+      if (a?.getAttribute('href') === `/skrifter/${block.slug}`) return true;
+      return false; // andet slug → erstat hele blokken
+    }
+  }
+}
+
+function syncListItems(listEl: HTMLElement, items: Inline[][]): void {
+  const existingItems = Array.from(listEl.children) as HTMLElement[];
+  for (let i = 0; i < items.length; i++) {
+    let li = existingItems[i];
+    if (!li) {
+      li = document.createElement('li');
+      listEl.appendChild(li);
+    } else {
+      li.replaceChildren();
+    }
+    appendInlines(li, items[i]!);
+  }
+  for (let i = items.length; i < existingItems.length; i++) {
+    existingItems[i]!.remove();
+  }
+}
+
 function renderBlock(block: Block, citations: Citations): HTMLElement {
   switch (block.kind) {
     case 'lede': {

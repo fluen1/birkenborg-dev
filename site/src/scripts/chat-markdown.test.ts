@@ -3,6 +3,7 @@ import {
   parseMarkdown,
   parseInlines,
   renderMarkdown,
+  updateMarkdown,
   type Block,
 } from './chat-markdown';
 
@@ -258,5 +259,110 @@ describe('renderMarkdown — DOM-construction', () => {
     const fragment = renderMarkdown('→ /skrifter/javascript:alert(1)', {});
     const caption = fragment.querySelector('.caption');
     expect(caption).toBeNull();
+  });
+});
+
+describe('updateMarkdown — diff-rendering', () => {
+  it('første kald: alle blokke får block-appear class', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, 'Første.\n\nAnden.', {});
+    const ps = target.querySelectorAll('p');
+    expect(ps).toHaveLength(2);
+    expect(ps[0]!.classList.contains('block-appear')).toBe(true);
+    expect(ps[1]!.classList.contains('block-appear')).toBe(true);
+  });
+
+  it('andet kald uden ændring: samme element-instans bevares', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, 'Første.', {});
+    const firstP = target.querySelector('p')!;
+    updateMarkdown(target, 'Første.', {});
+    const sameP = target.querySelector('p')!;
+    expect(sameP).toBe(firstP);
+  });
+
+  it('andet kald med text-tilføjelse: paragraph-element bevares', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, 'Halv', {});
+    const p = target.querySelector('p')!;
+    updateMarkdown(target, 'Halvfærdig sætning.', {});
+    const sameP = target.querySelector('p')!;
+    expect(sameP).toBe(p);
+    expect(sameP.textContent).toBe('Halvfærdig sætning.');
+  });
+
+  it('ny blok tilføjet: kun den nye får block-appear', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, 'Første.', {});
+    const firstP = target.querySelector('p')!;
+    // Class fjernes typisk efter animation, men her testes kun initialt
+    firstP.classList.remove('block-appear');
+
+    updateMarkdown(target, 'Første.\n\nAnden.', {});
+    const ps = target.querySelectorAll('p');
+    expect(ps).toHaveLength(2);
+    expect(ps[0]).toBe(firstP);
+    expect(ps[0]!.classList.contains('block-appear')).toBe(false);
+    expect(ps[1]!.classList.contains('block-appear')).toBe(true);
+  });
+
+  it('blok-kind ændres (paragraph → olist): erstattes med ny element', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, 'Halvfærdig 1', {});
+    expect(target.querySelector('p')).toBeTruthy();
+    expect(target.querySelector('ol')).toBeNull();
+
+    updateMarkdown(target, '1. Liste-item', {});
+    expect(target.querySelector('p')).toBeNull();
+    expect(target.querySelector('ol')).toBeTruthy();
+  });
+
+  it('liste-item tilføjes: eksisterende li bevares, ny tilføjes', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, '1. Første\n2. Anden', {});
+    const firstLi = target.querySelector('ol li')!;
+
+    updateMarkdown(target, '1. Første\n2. Anden\n3. Tredje', {});
+    const lis = target.querySelectorAll('ol li');
+    expect(lis).toHaveLength(3);
+    expect(lis[0]).toBe(firstLi);
+  });
+
+  it('liste-items opdaterer indhold på plads', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, '1. Halv', {});
+    const firstLi = target.querySelector('li')!;
+
+    updateMarkdown(target, '1. Halvfærdig liste-item', {});
+    expect(target.querySelector('li')).toBe(firstLi);
+    expect(firstLi.textContent).toBe('Halvfærdig liste-item');
+  });
+
+  it('lede-class bevares mellem opdateringer', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, 'Lede starter.', {});
+    const lede = target.querySelector('p')!;
+    expect(lede.classList.contains('lede')).toBe(true);
+
+    updateMarkdown(target, 'Lede starter.\n\nNæste.', {});
+    const stillLede = target.children[0] as HTMLElement;
+    expect(stillLede).toBe(lede);
+    expect(stillLede.classList.contains('lede')).toBe(true);
+
+    const nextP = target.children[1] as HTMLElement;
+    expect(nextP.classList.contains('lede')).toBe(false);
+  });
+
+  it('citation-blok tilføjes uden at fjerne foregående', () => {
+    const target = document.createElement('div');
+    updateMarkdown(target, 'Svar.\n\n1. Punkt', {});
+    const ol = target.querySelector('ol')!;
+
+    updateMarkdown(target, 'Svar.\n\n1. Punkt\n\n→ /skrifter/min-post', {
+      'min-post': 'Min Post',
+    });
+    expect(target.querySelector('ol')).toBe(ol);
+    expect(target.querySelector('.caption')).toBeTruthy();
+    expect(target.querySelector('.caption .source-title')!.textContent).toBe('Min Post');
   });
 });

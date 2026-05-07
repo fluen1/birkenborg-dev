@@ -48,7 +48,7 @@ import Footer from '../components/Footer.astro';
 </Base>
 
 <script>
-  import { renderMarkdown } from '../scripts/chat-markdown';
+  import { renderMarkdown, updateMarkdown } from '../scripts/chat-markdown';
   import citations from '../data/chat-citations.json';
 
   interface Message { role: 'user' | 'assistant'; content: string; }
@@ -116,8 +116,9 @@ import Footer from '../components/Footer.astro';
   }
 
   function setBotMarkdown(target: HTMLElement, text: string): void {
-    target.replaceChildren();
-    target.appendChild(renderMarkdown(text, citations));
+    // Diff-rendrer på plads — bevarer stabile blokke uden flicker.
+    // Nye blokke får class="block-appear" så CSS animerer dem ind.
+    updateMarkdown(target, text, citations);
   }
 
   function setDimMessage(target: HTMLElement, text: string): void {
@@ -619,6 +620,27 @@ import Footer from '../components/Footer.astro';
   }
   @keyframes chat-blink {
     50% { opacity: 0; }
+  }
+
+  /* Subtle fade-in for nye blokke (kun ved første tilkomst). */
+  @keyframes chat-block-appear {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .chat-thread .bubble-assistant .body .block-appear {
+    animation: chat-block-appear 320ms cubic-bezier(.2, .8, .25, 1) both;
+  }
+  /* Hele bot-bubble (label + body) animerer også ind ved første render */
+  .chat-thread .bubble-user,
+  .chat-thread .bubble-assistant {
+    animation: chat-block-appear 280ms cubic-bezier(.2, .8, .25, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chat-thread .bubble-user,
+    .chat-thread .bubble-assistant,
+    .chat-thread .bubble-assistant .body .block-appear {
+      animation: none;
+    }
   }
 
   .chat-thread .bubble .body em.dim {
