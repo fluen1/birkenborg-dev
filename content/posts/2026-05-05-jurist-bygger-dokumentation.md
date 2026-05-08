@@ -6,10 +6,10 @@ tags: ["jura", "kode", "dokumentation"]
 suggested_publish_day: friday
 rationale: "Bruger ikke inbox direkte men aktiverer jurist-bygger-paradoks-temaet med en konkret og morsom detalje (30 README'er) — risikoen er at den er lidt mere reflekterende end energisk, men åbningslinjen og slutningen er skarpe nok."
 privacy_flag: false
-status: scheduled
+status: published
 publish_at: 2026-05-08T09:00:00+02:00
 
-linkedin_url: null
+linkedin_url: "https://www.linkedin.com/feed/update/urn:li:share:7458430436244111361/"
 ---
 
 
