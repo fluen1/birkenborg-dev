@@ -1,0 +1,125 @@
+---
+interface Props {
+  niche: 'klinik' | 'konsulent';
+  ctaLabel?: string;
+}
+const { niche, ctaLabel = 'Send' } = Astro.props;
+---
+
+<form class="lead-form" data-niche={niche}>
+  <input type="hidden" name="niche" value={niche} />
+  <input type="hidden" name="utm_source" id="utm_source" />
+  <input type="hidden" name="utm_campaign" id="utm_campaign" />
+
+  <label>
+    Navn
+    <input type="text" name="name" required autocomplete="name" />
+  </label>
+
+  <label>
+    Firma / klinik (valgfri)
+    <input type="text" name="company" autocomplete="organization" />
+  </label>
+
+  <label>
+    Email
+    <input type="email" name="email" required autocomplete="email" />
+  </label>
+
+  <label>
+    Telefon (valgfri)
+    <input type="tel" name="phone" autocomplete="tel" />
+  </label>
+
+  <label>
+    Hvad har du på hjerte?
+    <textarea name="message" rows="4" required></textarea>
+  </label>
+
+  <button type="submit">{ctaLabel}</button>
+  <p class="status" aria-live="polite"></p>
+</form>
+
+<script>
+  // UTM-tracking: kopier URL-params til hidden form fields
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = document.getElementById('utm_source') as HTMLInputElement;
+  const utmCampaign = document.getElementById('utm_campaign') as HTMLInputElement;
+  if (utmSource) utmSource.value = params.get('utm_source') ?? '';
+  if (utmCampaign) utmCampaign.value = params.get('utm_campaign') ?? '';
+
+  // Submit-handler: POST til bot-worker
+  const form = document.querySelector('.lead-form') as HTMLFormElement;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = form.querySelector('.status') as HTMLElement;
+    const button = form.querySelector('button') as HTMLButtonElement;
+    button.disabled = true;
+    status.textContent = 'Sender…';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      const res = await fetch('https://bot.birkenborg.dev/internal/lead', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(`status ${res.status}`);
+      status.textContent = 'Tak — jeg vender tilbage hurtigst muligt.';
+      form.reset();
+    } catch (err) {
+      status.textContent = 'Noget gik galt. Skriv direkte til philip@birkenborg.dev.';
+      button.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .lead-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 540px;
+    margin: 32px 0;
+  }
+  .lead-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+  .lead-form input,
+  .lead-form textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-sm);
+    background: var(--cream);
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .lead-form input:focus,
+  .lead-form textarea:focus {
+    outline: 2px solid var(--clay);
+    outline-offset: 2px;
+  }
+  .lead-form button {
+    align-self: flex-start;
+    padding: 12px 24px;
+    background: var(--clay);
+    color: white;
+    border: none;
+    border-radius: var(--r-sm);
+    font-size: 16px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lead-form button:hover { background: var(--clay-deep); }
+  .lead-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .lead-form .status {
+    margin: 0;
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+</style>
