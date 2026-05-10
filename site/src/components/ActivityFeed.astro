@@ -184,7 +184,7 @@
   }
   .row {
     display: flex;
-    gap: 22px;
+    gap: 28px;
     align-items: baseline;
     padding: 16px 14px;
     margin: 0 -14px;
@@ -197,14 +197,14 @@
   .row .when {
     color: var(--gray-700);
     font-size: 12px;
-    min-width: 64px;
+    min-width: 88px;
     font-feature-settings: 'tnum';
     letter-spacing: 0.02em;
   }
   .row .what { color: var(--ink); }
   .row .what a { color: var(--clay-deep); }
   .row .what a:hover { text-decoration: underline; }
-  .row .ic { display: inline-block; margin-right: 10px; opacity: 0.45; font-size: 12px; }
+  .row .ic { display: inline-block; margin-right: 14px; opacity: 0.45; font-size: 12px; }
   .skeleton-row { padding: 9px 0; }
   .skeleton {
     display: inline-block;
@@ -239,8 +239,10 @@
     50% { box-shadow: 0 0 0 7px rgba(217, 119, 87, 0); }
   }
   @media (max-width: 720px) {
-    .feed { padding: 20px 18px; }
-    .row .when { min-width: 48px; font-size: 11px; }
+    .feed { padding: 22px 20px; }
+    .row { gap: 18px; padding: 14px 10px; margin: 0 -10px; }
+    .row .when { min-width: 56px; font-size: 11px; }
+    .row .ic { margin-right: 10px; }
     .meta { display: none; }
   }
 </style>
