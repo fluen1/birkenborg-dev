@@ -3,69 +3,107 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import LiveActivity from '../components/LiveActivity.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import HeroSkrift from '../components/HeroSkrift.astro';
+import OmMig from '../components/OmMig.astro';
+import Marginalia from '../components/Marginalia.astro';
+import ActivityFeed from '../components/ActivityFeed.astro';
 import WritingItem from '../components/WritingItem.astro';
 import ChatCta from '../components/ChatCta.astro';
+import StructuredData from '../components/StructuredData.astro';
+import MetaTags from '../components/MetaTags.astro';
 
-const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
-const recentPosts = allPosts
-  .sort((a, b) => +b.data.publish_at - +a.data.publish_at)
-  .slice(0, 4);
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published' && !data.privacy_flag);
+const sortedPosts = allPosts.sort((a, b) => +b.data.publish_at - +a.data.publish_at);
+const heroPost = sortedPosts[0];
+const restPosts = sortedPosts.slice(1, 5);
+
+const heroSlug = heroPost?.data.slug ?? heroPost?.id.replace(/\.md$/, '') ?? '';
+const heroMarginalia = heroPost?.data.marginalia ?? [];
 
 const allProjects = await getCollection('projekter', ({ data }) => data.status !== 'archived');
-const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
-const featuredProjects = sortedProjects.slice(0, 3);
+const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_TITLE = 'Philip Birkenborg — birkenborg.dev';
+const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skrifter om hvad der virker, og præcist hvor det fejler.';
 ---
-<Base title="Philip Birkenborg — birkenborg.dev">
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags
+      title={PAGE_TITLE}
+      description={PAGE_DESC}
+      url={SITE_URL}
+      type="website"
+    />
+    <StructuredData
+      type="Person"
+      data={{
+        name: 'Philip Birkenborg',
+        url: SITE_URL,
+        jobTitle: 'Legal Counsel & AI Agent Builder',
+        worksFor: { '@type': 'Organization', name: 'Tandlægen.dk' },
+        sameAs: [
+          'https://linkedin.com/in/philip-birkenborg-509794172/',
+          'https://github.com/fluen1',
+        ],
+      }}
+    />
+  </Fragment>
+
   <Header />
   <main>
-    <Hero />
+    <div class="container hero-row">
+      {heroPost && (
+        <>
+          <div class="hero-main">
+            <HeroSkrift
+              slug={heroSlug}
+              title={heroPost.data.title}
+              publish_at={heroPost.data.publish_at}
+              excerpt={heroPost.data.excerpt}
+            />
+            <OmMig />
+          </div>
+          <div class="hero-margin">
+            <Marginalia notes={heroMarginalia} />
+          </div>
+        </>
+      )}
+    </div>
 
-    <section class="status-section">
-      <div class="container">
-        <LiveActivity />
-      </div>
+    <section class="container">
+      <ActivityFeed />
     </section>
 
-    <section class="work">
-      <div class="container">
-        <div class="section-head">
-          <h2>Hvad jeg har bygget</h2>
-          <a class="more" href="/projekter">Alle projekter →</a>
-        </div>
-        <div class="grid-projects">
-          {featuredProjects.map(p => (
-            <ProjectCard
-              href={`/projekter/${p.id.replace(/\.md$/, '')}`}
-              title={p.data.title}
-              pillLabel={p.data.pill_label}
-              status={p.data.status}
-              summary={p.data.summary}
-              featured={p.data.featured}
-            />
-          ))}
-        </div>
+    <section class="writings container">
+      <div class="section-head">
+        <h2>Skrifter</h2>
+        <a class="more" href="/skrifter">Alle skrifter →</a>
       </div>
+      <div class="writings-list">
+        {restPosts.map(p => (
+          <WritingItem
+            href={`/skrifter/${p.data.slug ?? p.id.replace(/\.md$/, '')}`}
+            title={p.data.title}
+            date={p.data.publish_at}
+          />
+        ))}
+      </div>
+      <ChatCta />
     </section>
 
-    <section class="writings">
-      <div class="container">
-        <div class="section-head">
-          <h2>Seneste skrifter</h2>
-          <a class="more" href="/skrifter">Alle skrifter →</a>
-        </div>
-        <div class="writings-list">
-          {recentPosts.map(p => (
-            <WritingItem
-              href={`/skrifter/${p.id.replace(/\.md$/, '')}`}
-              title={p.data.title}
-              date={p.data.publish_at}
-            />
-          ))}
-        </div>
-        <ChatCta />
+    <section class="projekter container">
+      <div class="section-head minor">
+        <h3>Andre ting jeg bygger</h3>
+        <a class="more" href="/projekter">Alle projekter →</a>
+      </div>
+      <div class="pill-grid">
+        {sortedProjects.map(p => (
+          <a class="pill" href={`/projekter/${p.id.replace(/\.md$/, '')}`}>
+            <div class="nm">{p.data.title}</div>
+            <div class="desc">{p.data.summary}</div>
+          </a>
+        ))}
       </div>
     </section>
   </main>
@@ -73,34 +111,59 @@ const featuredProjects = sortedProjects.slice(0, 3);
 </Base>
 
 <style>
-  .status-section { padding-top: 0; }
-  .work { padding: 96px 0 24px; }
-  .writings { padding: 72px 0 96px; }
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 32px;
+    margin-top: 16px;
+  }
+  .hero-main { min-width: 0; }
+  .hero-margin { padding-top: 80px; }
+
+  .writings { padding: 56px 0 32px; }
   .section-head {
     display: flex; align-items: end; justify-content: space-between;
-    margin-bottom: 36px;
-    padding-bottom: 18px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
     border-bottom: 1px solid var(--gray-100);
   }
   .section-head h2 {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 36px;
+    font-size: 32px;
     margin: 0;
     letter-spacing: -.015em;
-    font-variation-settings: 'opsz' 144;
+  }
+  .section-head.minor h3 {
+    font-size: 14px; font-weight: 600; margin: 0;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--gray-700);
   }
   .more {
-    font-size: 14px; color: var(--gray-700);
-    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--gray-700);
   }
   .more:hover { color: var(--ink); }
-  .grid-projects {
+
+  .projekter { padding: 24px 0 80px; }
+  .pill-grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 18px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
   }
+  .pill {
+    background: var(--cream-warm);
+    border: 1px solid var(--gray-100);
+    padding: 14px 18px;
+    border-radius: var(--r-md);
+    transition: border-color 0.15s;
+  }
+  .pill:hover { border-color: var(--clay); }
+  .pill .nm { font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .pill .desc { font-size: 13px; color: var(--gray-700); }
+
   @media (max-width: 900px) {
-    .grid-projects { grid-template-columns: 1fr; }
+    .hero-row { grid-template-columns: 1fr; gap: 8px; }
+    .hero-margin { padding-top: 0; }
+    .pill-grid { grid-template-columns: 1fr; }
   }
 </style>
