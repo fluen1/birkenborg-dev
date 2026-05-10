@@ -180,13 +180,16 @@
   .list {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
   .row {
     display: flex;
     gap: 28px;
     align-items: baseline;
-    padding: 16px 14px;
+    padding: 20px 14px;
     margin: 0 -14px;
     border-radius: 6px;
     font-size: 14px;
@@ -240,7 +243,8 @@
   }
   @media (max-width: 720px) {
     .feed { padding: 22px 20px; }
-    .row { gap: 18px; padding: 14px 10px; margin: 0 -10px; }
+    .list { gap: 6px; }
+    .row { gap: 18px; padding: 16px 10px; margin: 0 -10px; }
     .row .when { min-width: 56px; font-size: 11px; }
     .row .ic { margin-right: 10px; }
     .meta { display: none; }
