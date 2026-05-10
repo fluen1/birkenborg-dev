@@ -304,5 +304,5 @@ async function buildEvents(env: Env): Promise<ActivityEvent[]> {
   }
 
   events.sort((a, b) => b.ts - a.ts);
-  return events.slice(0, 10);
+  return events.slice(0, 7);
 }
