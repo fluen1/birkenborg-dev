@@ -1,0 +1,95 @@
+name: Auto-marginalia
+
+# Søndag 19:00 dansk sommer-tid (CEST, UTC+2) = 17:00 UTC.
+# DST-NOTE: Ved CET (vintertid, UTC+1) skal cron ændres til '0 18 * * 0'.
+
+on:
+  schedule:
+    - cron: '0 17 * * 0'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Kør dry-run (ingen ændringer pushed)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PUBLIC_REPO_PAT }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run auto-marginalia
+        id: run
+        env:
+          GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_PAT }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            node scripts/build-marginalia.mjs --dry-run
+          else
+            node scripts/build-marginalia.mjs
+          fi
+
+      - name: Commit + open PR if changes
+        if: github.event.inputs.dry_run != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.PUBLIC_REPO_PAT }}
+        run: |
+          if [ -z "$(git status --porcelain content/posts/)" ]; then
+            echo "Ingen ændringer — skipper PR-opening"
+            exit 0
+          fi
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="auto-marginalia/$DATE"
+          git config user.name "birkenborg-agents"
+          git config user.email "philip+agents@birkenborg.dev"
+          git checkout -b "$BRANCH"
+          git add content/posts/
+          git commit -m "auto-marginalia: ugens noter ($DATE)"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "auto-marginalia: ugens commits → marginalia ($DATE)" \
+            --body "Auto-genereret af build-marginalia.mjs. Review hvert forslag og slet de irrelevante FØR merge." \
+            --base main \
+            --head "$BRANCH"
+
+      - name: Notify Telegram
+        if: success() && github.event.inputs.dry_run != 'true'
+        env:
+          BOT_INTERNAL_TOKEN: ${{ secrets.BOT_INTERNAL_TOKEN }}
+        run: |
+          if [ -z "$(git log origin/main..HEAD 2>/dev/null)" ]; then
+            exit 0
+          fi
+          curl -s -X POST "https://bot.birkenborg.dev/internal/notify" \
+            -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"text":"🤖 Auto-marginalia PR åben — review når du har lyst."}'
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          BOT_INTERNAL_TOKEN: ${{ secrets.BOT_INTERNAL_TOKEN }}
+        run: |
+          curl -s -X POST "https://bot.birkenborg.dev/internal/notify" \
+            -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\":\"⚠️ Auto-marginalia fejlede. Tjek loggen: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}"
