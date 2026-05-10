@@ -40,11 +40,20 @@ interface LastCommit {
   url: string;
 }
 
+interface ActivityEvent {
+  type: 'commit' | 'skrift' | 'now';
+  ts: number;
+  text: string;
+  icon: string;
+  url?: string;
+}
+
 interface ActivityResponse {
   activity: DayCount[];
   lastCommit: LastCommit | null;
   draftsPending: number | null;
   generatedAt: number;
+  events: ActivityEvent[];
 }
 
 export default {
@@ -112,11 +121,17 @@ async function collectActivity(env: Env): Promise<ActivityResponse> {
     }
   }
 
+  const events = await buildEvents(env).catch((e) => {
+    console.error('events', e);
+    return [] as ActivityEvent[];
+  });
+
   return {
     activity,
     lastCommit,
     draftsPending,
     generatedAt: Math.floor(Date.now() / 1000),
+    events,
   };
 }
 
@@ -223,4 +238,71 @@ async function fetchDrafts(env: Env): Promise<number | null> {
   if (!r.ok) return null;
   const data = (await r.json()) as { messages?: unknown[] };
   return data.messages?.length ?? 0;
+}
+
+async function buildEvents(env: Env): Promise<ActivityEvent[]> {
+  const events: ActivityEvent[] = [];
+
+  // Fetch up to 15 recent commits
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github+json',
+    'User-Agent': 'birkenborg-dev-worker',
+  };
+  if (env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
+  }
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${GITHUB_USER}/${PUBLIC_REPOS[0]}/commits?per_page=15`,
+      { headers },
+    );
+    if (r.ok) {
+      const commits = (await r.json()) as Array<{
+        sha: string;
+        commit: { message: string; author: { date: string } };
+        html_url: string;
+      }>;
+      for (const c of commits) {
+        const msg = c.commit.message.split('\n')[0];
+        if (/^merge[: ]/i.test(msg) || /^wip/i.test(msg) || msg.length < 8) continue;
+        const cleanMsg = msg.match(/^[a-z]+(\([^)]+\))?:\s*(.+)$/)?.[2] ?? msg;
+        events.push({
+          type: 'commit',
+          ts: Math.floor(new Date(c.commit.author.date).getTime() / 1000),
+          text: cleanMsg.trim(),
+          icon: '⚙',
+          url: c.html_url,
+        });
+      }
+    }
+  } catch (e) {
+    console.error('events_commits', e);
+  }
+
+  // Fetch skrifter from build-time _corpus.json (served as static asset)
+  try {
+    const corpusReq = new Request('https://birkenborg.dev/api/_corpus.json');
+    const corpusRes = await env.ASSETS.fetch(corpusReq);
+    if (corpusRes.ok) {
+      const corpus = (await corpusRes.json()) as Array<{
+        slug: string;
+        title: string;
+        publish_at: string;
+      }>;
+      for (const post of corpus) {
+        events.push({
+          type: 'skrift',
+          ts: Math.floor(new Date(post.publish_at).getTime() / 1000),
+          text: `Skrev "${post.title}"`,
+          icon: '✎',
+          url: `/skrifter/${post.slug}`,
+        });
+      }
+    }
+  } catch (e) {
+    console.error('events_skrifter', e);
+  }
+
+  events.sort((a, b) => b.ts - a.ts);
+  return events.slice(0, 10);
 }
