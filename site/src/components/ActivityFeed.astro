@@ -61,6 +61,7 @@
       for (const e of events) {
         const li = document.createElement('li');
         li.className = 'row';
+        li.dataset.type = e.type;
         const when = document.createElement('span');
         when.className = 'when';
         when.textContent = formatWhen(e.ts);
@@ -213,6 +214,23 @@
     margin-right: 18px;
     opacity: 0.5;
     font-size: 12px;
+  }
+  .row[data-type="highlight"] {
+    background: rgba(217, 119, 87, 0.06);
+    padding-left: 12px;
+    border-left: 2px solid var(--clay);
+    border-radius: 0 6px 6px 0;
+  }
+  .row[data-type="highlight"]:hover {
+    background: rgba(217, 119, 87, 0.10);
+  }
+  .row[data-type="highlight"] .ic {
+    opacity: 1;
+    color: var(--clay);
+    font-weight: 600;
+  }
+  .row[data-type="highlight"] .what {
+    font-weight: 500;
   }
   .skeleton-row { padding: 9px 0; }
   .skeleton {
