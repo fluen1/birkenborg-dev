@@ -293,7 +293,7 @@ async function buildEvents(env: Env): Promise<ActivityEvent[]> {
         events.push({
           type: 'skrift',
           ts: Math.floor(new Date(post.publish_at).getTime() / 1000),
-          text: `Skrev "${post.title}"`,
+          text: post.title,
           icon: '✎',
           url: `/skrifter/${post.slug}`,
         });

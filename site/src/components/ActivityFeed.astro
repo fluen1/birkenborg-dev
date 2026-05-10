@@ -45,13 +45,15 @@
     const hintEl = root.querySelector('[data-hint]') as HTMLElement;
     const barsEl = root.querySelector('[data-bars]') as SVGGElement;
 
+    const MONTHS_DA = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+
     const formatWhen = (ts: number): string => {
       const diff = Math.floor(Date.now() / 1000) - ts;
-      if (diff < 3600) return 'lige nu';
-      if (diff < 86400) return 'i dag';
-      if (diff < 2 * 86400) return 'i går';
+      if (diff < 3600) return 'Lige nu';
+      if (diff < 86400) return 'I dag';
+      if (diff < 2 * 86400) return 'I går';
       const d = new Date(ts * 1000);
-      return `${d.getDate()}/${d.getMonth() + 1}`;
+      return `${d.getDate()}. ${MONTHS_DA[d.getMonth()]}`;
     };
 
     const renderEvents = (events: ActivityEvent[]): void => {
@@ -68,13 +70,16 @@
         ic.className = 'ic';
         ic.textContent = e.icon;
         what.appendChild(ic);
+        const textNode = e.type === 'skrift'
+          ? Object.assign(document.createElement('em'), { textContent: e.text })
+          : document.createTextNode(e.text);
         if (e.url) {
           const a = document.createElement('a');
           a.href = e.url;
-          a.textContent = e.text;
+          a.appendChild(textNode);
           what.appendChild(a);
         } else {
-          what.appendChild(document.createTextNode(e.text));
+          what.appendChild(textNode);
         }
         li.appendChild(when);
         li.appendChild(what);
