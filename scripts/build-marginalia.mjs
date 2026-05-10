@@ -1,5 +1,5 @@
 import matter from "gray-matter";
-import { readFile as readFileNode, writeFile as writeFileNode } from "node:fs/promises";
+import { readFile as readFileNode, writeFile as writeFileNode, readdir } from "node:fs/promises";
 
 const STOP_WORDS_DA = new Set([
   "og", "eller", "men", "som", "der", "det", "den", "de", "en", "et",
@@ -101,4 +101,50 @@ export async function writePostWithMarginalia(filePath, suggestions) {
   };
   const newContent = matter.stringify(parsed.content, updated);
   await writeFileNode(filePath, newContent, "utf-8");
+}
+
+export async function runAutoMarginalia({ postsDir, repos, githubToken, sinceDays, dryRun }) {
+  // 1. Læs alle posts der er published + ikke privacy_flag
+  const files = await readdir(postsDir);
+  const posts = [];
+  for (const f of files) {
+    if (!f.endsWith(".md")) continue;
+    const filePath = `${postsDir}/${f}`;
+    const raw = await readFileNode(filePath, "utf-8");
+    const parsed = matter(raw);
+    if (parsed.data.status !== "published") continue;
+    if (parsed.data.privacy_flag === true) continue;
+    posts.push({
+      filePath,
+      slug: parsed.data.slug ?? f.replace(/\.md$/, ""),
+      tags: parsed.data.tags ?? [],
+      title: parsed.data.title ?? "",
+      marginalia: parsed.data.marginalia ?? [],
+    });
+  }
+
+  // 2. Fetch commits fra alle repos
+  const allCommits = [];
+  for (const repo of repos) {
+    const commits = await fetchCommits(repo, githubToken, sinceDays);
+    allCommits.push(...commits);
+  }
+
+  // 3. For hver post: byg suggestions + dedup + skriv (hvis ikke dry-run)
+  const perPost = [];
+  let filesChanged = 0;
+  let totalSuggestions = 0;
+  for (const post of posts) {
+    const raw = buildSuggestions(post, allCommits);
+    const filtered = dedupAgainstExisting(post, raw);
+    if (filtered.length === 0) continue;
+    perPost.push({ slug: post.slug, count: filtered.length });
+    totalSuggestions += filtered.length;
+    filesChanged++;
+    if (!dryRun) {
+      await writePostWithMarginalia(post.filePath, filtered);
+    }
+  }
+
+  return { filesChanged, totalSuggestions, perPost };
 }

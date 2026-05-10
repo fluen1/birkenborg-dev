@@ -6,8 +6,9 @@ import {
   buildSuggestions,
   dedupAgainstExisting,
   writePostWithMarginalia,
+  runAutoMarginalia,
 } from "./build-marginalia.mjs";
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -258,5 +259,136 @@ Body.
     const updated = await readFile(tmpPath, "utf-8");
     expect(updated).toContain("eksisterende note");
     expect(updated).toContain("ny");
+  });
+});
+
+describe("runAutoMarginalia (orchestrator)", () => {
+  let postsDir: string;
+
+  beforeEach(async () => {
+    vi.restoreAllMocks();
+    postsDir = join(__dirname, ".tmp-orchestrator-posts");
+    await rm(postsDir, { recursive: true, force: true });
+    await mkdir(postsDir, { recursive: true });
+    const content = `---
+title: Auto-test
+slug: auto-test
+publish_at: 2026-05-08
+status: published
+tags: [marginalia]
+privacy_flag: false
+linkedin_url: null
+---
+
+Body.
+`;
+    await writeFile(join(postsDir, "auto-test.md"), content);
+  });
+
+  it("returnerer summary uden at skrive i dry-run-mode", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify([
+        {
+          sha: "abc",
+          commit: {
+            message: "feat: marginalia komponent fixet",
+            author: { date: new Date().toISOString() },
+          },
+          html_url: "https://github.com/x/y/commit/abc",
+        },
+      ]), { status: 200 }),
+    );
+
+    const summary = await runAutoMarginalia({
+      postsDir,
+      repos: ["fluen1/birkenborg-dev"],
+      githubToken: "ghp",
+      sinceDays: 30,
+      dryRun: true,
+    });
+
+    expect(summary.filesChanged).toBe(1);
+    expect(summary.totalSuggestions).toBeGreaterThan(0);
+    expect(summary.perPost).toHaveLength(1);
+    expect(summary.perPost[0].slug).toBe("auto-test");
+
+    const after = await readFile(join(postsDir, "auto-test.md"), "utf-8");
+    expect(after).not.toContain("auto-commit");
+  });
+
+  it("skriver ændringer hvis dryRun = false", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify([
+        {
+          sha: "abc",
+          commit: {
+            message: "feat: marginalia komponent fixet",
+            author: { date: new Date().toISOString() },
+          },
+          html_url: "https://github.com/x/y/commit/abc",
+        },
+      ]), { status: 200 }),
+    );
+
+    await runAutoMarginalia({
+      postsDir,
+      repos: ["fluen1/birkenborg-dev"],
+      githubToken: "ghp",
+      sinceDays: 30,
+      dryRun: false,
+    });
+
+    const after = await readFile(join(postsDir, "auto-test.md"), "utf-8");
+    expect(after).toContain("auto-commit");
+  });
+
+  it("skipper privacy_flag-true posts og non-published", async () => {
+    const draftContent = `---
+title: Draft
+slug: draft-post
+publish_at: 2026-05-08
+status: draft
+tags: [marginalia]
+privacy_flag: false
+linkedin_url: null
+---
+
+Body.
+`;
+    await writeFile(join(postsDir, "draft-post.md"), draftContent);
+
+    const privateContent = `---
+title: Private
+slug: private-post
+publish_at: 2026-05-08
+status: published
+tags: [marginalia]
+privacy_flag: true
+linkedin_url: null
+---
+
+Body.
+`;
+    await writeFile(join(postsDir, "private-post.md"), privateContent);
+
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify([
+        {
+          sha: "abc",
+          commit: { message: "feat: marginalia", author: { date: new Date().toISOString() } },
+          html_url: "https://x.com/c",
+        },
+      ]), { status: 200 }),
+    );
+
+    const summary = await runAutoMarginalia({
+      postsDir,
+      repos: ["fluen1/birkenborg-dev"],
+      githubToken: "ghp",
+      sinceDays: 30,
+      dryRun: true,
+    });
+
+    expect(summary.perPost.map((p) => p.slug)).toEqual(["auto-test"]);
   });
 });
