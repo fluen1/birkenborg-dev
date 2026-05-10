@@ -179,23 +179,27 @@
   }
   .row {
     display: flex;
-    gap: 18px;
+    gap: 20px;
     align-items: baseline;
-    padding: 14px 0;
-    border-bottom: 1px dashed var(--gray-100);
+    padding: 12px 12px;
+    margin: 0 -12px;
+    border-radius: 6px;
     font-size: 14px;
     line-height: 1.5;
+    transition: background 0.15s ease;
   }
-  .row:last-child { border-bottom: none; }
+  .row:hover { background: rgba(217, 119, 87, 0.05); }
   .row .when {
     color: var(--gray-700);
     font-size: 12px;
     min-width: 64px;
     font-feature-settings: 'tnum';
+    letter-spacing: 0.02em;
   }
   .row .what { color: var(--ink); }
   .row .what a { color: var(--clay-deep); }
-  .row .ic { display: inline-block; margin-right: 8px; opacity: 0.5; font-size: 12px; }
+  .row .what a:hover { text-decoration: underline; }
+  .row .ic { display: inline-block; margin-right: 10px; opacity: 0.45; font-size: 12px; }
   .skeleton-row { padding: 9px 0; }
   .skeleton {
     display: inline-block;
