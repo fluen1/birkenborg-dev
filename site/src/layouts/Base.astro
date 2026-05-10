@@ -3,11 +3,9 @@ import '../styles/base.css';
 
 interface Props {
   title: string;
-  description?: string;
-  ogImage?: string;
 }
 
-const { title, description = 'Philip Birkenborg — in-house jurist der bygger AI-systemer i sundhedssektoren.', ogImage } = Astro.props;
+const { title } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 <!doctype html>
@@ -20,29 +18,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    <meta name="twitter:card" content="summary_large_image" />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      'name': 'Philip Birkenborg Andersen',
-      'jobTitle': 'Legal Counsel',
-      'worksFor': { '@type': 'Organization', 'name': 'Tandlægen.dk' },
-      'url': 'https://birkenborg.dev',
-      'sameAs': [
-        'https://linkedin.com/in/philip-birkenborg-509794172/',
-        'https://retsklar.dk',
-      ],
-      'alumniOf': [
-        { '@type': 'CollegeOrUniversity', 'name': 'Aarhus BSS' },
-        { '@type': 'CollegeOrUniversity', 'name': 'Aalborg Universitet' },
-      ],
-    })} />
     <slot name="head" />
   </head>
   <body>

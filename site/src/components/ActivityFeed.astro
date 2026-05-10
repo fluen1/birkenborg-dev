@@ -117,6 +117,12 @@
       .then((r) => r.json() as Promise<ActivityResponse>)
       .then((data) => {
         renderEvents(data.events);
+        if (data.events.length === 0) {
+          const li = document.createElement('li');
+          li.className = 'row';
+          li.textContent = 'Stille for tiden — næste publish onsdag';
+          listEl.replaceChildren(li);
+        }
         const total = data.activity.reduce((sum, d) => sum + d.count, 0);
         metaEl.textContent = `${total} commits · sidste 30 dage`;
         hintEl.textContent = 'Aktivitet sidste 30 dage';
