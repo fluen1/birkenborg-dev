@@ -11,6 +11,7 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "build:corpus": "node scripts/build-corpus.mjs"
+    "build:corpus": "node scripts/build-corpus.mjs",
+    "build:marginalia": "node scripts/build-marginalia.mjs"
   }
 }

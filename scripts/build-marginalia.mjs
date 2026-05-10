@@ -148,3 +148,36 @@ export async function runAutoMarginalia({ postsDir, repos, githubToken, sinceDay
 
   return { filesChanged, totalSuggestions, perPost };
 }
+
+// CLI entry point
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+if (fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
+  const argv = process.argv.slice(2);
+  const dryRun = argv.includes("--dry-run");
+
+  const githubToken = process.env.GITHUB_TOKEN ?? process.env.PUBLIC_REPO_PAT;
+  if (!githubToken) {
+    console.error("FEJL: GITHUB_TOKEN eller PUBLIC_REPO_PAT skal være sat");
+    process.exit(1);
+  }
+
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const postsDir = join(__dirname, "..", "content", "posts");
+
+  const summary = await runAutoMarginalia({
+    postsDir,
+    repos: ["fluen1/birkenborg-dev", "fluen1/birkenborg-agents"],
+    githubToken,
+    sinceDays: 30,
+    dryRun,
+  });
+
+  console.log(JSON.stringify(summary, null, 2));
+  if (dryRun) {
+    console.log("\n(dry-run — ingen filer ændret)");
+  } else {
+    console.log(`\nÆndrede ${summary.filesChanged} filer.`);
+  }
+}
