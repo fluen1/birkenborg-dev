@@ -3,6 +3,8 @@ import {
   extractKeywords,
   matchCommit,
   fetchCommits,
+  buildSuggestions,
+  dedupAgainstExisting,
 } from "./build-marginalia.mjs";
 
 describe("extractKeywords", () => {
@@ -121,5 +123,74 @@ describe("fetchCommits", () => {
     const commits = await fetchCommits("fluen1/repo", "ghp", 30);
     expect(commits).toHaveLength(1);
     expect(commits[0].message).toBe("ny");
+  });
+});
+
+describe("buildSuggestions", () => {
+  it("bygger marginalia-entries for matched commits", () => {
+    const post = {
+      slug: "ma-agent-paragraf-30",
+      tags: [],
+      title: "M&A-agenten",
+      marginalia: [],
+    };
+    const commits = [
+      {
+        message: "feat: agent-fix til paragraf",
+        authorDate: "2026-05-09T14:00:00Z",
+        htmlUrl: "https://github.com/x/y/commit/abc",
+      },
+      {
+        message: "chore: ikke relateret",
+        authorDate: "2026-05-09T15:00:00Z",
+        htmlUrl: "https://github.com/x/y/commit/def",
+      },
+    ];
+    const suggestions = buildSuggestions(post, commits);
+    expect(suggestions).toHaveLength(1);
+    expect(suggestions[0]).toEqual({
+      ts: "2026-05-09T14:00:00Z",
+      text: "agent-fix til paragraf",
+      source: "auto-commit",
+      commit_url: "https://github.com/x/y/commit/abc",
+    });
+  });
+
+  it("trimmer commit-message til max 80 chars + stripper conventional-commit-prefix", () => {
+    const post = { slug: "x", tags: [], title: "", marginalia: [] };
+    const longMessage = "feat(scope): " + "a".repeat(200);
+    const commits = [
+      { message: longMessage, authorDate: "2026-05-09T00:00:00Z", htmlUrl: "https://x.com/c" },
+    ];
+    const postWithMatch = { ...post, title: "aaaaa" };
+    const suggestions = buildSuggestions(postWithMatch, commits);
+    expect(suggestions[0].text.length).toBeLessThanOrEqual(80);
+    expect(suggestions[0].text).not.toMatch(/^feat\(scope\):/);
+  });
+});
+
+describe("dedupAgainstExisting", () => {
+  it("filtrerer suggestions der matcher eksisterende marginalia (text-equality)", () => {
+    const post = {
+      slug: "x", tags: [], title: "",
+      marginalia: [
+        { ts: "2026-05-08", text: "allerede tilføjet", source: "manual" },
+      ],
+    };
+    const suggestions = [
+      { ts: "2026-05-09", text: "allerede tilføjet", source: "auto-commit", commit_url: "x" },
+      { ts: "2026-05-09", text: "ny note", source: "auto-commit", commit_url: "y" },
+    ];
+    const filtered = dedupAgainstExisting(post, suggestions);
+    expect(filtered).toHaveLength(1);
+    expect(filtered[0].text).toBe("ny note");
+  });
+
+  it("returnerer alle hvis post mangler marginalia-felt", () => {
+    const post = { slug: "x", tags: [], title: "" };
+    const suggestions = [
+      { ts: "2026-05-09", text: "ny", source: "auto-commit", commit_url: "x" },
+    ];
+    expect(dedupAgainstExisting(post, suggestions)).toEqual(suggestions);
   });
 });
