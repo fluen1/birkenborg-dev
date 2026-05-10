@@ -77,4 +77,96 @@ describe('/api/activity events array', () => {
       expect(data.events[i - 1].ts).toBeGreaterThanOrEqual(data.events[i].ts);
     }
   });
+
+  it("inkluderer highlights øverst i events-array (uafhængigt af ts)", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (url) => {
+      const u = url.toString();
+      if (u.includes("api.github.com/users/fluen1/events/public")) {
+        return new Response(JSON.stringify([]), { status: 200 });
+      }
+      if (u.includes("api.github.com/repos/fluen1/birkenborg-dev/commits")) {
+        return new Response(JSON.stringify([
+          {
+            sha: "abc",
+            commit: { message: "feat: ny feature", author: { date: "2026-05-09T14:00:00Z" } },
+            html_url: "https://github.com/fluen1/birkenborg-dev/commit/abc",
+          },
+        ]), { status: 200 });
+      }
+      if (u.includes("bot.birkenborg.dev/internal/inbox")) {
+        return new Response(JSON.stringify({ messages: [] }), { status: 200 });
+      }
+      if (u.includes("bot.birkenborg.dev/internal/highlights")) {
+        return new Response(JSON.stringify({
+          highlights: [
+            { ts: 1746000000, text: "ÆLDRE highlight" },
+          ],
+        }), { status: 200 });
+      }
+      return new Response("not found", { status: 404 });
+    });
+
+    const { default: worker } = await import("./index");
+    const env = {
+      ASSETS: { fetch: async () => new Response(JSON.stringify([])) } as Fetcher,
+      CHAT_STATE: {} as KVNamespace,
+      ANTHROPIC_API_KEY: "sk-test",
+      IP_HASH_SALT: "salt",
+      BOT_INTERNAL_TOKEN: "tok",
+    };
+    const ctx = { waitUntil: () => {}, passThroughOnException: () => {} } as unknown as ExecutionContext;
+
+    const req = new Request("https://birkenborg.dev/api/activity");
+    const res = await worker.fetch!(req, env as never, ctx);
+    const data = await res.json() as { events: Array<{ type: string; text: string; icon: string }> };
+
+    expect(data.events[0].type).toBe("highlight");
+    expect(data.events[0].text).toBe("ÆLDRE highlight");
+    expect(data.events[0].icon).toBe("✦");
+  });
+
+  it("dedupliker highlight mod commit hvis text matcher", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (url) => {
+      const u = url.toString();
+      if (u.includes("api.github.com/users/fluen1/events/public")) {
+        return new Response(JSON.stringify([]), { status: 200 });
+      }
+      if (u.includes("api.github.com/repos/fluen1/birkenborg-dev/commits")) {
+        return new Response(JSON.stringify([
+          {
+            sha: "abc",
+            commit: { message: "feat: dubletten", author: { date: "2026-05-09T14:00:00Z" } },
+            html_url: "https://github.com/fluen1/birkenborg-dev/commit/abc",
+          },
+        ]), { status: 200 });
+      }
+      if (u.includes("bot.birkenborg.dev/internal/inbox")) {
+        return new Response(JSON.stringify({ messages: [] }), { status: 200 });
+      }
+      if (u.includes("bot.birkenborg.dev/internal/highlights")) {
+        return new Response(JSON.stringify({
+          highlights: [{ ts: 1746000000, text: "dubletten" }],
+        }), { status: 200 });
+      }
+      return new Response("not found", { status: 404 });
+    });
+
+    const { default: worker } = await import("./index");
+    const env = {
+      ASSETS: { fetch: async () => new Response(JSON.stringify([])) } as Fetcher,
+      CHAT_STATE: {} as KVNamespace,
+      ANTHROPIC_API_KEY: "sk-test",
+      IP_HASH_SALT: "salt",
+      BOT_INTERNAL_TOKEN: "tok",
+    };
+    const ctx = { waitUntil: () => {}, passThroughOnException: () => {} } as unknown as ExecutionContext;
+
+    const req = new Request("https://birkenborg.dev/api/activity");
+    const res = await worker.fetch!(req, env as never, ctx);
+    const data = await res.json() as { events: Array<{ type: string; text: string }> };
+
+    const matching = data.events.filter(e => e.text === "dubletten");
+    expect(matching).toHaveLength(1);
+    expect(matching[0].type).toBe("highlight");
+  });
 });

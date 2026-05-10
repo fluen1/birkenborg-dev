@@ -41,7 +41,7 @@ interface LastCommit {
 }
 
 interface ActivityEvent {
-  type: 'commit' | 'skrift' | 'now';
+  type: 'commit' | 'skrift' | 'now' | 'highlight';
   ts: number;
   text: string;
   icon: string;
@@ -303,6 +303,34 @@ async function buildEvents(env: Env): Promise<ActivityEvent[]> {
     console.error('events_skrifter', e);
   }
 
-  events.sort((a, b) => b.ts - a.ts);
-  return events.slice(0, 5);
+  // Fetch highlights fra bot-worker (placeres øverst, ikke ts-sorteret)
+  const highlightTexts = new Set<string>();
+  const highlights: ActivityEvent[] = [];
+  try {
+    const r = await fetch(`${BOT_BASE}/internal/highlights`, {
+      headers: { Authorization: `Bearer ${env.BOT_INTERNAL_TOKEN}` },
+    });
+    if (r.ok) {
+      const data = (await r.json()) as { highlights: Array<{ ts: number; text: string }> };
+      for (const h of data.highlights) {
+        highlights.push({
+          type: 'highlight',
+          ts: h.ts,
+          text: h.text,
+          icon: '✦',
+        });
+        highlightTexts.add(h.text);
+      }
+    }
+  } catch (e) {
+    console.error('events_highlights', e);
+  }
+
+  // Dedup commits/skrifter mod highlights
+  const dedupedRest = events.filter(e => !highlightTexts.has(e.text));
+  dedupedRest.sort((a, b) => b.ts - a.ts);
+
+  // Highlights ALTID øverst, derefter sorted commits/skrifter
+  const finalEvents = [...highlights, ...dedupedRest].slice(0, 5);
+  return finalEvents;
 }
