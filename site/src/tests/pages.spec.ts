@@ -1,15 +1,16 @@
 import { test, expect } from '@playwright/test';
 
-test('forside renders med hero-headline', async ({ page }) => {
+test('forside renders med hero-skrift', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('h1.headline')).toContainText('In-house jurist');
-  await expect(page.locator('.eyebrow')).toBeVisible();
+  await expect(page.locator('section.hero-skrift')).toBeVisible();
+  await expect(page.locator('section.hero-skrift .label')).toContainText('Senest skrift');
+  await expect(page.locator('section.hero-skrift h1.title')).toBeVisible();
 });
 
-test('forsiden viser tre projekter', async ({ page }) => {
+test('forsiden viser om-mig-sektion + activity-feed', async ({ page }) => {
   await page.goto('/');
-  const cards = page.locator('.project');
-  await expect(cards).toHaveCount(3);
+  await expect(page.locator('section.om-mig')).toBeVisible();
+  await expect(page.locator('aside.feed')).toBeVisible();
 });
 
 test('navigation til /skrifter virker', async ({ page }) => {
@@ -30,7 +31,7 @@ test('CV-side har download-link', async ({ page }) => {
 });
 
 test('alle sider returnerer 200', async ({ page }) => {
-  for (const url of ['/', '/skrifter', '/projekter', '/cv', '/kontakt']) {
+  for (const url of ['/', '/skrifter', '/projekter', '/cv', '/chat', '/kontakt', '/klinikker', '/konsulenter', '/now']) {
     const resp = await page.goto(url);
     expect(resp?.status()).toBe(200);
   }

@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  imageUrl?: string;
+}
+
+const {
+  title,
+  description,
+  url,
+  type = 'website',
+  publishedTime,
+  imageUrl,
+} = Astro.props;
+
+const fullImageUrl = imageUrl ?? 'https://birkenborg.dev/og-default.png';
+---
+
+<meta name="description" content={description} />
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={fullImageUrl} />
+<meta property="og:site_name" content="birkenborg.dev" />
+<meta property="og:locale" content="da_DK" />
+
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullImageUrl} />

@@ -1,0 +1,67 @@
+---
+interface MarginaliaNote {
+  ts: string;
+  text: string;
+  source?: string;
+}
+
+interface Props {
+  notes: MarginaliaNote[];
+}
+
+const { notes } = Astro.props;
+---
+
+{notes.length > 0 && (
+  <aside class="marginalia" aria-label="Philips noter">
+    {notes.map(n => (
+      <div class="note">
+        <div class="ts">{n.ts}</div>
+        <div class="text">{n.text}</div>
+      </div>
+    ))}
+  </aside>
+)}
+
+<style>
+  .marginalia {
+    border-left: 1px dashed var(--margin-rule, #d9c8a8);
+    padding-left: 18px;
+    font-family: 'Caveat', 'Patrick Hand', 'Segoe Script', cursive;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--margin-ink, #8a6e3d);
+  }
+  .note {
+    margin-bottom: 16px;
+    padding-left: 4px;
+    position: relative;
+  }
+  .note::before {
+    content: '↗';
+    position: absolute;
+    left: -14px;
+    top: 0;
+    color: var(--clay);
+    font-size: 12px;
+  }
+  .ts {
+    font-family: var(--font-sans, system-ui);
+    font-size: 9px;
+    color: var(--margin-ts, #b8a888);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+  }
+  .text { font-style: normal; }
+
+  @media (max-width: 900px) {
+    .marginalia {
+      border-left: none;
+      border-top: 1px dashed var(--margin-rule, #d9c8a8);
+      padding-left: 0;
+      padding-top: 16px;
+      margin-top: 24px;
+    }
+  }
+</style>

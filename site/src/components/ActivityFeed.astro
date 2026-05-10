@@ -1,0 +1,236 @@
+---
+// Udvidet aktivitets-feed: tidslinje af events fra /api/activity.
+// Initial render er skeleton; data fetches client-side.
+---
+
+<aside class="feed" aria-label="Hvad jeg arbejder med">
+  <div class="head">
+    <span class="ldot" aria-hidden="true"></span>
+    <span class="label">Hvad jeg arbejder med</span>
+    <span class="meta" data-meta>henter status…</span>
+  </div>
+  <ul class="list" data-list>
+    <li class="row skeleton-row"><span class="skeleton" style="width: 320px"></span></li>
+    <li class="row skeleton-row"><span class="skeleton" style="width: 280px"></span></li>
+    <li class="row skeleton-row"><span class="skeleton" style="width: 240px"></span></li>
+  </ul>
+  <svg class="graph" viewBox="0 0 600 56" preserveAspectRatio="none" aria-hidden="true">
+    <g data-bars></g>
+  </svg>
+  <div class="footer">
+    <span class="hint" data-hint>Aktivitet sidste 30 dage</span>
+    <a class="github" href="https://github.com/fluen1" target="_blank" rel="noopener">github.com/fluen1 →</a>
+  </div>
+</aside>
+
+<script>
+  interface DayCount { date: string; count: number; }
+  interface ActivityEvent {
+    type: 'commit' | 'skrift' | 'now';
+    ts: number;
+    text: string;
+    icon: string;
+    url?: string;
+  }
+  interface ActivityResponse {
+    activity: DayCount[];
+    events: ActivityEvent[];
+    generatedAt: number;
+  }
+
+  const root = document.querySelector('.feed') as HTMLElement | null;
+  if (root) {
+    const listEl = root.querySelector('[data-list]') as HTMLUListElement;
+    const metaEl = root.querySelector('[data-meta]') as HTMLElement;
+    const hintEl = root.querySelector('[data-hint]') as HTMLElement;
+    const barsEl = root.querySelector('[data-bars]') as SVGGElement;
+
+    const formatWhen = (ts: number): string => {
+      const diff = Math.floor(Date.now() / 1000) - ts;
+      if (diff < 3600) return 'lige nu';
+      if (diff < 86400) return 'i dag';
+      if (diff < 2 * 86400) return 'i går';
+      const d = new Date(ts * 1000);
+      return `${d.getDate()}/${d.getMonth() + 1}`;
+    };
+
+    const renderEvents = (events: ActivityEvent[]): void => {
+      listEl.replaceChildren();
+      for (const e of events) {
+        const li = document.createElement('li');
+        li.className = 'row';
+        const when = document.createElement('span');
+        when.className = 'when';
+        when.textContent = formatWhen(e.ts);
+        const what = document.createElement('span');
+        what.className = 'what';
+        const ic = document.createElement('span');
+        ic.className = 'ic';
+        ic.textContent = e.icon;
+        what.appendChild(ic);
+        if (e.url) {
+          const a = document.createElement('a');
+          a.href = e.url;
+          a.textContent = e.text;
+          what.appendChild(a);
+        } else {
+          what.appendChild(document.createTextNode(e.text));
+        }
+        li.appendChild(when);
+        li.appendChild(what);
+        listEl.appendChild(li);
+      }
+    };
+
+    const renderError = (msg: string): void => {
+      listEl.replaceChildren();
+      const li = document.createElement('li');
+      li.className = 'row';
+      li.textContent = msg;
+      listEl.appendChild(li);
+    };
+
+    const renderBars = (activity: DayCount[]): void => {
+      barsEl.replaceChildren();
+      const ns = 'http://www.w3.org/2000/svg';
+      const max = Math.max(1, ...activity.map((d) => d.count));
+      const w = 600 / activity.length;
+      const gap = 2;
+      activity.forEach((d, i) => {
+        const h = Math.max(2, (d.count / max) * 48);
+        const y = 56 - h;
+        const x = i * w;
+        const opacity = d.count === 0 ? 0.18 : 0.5 + (d.count / max) * 0.5;
+        const rect = document.createElementNS(ns, 'rect');
+        rect.setAttribute('x', x.toFixed(2));
+        rect.setAttribute('y', y.toFixed(2));
+        rect.setAttribute('width', (w - gap).toFixed(2));
+        rect.setAttribute('height', h.toFixed(2));
+        rect.setAttribute('rx', '1.5');
+        rect.setAttribute('fill', 'currentColor');
+        rect.setAttribute('opacity', opacity.toFixed(2));
+        barsEl.appendChild(rect);
+      });
+    };
+
+    fetch('/api/activity')
+      .then((r) => r.json() as Promise<ActivityResponse>)
+      .then((data) => {
+        renderEvents(data.events);
+        if (data.events.length === 0) {
+          const li = document.createElement('li');
+          li.className = 'row';
+          li.textContent = 'Stille for tiden — næste publish onsdag';
+          listEl.replaceChildren(li);
+        }
+        const total = data.activity.reduce((sum, d) => sum + d.count, 0);
+        metaEl.textContent = `${total} commits · sidste 30 dage`;
+        hintEl.textContent = 'Aktivitet sidste 30 dage';
+        renderBars(data.activity);
+      })
+      .catch(() => {
+        renderError('Kunne ikke hente aktivitet — prøv igen om lidt.');
+        metaEl.textContent = '';
+      });
+  }
+</script>
+
+<style>
+  .feed {
+    margin: 24px 0 32px;
+    padding: 24px 28px;
+    background: var(--cream-warm);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-sm);
+    color: var(--clay-deep);
+  }
+  .head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .ldot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--clay);
+    box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.55);
+    animation: pulse 2.4s infinite;
+  }
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay-deep);
+    font-weight: 600;
+  }
+  .meta {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--gray-700);
+    font-feature-settings: 'tnum';
+  }
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+  }
+  .row {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--gray-100);
+    font-size: 14px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .when {
+    color: var(--gray-700);
+    font-size: 12px;
+    min-width: 64px;
+    font-feature-settings: 'tnum';
+  }
+  .row .what { color: var(--ink); }
+  .row .what a { color: var(--clay-deep); }
+  .row .ic { display: inline-block; margin-right: 8px; opacity: 0.5; font-size: 12px; }
+  .skeleton-row { padding: 9px 0; }
+  .skeleton {
+    display: inline-block;
+    height: 16px;
+    background: linear-gradient(90deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--gray-100) 100%);
+    background-size: 200% 100%;
+    border-radius: 3px;
+    animation: shimmer 1.4s infinite;
+  }
+  .graph {
+    width: 100%;
+    height: 56px;
+    color: var(--clay);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--gray-700);
+  }
+  .github { color: var(--gray-700); }
+  .github:hover { color: var(--clay-deep); }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.55); }
+    50% { box-shadow: 0 0 0 7px rgba(217, 119, 87, 0); }
+  }
+  @media (max-width: 720px) {
+    .feed { padding: 20px 18px; }
+    .row .when { min-width: 48px; font-size: 11px; }
+    .meta { display: none; }
+  }
+</style>

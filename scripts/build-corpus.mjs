@@ -86,7 +86,18 @@ if (fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   await mkdir(voiceDir, { recursive: true });
   await writeFile(voiceFile, JSON.stringify(voice, null, 2), 'utf-8');
 
+  const apiCorpusDir = join(__dirname, '..', 'site', 'public', 'api');
+  const apiCorpusFile = join(apiCorpusDir, '_corpus.json');
+  const apiCorpus = corpus.map(p => ({
+    slug: p.slug,
+    title: p.title,
+    publish_at: p.publishAt,
+  }));
+  await mkdir(apiCorpusDir, { recursive: true });
+  await writeFile(apiCorpusFile, JSON.stringify(apiCorpus), 'utf-8');
+
   console.log(`Wrote ${corpus.length} posts to ${corpusFile}`);
   console.log(`Wrote ${Object.keys(citations).length} citations to ${citationsFile}`);
   console.log(`Wrote ${voice.length} voice-samples to ${voiceFile}`);
+  console.log(`Wrote ${apiCorpus.length} posts to ${apiCorpusFile}`);
 }

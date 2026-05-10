@@ -6,6 +6,13 @@ status: published
 tags: [ai, m-and-a, fejl-rapport]
 privacy_flag: false
 excerpt: "Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde fejl. Den fandt 14 — og overså den ene der havde betydet noget."
+marginalia:
+  - ts: "8/5 14:32"
+    text: "undersøgte det her i 3 dage før jeg gav op"
+    source: manual
+  - ts: "9/5 09:01"
+    text: "rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas"
+    source: manual
 ---
 
 

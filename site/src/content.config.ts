@@ -12,6 +12,11 @@ const posts = defineCollection({
     privacy_flag: z.boolean().default(false),
     linkedin_url: z.string().nullable().default(null),
     excerpt: z.string().optional(),
+    marginalia: z.array(z.object({
+      ts: z.string(),
+      text: z.string(),
+      source: z.enum(['telegram', 'auto-commit', 'manual']).default('manual'),
+    })).default([]),
   }),
 });
 

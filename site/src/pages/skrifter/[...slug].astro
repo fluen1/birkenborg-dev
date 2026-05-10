@@ -3,6 +3,9 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import Marginalia from '../../components/Marginalia.astro';
+import MetaTags from '../../components/MetaTags.astro';
+import StructuredData from '../../components/StructuredData.astro';
 import { formatDate } from '../../lib/format-date';
 
 export async function getStaticPaths() {
@@ -16,30 +19,78 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
-<Base title={`${post.data.title} · birkenborg.dev`} description={post.data.excerpt}>
+<Base title={`${post.data.title} · birkenborg.dev`}>
+  <Fragment slot="head">
+    <MetaTags
+      title={`${post.data.title} · birkenborg.dev`}
+      description={post.data.excerpt ?? post.data.title}
+      url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}`}
+      type="article"
+      publishedTime={post.data.publish_at.toISOString()}
+    />
+    <StructuredData
+      type="Article"
+      data={{
+        headline: post.data.title,
+        datePublished: post.data.publish_at.toISOString(),
+        author: {
+          '@type': 'Person',
+          name: 'Philip Birkenborg',
+          url: 'https://birkenborg.dev',
+        },
+        publisher: {
+          '@type': 'Person',
+          name: 'Philip Birkenborg',
+        },
+        description: post.data.excerpt ?? post.data.title,
+        url: `https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}`,
+      }}
+    />
+  </Fragment>
   <Header />
   <main class="post-page">
-    <article class="container">
-      <header class="post-head">
-        <p class="meta">{formatDate(post.data.publish_at)}</p>
-        <h1>{post.data.title}</h1>
-        {post.data.excerpt && <p class="excerpt">{post.data.excerpt}</p>}
-      </header>
-      <div class="post-body">
-        <Content />
-      </div>
-      {post.data.linkedin_url && (
-        <footer class="post-foot">
-          <a href={post.data.linkedin_url} target="_blank" rel="noopener">Læs også på LinkedIn →</a>
-        </footer>
-      )}
-    </article>
+    <div class="post-layout container">
+      <article class="post-content">
+        <header class="post-head">
+          <p class="meta">{formatDate(post.data.publish_at)}</p>
+          <h1>{post.data.title}</h1>
+          {post.data.excerpt && <p class="excerpt">{post.data.excerpt}</p>}
+        </header>
+        <div class="post-body">
+          <Content />
+        </div>
+        {post.data.linkedin_url && (
+          <footer class="post-foot">
+            <a href={post.data.linkedin_url} target="_blank" rel="noopener">Læs også på LinkedIn →</a>
+          </footer>
+        )}
+      </article>
+      <aside class="post-margin">
+        <Marginalia notes={post.data.marginalia ?? []} />
+      </aside>
+    </div>
   </main>
   <Footer />
 </Base>
 
 <style>
   .post-page { padding: 64px 0 96px; }
+
+  .post-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .post-content { min-width: 0; }
+
+  .post-margin {
+    position: sticky;
+    top: 96px;
+    padding-top: 0;
+  }
+
   .post-head { max-width: 720px; margin: 0 auto 48px; }
   .meta {
     font-size: 12px; letter-spacing: .15em; text-transform: uppercase;
@@ -88,4 +139,9 @@ const { Content } = await render(post);
     font-size: 14px;
   }
   .post-foot a { color: var(--clay-deep); }
+
+  @media (max-width: 900px) {
+    .post-layout { grid-template-columns: 1fr; gap: 16px; }
+    .post-margin { position: static; padding-top: 24px; }
+  }
 </style>
