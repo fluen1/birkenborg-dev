@@ -14,10 +14,11 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            https://birkenborg-dev.birkenborg-p.workers.dev
-            https://birkenborg-dev.birkenborg-p.workers.dev/skrifter
-            https://birkenborg-dev.birkenborg-p.workers.dev/projekter
-            https://birkenborg-dev.birkenborg-p.workers.dev/cv
+            https://birkenborg.dev
+            https://birkenborg.dev/skrifter
+            https://birkenborg.dev/projekter
+            https://birkenborg.dev/cv
+            https://birkenborg.dev/skrifter/ma-agent-paragraf-30
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: ./lighthouserc.json
