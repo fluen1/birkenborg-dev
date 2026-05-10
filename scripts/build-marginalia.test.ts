@@ -5,7 +5,14 @@ import {
   fetchCommits,
   buildSuggestions,
   dedupAgainstExisting,
+  writePostWithMarginalia,
 } from "./build-marginalia.mjs";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const FIXTURE_PATH = join(__dirname, "build-marginalia.fixtures", "sample-post.md");
 
 describe("extractKeywords", () => {
   it("extraherer slug-fragmenter, tags, og title-keywords", () => {
@@ -192,5 +199,64 @@ describe("dedupAgainstExisting", () => {
       { ts: "2026-05-09", text: "ny", source: "auto-commit", commit_url: "x" },
     ];
     expect(dedupAgainstExisting(post, suggestions)).toEqual(suggestions);
+  });
+});
+
+describe("writePostWithMarginalia", () => {
+  let tmpPath: string;
+
+  beforeEach(async () => {
+    const tmpDir = join(__dirname, ".tmp-test");
+    await mkdir(tmpDir, { recursive: true });
+    tmpPath = join(tmpDir, "test-post.md");
+    const fixture = await readFile(FIXTURE_PATH, "utf-8");
+    await writeFile(tmpPath, fixture);
+  });
+
+  it("appender suggestions til marginalia-array i frontmatter", async () => {
+    const suggestions = [
+      {
+        ts: "2026-05-09T14:00:00Z",
+        text: "feat: ny feature",
+        source: "auto-commit",
+        commit_url: "https://github.com/x/y/commit/abc",
+      },
+    ];
+    await writePostWithMarginalia(tmpPath, suggestions);
+    const updated = await readFile(tmpPath, "utf-8");
+    expect(updated).toContain("marginalia:");
+    expect(updated).toContain("ny feature");
+    expect(updated).toContain("source: auto-commit");
+    expect(updated).toContain("commit_url:");
+    expect(updated).toContain("# Test post");
+    expect(updated).toContain("Body content.");
+  });
+
+  it("appender til eksisterende marginalia hvis array allerede findes", async () => {
+    const fixtureWithMarg = `---
+title: Test
+slug: test
+publish_at: 2026-05-08
+status: published
+tags: []
+privacy_flag: false
+linkedin_url: null
+marginalia:
+  - ts: "8/5"
+    text: eksisterende note
+    source: manual
+---
+
+Body.
+`;
+    await writeFile(tmpPath, fixtureWithMarg);
+
+    const suggestions = [
+      { ts: "2026-05-09", text: "ny", source: "auto-commit", commit_url: "https://x.com" },
+    ];
+    await writePostWithMarginalia(tmpPath, suggestions);
+    const updated = await readFile(tmpPath, "utf-8");
+    expect(updated).toContain("eksisterende note");
+    expect(updated).toContain("ny");
   });
 });

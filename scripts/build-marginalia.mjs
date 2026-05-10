@@ -1,3 +1,6 @@
+import matter from "gray-matter";
+import { readFile as readFileNode, writeFile as writeFileNode } from "node:fs/promises";
+
 const STOP_WORDS_DA = new Set([
   "og", "eller", "men", "som", "der", "det", "den", "de", "en", "et",
   "at", "for", "til", "med", "af", "på", "i", "var", "er", "have", "har",
@@ -86,4 +89,16 @@ export function buildSuggestions(post, commits) {
 export function dedupAgainstExisting(post, suggestions) {
   const existing = new Set((post.marginalia ?? []).map((m) => m.text));
   return suggestions.filter((s) => !existing.has(s.text));
+}
+
+export async function writePostWithMarginalia(filePath, suggestions) {
+  const raw = await readFileNode(filePath, "utf-8");
+  const parsed = matter(raw);
+  const existing = parsed.data.marginalia ?? [];
+  const updated = {
+    ...parsed.data,
+    marginalia: [...existing, ...suggestions],
+  };
+  const newContent = matter.stringify(parsed.content, updated);
+  await writeFileNode(filePath, newContent, "utf-8");
 }
