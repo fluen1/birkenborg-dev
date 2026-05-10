@@ -28,3 +28,27 @@ export function matchCommit(commitMessage, keywords) {
   const lower = commitMessage.toLowerCase();
   return keywords.filter((kw) => lower.includes(kw));
 }
+
+const GITHUB_API = "https://api.github.com";
+
+export async function fetchCommits(repo, githubToken, sinceDays) {
+  const res = await fetch(`${GITHUB_API}/repos/${repo}/commits?per_page=100`, {
+    headers: {
+      Authorization: `Bearer ${githubToken}`,
+      Accept: "application/vnd.github+json",
+      "User-Agent": "build-marginalia",
+    },
+  });
+  if (!res.ok) {
+    throw new Error(`github_${res.status}: ${repo}`);
+  }
+  const arr = await res.json();
+  const cutoffMs = Date.now() - sinceDays * 86400_000;
+  return arr
+    .map((c) => ({
+      message: c.commit.message.split("\n")[0],
+      authorDate: c.commit.author.date,
+      htmlUrl: c.html_url,
+    }))
+    .filter((c) => Date.parse(c.authorDate) >= cutoffMs);
+}
