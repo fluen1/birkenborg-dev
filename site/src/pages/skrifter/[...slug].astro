@@ -20,6 +20,28 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const rawBody = post.body ?? '';
 const wordCount = rawBody.replace(/[*#`>\[\]_]/g, '').trim().split(/\s+/).filter(Boolean).length;
+
+// Relaterede skrifter via tag-overlap
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published' && !data.privacy_flag);
+const currentSlug = post.id.replace(/\.md$/, '');
+const currentTags = post.data.tags ?? [];
+
+type RelatedPost = { slug: string; title: string; publishAt: Date; score: number };
+const related: RelatedPost[] = allPosts
+  .filter(p => p.id.replace(/\.md$/, '') !== currentSlug)
+  .map(p => {
+    const otherTags = p.data.tags ?? [];
+    const overlap = currentTags.filter(t => otherTags.includes(t)).length;
+    return {
+      slug: p.data.slug ?? p.id.replace(/\.md$/, ''),
+      title: p.data.title,
+      publishAt: p.data.publish_at,
+      score: overlap,
+    };
+  })
+  .filter(r => r.score > 0)
+  .sort((a, b) => b.score - a.score || +b.publishAt - +a.publishAt)
+  .slice(0, 3);
 ---
 <Base title={`${post.data.title} · birkenborg.dev`}>
   <Fragment slot="head">
@@ -72,6 +94,20 @@ const wordCount = rawBody.replace(/[*#`>\[\]_]/g, '').trim().split(/\s+/).filter
           <footer class="post-foot">
             <a href={post.data.linkedin_url} target="_blank" rel="noopener">Læs også på LinkedIn →</a>
           </footer>
+        )}
+        {related.length > 0 && (
+          <aside class="related">
+            <h2>Relaterede skrifter</h2>
+            <ul>
+              {related.map(r => (
+                <li>
+                  <a href={`/skrifter/${r.slug}`}>
+                    {r.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
         )}
       </article>
       <aside class="post-margin">
@@ -148,6 +184,40 @@ const wordCount = rawBody.replace(/[*#`>\[\]_]/g, '').trim().split(/\s+/).filter
     font-size: 14px;
   }
   .post-foot a { color: var(--clay-deep); }
+
+  .related {
+    max-width: 720px;
+    margin: 64px auto 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .related h2 {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-700);
+    margin: 0 0 16px;
+  }
+  .related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .related li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  .related a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .related a:hover {
+    border-bottom-color: var(--clay-xdeep);
+  }
 
   @media (max-width: 900px) {
     .post-layout { grid-template-columns: 1fr; gap: 16px; }
