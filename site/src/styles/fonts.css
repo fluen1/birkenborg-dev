@@ -1,9 +1,15 @@
-/* Google Fonts via <link rel="stylesheet"> i Base.astro head — IKKE @import her
-   (which is render-blocking når Astro bundle'r CSS). Variant-mængden er reduceret
-   til kun de wghts vi faktisk bruger. */
+/* Self-hosted fonts via @fontsource-variable (variable woff2). Loaded via
+   base.css @import — font-display: swap er indbygget i pakken så FOIT undgås.
+   Ingen DNS-lookup eller CDN-handshake som ved Google Fonts. */
+
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/source-serif-4';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/caveat';
 
 :root {
-  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-  --font-serif:   'Source Serif 4', 'Iowan Old Style', Georgia, serif;
-  --font-sans:    'Geist', -apple-system, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-serif:   'Source Serif 4 Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans:    'Geist Variable', -apple-system, system-ui, sans-serif;
+  --font-handwritten: 'Caveat Variable', cursive;
 }
