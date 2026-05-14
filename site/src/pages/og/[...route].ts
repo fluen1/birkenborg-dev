@@ -11,23 +11,37 @@ const projekter = await getCollection(
   ({ data }) => data.status !== 'archived',
 );
 
+const DANISH_MONTHS = [
+  'januar', 'februar', 'marts', 'april', 'maj', 'juni',
+  'juli', 'august', 'september', 'oktober', 'november', 'december',
+];
+
+function formatDateDanish(date: Date): string {
+  return `${date.getDate()}. ${DANISH_MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+}
+
 // Keys become URL slugs: posts → "posts/<id>.png", projekter → "projekter/<id>.png"
 const pages = {
   ...Object.fromEntries(
-    posts.map((post) => [
-      `posts/${post.id.replace(/\.md$/, '')}`,
-      {
-        title: post.data.title,
-        description: post.data.excerpt ?? '',
-      },
-    ]),
+    posts.map((post) => {
+      const date = new Date(post.data.publish_at);
+      const excerpt = post.data.excerpt ?? '';
+      const dateLine = `${formatDateDanish(date)}  ·  Philip Birkenborg  ·  birkenborg.dev`;
+      return [
+        `posts/${post.id.replace(/\.md$/, '')}`,
+        {
+          title: post.data.title,
+          description: excerpt ? `${excerpt}\n\n${dateLine}` : dateLine,
+        },
+      ];
+    }),
   ),
   ...Object.fromEntries(
     projekter.map((project) => [
       `projekter/${project.id.replace(/\.md$/, '')}`,
       {
         title: project.data.title,
-        description: project.data.summary ?? '',
+        description: `${project.data.summary ?? ''}\n\nProjekt  ·  Philip Birkenborg  ·  birkenborg.dev`,
       },
     ]),
   ),
@@ -51,7 +65,7 @@ export const { getStaticPaths, GET } = await OGImageRoute({
         lineHeight: 1.1,
       },
       description: {
-        size: 28,
+        size: 26,
         families: ['Geist'],
         weight: 'Normal',
         color: [90, 88, 79], // --gray-700
