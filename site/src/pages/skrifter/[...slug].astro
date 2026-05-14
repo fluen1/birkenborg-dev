@@ -27,6 +27,7 @@ const { Content } = await render(post);
       url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}`}
       type="article"
       publishedTime={post.data.publish_at.toISOString()}
+      imageUrl={`https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`}
     />
     <StructuredData
       type="Article"
