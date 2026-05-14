@@ -6,12 +6,14 @@ interface Props {
   title: string;
   date: Date | string;
   readTime?: string;
+  headingLevel?: 'h2' | 'h3';
 }
-const { href, title, date, readTime = '5 min' } = Astro.props;
+const { href, title, date, readTime = '5 min', headingLevel = 'h3' } = Astro.props;
+const HeadingTag = headingLevel;
 ---
 <a class="writing" href={href}>
   <span class="date">{formatDateShort(date)}</span>
-  <h3>{title}</h3>
+  <HeadingTag>{title}</HeadingTag>
   <span class="read">{readTime}</span>
 </a>
 
@@ -26,13 +28,13 @@ const { href, title, date, readTime = '5 min' } = Astro.props;
     transition: padding .25s ease;
   }
   .writing:hover { padding-left: 12px; }
-  .writing:hover h3 { color: var(--clay-deep); }
+  .writing:hover h2, .writing:hover h3 { color: var(--clay-deep); }
   .date {
     font-size: 13px;
     font-variant-numeric: tabular-nums;
     color: var(--gray-400);
   }
-  h3 {
+  h2, h3 {
     font-family: var(--font-serif);
     font-weight: 500;
     font-size: 22px;
@@ -44,6 +46,6 @@ const { href, title, date, readTime = '5 min' } = Astro.props;
   @media (max-width: 720px) {
     .writing { grid-template-columns: 64px 1fr; gap: 16px; }
     .read { display: none; }
-    h3 { font-size: 18px; }
+    h2, h3 { font-size: 18px; }
   }
 </style>

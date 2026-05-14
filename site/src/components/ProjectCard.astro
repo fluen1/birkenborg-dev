@@ -6,13 +6,15 @@ interface Props {
   status: 'shipped' | 'alpha' | 'internal' | 'archived';
   summary: string;
   featured?: boolean;
+  headingLevel?: 'h2' | 'h3';
 }
-const { href, title, pillLabel, status, summary, featured = false } = Astro.props;
+const { href, title, pillLabel, status, summary, featured = false, headingLevel = 'h3' } = Astro.props;
 const pillClass = `pill ${status}`;
+const HeadingTag = headingLevel;
 ---
 <a class={`project ${featured ? 'featured' : ''}`} href={href}>
   <span class={pillClass}>{pillLabel}</span>
-  <h3>{title}</h3>
+  <HeadingTag>{title}</HeadingTag>
   <p>{summary}</p>
   <span class="arrow-small">Læs mere →</span>
 </a>
@@ -41,7 +43,7 @@ const pillClass = `pill ${status}`;
   .pill.alpha    { background: rgba(217,119,87,.14); color: var(--clay-deep); }
   .pill.internal { background: rgba(106,155,204,.14); color: #3a6a99; }
   .pill.archived { background: var(--gray-100); color: var(--gray-700); }
-  h3 {
+  h2, h3 {
     font-family: var(--font-display);
     font-size: 26px; font-weight: 400; margin: 0;
     line-height: 1.15; letter-spacing: -.01em;
@@ -59,7 +61,7 @@ const pillClass = `pill ${status}`;
   .project:hover .arrow-small { gap: 12px; }
 
   .project.featured { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-  .project.featured h3 { color: var(--cream); }
+  .project.featured h2, .project.featured h3 { color: var(--cream); }
   .project.featured p { color: rgba(250,249,245,.7); }
   .project.featured .arrow-small { color: var(--clay-soft); }
   .project.featured .pill.alpha { background: rgba(217,119,87,.22); color: var(--clay-soft); }
