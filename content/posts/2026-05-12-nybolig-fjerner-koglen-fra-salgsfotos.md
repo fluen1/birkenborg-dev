@@ -3,7 +3,8 @@ title: "Nybolig fjerner Koglen fra salgsfotos"
 slug: nybolig-fjerner-koglen-fra-salgsfotos
 publish_at: 2026-05-12T22:35:00+02:00
 status: published
-tags: []
+tags: [ai, ejendomsmægler, sikkerhed, retouchering]
+excerpt: "En ejendomsmægler i Aarhus retoucherer designerlamper ud af salgsbillederne fordi indbrudstyve bruger dem som indkøbsliste. Mindste mulige fix til et reelt problem."
 privacy_flag: false
 linkedin_url: null
 ---
