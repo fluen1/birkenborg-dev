@@ -4,11 +4,25 @@ import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import MetaTags from '../../components/MetaTags.astro';
 
 const all = await getCollection('projekter', ({ data }) => data.status !== 'archived');
 const sorted = all.sort((a, b) => a.data.order - b.data.order);
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/projekter`;
+const PAGE_TITLE = 'Projekter · birkenborg.dev';
+const PAGE_DESC = 'AI-systemer og legal-tech jeg har bygget — fra alpha-eksperimenter til produktion. Konkrete cases, åbne fejl, ingen pitch.';
 ---
-<Base title="Projekter · birkenborg.dev" description="Hvad jeg har bygget — herunder retsklar.dk og ChainHub i alpha.">
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags
+      title={PAGE_TITLE}
+      description={PAGE_DESC}
+      url={PAGE_URL}
+      type="website"
+    />
+  </Fragment>
   <Header />
   <main class="page">
     <div class="container">

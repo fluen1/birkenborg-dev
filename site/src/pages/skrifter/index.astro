@@ -4,11 +4,25 @@ import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WritingItem from '../../components/WritingItem.astro';
+import MetaTags from '../../components/MetaTags.astro';
 
 const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
 const sorted = allPosts.sort((a, b) => +b.data.publish_at - +a.data.publish_at);
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/skrifter`;
+const PAGE_TITLE = 'Skrifter · birkenborg.dev';
+const PAGE_DESC = `Korte essays om jura, AI-systemer i drift og fejl jeg er løbet ind i. ${sorted.length} stykker.`;
 ---
-<Base title="Skrifter · birkenborg.dev" description="Korte essays om jura, AI-systemer i drift og fejl jeg er løbet ind i.">
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags
+      title={PAGE_TITLE}
+      description={PAGE_DESC}
+      url={PAGE_URL}
+      type="website"
+    />
+  </Fragment>
   <Header />
   <main class="page">
     <div class="container">
