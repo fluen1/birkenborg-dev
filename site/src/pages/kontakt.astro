@@ -2,8 +2,22 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import MetaTags from '../components/MetaTags.astro';
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/kontakt`;
+const PAGE_TITLE = 'Kontakt · birkenborg.dev';
+const PAGE_DESC = 'Skriv til Philip Birkenborg via email, LinkedIn eller GitHub. Specifikt om AI-systemer, jurist-arbejde og legal-tech-projekter.';
 ---
-<Base title="Kontakt · birkenborg.dev" description="Skriv til Philip Birkenborg.">
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags
+      title={PAGE_TITLE}
+      description={PAGE_DESC}
+      url={PAGE_URL}
+      type="website"
+    />
+  </Fragment>
   <Header />
   <main class="page">
     <div class="container">

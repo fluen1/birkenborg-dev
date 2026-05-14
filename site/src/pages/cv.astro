@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import MetaTags from '../components/MetaTags.astro';
 
 interface Role {
   role: string;
@@ -49,8 +50,21 @@ const recentSorted = (cv.recent ?? [])
   .slice()
   .sort((a, b) => b.date.localeCompare(a.date))
   .slice(0, 8);
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/cv`;
+const PAGE_TITLE = 'CV · Philip Birkenborg';
+const PAGE_DESC = 'Cand.merc.jur. + AI-superbruger. Legal Counsel hos Tandlægen.dk, bygger AI-agenter til jurist-arbejde. Karriere, projekter, sprog og kompetencer.';
 ---
-<Base title="CV · birkenborg.dev" description="Philip Birkenborg Andersen — Cand.merc.jur., Legal Counsel hos Tandlægen.dk.">
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags
+      title={PAGE_TITLE}
+      description={PAGE_DESC}
+      url={PAGE_URL}
+      type="website"
+    />
+  </Fragment>
   <Header />
   <main class="cv-page">
 

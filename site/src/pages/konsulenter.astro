@@ -3,11 +3,22 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LeadForm from '../components/LeadForm.astro';
+import MetaTags from '../components/MetaTags.astro';
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/konsulenter`;
+const PAGE_TITLE = 'Konsulenter · birkenborg.dev';
+const PAGE_DESC = 'Authority-sites + AI-værktøjer til SMV-konsulenter (strategi, forretningsudvikling, compliance). Fast prissætning, single leverandør.';
 ---
-<Base
-  title="Autoritets-sites til konsulenter · birkenborg.dev"
-  description="Et site der ikke ligner alle andre konsulent-sites. Tilpasset æstetik, AI-chat der kender dit arbejde, og content-system der gør det nemt at holde det levende."
->
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags
+      title={PAGE_TITLE}
+      description={PAGE_DESC}
+      url={PAGE_URL}
+      type="website"
+    />
+  </Fragment>
   <Header />
   <main class="page">
     <div class="container">

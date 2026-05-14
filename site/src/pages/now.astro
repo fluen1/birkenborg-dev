@@ -6,6 +6,7 @@ import { marked } from 'marked';
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import MetaTags from '../components/MetaTags.astro';
 
 const nowPath = path.resolve('../content/now.md');
 const raw = await fs.readFile(nowPath, 'utf-8');
@@ -17,11 +18,21 @@ const formatUpdated = (d: string) => {
   const months = ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'];
   return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}`;
 };
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/now`;
+const PAGE_TITLE = 'Nu · birkenborg.dev';
+const PAGE_DESC = 'Hvad Philip Birkenborg arbejder på lige nu — projekter, læring og fokus. Inspireret af nownownow.com-genren.';
 ---
-<Base
-  title="Now · birkenborg.dev"
-  description="Hvad Philip Birkenborg er optaget af lige nu — opdateres løbende."
->
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags
+      title={PAGE_TITLE}
+      description={PAGE_DESC}
+      url={PAGE_URL}
+      type="website"
+    />
+  </Fragment>
   <Header />
   <main class="now-page">
     <section class="now-hero">
