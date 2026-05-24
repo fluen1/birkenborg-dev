@@ -128,7 +128,11 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
     display: flex; align-items: end; justify-content: space-between;
     margin-bottom: 28px;
     padding-bottom: 14px;
-    border-bottom: 1px solid var(--gray-100);
+    border-bottom: none;
+    background-image: linear-gradient(90deg, var(--clay), transparent);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
   }
   .section-head h2 {
     font-family: var(--font-display);
@@ -136,6 +140,7 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
     font-size: 32px;
     margin: 0;
     letter-spacing: -.015em;
+    font-variation-settings: 'opsz' 72;
   }
   .section-head.minor h3 {
     font-size: 14px; font-weight: 600; margin: 0;
