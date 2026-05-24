@@ -84,7 +84,7 @@ const related: RelatedPost[] = allPosts
       <article class="post-content">
         <header class="post-head">
           <p class="meta">{formatDate(post.data.publish_at)}</p>
-          <h1>{post.data.title}</h1>
+          <h1 transition:name={`skrift-${currentSlug}`}>{post.data.title}</h1>
           {post.data.excerpt && <p class="excerpt">{post.data.excerpt}</p>}
         </header>
         <div class="post-body">

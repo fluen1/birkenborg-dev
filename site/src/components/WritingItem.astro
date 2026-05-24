@@ -10,10 +10,11 @@ interface Props {
 }
 const { href, title, date, readTime = '5 min', headingLevel = 'h3' } = Astro.props;
 const HeadingTag = headingLevel;
+const slug = href.split('/').pop() ?? '';
 ---
 <a class="writing" href={href}>
   <span class="date">{formatDateShort(date)}</span>
-  <HeadingTag>{title}</HeadingTag>
+  <HeadingTag transition:name={`skrift-${slug}`}>{title}</HeadingTag>
   <span class="read">{readTime}</span>
 </a>
 
