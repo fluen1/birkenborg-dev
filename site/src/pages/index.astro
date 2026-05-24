@@ -82,12 +82,14 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
         <a class="more" href="/skrifter">Alle skrifter →</a>
       </div>
       <div class="writings-list">
-        {restPosts.map(p => (
-          <WritingItem
-            href={`/skrifter/${p.data.slug ?? p.id.replace(/\.md$/, '')}`}
-            title={p.data.title}
-            date={p.data.publish_at}
-          />
+        {restPosts.map((p, i) => (
+          <div data-reveal data-reveal-delay={String(Math.min(i, 3))}>
+            <WritingItem
+              href={`/skrifter/${p.data.slug ?? p.id.replace(/\.md$/, '')}`}
+              title={p.data.title}
+              date={p.data.publish_at}
+            />
+          </div>
         ))}
       </div>
       <ChatCta />
@@ -99,8 +101,8 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
         <a class="more" href="/projekter">Alle projekter →</a>
       </div>
       <div class="pill-grid">
-        {sortedProjects.map(p => (
-          <a class="pill" href={`/projekter/${p.id.replace(/\.md$/, '')}`}>
+        {sortedProjects.map((p, i) => (
+          <a class="pill" href={`/projekter/${p.id.replace(/\.md$/, '')}`} data-reveal data-reveal-delay={String(Math.min(i, 3))}>
             <div class="nm">{p.data.title}</div>
             <div class="desc">{p.data.summary}</div>
           </a>
