@@ -158,9 +158,15 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
     border: 1px solid var(--gray-100);
     padding: 14px 18px;
     border-radius: var(--r-md);
-    transition: border-color 0.15s;
+    transition: border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .pill:hover { border-color: var(--clay); }
+  .pill:hover {
+    border-color: var(--clay);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hov);
+  }
   .pill .nm { font-weight: 500; color: var(--ink); margin-bottom: 4px; }
   .pill .desc { font-size: 13px; color: var(--gray-700); }
 
