@@ -1,11 +1,40 @@
 ---
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import matter from 'gray-matter';
+
 const year = new Date().getFullYear();
+
+let nowSnippet = '';
+let nowUpdated = '';
+try {
+  const nowPath = path.resolve('../content/now.md');
+  const raw = await fs.readFile(nowPath, 'utf-8');
+  const { data, content } = matter(raw);
+  const trimmed = content.trim();
+  nowSnippet = trimmed.length > 120 ? trimmed.slice(0, 120) + '…' : trimmed;
+  if (data.updated) {
+    const d = new Date(data.updated);
+    const months = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
+    nowUpdated = `${d.getDate()}. ${months[d.getMonth()]}`;
+  }
+} catch {
+  // now.md missing or unreadable — skip snippet
+}
 ---
 <footer class="site-footer" data-reveal>
   <div class="container">
     <div class="signature">
       Philip Birkenborg<br />
       <em>Cand.merc.jur.</em>
+      {nowSnippet && (
+        <div class="now-snippet">
+          <span class="now-label">Lige nu</span>
+          <p>{nowSnippet}</p>
+          <a class="now-link" href="/now">Mere →</a>
+          {nowUpdated && <span class="now-updated">Opdateret {nowUpdated}</span>}
+        </div>
+      )}
     </div>
     <div>
       <h2>Sider</h2>
@@ -67,6 +96,22 @@ const year = new Date().getFullYear();
     display: flex; justify-content: space-between;
     font-size: 11px; color: var(--gray-400);
   }
+  .now-snippet {
+    margin-top: 16px; padding-top: 12px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .now-label {
+    font-size: 9px; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--clay-xdeep);
+    font-weight: 600; display: block; margin-bottom: 6px;
+  }
+  .now-snippet p {
+    font-size: 13px; color: var(--gray-700);
+    line-height: 1.5; margin: 0 0 6px;
+    font-family: var(--font-serif);
+  }
+  .now-link { font-size: 12px; color: var(--clay-deep); }
+  .now-updated { font-size: 10px; color: var(--gray-400); margin-left: 12px; }
   @media (max-width: 720px) {
     .site-footer .container { grid-template-columns: 1fr; gap: 24px; }
     .colophon { flex-direction: column; gap: 6px; }
