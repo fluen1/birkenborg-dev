@@ -2,8 +2,7 @@ import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
-
-const LINKEDIN_MARKER = '<!-- linkedin:start -->';
+import { stripLinkedinBlock } from '../site/src/lib/linkedin-block.mjs';
 
 export async function buildCorpus(postsDir) {
   const files = await readdir(postsDir);
@@ -21,10 +20,7 @@ export async function buildCorpus(postsDir) {
     if (data.status !== undefined && data.status !== 'published') continue;
 
     // Strip LinkedIn-blok
-    const linkedinIdx = content.indexOf(LINKEDIN_MARKER);
-    const body = linkedinIdx === -1
-      ? content.trim()
-      : content.slice(0, linkedinIdx).trim();
+    const body = stripLinkedinBlock(content).trim();
 
     corpus.push({
       slug: data.slug ?? file.replace(/\.md$/, ''),
