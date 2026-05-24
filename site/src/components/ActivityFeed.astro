@@ -1,20 +1,37 @@
 ---
-// Udvidet aktivitets-feed: tidslinje af events fra /api/activity.
-// Initial render er skeleton; data fetches client-side.
+interface Props {
+  projectCount?: number;
+}
+const { projectCount = 0 } = Astro.props;
 ---
 
-<aside class="feed" aria-label="Hvad jeg arbejder med" data-reveal>
+<aside class="feed" data-reveal aria-label="Hvad jeg arbejder med" data-project-count={projectCount}>
   <div class="head">
-    <span class="ldot" aria-hidden="true"></span>
-    <span class="label">Hvad jeg arbejder med</span>
-    <span class="meta" data-meta>henter status…</span>
+    <div class="head-left">
+      <span class="ldot" aria-hidden="true"></span>
+      <span class="label">Hvad jeg bygger</span>
+    </div>
+    <div class="stats" data-stats>
+      <div class="stat">
+        <span class="stat-num" data-stat-skrifter>–</span>
+        <span class="stat-label">Skrifter</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-stat-projekter>{projectCount}</span>
+        <span class="stat-label">Projekter</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-stat-commits>–</span>
+        <span class="stat-label">Commits</span>
+      </div>
+    </div>
   </div>
   <ul class="list" data-list>
     <li class="row skeleton-row"><span class="skeleton" style="width: 320px"></span></li>
     <li class="row skeleton-row"><span class="skeleton" style="width: 280px"></span></li>
     <li class="row skeleton-row"><span class="skeleton" style="width: 240px"></span></li>
   </ul>
-  <svg class="graph" viewBox="0 0 600 56" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="graph" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
     <g data-bars></g>
   </svg>
   <div class="footer">
@@ -41,9 +58,10 @@
   const root = document.querySelector('.feed') as HTMLElement | null;
   if (root) {
     const listEl = root.querySelector('[data-list]') as HTMLUListElement;
-    const metaEl = root.querySelector('[data-meta]') as HTMLElement;
     const hintEl = root.querySelector('[data-hint]') as HTMLElement;
     const barsEl = root.querySelector('[data-bars]') as SVGGElement;
+    const statSkrifter = root.querySelector('[data-stat-skrifter]') as HTMLElement;
+    const statCommits = root.querySelector('[data-stat-commits]') as HTMLElement;
 
     const MONTHS_DA = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
 
@@ -103,8 +121,8 @@
       const w = 600 / activity.length;
       const gap = 2;
       activity.forEach((d, i) => {
-        const h = Math.max(2, (d.count / max) * 48);
-        const y = 56 - h;
+        const h = Math.max(2, (d.count / max) * 32);
+        const y = 40 - h;
         const x = i * w;
         const opacity = d.count === 0 ? 0.18 : 0.5 + (d.count / max) * 0.5;
         const rect = document.createElementNS(ns, 'rect');
@@ -112,7 +130,7 @@
         rect.setAttribute('y', y.toFixed(2));
         rect.setAttribute('width', (w - gap).toFixed(2));
         rect.setAttribute('height', h.toFixed(2));
-        rect.setAttribute('rx', '1.5');
+        rect.setAttribute('rx', '2');
         rect.setAttribute('fill', 'currentColor');
         rect.setAttribute('opacity', opacity.toFixed(2));
         barsEl.appendChild(rect);
@@ -126,17 +144,20 @@
         if (data.events.length === 0) {
           const li = document.createElement('li');
           li.className = 'row';
-          li.textContent = 'Stille for tiden — næste publish onsdag';
+          li.textContent = 'Stille for tiden';
           listEl.replaceChildren(li);
         }
         const total = data.activity.reduce((sum, d) => sum + d.count, 0);
-        metaEl.textContent = `${total} commits · sidste 30 dage`;
+        const skriftCount = data.events.filter(e => e.type === 'skrift').length;
+        statCommits.textContent = String(total);
+        statSkrifter.textContent = String(skriftCount);
         hintEl.textContent = 'Aktivitet sidste 30 dage';
         renderBars(data.activity);
       })
       .catch(() => {
-        renderError('Kunne ikke hente aktivitet — prøv igen om lidt.');
-        metaEl.textContent = '';
+        renderError('Kunne ikke hente aktivitet.');
+        statCommits.textContent = '–';
+        statSkrifter.textContent = '–';
       });
   }
 </script>
@@ -152,124 +173,82 @@
     color: var(--clay-deep);
   }
   .head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 14px;
   }
+  .head-left { display: flex; align-items: center; gap: 10px; }
   .ldot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
+    width: 7px; height: 7px; border-radius: 50%;
     background: var(--clay);
     box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.55);
     animation: pulse 2.4s infinite;
   }
   .label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--clay-xdeep);
-    font-weight: 600;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--clay-xdeep); font-weight: 600;
   }
-  .meta {
-    margin-left: auto;
-    font-size: 12px;
-    color: var(--gray-700);
-    font-feature-settings: 'tnum';
+  .stats { display: flex; gap: 20px; }
+  .stat { text-align: center; }
+  .stat-num {
+    display: block; font-family: var(--font-display);
+    font-size: 18px; font-weight: 500; color: var(--ink);
+    line-height: 1; font-feature-settings: 'tnum';
+  }
+  .stat-label {
+    font-size: 8px; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--gray-700);
   }
   .list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    list-style: none; padding: 0; margin: 0 0 16px;
+    display: flex; flex-direction: column; gap: 2px;
   }
   .row {
-    display: flex;
-    gap: 18px;
-    align-items: baseline;
-    padding: 8px 12px;
-    margin: 0 -12px;
-    border-radius: 6px;
-    font-size: 14px;
-    line-height: 1.5;
+    display: flex; gap: 10px; align-items: baseline;
+    padding: 8px 12px; margin: 0 -12px; border-radius: 6px;
+    font-size: 14px; line-height: 1.5;
     transition: background 0.15s ease;
   }
   .row:hover { background: rgba(217, 119, 87, 0.05); }
   .row .when {
-    color: var(--gray-700);
-    font-size: 12px;
-    white-space: nowrap;
-    font-feature-settings: 'tnum';
-    letter-spacing: 0.02em;
+    color: var(--gray-700); font-size: 12px; white-space: nowrap;
+    font-feature-settings: 'tnum'; letter-spacing: 0.02em; min-width: 48px;
   }
   .row .what { color: var(--ink); }
   .row .what em { font-style: italic; color: var(--ink); }
   .row .what a { color: var(--clay-deep); }
   .row .what a:hover { text-decoration: underline; }
-  .row .ic {
-    display: inline-block;
-    margin-right: 18px;
-    opacity: 0.5;
-    font-size: 12px;
-  }
+  .row .ic { display: inline-block; margin-right: 10px; opacity: 0.5; font-size: 12px; }
   .row[data-type="highlight"] {
-    background: rgba(217, 119, 87, 0.06);
-    padding-left: 12px;
-    border-left: 2px solid var(--clay);
-    border-radius: 0 6px 6px 0;
+    background: rgba(217, 119, 87, 0.06); padding-left: 12px;
+    border-left: 2px solid var(--clay); border-radius: 0 6px 6px 0;
   }
-  .row[data-type="highlight"]:hover {
-    background: rgba(217, 119, 87, 0.10);
-  }
-  .row[data-type="highlight"] .ic {
-    opacity: 1;
-    color: var(--clay);
-    font-weight: 600;
-  }
-  .row[data-type="highlight"] .what {
-    font-weight: 500;
-  }
+  .row[data-type="highlight"]:hover { background: rgba(217, 119, 87, 0.10); }
+  .row[data-type="highlight"] .ic { opacity: 1; color: var(--clay); font-weight: 600; }
+  .row[data-type="highlight"] .what { font-weight: 500; }
   .skeleton-row { padding: 9px 0; }
   .skeleton {
-    display: inline-block;
-    height: 16px;
+    display: inline-block; height: 16px;
     background: linear-gradient(90deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--gray-100) 100%);
-    background-size: 200% 100%;
-    border-radius: 3px;
-    animation: shimmer 1.4s infinite;
+    background-size: 200% 100%; border-radius: 3px; animation: shimmer 1.4s infinite;
   }
-  .graph {
-    width: 100%;
-    height: 56px;
-    color: var(--clay);
-    display: block;
-    margin-bottom: 10px;
-  }
+  .graph { width: 100%; height: 40px; color: var(--clay); display: block; margin-bottom: 10px; }
   .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: var(--gray-700);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--gray-700);
   }
   .github { color: var(--gray-700); }
   .github:hover { color: var(--clay-deep); }
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.55); }
     50% { box-shadow: 0 0 0 7px rgba(217, 119, 87, 0); }
   }
   @media (max-width: 720px) {
     .feed { padding: 18px 16px; }
-    .row { gap: 20px; padding: 8px 8px; margin: 0 -8px; }
-    .row .when { min-width: 56px; font-size: 11px; }
-    .row .ic { margin-right: 10px; }
-    .meta { display: none; }
+    .stats { gap: 14px; }
+    .stat-num { font-size: 16px; }
+    .row { gap: 10px; padding: 8px 8px; margin: 0 -8px; }
+    .row .when { min-width: 44px; font-size: 11px; }
+    .row .ic { margin-right: 6px; }
   }
 </style>
