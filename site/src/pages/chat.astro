@@ -23,6 +23,10 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
   <main class="chat-main">
     <div class="container">
       <header class="chat-head">
+        <div class="chat-status">
+          <span class="chat-dot" data-chat-dot></span>
+          <span class="chat-online" data-chat-online>Online</span>
+        </div>
         <h1>Snak med Philip om hans skrifter</h1>
         <p class="chat-lede">
           Bot'en kender alt på <a href="/skrifter">/skrifter</a>. Den citerer kilder.
@@ -191,8 +195,16 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
     messages.push(userMsg);
     renderMessage(userMsg);
 
+    // Show thinking dots
+    const thinkingEl = document.createElement('div');
+    thinkingEl.className = 'bubble bubble-assistant';
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'thinking-dots';
+    for (let i = 0; i < 3; i++) dotsContainer.appendChild(document.createElement('span'));
+    thinkingEl.appendChild(dotsContainer);
+    thread.appendChild(thinkingEl);
+
     const assistantMsg: Message = { role: 'assistant', content: '' };
-    const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
 
     setBusy(true);
 
@@ -204,8 +216,19 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
         body: JSON.stringify({ messages }),
       });
     } catch {
+      thinkingEl.remove();
+      const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
       setDimMessage(bodyEl, 'afbrudt — netværksfejl');
       setStatus('Kunne ikke nå serveren. Prøv igen om lidt.', 'error');
+      const retryContent = content;
+      const retryBtn = document.createElement('button');
+      retryBtn.className = 'retry-btn';
+      retryBtn.textContent = 'Prøv igen →';
+      retryBtn.addEventListener('click', () => {
+        assistantEl.remove();
+        void send(retryContent);
+      });
+      bodyEl.appendChild(retryBtn);
       messages.pop();
       setBusy(false);
       return;
@@ -228,19 +251,35 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
       } else {
         userText = 'Noget gik galt på vores side. Prøv igen om lidt.';
       }
+      thinkingEl.remove();
+      const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
       setDimMessage(bodyEl, userText);
       setStatus(userText, 'error');
+      const retryContent = content;
+      const retryBtn = document.createElement('button');
+      retryBtn.className = 'retry-btn';
+      retryBtn.textContent = 'Prøv igen →';
+      retryBtn.addEventListener('click', () => {
+        assistantEl.remove();
+        void send(retryContent);
+      });
+      bodyEl.appendChild(retryBtn);
       messages.pop();
       setBusy(false);
       return;
     }
 
     if (!res.body) {
+      thinkingEl.remove();
+      const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
       setDimMessage(bodyEl, 'afbrudt — tom respons');
       messages.pop();
       setBusy(false);
       return;
     }
+
+    thinkingEl.remove();
+    const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
 
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
@@ -339,6 +378,11 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
   });
 
   input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      input.value = '';
+      input.blur();
+      return;
+    }
     // Enter sender, Shift+Enter laver ny linje (standard chat-pattern).
     if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
       e.preventDefault();
@@ -353,6 +397,26 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
      ==================================================================== */
 
   .chat-main { padding: 56px 0 40px; }
+
+  .chat-status {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+  }
+  .chat-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--sage);
+    box-shadow: 0 0 0 0 rgba(120, 140, 93, 0.5);
+    animation: chat-pulse 2.4s infinite;
+  }
+  .chat-dot.offline { background: var(--gray-400); animation: none; }
+  .chat-online {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 600; color: var(--sage);
+  }
+  .chat-online.offline { color: var(--gray-400); }
+  @keyframes chat-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(120, 140, 93, 0.5); }
+    50% { box-shadow: 0 0 0 5px rgba(120, 140, 93, 0); }
+  }
 
   .chat-head {
     max-width: 720px;
@@ -521,6 +585,10 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
     font-size: 17px;
     line-height: 1.7;
     color: var(--ink);
+    background: var(--cream-warm);
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    padding: 20px 24px;
   }
 
   .chat-thread .bubble-assistant .body p.lede {
@@ -689,5 +757,34 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
     .chat-thread .bubble-assistant .body p.lede { font-size: 22px; }
     .chat-thread .bubble-assistant .body ol > li { padding-left: 46px; }
     .chat-thread .bubble-assistant .body ol > li::before { font-size: 26px; width: 38px; }
+  }
+
+  .chat-thread .thinking-dots {
+    display: inline-flex; gap: 4px; padding: 12px 16px;
+    background: var(--cream-warm); border: 1px solid var(--gray-100);
+    border-radius: 12px; width: fit-content;
+  }
+  .chat-thread .thinking-dots span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--clay); opacity: 0.4;
+    animation: thinking 1.4s infinite;
+  }
+  .chat-thread .thinking-dots span:nth-child(2) { animation-delay: 200ms; }
+  .chat-thread .thinking-dots span:nth-child(3) { animation-delay: 400ms; }
+  @keyframes thinking {
+    0%, 100% { opacity: 0.4; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-3px); }
+  }
+
+  .chat-thread .retry-btn {
+    display: inline-block; margin-top: 12px;
+    padding: 6px 14px; border: 1px solid var(--clay);
+    border-radius: var(--r-sm); background: transparent;
+    color: var(--clay-deep); font-size: 13px;
+    cursor: pointer; transition: background 0.15s, color 0.15s;
+    font-family: var(--font-sans);
+  }
+  .chat-thread .retry-btn:hover {
+    background: var(--clay); color: var(--cream);
   }
 </style>
