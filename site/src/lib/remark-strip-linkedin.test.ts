@@ -35,4 +35,21 @@ describe('remarkStripLinkedin', () => {
     const output = await process(input);
     expect(output.trim()).toBe('Essay only.\n\nNo LinkedIn here.'.trim());
   });
+
+  it('stops at the first marker when multiple are present', async () => {
+    const input = [
+      'Essay paragraph.',
+      '',
+      '<!-- linkedin:start -->',
+      'First LinkedIn block.',
+      '',
+      '<!-- linkedin:start -->',
+      'Second LinkedIn block.',
+      '',
+    ].join('\n');
+    const output = await process(input);
+    expect(output).toContain('Essay paragraph.');
+    expect(output).not.toContain('First LinkedIn block.');
+    expect(output).not.toContain('Second LinkedIn block.');
+  });
 });

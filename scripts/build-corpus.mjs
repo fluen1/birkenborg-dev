@@ -2,6 +2,9 @@ import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
+// Shared with the site renderer's remark-strip-linkedin plugin so the
+// marker contract lives in one place. This couples scripts/ to site/src/
+// on disk — if either moves, this import path must be updated.
 import { stripLinkedinBlock } from '../site/src/lib/linkedin-block.mjs';
 
 export async function buildCorpus(postsDir) {
