@@ -21,6 +21,11 @@ body {
 
 ::selection { background: var(--clay); color: var(--cream); }
 
+html[data-theme] body,
+html[data-theme] .site-header {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
 a { color: inherit; text-decoration: none; }
 
 img { max-width: 100%; height: auto; display: block; }
