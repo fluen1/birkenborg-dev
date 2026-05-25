@@ -100,21 +100,21 @@ async function handleActivity(req: Request, env: Env, ctx: ExecutionContext): Pr
 }
 
 async function collectActivity(env: Env): Promise<ActivityResponse> {
-  const [activity, lastCommit] = await Promise.all([
+  const [activity, events] = await Promise.all([
     fetchActivityWindow(env).catch((e) => {
       console.error("activity", e);
       return emptyWindow();
     }),
-    fetchLastCommit(env).catch((e) => {
-      console.error("lastCommit", e);
-      return null;
+    buildEvents(env).catch((e) => {
+      console.error('events', e);
+      return [] as ActivityEvent[];
     }),
   ]);
 
-  const events = await buildEvents(env).catch((e) => {
-    console.error('events', e);
-    return [] as ActivityEvent[];
-  });
+  const firstCommit = events.find(e => e.type === 'commit');
+  const lastCommit: LastCommit | null = firstCommit
+    ? { repo: 'birkenborg-dev', message: firstCommit.text, ts: firstCommit.ts, url: firstCommit.url ?? '' }
+    : null;
 
   return {
     activity,
@@ -177,47 +177,6 @@ function emptyWindow(): DayCount[] {
   return window;
 }
 
-async function fetchLastCommit(env: Env): Promise<LastCommit | null> {
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-    "User-Agent": "birkenborg-dev-worker",
-  };
-  if (env.GITHUB_TOKEN) {
-    headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
-  }
-
-  const results = await Promise.all(
-    PUBLIC_REPOS.map(async (repo) => {
-      try {
-        const r = await fetch(
-          `https://api.github.com/repos/${GITHUB_USER}/${repo}/commits?per_page=1`,
-          { headers },
-        );
-        if (!r.ok) return null;
-        const arr = (await r.json()) as Array<{
-          sha: string;
-          commit: { message: string; author: { date: string } };
-          html_url: string;
-        }>;
-        if (!arr.length) return null;
-        const c = arr[0];
-        return {
-          repo,
-          message: c.commit.message.split("\n")[0].slice(0, 80),
-          ts: Math.floor(Date.parse(c.commit.author.date) / 1000),
-          url: c.html_url,
-        };
-      } catch {
-        return null;
-      }
-    }),
-  );
-
-  const valid = results.filter((c): c is LastCommit => c !== null);
-  if (!valid.length) return null;
-  valid.sort((a, b) => b.ts - a.ts);
-  return valid[0];
-}
 
 async function buildEvents(env: Env): Promise<ActivityEvent[]> {
   const events: ActivityEvent[] = [];
@@ -286,9 +245,13 @@ async function buildEvents(env: Env): Promise<ActivityEvent[]> {
   const highlightTexts = new Set<string>();
   const highlights: ActivityEvent[] = [];
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
     const r = await fetch(`${BOT_BASE}/internal/highlights`, {
       headers: { Authorization: `Bearer ${env.BOT_INTERNAL_TOKEN}` },
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
     if (r.ok) {
       const data = (await r.json()) as { highlights: Array<{ ts: number; text: string }> };
       for (const h of data.highlights) {
