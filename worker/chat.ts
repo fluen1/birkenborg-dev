@@ -99,18 +99,34 @@ export async function handleChat(
     return jsonError(400, { error: 'validation', message: validation.error });
   }
 
+  const aboutSlug = (payload as { aboutSlug?: string })?.aboutSlug;
+
   const model = env.CHAT_MODEL ?? DEFAULT_MODEL;
+
+  const systemBlocks: Array<{ type: string; text: string; cache_control?: { type: string } }> = [
+    {
+      type: 'text',
+      text: getSystemPrompt(),
+      cache_control: { type: 'ephemeral' },
+    },
+  ];
+
+  if (aboutSlug && typeof aboutSlug === 'string') {
+    const { findPostBySlug } = await import('./persona');
+    const focusPost = findPostBySlug(CORPUS, aboutSlug);
+    if (focusPost) {
+      systemBlocks.push({
+        type: 'text',
+        text: `Brugeren læser lige nu: "${focusPost.title}"\nTags: ${focusPost.tags.join(', ')}\n\nPrioritér dette skrift i dine svar. Citér det først hvis relevant.`,
+      });
+    }
+  }
+
   const anthropicReq = {
     model,
     max_tokens: MAX_OUTPUT_TOKENS,
     stream: true,
-    system: [
-      {
-        type: 'text',
-        text: getSystemPrompt(),
-        cache_control: { type: 'ephemeral' },
-      },
-    ],
+    system: systemBlocks,
     messages: validation.messages,
   };
 

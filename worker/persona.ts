@@ -38,6 +38,10 @@ GRÆNSER:
 - Hold svar korte og konkrete. Maks ~150 ord medmindre brugeren beder om mere.
 `;
 
+export function findPostBySlug(corpus: CorpusPost[], slug: string): CorpusPost | null {
+  return corpus.find(p => p.slug === slug) ?? null;
+}
+
 export function buildSystemPrompt(corpus: CorpusPost[]): string {
   if (corpus.length === 0) {
     return `${PERSONA_INSTRUCTIONS}\nKILDER START\n(ingen kilder tilgængelige)\nKILDER SLUT\n`;

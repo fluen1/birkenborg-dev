@@ -224,7 +224,7 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
       res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ messages, aboutSlug: aboutSlug ?? undefined }),
       });
     } catch {
       thinkingEl.remove();
