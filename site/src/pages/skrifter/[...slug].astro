@@ -51,7 +51,7 @@ const related: RelatedPost[] = allPosts
       url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}`}
       type="article"
       publishedTime={post.data.publish_at.toISOString()}
-      imageUrl={`https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`}
+      imageUrl={post.data.image_url ?? `https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`}
     />
     <StructuredData
       type="Article"
@@ -86,6 +86,14 @@ const related: RelatedPost[] = allPosts
           <p class="meta">{formatDate(post.data.publish_at)}</p>
           <h1 transition:name={`skrift-${currentSlug}`}>{post.data.title}</h1>
           {post.data.excerpt && <p class="excerpt">{post.data.excerpt}</p>}
+          {post.data.image_url && (
+            <img class="post-hero-image"
+              src={post.data.image_url}
+              alt={`Illustration: ${post.data.title}`}
+              loading="eager"
+              width="720"
+              height="378" />
+          )}
         </header>
         <div class="post-body">
           <Content />
@@ -154,6 +162,14 @@ const related: RelatedPost[] = allPosts
     letter-spacing: -.02em;
     margin: 0 0 20px;
     font-variation-settings: 'opsz' 144;
+  }
+  .post-hero-image {
+    max-width: 720px;
+    width: 100%;
+    height: auto;
+    border-radius: var(--r-md);
+    margin: 24px auto 48px;
+    display: block;
   }
   .excerpt {
     font-family: var(--font-serif);

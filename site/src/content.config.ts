@@ -11,6 +11,7 @@ const posts = defineCollection({
     tags: z.array(z.string()).default([]),
     privacy_flag: z.boolean().default(false),
     linkedin_url: z.string().nullable().default(null),
+    image_url: z.string().url().optional(),
     excerpt: z.string().optional(),
     marginalia: z.array(z.object({
       ts: z.string(),
