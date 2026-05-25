@@ -5,12 +5,15 @@ interface Props {
   href: string;
   title: string;
   date: Date | string;
-  readTime?: string;
+  body?: string;
   headingLevel?: 'h2' | 'h3';
 }
-const { href, title, date, readTime = '5 min', headingLevel = 'h3' } = Astro.props;
+const { href, title, date, body = '', headingLevel = 'h3' } = Astro.props;
 const HeadingTag = headingLevel;
 const slug = href.split('/').pop() ?? '';
+const words = body.replace(/[*#`>\[\]_]/g, '').trim().split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 200));
+const readTime = `${minutes} min`;
 ---
 <a class="writing" href={href}>
   <span class="date">{formatDateShort(date)}</span>
