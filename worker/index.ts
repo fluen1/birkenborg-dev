@@ -51,7 +51,6 @@ interface ActivityEvent {
 interface ActivityResponse {
   activity: DayCount[];
   lastCommit: LastCommit | null;
-  draftsPending: number | null;
   generatedAt: number;
   events: ActivityEvent[];
 }
@@ -112,15 +111,6 @@ async function collectActivity(env: Env): Promise<ActivityResponse> {
     }),
   ]);
 
-  let draftsPending: number | null = null;
-  if (env.BOT_INTERNAL_TOKEN) {
-    try {
-      draftsPending = await fetchDrafts(env);
-    } catch (e) {
-      console.error("drafts", e);
-    }
-  }
-
   const events = await buildEvents(env).catch((e) => {
     console.error('events', e);
     return [] as ActivityEvent[];
@@ -129,7 +119,6 @@ async function collectActivity(env: Env): Promise<ActivityResponse> {
   return {
     activity,
     lastCommit,
-    draftsPending,
     generatedAt: Math.floor(Date.now() / 1000),
     events,
   };
@@ -228,16 +217,6 @@ async function fetchLastCommit(env: Env): Promise<LastCommit | null> {
   if (!valid.length) return null;
   valid.sort((a, b) => b.ts - a.ts);
   return valid[0];
-}
-
-async function fetchDrafts(env: Env): Promise<number | null> {
-  const sinceTs = Math.floor(Date.now() / 1000) - 7 * 86400;
-  const r = await fetch(`${BOT_BASE}/internal/inbox?since=${sinceTs}`, {
-    headers: { Authorization: `Bearer ${env.BOT_INTERNAL_TOKEN}` },
-  });
-  if (!r.ok) return null;
-  const data = (await r.json()) as { messages?: unknown[] };
-  return data.messages?.length ?? 0;
 }
 
 async function buildEvents(env: Env): Promise<ActivityEvent[]> {

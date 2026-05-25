@@ -22,6 +22,10 @@ function formatDateDanish(date: Date): string {
 
 // Keys become URL slugs: posts → "posts/<id>.png", projekter → "projekter/<id>.png"
 const pages = {
+  default: {
+    title: 'Philip Birkenborg',
+    description: 'Jurist og teknolog  ·  birkenborg.dev',
+  },
   ...Object.fromEntries(
     posts.map((post) => {
       const date = new Date(post.data.publish_at);

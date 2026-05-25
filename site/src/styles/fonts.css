@@ -12,4 +12,5 @@
   --font-serif:   'Source Serif 4 Variable', 'Iowan Old Style', Georgia, serif;
   --font-sans:    'Geist Variable', -apple-system, system-ui, sans-serif;
   --font-handwritten: 'Caveat Variable', cursive;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
 }
