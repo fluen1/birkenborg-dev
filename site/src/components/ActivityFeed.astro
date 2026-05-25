@@ -5,38 +5,38 @@ interface Props {
 const { projectCount = 0 } = Astro.props;
 ---
 
-<aside class="feed" data-reveal aria-label="Hvad jeg arbejder med" data-project-count={projectCount}>
-  <div class="head">
-    <div class="head-left">
-      <span class="ldot" aria-hidden="true"></span>
-      <span class="label">Hvad jeg bygger</span>
+<aside class="af-feed" data-reveal aria-label="Hvad jeg arbejder med" data-project-count={projectCount}>
+  <div class="af-head">
+    <div class="af-head-left">
+      <span class="af-ldot" aria-hidden="true"></span>
+      <span class="af-label">Hvad jeg bygger</span>
     </div>
-    <div class="stats" data-stats>
-      <div class="stat">
-        <span class="stat-num" data-stat-skrifter>–</span>
-        <span class="stat-label">Skrifter</span>
+    <div class="af-stats" data-stats>
+      <div class="af-stat">
+        <span class="af-stat-num" data-stat-skrifter>–</span>
+        <span class="af-stat-label">Skrifter</span>
       </div>
-      <div class="stat">
-        <span class="stat-num" data-stat-projekter>{projectCount}</span>
-        <span class="stat-label">Projekter</span>
+      <div class="af-stat">
+        <span class="af-stat-num" data-stat-projekter>{projectCount}</span>
+        <span class="af-stat-label">Projekter</span>
       </div>
-      <div class="stat">
-        <span class="stat-num" data-stat-commits>–</span>
-        <span class="stat-label">Commits</span>
+      <div class="af-stat">
+        <span class="af-stat-num" data-stat-commits>–</span>
+        <span class="af-stat-label">Commits</span>
       </div>
     </div>
   </div>
-  <ul class="list" data-list>
-    <li class="row skeleton-row"><span class="skeleton" style="width: 320px"></span></li>
-    <li class="row skeleton-row"><span class="skeleton" style="width: 280px"></span></li>
-    <li class="row skeleton-row"><span class="skeleton" style="width: 240px"></span></li>
+  <ul class="af-list" data-list>
+    <li class="af-row af-skeleton-row"><span class="af-skeleton" style="width: 320px"></span></li>
+    <li class="af-row af-skeleton-row"><span class="af-skeleton" style="width: 280px"></span></li>
+    <li class="af-row af-skeleton-row"><span class="af-skeleton" style="width: 240px"></span></li>
   </ul>
-  <svg class="graph" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="af-graph" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
     <g data-bars></g>
   </svg>
-  <div class="footer">
-    <span class="hint" data-hint>Aktivitet sidste 30 dage</span>
-    <a class="github" href="https://github.com/fluen1" target="_blank" rel="noopener">github.com/fluen1 →</a>
+  <div class="af-footer">
+    <span class="af-hint" data-hint>Aktivitet sidste 30 dage</span>
+    <a class="af-github" href="https://github.com/fluen1" target="_blank" rel="noopener">github.com/fluen1 →</a>
   </div>
 </aside>
 
@@ -55,7 +55,7 @@ const { projectCount = 0 } = Astro.props;
     generatedAt: number;
   }
 
-  const root = document.querySelector('.feed') as HTMLElement | null;
+  const root = document.querySelector('.af-feed') as HTMLElement | null;
   if (root) {
     const listEl = root.querySelector('[data-list]') as HTMLUListElement;
     const hintEl = root.querySelector('[data-hint]') as HTMLElement;
@@ -78,15 +78,15 @@ const { projectCount = 0 } = Astro.props;
       listEl.replaceChildren();
       for (const e of events) {
         const li = document.createElement('li');
-        li.className = 'row';
+        li.className = 'af-row';
         li.dataset.type = e.type;
         const when = document.createElement('span');
-        when.className = 'when';
+        when.className = 'af-when';
         when.textContent = formatWhen(e.ts);
         const what = document.createElement('span');
-        what.className = 'what';
+        what.className = 'af-what';
         const ic = document.createElement('span');
-        ic.className = 'ic';
+        ic.className = 'af-ic';
         ic.textContent = e.icon;
         what.appendChild(ic);
         const textNode = e.type === 'skrift'
@@ -109,7 +109,7 @@ const { projectCount = 0 } = Astro.props;
     const renderError = (msg: string): void => {
       listEl.replaceChildren();
       const li = document.createElement('li');
-      li.className = 'row';
+      li.className = 'af-row';
       li.textContent = msg;
       listEl.appendChild(li);
     };
@@ -161,7 +161,7 @@ const { projectCount = 0 } = Astro.props;
         renderEvents(data.events);
         if (data.events.length === 0) {
           const li = document.createElement('li');
-          li.className = 'row';
+          li.className = 'af-row';
           li.textContent = 'Stille for tiden';
           listEl.replaceChildren(li);
         }
@@ -181,7 +181,7 @@ const { projectCount = 0 } = Astro.props;
 </script>
 
 <style is:global>
-  .feed {
+  .af-feed {
     margin: 24px 0 32px;
     padding: 22px 28px 18px;
     background: var(--cream-warm);
@@ -191,83 +191,83 @@ const { projectCount = 0 } = Astro.props;
     color: var(--clay-deep);
     min-height: 220px;
   }
-  .head {
+  .af-head {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 14px;
   }
-  .head-left { display: flex; align-items: center; gap: 10px; }
-  .ldot {
+  .af-head-left { display: flex; align-items: center; gap: 10px; }
+  .af-ldot {
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--clay);
     box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.55);
     animation: pulse 2.4s infinite;
   }
-  .label {
+  .af-label {
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--clay-xdeep); font-weight: 600;
   }
-  .stats { display: flex; gap: 20px; }
-  .stat { text-align: center; }
-  .stat-num {
+  .af-stats { display: flex; gap: 20px; }
+  .af-stat { text-align: center; }
+  .af-stat-num {
     display: block; font-family: var(--font-display);
     font-size: 18px; font-weight: 500; color: var(--ink);
     line-height: 1; font-feature-settings: 'tnum';
   }
-  .stat-label {
+  .af-stat-label {
     font-size: 8px; text-transform: uppercase;
     letter-spacing: 0.1em; color: var(--gray-700);
   }
-  .list {
+  .af-list {
     list-style: none; padding: 0; margin: 0 0 16px;
     display: flex; flex-direction: column; gap: 2px;
   }
-  .row {
+  .af-row {
     display: flex; gap: 10px; align-items: baseline;
     padding: 8px 12px; margin: 0 -12px; border-radius: 6px;
     font-size: 14px; line-height: 1.5;
     transition: background 0.15s ease;
   }
-  .row:hover { background: rgba(217, 119, 87, 0.05); }
-  .row .when {
+  .af-row:hover { background: rgba(217, 119, 87, 0.05); }
+  .af-row .af-when {
     color: var(--gray-700); font-size: 12px; white-space: nowrap;
     font-feature-settings: 'tnum'; letter-spacing: 0.02em; min-width: 48px;
   }
-  .row .what { color: var(--ink); }
-  .row .what em { font-style: italic; color: var(--ink); }
-  .row .what a { color: var(--clay-deep); }
-  .row .what a:hover { text-decoration: underline; }
-  .row .ic { display: inline-block; margin-right: 10px; opacity: 0.5; font-size: 12px; }
-  .row[data-type="highlight"] {
+  .af-row .af-what { color: var(--ink); }
+  .af-row .af-what em { font-style: italic; color: var(--ink); }
+  .af-row .af-what a { color: var(--clay-deep); }
+  .af-row .af-what a:hover { text-decoration: underline; }
+  .af-row .af-ic { display: inline-block; margin-right: 10px; opacity: 0.5; font-size: 12px; }
+  .af-row[data-type="highlight"] {
     background: rgba(217, 119, 87, 0.06); padding-left: 12px;
     border-left: 2px solid var(--clay); border-radius: 0 6px 6px 0;
   }
-  .row[data-type="highlight"]:hover { background: rgba(217, 119, 87, 0.10); }
-  .row[data-type="highlight"] .ic { opacity: 1; color: var(--clay); font-weight: 600; }
-  .row[data-type="highlight"] .what { font-weight: 500; }
-  .skeleton-row { padding: 9px 0; }
-  .skeleton {
+  .af-row[data-type="highlight"]:hover { background: rgba(217, 119, 87, 0.10); }
+  .af-row[data-type="highlight"] .af-ic { opacity: 1; color: var(--clay); font-weight: 600; }
+  .af-row[data-type="highlight"] .af-what { font-weight: 500; }
+  .af-skeleton-row { padding: 9px 0; }
+  .af-skeleton {
     display: inline-block; height: 16px;
     background: linear-gradient(90deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--gray-100) 100%);
     background-size: 200% 100%; border-radius: 3px; animation: shimmer 1.4s infinite;
   }
-  .graph { width: 100%; height: 40px; color: var(--clay); display: block; margin-bottom: 10px; }
-  .footer {
+  .af-graph { width: 100%; height: 40px; color: var(--clay); display: block; margin-bottom: 10px; }
+  .af-footer {
     display: flex; justify-content: space-between; align-items: center;
     font-size: 12px; color: var(--gray-700);
   }
-  .github { color: var(--gray-700); }
-  .github:hover { color: var(--clay-deep); }
+  .af-github { color: var(--gray-700); }
+  .af-github:hover { color: var(--clay-deep); }
   @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.55); }
     50% { box-shadow: 0 0 0 7px rgba(217, 119, 87, 0); }
   }
   @media (max-width: 720px) {
-    .feed { padding: 18px 16px; }
-    .stats { gap: 14px; }
-    .stat-num { font-size: 16px; }
-    .row { gap: 10px; padding: 8px 8px; margin: 0 -8px; }
-    .row .when { min-width: 44px; font-size: 11px; }
-    .row .ic { margin-right: 6px; }
+    .af-feed { padding: 18px 16px; }
+    .af-stats { gap: 14px; }
+    .af-stat-num { font-size: 16px; }
+    .af-row { gap: 10px; padding: 8px 8px; margin: 0 -8px; }
+    .af-row .af-when { min-width: 44px; font-size: 11px; }
+    .af-row .af-ic { margin-right: 6px; }
   }
 </style>

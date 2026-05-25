@@ -10,7 +10,7 @@ test('forside renders med hero-skrift', async ({ page }) => {
 test('forsiden viser om-mig-sektion + activity-feed', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('section.om-mig')).toBeVisible();
-  await expect(page.locator('aside.feed')).toBeVisible();
+  await expect(page.locator('aside.af-feed')).toBeVisible();
 });
 
 test('navigation til /skrifter virker', async ({ page }) => {
