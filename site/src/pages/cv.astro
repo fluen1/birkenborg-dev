@@ -86,8 +86,8 @@ const PAGE_DESC = 'Cand.merc.jur. + AI-superbruger. Legal Counsel hos Tandlægen
         <div class="experience">
           <h2 class="section-label">Erfaring</h2>
           <ol class="timeline">
-            {cv.experience.map((role) => (
-              <li class={`role ${role.current ? 'current' : ''}`}>
+            {cv.experience.map((role, i) => (
+              <li class={`role ${role.current ? 'current' : ''}`} data-reveal data-reveal-delay={String(Math.min(i, 3))}>
                 <span class="dot" aria-hidden="true"></span>
                 <div class="role-content">
                   <div class="role-head">
@@ -276,6 +276,14 @@ const PAGE_DESC = 'Cand.merc.jur. + AI-superbruger. Legal Counsel hos Tandlægen
     border-color: var(--clay);
     background: var(--clay);
     box-shadow: 0 0 0 4px rgba(217,119,87,.18);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 87, 0.55); }
+    50% { box-shadow: 0 0 0 7px rgba(217, 119, 87, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .role.current .dot { animation: none; }
   }
   .role-head {
     display: flex; align-items: center; gap: 10px;

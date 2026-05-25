@@ -31,16 +31,18 @@ const PAGE_DESC = 'AI-systemer og legal-tech jeg har bygget — fra alpha-eksper
         <p>Hvad jeg har shipped, hvad jeg er ved at bygge, og hvad jeg lærer undervejs.</p>
       </header>
       <div class="grid">
-        {sorted.map(p => (
-          <ProjectCard
-            href={`/projekter/${p.id.replace(/\.md$/, '')}`}
-            title={p.data.title}
-            pillLabel={p.data.pill_label}
-            status={p.data.status}
-            summary={p.data.summary}
-            featured={p.data.featured}
-            headingLevel="h2"
-          />
+        {sorted.map((p, i) => (
+          <div data-reveal data-reveal-delay={String(Math.min(i, 3))}>
+            <ProjectCard
+              href={`/projekter/${p.id.replace(/\.md$/, '')}`}
+              title={p.data.title}
+              pillLabel={p.data.pill_label}
+              status={p.data.status}
+              summary={p.data.summary}
+              featured={p.data.featured}
+              headingLevel="h2"
+            />
+          </div>
         ))}
       </div>
     </div>

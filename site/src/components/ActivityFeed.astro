@@ -55,6 +55,22 @@ const { projectCount = 0 } = Astro.props;
     generatedAt: number;
   }
 
+  function animateCounter(el: HTMLElement, target: number, duration = 600): void {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = String(target);
+      return;
+    }
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(1, elapsed / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
   const root = document.querySelector('.af-feed') as HTMLElement | null;
   if (root) {
     const listEl = root.querySelector('[data-list]') as HTMLUListElement;
@@ -133,8 +149,20 @@ const { projectCount = 0 } = Astro.props;
         rect.setAttribute('rx', '2');
         rect.setAttribute('fill', 'currentColor');
         rect.setAttribute('opacity', opacity.toFixed(2));
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          rect.style.transformOrigin = '50% 100%';
+          rect.style.transform = 'scaleY(0)';
+          rect.style.transition = `transform 400ms cubic-bezier(0.16, 1, 0.3, 1) ${i * 20}ms`;
+        }
         barsEl.appendChild(rect);
       });
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        requestAnimationFrame(() => {
+          barsEl.querySelectorAll('rect').forEach(r => {
+            (r as SVGRectElement).style.transform = 'scaleY(1)';
+          });
+        });
+      }
     };
 
     const CACHE_KEY = 'activity_v1';
@@ -167,8 +195,8 @@ const { projectCount = 0 } = Astro.props;
         }
         const total = data.activity.reduce((sum, d) => sum + d.count, 0);
         const skriftCount = data.events.filter(e => e.type === 'skrift').length;
-        statCommits.textContent = String(total);
-        statSkrifter.textContent = String(skriftCount);
+        animateCounter(statCommits, total);
+        animateCounter(statSkrifter, skriftCount);
         hintEl.textContent = 'Aktivitet sidste 30 dage';
         renderBars(data.activity);
       })
@@ -251,6 +279,7 @@ const { projectCount = 0 } = Astro.props;
     background-size: 200% 100%; border-radius: 3px; animation: shimmer 1.4s infinite;
   }
   .af-graph { width: 100%; height: 40px; color: var(--clay); display: block; margin-bottom: 10px; }
+  .af-graph rect { transform-box: fill-box; }
   .af-footer {
     display: flex; justify-content: space-between; align-items: center;
     font-size: 12px; color: var(--gray-700);

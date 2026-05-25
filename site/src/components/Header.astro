@@ -35,6 +35,11 @@ const links = [
   .site-header .container {
     display: flex; justify-content: space-between; align-items: center;
     padding-top: 18px; padding-bottom: 18px;
+    transition: padding-top 200ms ease, padding-bottom 200ms ease;
+  }
+  .site-header.scrolled .container {
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
   .wordmark {
     font-family: var(--font-display);
@@ -109,4 +114,21 @@ const links = [
 
   initThemeToggle();
   document.addEventListener('astro:after-swap', initThemeToggle);
+
+  function initScrollHeader() {
+    const header = document.querySelector('.site-header') as HTMLElement;
+    if (!header || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          header.classList.toggle('scrolled', window.scrollY > 60);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+  initScrollHeader();
+  document.addEventListener('astro:after-swap', initScrollHeader);
 </script>

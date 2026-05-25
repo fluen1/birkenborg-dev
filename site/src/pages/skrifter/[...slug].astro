@@ -80,6 +80,7 @@ const related: RelatedPost[] = allPosts
   </Fragment>
   <Header />
   <main class="post-page">
+    <div class="reading-progress" aria-hidden="true"></div>
     <div class="post-layout container">
       <article class="post-content">
         <header class="post-head">
@@ -268,4 +269,45 @@ const related: RelatedPost[] = allPosts
     .post-layout { grid-template-columns: 1fr; gap: 16px; }
     .post-margin { position: static; padding-top: 24px; }
   }
+
+  .reading-progress {
+    position: fixed;
+    top: 57px;
+    left: 0;
+    height: 1px;
+    background: var(--clay);
+    width: 0%;
+    z-index: 40;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  .reading-progress.visible { opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) { .reading-progress { display: none; } }
 </style>
+
+<script>
+  const bar = document.querySelector('.reading-progress') as HTMLElement;
+  if (bar) {
+    const article = document.querySelector('.post-body') as HTMLElement;
+    if (article) {
+      const update = () => {
+        const rect = article.getBoundingClientRect();
+        const total = article.scrollHeight;
+        const scrolled = Math.max(0, -rect.top);
+        const pct = Math.min(100, (scrolled / (total - window.innerHeight)) * 100);
+        bar.style.width = `${pct}%`;
+        bar.classList.toggle('visible', scrolled > 100);
+      };
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    }
+  }
+
+  const margin = document.querySelector('.post-margin') as HTMLElement;
+  if (margin && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.addEventListener('scroll', () => {
+      margin.style.transform = `translateY(${window.scrollY * -0.015}px)`;
+    }, { passive: true });
+  }
+</script>

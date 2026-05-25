@@ -31,14 +31,16 @@ const PAGE_DESC = `Korte essays om jura, AI-systemer i drift og fejl jeg er løb
         <p>Korte essays om jura, AI-systemer i drift og fejl jeg er løbet ind i. {sorted.length} stk.</p>
       </header>
       <div class="writings-list">
-        {sorted.map(p => (
-          <WritingItem
-            href={`/skrifter/${p.id.replace(/\.md$/, '')}`}
-            title={p.data.title}
-            date={p.data.publish_at}
-            body={p.body ?? ''}
-            headingLevel="h2"
-          />
+        {sorted.map((p, i) => (
+          <div data-reveal data-reveal-delay={String(Math.min(i, 3))}>
+            <WritingItem
+              href={`/skrifter/${p.id.replace(/\.md$/, '')}`}
+              title={p.data.title}
+              date={p.data.publish_at}
+              body={p.body ?? ''}
+              headingLevel="h2"
+            />
+          </div>
         ))}
       </div>
     </div>
