@@ -80,6 +80,17 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
   const submitLabel = document.querySelector<HTMLElement>('[data-submit-label]')!;
   const statusLine = document.querySelector<HTMLElement>('[data-status]')!;
 
+  // Pre-fill from ?about=slug
+  const params = new URLSearchParams(window.location.search);
+  const aboutSlug = params.get('about');
+  if (aboutSlug) {
+    const title = (citations as Record<string, string>)[aboutSlug];
+    if (title) {
+      input.value = `Hvad mener du om "${title}"?`;
+      input.focus();
+    }
+  }
+
   const messages: Message[] = [];
   let inflight = false;
   let stuckToBottom = false;

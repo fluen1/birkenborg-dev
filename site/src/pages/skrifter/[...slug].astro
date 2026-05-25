@@ -109,6 +109,11 @@ const related: RelatedPost[] = allPosts
             </ul>
           </aside>
         )}
+        <aside class="ask-cta" data-reveal>
+          <a href={`/chat?about=${currentSlug}`}>
+            Spørg Philip-bot om <em>dette skrift</em> →
+          </a>
+        </aside>
       </article>
       <aside class="post-margin">
         <Marginalia notes={post.data.marginalia ?? []} />
@@ -218,6 +223,30 @@ const related: RelatedPost[] = allPosts
   .related a:hover {
     border-bottom-color: var(--clay-xdeep);
   }
+
+  .ask-cta {
+    max-width: 720px;
+    margin: 48px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .ask-cta a {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: var(--gray-700);
+    transition: color 0.15s;
+  }
+  .ask-cta a em {
+    color: var(--clay-deep);
+    font-style: italic;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: text-decoration-color 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ask-cta a:hover { color: var(--ink); }
+  .ask-cta a:hover em { text-decoration-color: var(--clay-deep); }
 
   @media (max-width: 900px) {
     .post-layout { grid-template-columns: 1fr; gap: 16px; }
