@@ -91,6 +91,7 @@ if (fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
     slug: p.slug,
     title: p.title,
     publish_at: p.publishAt,
+    tags: p.tags ?? [],
   }));
   await mkdir(apiCorpusDir, { recursive: true });
   await writeFile(apiCorpusFile, JSON.stringify(apiCorpus), 'utf-8');
