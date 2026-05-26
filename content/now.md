@@ -1,3 +1,3 @@
-updated: 2026-05-09
+updated: 2026-05-26
 
-ude og fejre min nervøs fødselsdag 🥳🎂
+Senest publiceret: "Stig Salskov Iversen, uddannelseschef på Syddansk Erhvervsakademi, kalder det en tsunami. Første bølge rammer de udsatte dele af it. Næste bølge rammer alt vidensarbejde. Siden august er AI skrevet ind i uddannelsesordningen på flere it-uddannelser — ikke som et eksperiment, men som et krav. Uddannelserne vil ikke uddanne til ledighed.". Arbejder videre med næste idé.
