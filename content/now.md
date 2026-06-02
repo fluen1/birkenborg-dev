@@ -1,3 +1,3 @@
-updated: 2026-05-29
+updated: 2026-06-02
 
-ude og få en enkelt med de bedste kollegaer 🍻
+Senest publiceret: "Herbert Nathan kalder det 'det store spørgsmål lige nu'. Det er en præcis beskrivelse.". Arbejder videre med næste idé.
