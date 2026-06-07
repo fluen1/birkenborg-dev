@@ -1,7 +1,10 @@
 name: Deploy to Cloudflare
 
 # Auto-deployer sitet ved push til main.
-# Kræver GitHub secret: CLOUDFLARE_API_TOKEN (Workers Edit + Account Read)
+# Kræver GitHub secrets:
+#   CLOUDFLARE_API_TOKEN (Workers Edit + Account Read)
+#   TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (fejl-alarm — tilføjet 2026-06-07
+#   efter 13 dages ubemærket rød CI; botten publicerede uden at noget kom live)
 
 on:
   push:
@@ -15,13 +18,17 @@ on:
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
+env:
+  # Node 20-actions deprecates 2026-06-16 — opt-in til Node 24 nu
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: npm
@@ -38,3 +45,12 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Telegram-alarm ved fejl
+        if: failure()
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          FIRST_LINE="${COMMIT_MSG%%$'\n'*}"
+          curl -fsS -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode text="🔴 birkenborg.dev deploy FEJLEDE: ${FIRST_LINE:-manuel kørsel} — https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" > /dev/null
