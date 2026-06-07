@@ -1,9 +1,12 @@
-# Worksome-profil — udkast til oprettelse
+# Freelance-platform-profil — udkast til oprettelse
 
-> **Status:** Udkast 2026-06-07. Philip opretter selv profilen (kræver MitID/CVR).
-> **OBS før oprettelse:** Tjek bibeskæftigelsesklausul i ansættelseskontrakt.
-> Priserne er kalibreret mod markedsresearch (boutique AI-bureau: 950-1.200 kr/t;
-> freelance avanceret: 750-900 kr/t).
+> **Status 2026-06-07:** ⚠️ Worksome er IKKE længere en mulighed — verificeret
+> invite-only for freelancere ("does not offer general public access to the
+> platform"). Teksterne herunder er platform-agnostiske og kan bruges på
+> LinkedIn "Tilbyder tjenester", Upwork, danske IT-mæglere m.fl.
+> **OBS før oprettelse (uanset platform):** Tjek bibeskæftigelsesklausul i
+> ansættelseskontrakt. Priserne er kalibreret mod markedsresearch (boutique
+> AI-bureau: 950-1.200 kr/t; freelance avanceret: 750-900 kr/t).
 
 ## Profil-headline
 
@@ -108,6 +111,6 @@ data (Schema.org), bygget ind i en eksisterende React-kodebase.
 
 ## Strategi-note
 
-Worksome er primært **leadgenerering til fastpris-pakkerne** — timeopgaver
+Platformene er primært **leadgenerering til fastpris-pakkerne** — timeopgaver
 konverteres til pakker (skabelon C). Profilen nævner bevidst ikke
 arbejdsgiver eller kundenavne.
