@@ -114,3 +114,20 @@ data (Schema.org), bygget ind i en eksisterende React-kodebase.
 Platformene er primært **leadgenerering til fastpris-pakkerne** — timeopgaver
 konverteres til pakker (skabelon C). Profilen nævner bevidst ikke
 arbejdsgiver eller kundenavne.
+
+## Platform-prioritering (verificeret 2026-06-07)
+
+Alle kanaler verificeret mod platformenes egne signup-/support-sider
+(lærdom efter Worksome-fejlen — antag aldrig at en platform stadig er åben).
+
+| Prioritet | Platform | Åben i DK? | Fee | Note |
+|---|---|---|---|---|
+| 1 | LinkedIn Services Page | ✅ gratis, alle medlemmer | 0% | **Parkeret af Philip** (klausul-afklaring først). Aktiveres: Profil → "Open to" → "Providing services"; kategorier: Software Development + Consulting |
+| 2 | Malt | ✅ DK dækket, AI-kategorier | ~10% | Bedste EU-fit for nordisk timepris; projekt- frem for gig-baseret |
+| 3 | Upwork | ✅ "free to join" | 0-15% pr. kontrakt (låst v. start) | Sæt rate ~130-150 USD/t; kategorier: "AI & Automation", "Automation Experts"; forvent 4-8 uger til første ordre |
+| 4 | Contra | ✅ global | 0% (klient betaler) | Gratis at teste; US-domineret, engelsksprogede klienter |
+| 5 | Right People Group | ✅ email-notifikationer | mægler-margin | Typisk 100%-engagementer — lav sidehustle-fit; tilmeld notifikationer og vent |
+| — | Fiverr | ✅ men uegnet | 20%→5% | Race-to-bottom; drop for high-ticket AI |
+| — | Worksome | ❌ invite-only | — | Enterprise-FMS-pivot; drop |
+| — | emagine/ProData, 7N | ❌ ingen åben registrering | — | Netværksdrevne; drop |
+| — | Toptal | ❌ screening, ~3% accept | — | Uger lang proces; drop |
