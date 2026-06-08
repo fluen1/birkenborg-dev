@@ -1,6 +1,6 @@
 ---
-title: "Seed 3dbba005"
-slug: seed-3dbba005
+title: "Atlas Assessments er live"
+slug: atlas-er-live
 publish_at: 2026-06-07T02:31:43+02:00
 status: published
 tags: ["konsulenter", "ai", "assessments", "produkter"]
