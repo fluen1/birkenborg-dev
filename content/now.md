@@ -1,3 +1,3 @@
-updated: 2026-06-07
+updated: 2026-06-08
 
-Senest publiceret: "Jeg har de seneste uger bygget Atlas Assessments. Det er en spørgeskemaplatform til konsulenter der lever af deres egen metode. Den er åben nu på atlas-app.dk med 30 dages gratis prøveperiode uden betalingskort.". Arbejder videre med næste idé.
+Senest publiceret: "Bo Martinsen, ejer og CEO i Norriq, har bygget fem AI-agenter med adgang til samtlige data i virksomheden og bedt dem om at være ubehagelige over for ham. Han kalder det bestyrelseserfaring på steroider.". Arbejder videre med næste idé.
