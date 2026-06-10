@@ -1,6 +1,6 @@
 ---
-title: "Seed c203f3db"
-slug: seed-c203f3db
+title: "Hvad sker der når din bestyrelse ikke kan miste noget"
+slug: hvad-sker-der-naar-din-bestyrelse-ikke-kan-miste-noget
 publish_at: 2026-06-08T08:59:49+02:00
 status: published
 tags: ["ai", "ledelse", "beslutninger", "agenter"]

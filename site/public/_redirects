@@ -1,0 +1,5 @@
+# Seed-posts omdøbt til meningsfulde slugs (2026-06-11). 301 så evt. indekserede
+# gamle URL'er (og interne links) ikke 404'er.
+/skrifter/seed-c203f3db   /skrifter/hvad-sker-der-naar-din-bestyrelse-ikke-kan-miste-noget   301
+/skrifter/seed-a620cfc2   /skrifter/uddannelse-til-at-bruge-vaerktoejer                     301
+/skrifter/seed-d2e9c417   /skrifter/ingen-ved-hvad-en-ai-agent-koster                       301

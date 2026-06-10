@@ -1,6 +1,6 @@
 ---
-title: "Seed d2e9c417"
-slug: seed-d2e9c417
+title: "Ingen ved hvad en AI-agent koster"
+slug: ingen-ved-hvad-en-ai-agent-koster
 publish_at: 2026-06-02T12:55:17+02:00
 status: published
 tags: ["ai", "agenter", "prissætning", "jura", "indkøb"]

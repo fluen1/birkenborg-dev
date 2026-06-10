@@ -1,6 +1,6 @@
 ---
-title: "Seed a620cfc2"
-slug: seed-a620cfc2
+title: "Uddannelse til at bruge værktøjer"
+slug: uddannelse-til-at-bruge-vaerktoejer
 publish_at: 2026-05-26T02:39:55+02:00
 status: published
 tags: ["ai", "uddannelse", "arbejdsmarked", "automation"]
