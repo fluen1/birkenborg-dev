@@ -14,6 +14,11 @@ binding = "ASSETS"
 binding = "CHAT_STATE"
 id = "a9e4d133b0174405accbdb594fa89b61"
 
+# Workers Logs — uden denne er der INGEN produktion-logs at debugge med
+# (fundet ved flåde-audit 2026-06-12: workeren havde 0 observability-events)
+[observability]
+enabled = true
+
 [[routes]]
 pattern = "birkenborg.dev"
 custom_domain = true
