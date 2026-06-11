@@ -81,13 +81,14 @@ describe("fetchCommits", () => {
   beforeEach(() => vi.restoreAllMocks());
 
   it("henter commits og returnerer normaliseret format", async () => {
+    const fixtureDate = new Date(Date.now() - 5 * 86400_000).toISOString();
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(JSON.stringify([
         {
           sha: "abc",
           commit: {
             message: "feat: ny feature",
-            author: { date: "2026-05-09T14:00:00Z" },
+            author: { date: fixtureDate },
           },
           html_url: "https://github.com/fluen1/birkenborg-dev/commit/abc",
         },
@@ -98,7 +99,7 @@ describe("fetchCommits", () => {
     expect(commits).toHaveLength(1);
     expect(commits[0]).toEqual({
       message: "feat: ny feature",
-      authorDate: "2026-05-09T14:00:00Z",
+      authorDate: fixtureDate,
       htmlUrl: "https://github.com/fluen1/birkenborg-dev/commit/abc",
     });
   });
