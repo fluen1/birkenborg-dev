@@ -1,5 +1,9 @@
 name: Lighthouse audit
 
+# Node 20-actions-runtime fjernes 16/9/2026 — tving JS-actions til Node 24 (GitHub-sanktioneret bro).
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 on:
   schedule:
     - cron: '0 6 * * 1'  # mandag 06:00 UTC

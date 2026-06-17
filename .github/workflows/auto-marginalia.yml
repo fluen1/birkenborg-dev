@@ -1,5 +1,9 @@
 name: Auto-marginalia
 
+# Node 20-actions-runtime fjernes 16/9/2026 — tving JS-actions til Node 24 (GitHub-sanktioneret bro).
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 # Søndag 19:00 dansk sommer-tid (CEST, UTC+2) = 17:00 UTC.
 # DST-NOTE: Ved CET (vintertid, UTC+1) skal cron ændres til '0 18 * * 0'.
 
