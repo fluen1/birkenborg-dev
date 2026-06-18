@@ -28,7 +28,7 @@ Følg `feedback_privacy_tandlaegen` i auto-memory: Tandlægen.dk må nævnes som
 Følg `feedback_content_tone` — bygger-fortælleren, skæv inden for normen, ingen consultant-fraser. De 8 kalibrerede toner er dokumenteret i auto-memory.
 
 ## Repo-layout i én linje
-`site/` = Astro 6 SSG; `worker/` = Cloudflare Worker (chat + bot); `scripts/` = build-tid pipeline (corpus, marginalia); `content/` = markdown-posts + projekter; `docs/superpowers/` = specs + plans.
+`site/` = Astro 6 SSG; `worker/` = Cloudflare Worker (site-assets + `/api/chat` + `/api/activity`); `scripts/` = build-tid pipeline (corpus, marginalia); `content/` = markdown-posts + projekter; `docs/superpowers/` = specs + plans. NB: Telegram-til-LinkedIn-botten kører i en SEPARAT worker (`bot.birkenborg.dev`, repo `birkenborg-agents`) — ikke i dette repo; her kaldes den kun via `/internal/highlights`.
 
 ## Content-format-kontrakt for `content/posts/*.md`
 
@@ -66,7 +66,7 @@ Før en task markeres complete:
 
 1. `npm test` (repo-root) — worker + scripts tests grønne.
 2. `cd site && npm test` — site tests grønne.
-3. `cd site && npm run build` — succeeds, 17 pages.
+3. `cd site && npm run build` — succeeds uden fejl.
 4. Hvis `content/posts/` ændret: bekræft at `npm run prebuild` (som er `node scripts/build-corpus.mjs`) genererer corpus uden fejl.
 5. Hvis UI-ændringer: visual check via `cd site && npm run dev` på `http://localhost:4321`.
 6. Hvis worker-ændringer: tests dækker det, eller manuelt verificér med `wrangler dev` før push.
