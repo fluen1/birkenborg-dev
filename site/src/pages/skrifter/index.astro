@@ -9,6 +9,19 @@ import MetaTags from '../../components/MetaTags.astro';
 const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
 const sorted = allPosts.sort((a, b) => +b.data.publish_at - +a.data.publish_at);
 
+// Emne-tags på tværs af alle skrifter, sorteret efter hyppighed (så de mest
+// brugte emner står først). Driver tag-filter-baren herunder. Kun tags der
+// grupperer ≥2 skrifter vises — et filter til ét enkelt skrift er ikke et
+// meningsfuldt filter, og holder baren ren mens taxonomien vokser.
+const TAG_MIN_COUNT = 2;
+const tagCounts = new Map<string, number>();
+for (const p of sorted) {
+  for (const t of p.data.tags) tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
+}
+const tags = [...tagCounts.entries()]
+  .filter(([, count]) => count >= TAG_MIN_COUNT)
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'da'));
+
 const SITE_URL = 'https://birkenborg.dev';
 const PAGE_URL = `${SITE_URL}/skrifter/`;
 const PAGE_TITLE = 'Skrifter · birkenborg.dev';
@@ -30,9 +43,21 @@ const PAGE_DESC = `Korte essays om jura, AI-systemer i drift og fejl jeg er løb
         <h1>Skrifter</h1>
         <p>Korte essays om jura, AI-systemer i drift og fejl jeg er løbet ind i. {sorted.length} stk.</p>
       </header>
-      <div class="writings-list">
+      {tags.length > 0 && (
+        <div class="tag-filter" data-tag-filter role="group" aria-label="Filtrér skrifter efter emne">
+          <button class="tag-chip is-active" data-tag="" type="button" aria-pressed="true">
+            Alle <span class="count">{sorted.length}</span>
+          </button>
+          {tags.map(([tag, count]) => (
+            <button class="tag-chip" data-tag={tag} type="button" aria-pressed="false">
+              {tag} <span class="count">{count}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      <div class="writings-list" data-skrifter-list>
         {sorted.map((p, i) => (
-          <div data-reveal data-reveal-delay={String(Math.min(i, 3))}>
+          <div data-reveal data-reveal-delay={String(Math.min(i, 3))} data-tags={p.data.tags.join(',')}>
             <WritingItem
               href={`/skrifter/${p.id.replace(/\.md$/, '')}/`}
               title={p.data.title}
@@ -43,10 +68,56 @@ const PAGE_DESC = `Korte essays om jura, AI-systemer i drift og fejl jeg er løb
           </div>
         ))}
       </div>
+      <p class="no-match" data-no-match hidden>Ingen skrifter med dette emne endnu.</p>
     </div>
   </main>
   <Footer />
 </Base>
+
+<script>
+  // Client-side tag-filtrering. Statisk render viser ALLE posts, så uden JS
+  // degraderer siden pænt (intet skjules). ?tag=<emne> deep-linker et filter.
+  const filterBar = document.querySelector<HTMLElement>('[data-tag-filter]');
+  const list = document.querySelector<HTMLElement>('[data-skrifter-list]');
+
+  if (filterBar && list) {
+    const items = Array.from(list.querySelectorAll<HTMLElement>('[data-tags]'));
+    const chips = Array.from(filterBar.querySelectorAll<HTMLButtonElement>('.tag-chip'));
+    const noMatch = document.querySelector<HTMLElement>('[data-no-match]');
+
+    function apply(tag: string): void {
+      let visible = 0;
+      for (const item of items) {
+        const itemTags = (item.dataset.tags ?? '').split(',').filter(Boolean);
+        const show = tag === '' || itemTags.includes(tag);
+        item.hidden = !show;
+        // Synlige items skal være revealed, ellers står de på opacity:0 fra
+        // scroll-reveal-systemet når de skiftes ind under fold.
+        if (show) { item.classList.add('revealed'); visible++; }
+      }
+      for (const chip of chips) {
+        const active = (chip.dataset.tag ?? '') === tag;
+        chip.classList.toggle('is-active', active);
+        chip.setAttribute('aria-pressed', String(active));
+      }
+      if (noMatch) noMatch.hidden = visible > 0;
+
+      const url = new URL(window.location.href);
+      if (tag) url.searchParams.set('tag', tag);
+      else url.searchParams.delete('tag');
+      history.replaceState(null, '', url);
+    }
+
+    filterBar.addEventListener('click', (e) => {
+      const chip = (e.target as HTMLElement).closest<HTMLButtonElement>('.tag-chip');
+      if (chip) apply(chip.dataset.tag ?? '');
+    });
+
+    // Deep-link: åbn med ?tag=ai → filtret er aktivt fra start
+    const initial = new URL(window.location.href).searchParams.get('tag') ?? '';
+    if (initial && chips.some(c => (c.dataset.tag ?? '') === initial)) apply(initial);
+  }
+</script>
 
 <style>
   .page { padding: 64px 0 96px; }
@@ -60,4 +131,48 @@ const PAGE_DESC = `Korte essays om jura, AI-systemer i drift og fejl jeg er løb
     font-variation-settings: 'opsz' 144;
   }
   .page-head p { font-size: 18px; color: var(--gray-700); margin: 0; }
+
+  .tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 720px;
+    margin: 0 0 44px;
+  }
+  .tag-chip {
+    font-family: var(--font-sans, system-ui);
+    font-size: 13px;
+    line-height: 1;
+    padding: 7px 13px;
+    border: 1px solid var(--gray-200);
+    border-radius: 999px;
+    background: var(--cream);
+    color: var(--gray-700);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .tag-chip:hover { border-color: var(--clay); color: var(--ink); }
+  .tag-chip.is-active {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .tag-chip .count {
+    font-size: 11px;
+    opacity: .55;
+    font-variant-numeric: tabular-nums;
+  }
+  .tag-chip:focus-visible {
+    outline: 2px solid var(--clay);
+    outline-offset: 2px;
+  }
+  .no-match {
+    max-width: 720px;
+    color: var(--gray-700);
+    font-size: 16px;
+    margin: 0;
+  }
 </style>

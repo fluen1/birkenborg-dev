@@ -47,6 +47,30 @@ test('scroll-reveal respects prefers-reduced-motion', async ({ page }) => {
   expect(heroClass).toContain('revealed');
 });
 
+test('tag-filter på /skrifter filtrerer listen og synker URL', async ({ page }) => {
+  await page.goto('/skrifter/');
+  const allItems = page.locator('[data-skrifter-list] [data-tags]');
+  const total = await allItems.count();
+  expect(total).toBeGreaterThan(0);
+
+  // Vælg første emne-chip (ikke "Alle") — robust mod hvilke tags der findes.
+  const firstTag = page.locator('.tag-chip:not([data-tag=""])').first();
+  await firstTag.click();
+
+  await expect(page).toHaveURL(/\?tag=/);
+  await expect(firstTag).toHaveAttribute('aria-pressed', 'true');
+
+  const visible = page.locator('[data-skrifter-list] [data-tags]:not([hidden])');
+  const visibleCount = await visible.count();
+  expect(visibleCount).toBeGreaterThan(0);
+  expect(visibleCount).toBeLessThan(total); // filtret skjuler faktisk noget
+
+  // Tilbage til "Alle" viser alt igen + rydder URL.
+  await page.click('.tag-chip[data-tag=""]');
+  await expect(page).toHaveURL(/\/skrifter\/$/);
+  await expect(page.locator('[data-skrifter-list] [data-tags]:not([hidden])')).toHaveCount(total);
+});
+
 test('alle sider returnerer 200', async ({ page }) => {
   for (const url of ['/', '/skrifter/', '/projekter/', '/cv/', '/chat/', '/kontakt/', '/klinikker/', '/konsulenter/', '/now/']) {
     const resp = await page.goto(url);
