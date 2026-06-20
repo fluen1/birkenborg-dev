@@ -10,7 +10,7 @@ const all = await getCollection('projekter', ({ data }) => data.status !== 'arch
 const sorted = all.sort((a, b) => a.data.order - b.data.order);
 
 const SITE_URL = 'https://birkenborg.dev';
-const PAGE_URL = `${SITE_URL}/projekter`;
+const PAGE_URL = `${SITE_URL}/projekter/`;
 const PAGE_TITLE = 'Projekter · birkenborg.dev';
 const PAGE_DESC = 'AI-systemer og legal-tech jeg har bygget — fra alpha-eksperimenter til produktion. Konkrete cases, åbne fejl, ingen pitch.';
 ---
@@ -34,7 +34,7 @@ const PAGE_DESC = 'AI-systemer og legal-tech jeg har bygget — fra alpha-eksper
         {sorted.map((p, i) => (
           <div data-reveal data-reveal-delay={String(Math.min(i, 3))}>
             <ProjectCard
-              href={`/projekter/${p.id.replace(/\.md$/, '')}`}
+              href={`/projekter/${p.id.replace(/\.md$/, '')}/`}
               title={p.data.title}
               pillLabel={p.data.pill_label}
               status={p.data.status}

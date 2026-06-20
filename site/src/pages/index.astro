@@ -32,14 +32,14 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
     <MetaTags
       title={PAGE_TITLE}
       description={PAGE_DESC}
-      url={SITE_URL}
+      url={`${SITE_URL}/`}
       type="website"
     />
     <StructuredData
       type="Person"
       data={{
         name: 'Philip Birkenborg',
-        url: SITE_URL,
+        url: `${SITE_URL}/`,
         jobTitle: 'Legal Counsel & AI Engineer',
         description: 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde.',
         worksFor: { '@type': 'Organization', name: 'Tandlægen.dk' },
@@ -79,13 +79,13 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
     <section class="writings container">
       <div class="section-head" data-reveal>
         <h2>Skrifter</h2>
-        <a class="more" href="/skrifter">Alle skrifter →</a>
+        <a class="more" href="/skrifter/">Alle skrifter →</a>
       </div>
       <div class="writings-list">
         {restPosts.map((p, i) => (
           <div data-reveal data-reveal-delay={String(Math.min(i, 3))}>
             <WritingItem
-              href={`/skrifter/${p.data.slug ?? p.id.replace(/\.md$/, '')}`}
+              href={`/skrifter/${p.data.slug ?? p.id.replace(/\.md$/, '')}/`}
               title={p.data.title}
               date={p.data.publish_at}
               body={p.body ?? ''}
@@ -99,11 +99,11 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
     <section class="projekter container">
       <div class="section-head minor" data-reveal>
         <h3>Andre ting jeg bygger</h3>
-        <a class="more" href="/projekter">Alle projekter →</a>
+        <a class="more" href="/projekter/">Alle projekter →</a>
       </div>
       <div class="pill-grid">
         {sortedProjects.map((p, i) => (
-          <a class="pill" href={`/projekter/${p.id.replace(/\.md$/, '')}`} data-reveal data-reveal-delay={String(Math.min(i, 3))}>
+          <a class="pill" href={`/projekter/${p.id.replace(/\.md$/, '')}/`} data-reveal data-reveal-delay={String(Math.min(i, 3))}>
             <div class="nm">{p.data.title}</div>
             <div class="desc">{p.data.summary}</div>
           </a>

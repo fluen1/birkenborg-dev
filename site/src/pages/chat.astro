@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import MetaTags from '../components/MetaTags.astro';
 
 const SITE_URL = 'https://birkenborg.dev';
-const PAGE_URL = `${SITE_URL}/chat`;
+const PAGE_URL = `${SITE_URL}/chat/`;
 const PAGE_TITLE = 'Chat med Philip · birkenborg.dev';
 const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar med citation-link. Drevet af Anthropic Claude over sitets korpus.';
 ---
@@ -29,7 +29,7 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
         </div>
         <h1>Snak med Philip om hans skrifter</h1>
         <p class="chat-lede">
-          Bot'en kender alt på <a href="/skrifter">/skrifter</a>. Den citerer kilder.
+          Bot'en kender alt på <a href="/skrifter/">/skrifter</a>. Den citerer kilder.
           Den giver ikke juridisk rådgivning. Samtalen gemmes ikke — genindlæs siden for at starte forfra.
         </p>
       </header>
@@ -79,6 +79,18 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
   const submit = document.querySelector<HTMLButtonElement>('[data-submit]')!;
   const submitLabel = document.querySelector<HTMLElement>('[data-submit-label]')!;
   const statusLine = document.querySelector<HTMLElement>('[data-status]')!;
+  const chatDot = document.querySelector<HTMLElement>('[data-chat-dot]')!;
+  const chatOnline = document.querySelector<HTMLElement>('[data-chat-online]')!;
+
+  // Badgen starter optimistisk på "Online" (ingen health-probe ved load — det
+  // ville kræve et worker-endpoint). Men så snart et kald afslører at tjenesten
+  // er nede, holder vi op med at lyve og flipper til offline. Et efterfølgende
+  // vellykket svar flipper tilbage.
+  function setChatOnline(online: boolean): void {
+    chatDot.classList.toggle('offline', !online);
+    chatOnline.classList.toggle('offline', !online);
+    chatOnline.textContent = online ? 'Online' : 'Offline';
+  }
 
   // Pre-fill from ?about=slug
   const params = new URLSearchParams(window.location.search);
@@ -231,6 +243,7 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
       const { el: assistantEl, bodyEl } = renderMessage(assistantMsg, true);
       setDimMessage(bodyEl, 'afbrudt — netværksfejl');
       setStatus('Kunne ikke nå serveren. Prøv igen om lidt.', 'error');
+      setChatOnline(false);
       const retryContent = content;
       const retryBtn = document.createElement('button');
       retryBtn.className = 'retry-btn';
@@ -257,6 +270,7 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
         userText = 'Chatten har holdt fri i dag — kom tilbage i morgen.';
       } else if (res.status === 503 && body.error === 'disabled') {
         userText = 'Chatten er midlertidigt slået fra.';
+        setChatOnline(false);
       } else if (res.status === 400) {
         userText = `Beskeden blev afvist (${body.message ?? 'valideringsfejl'}).`;
       } else {
@@ -279,6 +293,9 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
       setBusy(false);
       return;
     }
+
+    // Tjenesten svarede — badgen fortæller sandheden igen.
+    setChatOnline(true);
 
     if (!res.body) {
       thinkingEl.remove();

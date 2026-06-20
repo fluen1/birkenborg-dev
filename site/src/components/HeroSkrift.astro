@@ -17,10 +17,10 @@ const dateLabel = publish_at.toLocaleDateString('da-DK', {
 <section class="hero-skrift" data-reveal>
   <div class="label">Senest skrift · {dateLabel}</div>
   <h1 class="title" transition:name={`skrift-${slug}`}>
-    <a href={`/skrifter/${slug}`}>{title}</a>
+    <a href={`/skrifter/${slug}/`}>{title}</a>
   </h1>
   {excerpt && <p class="deck">{excerpt}</p>}
-  <a class="read-more" href={`/skrifter/${slug}`}>Læs videre <span class="arrow">→</span></a>
+  <a class="read-more" href={`/skrifter/${slug}/`}>Læs videre <span class="arrow">→</span></a>
 </section>
 
 <style>

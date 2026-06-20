@@ -48,7 +48,7 @@ const related: RelatedPost[] = allPosts
     <MetaTags
       title={`${post.data.title} · birkenborg.dev`}
       description={post.data.excerpt ?? post.data.title}
-      url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}`}
+      url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`}
       type="article"
       publishedTime={post.data.publish_at.toISOString()}
       imageUrl={post.data.image_url ?? `https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`}
@@ -62,7 +62,7 @@ const related: RelatedPost[] = allPosts
         author: {
           '@type': 'Person',
           name: 'Philip Birkenborg',
-          url: 'https://birkenborg.dev',
+          url: 'https://birkenborg.dev/',
         },
         publisher: {
           '@type': 'Person',
@@ -110,7 +110,7 @@ const related: RelatedPost[] = allPosts
             <ul>
               {related.map(r => (
                 <li>
-                  <a href={`/skrifter/${r.slug}`}>
+                  <a href={`/skrifter/${r.slug}/`}>
                     {r.title}
                   </a>
                 </li>
@@ -119,7 +119,7 @@ const related: RelatedPost[] = allPosts
           </aside>
         )}
         <aside class="ask-cta" data-reveal>
-          <a href={`/chat?about=${currentSlug}`}>
+          <a href={`/chat/?about=${currentSlug}`}>
             Spørg Philip-bot om <em>dette skrift</em> →
           </a>
         </aside>

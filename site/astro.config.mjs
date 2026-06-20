@@ -5,7 +5,7 @@ import remarkStripLinkedin from './src/lib/remark-strip-linkedin.mjs';
 
 export default defineConfig({
   site: 'https://birkenborg.dev',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [sitemap()],
   markdown: {

@@ -18,7 +18,7 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 
 const SITE_URL = 'https://birkenborg.dev';
-const PAGE_URL = `${SITE_URL}/projekter/${project.id.replace(/\.md$/, '')}`;
+const PAGE_URL = `${SITE_URL}/projekter/${project.id.replace(/\.md$/, '')}/`;
 const PAGE_TITLE = `${project.data.title} · birkenborg.dev`;
 const PAGE_DESC = project.data.summary;
 ---
@@ -35,7 +35,7 @@ const PAGE_DESC = project.data.summary;
       type="Article"
       data={{
         headline: project.data.title,
-        author: { '@type': 'Person', name: 'Philip Birkenborg', url: SITE_URL },
+        author: { '@type': 'Person', name: 'Philip Birkenborg', url: `${SITE_URL}/` },
         publisher: { '@type': 'Person', name: 'Philip Birkenborg' },
         description: PAGE_DESC,
         url: PAGE_URL,
