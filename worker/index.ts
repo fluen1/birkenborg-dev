@@ -63,6 +63,16 @@ export default {
       return handleActivity(req, env, ctx);
     }
 
+    // Let-vægts health-probe så chat-badgen kan fortælle sandheden ved page-load
+    // uden at koste et Anthropic-kald. Spejler disabled-checken i handleChat.
+    if (url.pathname === "/api/chat/health") {
+      const status = env.CHAT_DISABLED === '1' ? 'disabled' : 'online';
+      return Response.json(
+        { status },
+        { headers: { 'cache-control': 'no-store', 'access-control-allow-origin': '*' } },
+      );
+    }
+
     if (url.pathname === "/api/chat") {
       return handleChat(req, env satisfies ChatEnv, ctx);
     }

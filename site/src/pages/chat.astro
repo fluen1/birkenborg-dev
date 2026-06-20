@@ -24,8 +24,8 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
     <div class="container">
       <header class="chat-head">
         <div class="chat-status">
-          <span class="chat-dot" data-chat-dot></span>
-          <span class="chat-online" data-chat-online>Online</span>
+          <span class="chat-dot offline" data-chat-dot></span>
+          <span class="chat-online offline" data-chat-online>Tjekker…</span>
         </div>
         <h1>Snak med Philip om hans skrifter</h1>
         <p class="chat-lede">
@@ -91,6 +91,20 @@ const PAGE_DESC = 'Stil spørgsmål til Philips skrifter og få streamede svar m
     chatOnline.classList.toggle('offline', !online);
     chatOnline.textContent = online ? 'Online' : 'Offline';
   }
+
+  // Load-tids-probe: spørg workeren om chatten faktisk er oppe, før badgen
+  // påstår noget. Starter neutralt på "Tjekker…"; fejler fetch'en (worker nede)
+  // eller er chatten disabled → "Offline". Reaktive flips under send sker stadig.
+  void (async () => {
+    try {
+      const r = await fetch('/api/chat/health', { cache: 'no-store' });
+      if (!r.ok) { setChatOnline(false); return; }
+      const { status } = await r.json() as { status: string };
+      setChatOnline(status === 'online');
+    } catch {
+      setChatOnline(false);
+    }
+  })();
 
   // Pre-fill from ?about=slug
   const params = new URLSearchParams(window.location.search);
