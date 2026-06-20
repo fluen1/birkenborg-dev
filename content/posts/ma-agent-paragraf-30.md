@@ -3,7 +3,7 @@ title: "Hvorfor min M&A-agent fejlede på paragraf 30"
 slug: "ma-agent-paragraf-30"
 publish_at: 2026-05-12T09:00:00+02:00
 status: published
-tags: [ai, m-and-a, fejl-rapport]
+tags: ["ai", "agenter", "jura", "m-and-a", "fejl-rapport"]
 privacy_flag: false
 excerpt: "Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde fejl. Den fandt 14 — og overså den ene der havde betydet noget."
 marginalia:

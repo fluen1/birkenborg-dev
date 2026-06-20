@@ -3,7 +3,7 @@ title: "GDPR i klinikkæder — tre ting jeg lærte på den hårde måde"
 slug: "gdpr-klinikkaeder"
 publish_at: 2026-05-04T09:00:00+02:00
 status: published
-tags: [gdpr, sundhedsret]
+tags: ["jura", "gdpr", "sundhedsret"]
 privacy_flag: false
 excerpt: "Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på tværs af 50 klinikker."
 marginalia: []
