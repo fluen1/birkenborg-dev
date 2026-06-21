@@ -1,12 +1,66 @@
 ---
-title: "Ingen ved hvad en AI-agent koster"
+title: Ingen ved hvad en AI-agent koster
 slug: ingen-ved-hvad-en-ai-agent-koster
-publish_at: 2026-06-02T12:55:17+02:00
+publish_at: 2026-06-02T10:55:17.000Z
 status: published
-tags: ["ai", "agenter", "prissætning", "jura", "indkøb"]
-excerpt: "Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'. Han har ret."
+tags:
+  - ai
+  - agenter
+  - prissætning
+  - jura
+  - indkøb
+excerpt: >-
+  Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning
+  eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'.
+  Han har ret.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-20T16:11:27Z'
+    text: load-tids health-probe så badgen er ærlig ved page-load
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e390affb7ea4f192d598a77f96a06b850115287c
+  - ts: '2026-06-07T13:54:52Z'
+    text: Telegram-alarm ved deploy-fejl + Node 24 opt-in + checkout/setup-node v5
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/d8fecf3f5858f5800e5e58977969c7f359158d14
+  - ts: '2026-05-25T09:38:01Z'
+    text: write full ma-agent-paragraf-30 article
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/90e5cc290724022e092ba41521e82163e8325e73
+  - ts: '2026-05-25T09:37:29Z'
+    text: write full 10-agents-i-produktion article
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/68a07ab706f2e6f3ab892d7198e4cb7370a49c08
+  - ts: '2026-06-17T21:27:35Z'
+    text: første-kommentar-oplæg vedhæftet JA-beskeden
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c3707fa202f20ce0d4e2cb9661561e21f390e9de
+  - ts: '2026-06-17T20:37:16Z'
+    text: 'scorer favoriserer AI+jura-identitet, filtrerer generisk fra'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/589063dce8a2f6a978de40b3f6487ef645a64a70
+  - ts: '2026-06-10T23:20:35Z'
+    text: 'fail loud ved manglende ''# Titel'' i udkast, publicér aldrig placeholder'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/fb3cb2ef1400cdc387f0bf97b098dbf7963e71b8
+  - ts: '2026-06-07T19:58:00Z'
+    text: ensartet fejlbesked-konvention — hvad gik galt + næste skridt
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/25489507fa34f3d2fae3becda802e2c1788a5d79
+  - ts: '2026-06-07T19:40:26Z'
+    text: dashboard-besked opdateres ved alle state-transitions
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/754b02e4fa7d9f81ef9b0e174851e11da8e143ad
 ---
 
 Herbert Nathan kalder det 'det store spørgsmål lige nu'. Det er en præcis beskrivelse.
