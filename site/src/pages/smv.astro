@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LeadForm from '../components/LeadForm.astro';
+import MetaTags from '../components/MetaTags.astro';
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/smv/`;
+const PAGE_TITLE = 'Jura + anvendt AI · birkenborg.dev';
+const PAGE_DESC = 'Erhvervsjurist der selv bygger AI- og automatiseringsløsninger. Rådgivning og eksekvering i én profil — som ansat eller ad-hoc.';
+---
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags title={PAGE_TITLE} description={PAGE_DESC} url={PAGE_URL} type="website" />
+  </Fragment>
+  <Header />
+  <main class="page">
+    <div class="container">
+      <header class="page-head">
+        <p class="meta">Jura + anvendt AI</p>
+        <h1>En jurist, der også bygger løsningen</h1>
+        <p class="lead">
+          Jeg er cand.merc.(jur.) og Legal Counsel — og jeg bygger selv de AI- og
+          automatiseringsløsninger, der fjerner det gentagne arbejde. Rådgivning og
+          eksekvering i én profil, til virksomheder der ikke har begge dele in-house.
+        </p>
+      </header>
+
+      <section class="value-props">
+        <article>
+          <h2>Juridisk tyngde</h2>
+          <p>Kontrakter, selskabsret og compliance — pragmatisk og forretningsorienteret.</p>
+        </article>
+        <article>
+          <h2>Bygger selv</h2>
+          <p>AI-agenter og automatisering i drift — ikke slides. Se Atlas og ChainHub.</p>
+        </article>
+        <article>
+          <h2>Som ansat eller ad-hoc</h2>
+          <p>Fast i huset, eller på konkrete opgaver som selvstændig — som det passer jer.</p>
+        </article>
+      </section>
+
+      <section class="contact">
+        <h2>Tag en kort samtale</h2>
+        <p>Jeg vender tilbage inden for 24 timer på hverdage. Ingen sælger-flow.</p>
+        <LeadForm niche="smv" />
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .page-head { max-width: 720px; margin: 0 auto 48px; }
+  .meta { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray-700); margin: 0 0 16px; }
+  .page-head h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 350; letter-spacing: -.02em; margin: 0 0 16px; }
+  .lead { font-size: 18px; line-height: 1.5; color: var(--gray-700); }
+  .value-props { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 48px 0; }
+  .value-props article { padding: 24px; border: 1px solid var(--gray-200); border-radius: var(--r-md); }
+  .value-props h2 { font-size: 18px; margin: 0 0 8px; }
+  .value-props p { margin: 0; color: var(--gray-700); }
+  .contact { margin-top: 48px; max-width: 720px; }
+  .contact h2 { font-size: 24px; margin: 0 0 16px; }
+</style>
