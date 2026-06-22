@@ -72,7 +72,7 @@ test('tag-filter på /skrifter filtrerer listen og synker URL', async ({ page })
 });
 
 test('alle sider returnerer 200', async ({ page }) => {
-  for (const url of ['/', '/skrifter/', '/projekter/', '/cv/', '/chat/', '/kontakt/', '/klinikker/', '/konsulenter/', '/now/']) {
+  for (const url of ['/', '/skrifter/', '/projekter/', '/cv/', '/chat/', '/kontakt/', '/smv/', '/now/']) {
     const resp = await page.goto(url);
     expect(resp?.status()).toBe(200);
   }
