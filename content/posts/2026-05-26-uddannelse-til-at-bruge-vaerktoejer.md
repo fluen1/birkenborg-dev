@@ -1,12 +1,25 @@
 ---
-title: "Uddannelse til at bruge værktøjer"
+title: Uddannelse til at bruge værktøjer
 slug: uddannelse-til-at-bruge-vaerktoejer
-publish_at: 2026-05-26T02:39:55+02:00
+publish_at: 2026-05-26T00:39:55.000Z
 status: published
-tags: ["ai", "uddannelse", "arbejdsmarked", "automation"]
-excerpt: "Uddannelserne integrerer AI for at undgå at uddanne til ledighed. Men rutineopgaverne er præcis dem der normalt giver erfaring nok til at bedømme hvornår AI tager fejl."
+tags:
+  - ai
+  - uddannelse
+  - arbejdsmarked
+  - automation
+excerpt: >-
+  Uddannelserne integrerer AI for at undgå at uddanne til ledighed. Men
+  rutineopgaverne er præcis dem der normalt giver erfaring nok til at bedømme
+  hvornår AI tager fejl.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-19T14:22:18Z'
+    text: auto-marginalia bruger indbygget GITHUB_TOKEN i stedet for PAT
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/558ef6f0e9ec5c8314e958e59760482997098fa6
 ---
 
 Stig Salskov Iversen, uddannelseschef på Syddansk Erhvervsakademi, kalder det en tsunami. Første bølge rammer de udsatte dele af it. Næste bølge rammer alt vidensarbejde. Siden august er AI skrevet ind i uddannelsesordningen på flere it-uddannelser — ikke som et eksperiment, men som et krav. Uddannelserne vil ikke uddanne til ledighed.
