@@ -1,18 +1,100 @@
 ---
-title: "Hvorfor min M&A-agent fejlede på paragraf 30"
-slug: "ma-agent-paragraf-30"
-publish_at: 2026-05-12T09:00:00+02:00
+title: Hvorfor min M&A-agent fejlede på paragraf 30
+slug: ma-agent-paragraf-30
+publish_at: 2026-05-12T07:00:00.000Z
 status: published
-tags: ["ai", "agenter", "jura", "m-and-a", "fejl-rapport"]
+tags:
+  - ai
+  - agenter
+  - jura
+  - m-and-a
+  - fejl-rapport
 privacy_flag: false
-excerpt: "Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde fejl. Den fandt 14 — og overså den ene der havde betydet noget."
+excerpt: >-
+  Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde
+  fejl. Den fandt 14 — og overså den ene der havde betydet noget.
 marginalia:
-  - ts: "8/5 14:32"
-    text: "undersøgte det her i 3 dage før jeg gav op"
+  - ts: '8/5 14:32'
+    text: undersøgte det her i 3 dage før jeg gav op
     source: manual
-  - ts: "9/5 09:01"
-    text: "rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas"
+  - ts: '9/5 09:01'
+    text: 'rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas'
     source: manual
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-06-07T13:54:52Z'
+    text: Telegram-alarm ved deploy-fejl + Node 24 opt-in + checkout/setup-node v5
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/d8fecf3f5858f5800e5e58977969c7f359158d14
+  - ts: '2026-06-22T18:02:36Z'
+    text: SMV-outreach (jura + anvendt AI) implementeringsplan
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/56a8d063d64509e51889209ab574ba225852ee82
+  - ts: '2026-06-22T17:52:55Z'
+    text: SMV-outreach (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2f29f7a58b3ef80c2e5128b8c470f86c56958db0
+  - ts: '2026-06-17T22:32:50Z'
+    text: hæv job-timeout 5→10 min (suite-vækst sprængte loftet)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8ed6042f05dc2382685cc1b08146d110ad81667d
+  - ts: '2026-06-17T20:37:16Z'
+    text: 'scorer favoriserer AI+jura-identitet, filtrerer generisk fra'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/589063dce8a2f6a978de40b3f6487ef645a64a70
+  - ts: '2026-06-17T20:22:37Z'
+    text: 'parameterisér publish-tid (default 08:20 -> lander ~09:30)'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4c0b7c8f0f410c84df072c4075311e7999f92136
+  - ts: '2026-06-11T00:18:54Z'
+    text: router-bug + TAGS excerpt-tab
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2ba7b06c190c26735bc62efcda4fa2af621252c7
+  - ts: '2026-06-11T00:18:38Z'
+    text: hæv STALE_THRESHOLD_S fra 5 til 16 min
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/be15fd57f99d45a9fe3b9c32b68a67f6f0b0e782
+  - ts: '2026-06-08T16:21:49Z'
+    text: deterministisk tic-gate på LinkedIn-versionen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1ff7ae3f17cb0131d1dfaa195c888b315e47dcce
+  - ts: '2026-06-08T15:30:12Z'
+    text: tilføj requeue_linkedin for at gendanne BOM-fejlede krydsposter
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e48a8d9139f283660189792d7e64b574ff3e4b13
+  - ts: '2026-06-07T19:58:00Z'
+    text: ensartet fejlbesked-konvention — hvad gik galt + næste skridt
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/25489507fa34f3d2fae3becda802e2c1788a5d79
+  - ts: '2026-06-07T19:26:31Z'
+    text: fejlede seeds viser 'Seed modtaget' som nået i dashboard
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/27d9d5dea5db0e45f2f698f15389fcc77c842944
+  - ts: '2026-06-07T19:16:56Z'
+    text: drift-rapport rendres i ui.ts med HTML — rå-fallback bevares
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4abdf52e9ba0581e4562a3d0a2ca469a67539442
+  - ts: '2026-06-07T19:00:33Z'
+    text: setMyCommands-script — autocomplete-menu for alle kommandoer
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/449a0a76dc0e6dd01c31418ecd5637c509596bf2
 ---
 
 
