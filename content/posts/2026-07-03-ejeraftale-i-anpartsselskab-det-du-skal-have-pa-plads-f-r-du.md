@@ -1,12 +1,36 @@
 ---
-title: "Ejeraftale i anpartsselskab: det du skal have på plads før du skriver under"
+title: 'Ejeraftale i anpartsselskab: det du skal have på plads før du skriver under'
 slug: ejeraftale-i-anpartsselskab-det-du-skal-have-pa-plads-f-r-du
-publish_at: 2026-07-03T09:02:16+02:00
+publish_at: 2026-07-03T07:02:16.000Z
 status: published
-tags: ["selskabsret", "ejeraftale", "anpartsselskab", "exit-mekanismer", "ejerskifte"]
-excerpt: "En ejeraftale i et ApS regulerer det vedtægterne ikke kan: deadlock, exit, good/bad leaver og værdiansættelse. Her er hvad du skal have med — og hvad ejere typisk glemmer."
+tags:
+  - selskabsret
+  - ejeraftale
+  - anpartsselskab
+  - exit-mekanismer
+  - ejerskifte
+excerpt: >-
+  En ejeraftale i et ApS regulerer det vedtægterne ikke kan: deadlock, exit,
+  good/bad leaver og værdiansættelse. Her er hvad du skal have med — og hvad
+  ejere typisk glemmer.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-03T07:02:16Z'
+    text: publish ejeraftale-i-anpartsselskab-det-du-skal-have-pa-plads-f-r-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/64d6369eeab9c20b51f2f292faf899ebda3d3c1c
+  - ts: '2026-06-17T21:27:35Z'
+    text: første-kommentar-oplæg vedhæftet JA-beskeden
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c3707fa202f20ce0d4e2cb9661561e21f390e9de
+  - ts: '2026-06-08T15:22:24Z'
+    text: strip BOM/whitespace fra author-URN før publish
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e9d77ed199a4a0925695d86820e7b2b4370fa0dd
 ---
 
 Du er ved at starte virksomhed med en eller flere partnere, eller du er allerede i gang og har aldrig fået lavet en ejeraftale. Begge situationer er normale. Den første er den billige at løse. Den anden bliver dyrere for hver måned der går.

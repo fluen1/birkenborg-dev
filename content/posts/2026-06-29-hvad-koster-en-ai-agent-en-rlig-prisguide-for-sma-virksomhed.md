@@ -1,12 +1,91 @@
 ---
-title: "Hvad koster en AI-agent? En ærlig prisguide for små virksomheder"
+title: Hvad koster en AI-agent? En ærlig prisguide for små virksomheder
 slug: hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
-publish_at: 2026-06-29T09:02:12+02:00
+publish_at: 2026-06-29T07:02:12.000Z
 status: published
-tags: ["ai-agent", "prissætning", "open-source", "smv", "selvhosting"]
-excerpt: "En AI-agent koster fra ører per interaktion til sekscifrede udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting — og af om du bygger til den rigtige opgave."
+tags:
+  - ai-agent
+  - prissætning
+  - open-source
+  - smv
+  - selvhosting
+excerpt: >-
+  En AI-agent koster fra ører per interaktion til sekscifrede
+  udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting
+  — og af om du bygger til den rigtige opgave.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-06-24T17:01:07Z'
+    text: goer konverteringssiden synlig — /smv/ -> /arbejd-sammen/ i nav
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/c88bfe9634364d0999f4d205077736d45dc088b3
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-06-20T16:11:27Z'
+    text: load-tids health-probe så badgen er ærlig ved page-load
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e390affb7ea4f192d598a77f96a06b850115287c
+  - ts: '2026-07-02T18:17:03Z'
+    text: 'Merge branch ''main'' of https://github.com/fluen1/birkenborg-agents'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1061e1c045312a9e716ad5a0d019718a94babd6b
+  - ts: '2026-06-22T18:11:06Z'
+    text: SMV-templates for ansættelse + freelance (A/B)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4478560d851992000c8f3b93442b3a79f0b8cc4e
+  - ts: '2026-06-22T18:08:32Z'
+    text: SMV-prompt med A/B-variant + segment i draft_outreach
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/9ab240fb9880beea465353a2c686ba094010703e
+  - ts: '2026-06-22T18:04:49Z'
+    text: SMV-segmenter + A/B-kolonner i cvr_leads + tracker
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d97fb9e6000490b5287c172fe67c5064cdd81b06
+  - ts: '2026-06-22T18:02:36Z'
+    text: SMV-outreach (jura + anvendt AI) implementeringsplan
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/56a8d063d64509e51889209ab574ba225852ee82
+  - ts: '2026-06-22T17:52:55Z'
+    text: SMV-outreach (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2f29f7a58b3ef80c2e5128b8c470f86c56958db0
+  - ts: '2026-06-17T20:57:05Z'
+    text: selvbærende default + ægte-spørgsmål-slut + artikel-deling som valg
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f3578b608eae0f6187ac5206fb4ebec8ad9e5a0b
+  - ts: '2026-06-17T19:36:25Z'
+    text: 'resolve LinkedIn v2 open questions (Tue/Thu ~09:30, D1, fidelity-loosen)'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/76474fe92d3108e5ef1af052a771db492c2f32fb
+  - ts: '2026-06-07T19:58:00Z'
+    text: ensartet fejlbesked-konvention — hvad gik galt + næste skridt
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/25489507fa34f3d2fae3becda802e2c1788a5d79
 ---
 
 Det korte svar: det afhænger af. Det lidt længere svar: det afhænger af noget helt andet end du tror.

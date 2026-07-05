@@ -1,12 +1,26 @@
 ---
-title: "10 agents i produktion — sådan er de organiseret"
-slug: "10-agents-i-produktion"
-publish_at: 2026-04-28T09:00:00+02:00
+title: 10 agents i produktion — sådan er de organiseret
+slug: 10-agents-i-produktion
+publish_at: 2026-04-28T07:00:00.000Z
 status: published
-tags: ["agenter", "arkitektur"]
+tags:
+  - agenter
+  - arkitektur
 privacy_flag: false
-excerpt: "Et nørdet kig ind i mit Claude Code-setup: hvilke agenter, hvad de kan, og hvad jeg har lært om at orkestrere dem."
-marginalia: []
+excerpt: >-
+  Et nørdet kig ind i mit Claude Code-setup: hvilke agenter, hvad de kan, og
+  hvad jeg har lært om at orkestrere dem.
+marginalia:
+  - ts: '2026-06-11T22:57:32Z'
+    text: enable Workers Logs — workeren havde 0 produktion-logs
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/810baf8ad3cbe781581fd583bf822ace43605dd7
+  - ts: '2026-07-02T18:17:03Z'
+    text: 'Merge branch ''main'' of https://github.com/fluen1/birkenborg-agents'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1061e1c045312a9e716ad5a0d019718a94babd6b
 ---
 
 Ti agents lyder som mange. Det er det også, i den forstand at det er ti ting der kan gå galt på ti forskellige måder. Men de kom til gradvist — én ad gangen, over omtrent et år — og det er nok den eneste grund til at de stadig kører.

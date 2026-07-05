@@ -1,12 +1,111 @@
 ---
-title: "Ingen ved hvad en AI-agent koster"
+title: Ingen ved hvad en AI-agent koster
 slug: ingen-ved-hvad-en-ai-agent-koster
-publish_at: 2026-06-02T12:55:17+02:00
+publish_at: 2026-06-02T10:55:17.000Z
 status: published
-tags: ["ai", "agenter", "prissætning", "jura", "indkøb"]
-excerpt: "Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'. Han har ret."
+tags:
+  - ai
+  - agenter
+  - prissætning
+  - jura
+  - indkøb
+excerpt: >-
+  Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning
+  eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'.
+  Han har ret.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-06-20T16:11:27Z'
+    text: load-tids health-probe så badgen er ærlig ved page-load
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e390affb7ea4f192d598a77f96a06b850115287c
+  - ts: '2026-06-07T13:54:52Z'
+    text: Telegram-alarm ved deploy-fejl + Node 24 opt-in + checkout/setup-node v5
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/d8fecf3f5858f5800e5e58977969c7f359158d14
+  - ts: '2026-07-02T18:17:03Z'
+    text: 'Merge branch ''main'' of https://github.com/fluen1/birkenborg-agents'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1061e1c045312a9e716ad5a0d019718a94babd6b
+  - ts: '2026-07-01T22:22:33Z'
+    text: stub fetch i refill-fejl-test så ingen ægte Telegram-kald
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/3c060a33b23bbeef2eb353abf5982029c1577b29
+  - ts: '2026-07-01T22:10:20Z'
+    text: genopfyldnings-DM ved lav emnebeholdning (refill.ts)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/714cf22b8ce88d2afff95fd5a07cd62d3cb23ed0
+  - ts: '2026-07-01T21:54:45Z'
+    text: 55 jura-generalist-emner i 11 klynger + round-robin-rotation
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/70222dbd83c684f9c2b74d2b9d8bcfd41e4ac248
+  - ts: '2026-07-01T21:42:55Z'
+    text: implementeringsplan for jura-generalist-indholdsstrategi
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f652008850fab37a3c4f0eea4016d435190442dd
+  - ts: '2026-07-01T21:32:34Z'
+    text: jura-generalist-indholdsstrategi for birkenborg.dev
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4e24209fba84537e36339ddb0b02c20f92d685ff
+  - ts: '2026-06-22T18:02:36Z'
+    text: SMV-outreach (jura + anvendt AI) implementeringsplan
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/56a8d063d64509e51889209ab574ba225852ee82
+  - ts: '2026-06-22T17:52:55Z'
+    text: SMV-outreach (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2f29f7a58b3ef80c2e5128b8c470f86c56958db0
+  - ts: '2026-06-17T21:27:35Z'
+    text: første-kommentar-oplæg vedhæftet JA-beskeden
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c3707fa202f20ce0d4e2cb9661561e21f390e9de
+  - ts: '2026-06-17T20:37:16Z'
+    text: 'scorer favoriserer AI+jura-identitet, filtrerer generisk fra'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/589063dce8a2f6a978de40b3f6487ef645a64a70
+  - ts: '2026-06-10T23:20:35Z'
+    text: 'fail loud ved manglende ''# Titel'' i udkast, publicér aldrig placeholder'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/fb3cb2ef1400cdc387f0bf97b098dbf7963e71b8
+  - ts: '2026-06-07T19:58:00Z'
+    text: ensartet fejlbesked-konvention — hvad gik galt + næste skridt
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/25489507fa34f3d2fae3becda802e2c1788a5d79
+  - ts: '2026-06-07T19:40:26Z'
+    text: dashboard-besked opdateres ved alle state-transitions
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/754b02e4fa7d9f81ef9b0e174851e11da8e143ad
 ---
 
 Herbert Nathan kalder det 'det store spørgsmål lige nu'. Det er en præcis beskrivelse.
