@@ -7,8 +7,36 @@ import MetaTags from '../components/MetaTags.astro';
 
 const SITE_URL = 'https://birkenborg.dev';
 const PAGE_URL = `${SITE_URL}/arbejd-sammen/`;
-const PAGE_TITLE = 'Jura + anvendt AI · birkenborg.dev';
-const PAGE_DESC = 'Erhvervsjurist der selv bygger AI- og automatiseringsløsninger. Rådgivning og eksekvering i én profil — som ansat eller ad-hoc.';
+const PAGE_TITLE = 'Jura + anvendt AI — faste pakker · birkenborg.dev';
+const PAGE_DESC =
+  'Tre faste pakker i krydsfeltet jura og AI: kontrakt-tjek, sundhedstjek og automatiserings-audit. Faste priser, ingen sælger-flow.';
+
+const pakker = [
+  {
+    navn: 'AI-kontrakt-tjek',
+    pris: '7.500 kr.',
+    hvad: 'Jeres AI- eller SaaS-leverandøraftale gennemgået: ansvar, data, IP og exit.',
+    faar: 'Rød/gul/grøn-rapport med konkrete rettelser — klar til forhandlingen.',
+    tid: 'Levering: 5 hverdage.',
+    til: 'Til jer der skal skrive under på en AI-aftale — eller allerede har gjort det.',
+  },
+  {
+    navn: 'AI+jura sundhedstjek',
+    pris: '12.500 kr.',
+    hvad: 'Jeres AI-brug holdt op mod GDPR, AI Act og jeres kontraktgrundlag.',
+    faar: 'Prioriteret handlingsliste: hvad der haster, hvad der kan vente, hvad der er fint.',
+    tid: 'Levering: 2 uger.',
+    til: 'Til jer der bruger AI i driften og vil vide, om det holder.',
+  },
+  {
+    navn: 'Automatiserings-audit',
+    pris: '20.000 kr.',
+    hvad: '2-3 gentagne arbejdsgange kortlagt med automatiseringsforslag og juridisk risikovurdering.',
+    faar: 'Beslutningsklar rapport: hvad der kan automatiseres, hvad det kræver, og hvor jura sætter grænser.',
+    tid: 'Levering: 3 uger.',
+    til: 'Til jer der bruger for mange timer på det samme — og vil have løsning og lovlighed vurderet ét sted.',
+  },
+];
 ---
 <Base title={PAGE_TITLE}>
   <Fragment slot="head">
@@ -22,29 +50,35 @@ const PAGE_DESC = 'Erhvervsjurist der selv bygger AI- og automatiseringsløsning
         <h1>En jurist, der også bygger løsningen</h1>
         <p class="lead">
           Jeg er cand.merc.(jur.) og Legal Counsel — og jeg bygger selv de AI- og
-          automatiseringsløsninger, der fjerner det gentagne arbejde. Rådgivning og
-          eksekvering i én profil, til virksomheder der ikke har begge dele in-house.
+          automatiseringsløsninger, der fjerner det gentagne arbejde. Tre faste pakker,
+          faste priser. Rådgivning og eksekvering i én profil.
         </p>
       </header>
 
-      <section class="value-props">
-        <article>
-          <h2>Juridisk tyngde</h2>
-          <p>Kontrakter, selskabsret og compliance — pragmatisk og forretningsorienteret.</p>
-        </article>
-        <article>
-          <h2>Bygger selv</h2>
-          <p>AI-agenter og automatisering i drift — ikke slides. Se Atlas og ChainHub.</p>
-        </article>
-        <article>
-          <h2>Som ansat eller ad-hoc</h2>
-          <p>Fast i huset, eller på konkrete opgaver som selvstændig — som det passer jer.</p>
-        </article>
+      <section class="pakker" aria-label="Pakker med fast pris">
+        {pakker.map((p) => (
+          <article>
+            <h2>{p.navn}</h2>
+            <p class="pris">{p.pris}</p>
+            <p>{p.hvad}</p>
+            <p><strong>I får:</strong> {p.faar}</p>
+            <p class="detalje">{p.tid}</p>
+            <p class="detalje">{p.til}</p>
+          </article>
+        ))}
       </section>
+
+      <p class="adhoc">
+        Andet på hjerte? Ad-hoc sparring til <strong>1.800 kr./t</strong> — kontrakter,
+        selskabsret, compliance eller det tekniske. Alle priser er ekskl. moms.
+      </p>
 
       <section class="contact">
         <h2>Tag en kort samtale</h2>
-        <p>Jeg vender tilbage inden for 24 timer på hverdage. Ingen sælger-flow.</p>
+        <p>
+          Skriv hvilken pakke (eller hvilket problem) det handler om. Jeg vender tilbage
+          inden for 24 timer på hverdage. Ingen sælger-flow.
+        </p>
         <LeadForm niche="smv" />
       </section>
     </div>
@@ -58,10 +92,13 @@ const PAGE_DESC = 'Erhvervsjurist der selv bygger AI- og automatiseringsløsning
   .meta { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray-700); margin: 0 0 16px; }
   .page-head h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 350; letter-spacing: -.02em; margin: 0 0 16px; }
   .lead { font-size: 18px; line-height: 1.5; color: var(--gray-700); }
-  .value-props { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 48px 0; }
-  .value-props article { padding: 24px; border: 1px solid var(--gray-200); border-radius: var(--r-md); }
-  .value-props h2 { font-size: 18px; margin: 0 0 8px; }
-  .value-props p { margin: 0; color: var(--gray-700); }
+  .pakker { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 48px 0 24px; }
+  .pakker article { padding: 24px; border: 1px solid var(--gray-200); border-radius: var(--r-md); display: flex; flex-direction: column; gap: 10px; }
+  .pakker h2 { font-size: 18px; margin: 0; }
+  .pakker p { margin: 0; color: var(--gray-700); font-size: 15px; line-height: 1.5; }
+  .pakker .pris { font-family: var(--font-display); font-size: 26px; color: var(--ink); }
+  .pakker .detalje { font-size: 13px; }
+  .adhoc { max-width: 720px; margin: 0 0 24px; color: var(--gray-700); font-size: 15px; }
   .contact { margin-top: 48px; max-width: 720px; }
   .contact h2 { font-size: 24px; margin: 0 0 16px; }
 </style>

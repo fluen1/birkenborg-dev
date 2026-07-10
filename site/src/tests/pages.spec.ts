@@ -77,3 +77,18 @@ test('alle sider returnerer 200', async ({ page }) => {
     expect(resp?.status()).toBe(200);
   }
 });
+
+test('/arbejd-sammen viser 3 pakker med faste priser + timepris', async ({ page }) => {
+  await page.goto('/arbejd-sammen/');
+  const cards = page.locator('.pakker article');
+  await expect(cards).toHaveCount(3);
+  await expect(cards.nth(0)).toContainText('AI-kontrakt-tjek');
+  await expect(cards.nth(0)).toContainText('7.500 kr.');
+  await expect(cards.nth(1)).toContainText('AI+jura sundhedstjek');
+  await expect(cards.nth(1)).toContainText('12.500 kr.');
+  await expect(cards.nth(2)).toContainText('Automatiserings-audit');
+  await expect(cards.nth(2)).toContainText('20.000 kr.');
+  await expect(page.locator('.adhoc')).toContainText('1.800 kr./t');
+  await expect(page.locator('main')).toContainText('ekskl. moms');
+  await expect(page.locator('form.lead-form')).toBeVisible();
+});
