@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://birkenborg.dev',
   trailingSlash: 'always',
   build: { format: 'directory' },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/undersoegelse') })],
   markdown: {
     remarkPlugins: [remarkStripLinkedin],
     rehypePlugins: [rehypeImgAttrs],
