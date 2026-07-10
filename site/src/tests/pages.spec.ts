@@ -118,6 +118,7 @@ test('/undersoegelse submitter payload og viser tak-tilstand', async ({ page }) 
   }
   await page.locator('button[type="submit"]').click();
   await expect(page.locator('.tak')).toBeVisible();
+  await expect(page.locator('.tak')).toBeFocused();
   expect(posted.svar.q1).toBe('1-9');
   expect(posted.samtykke).toBe(false);
   expect(posted.email).toBeUndefined();

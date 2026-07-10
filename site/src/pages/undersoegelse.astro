@@ -93,7 +93,7 @@ const questions: Q[] = [
         <p class="foot">Besvarelser uden e-mail er fuldt anonyme. Ingen cookies, ingen tracking.</p>
       </form>
 
-      <div class="tak" hidden>
+      <div class="tak" tabindex="-1" hidden>
         <h2>Tak for hjælpen</h2>
         <p>Din besvarelse er modtaget. Har du bedt om resultaterne, hører du fra mig, når undersøgelsen er gjort op.</p>
       </div>
@@ -115,6 +115,8 @@ const questions: Q[] = [
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const button = form.querySelector('button') as HTMLButtonElement;
+    if (button.disabled) return;
     const svar: Record<string, string | string[]> = {};
     let missing = '';
     for (const fs of Array.from(form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-q]'))) {
@@ -135,6 +137,10 @@ const questions: Q[] = [
       status.textContent = 'Skriv din e-mail, eller fjern krydset i samtykke-feltet.';
       return;
     }
+    if (consent.checked && emailInput.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailInput.value)) {
+      status.textContent = 'E-mailadressen ser ikke rigtig ud — tjek den, eller fjern samtykke-krydset.';
+      return;
+    }
 
     const kildeParam = new URLSearchParams(location.search).get('k') ?? '';
     const payload: Record<string, unknown> = {
@@ -144,7 +150,6 @@ const questions: Q[] = [
       ...(/^[a-z0-9-]{1,24}$/.test(kildeParam) ? { kilde: kildeParam } : {}),
     };
 
-    const button = form.querySelector('button') as HTMLButtonElement;
     button.disabled = true;
     status.textContent = 'Sender…';
     try {
@@ -156,6 +161,7 @@ const questions: Q[] = [
       if (!res.ok) throw new Error(`status ${res.status}`);
       form.hidden = true;
       tak.hidden = false;
+      tak.focus();
       tak.scrollIntoView({ block: 'center' });
     } catch {
       status.textContent = 'Noget gik galt — prøv igen om et øjeblik.';
