@@ -56,7 +56,7 @@ e-mail-salgsbatch) genbruges som modtagere af den neutrale survey-invitation.
   (birkenborg.dev → bot.birkenborg.dev) — genbrug den CORS-håndtering `/internal/lead` har
   (LeadForm poster allerede cross-origin, så mønstret findes; kopiér det).
 - TDD: happy path anonym, happy path m. samtykke+email, samtykke uden email → 400,
-  email uden samtykke → email droppes (eller 400 — vælg og testfæst), ukendte svar-værdier → 400,
+  email uden samtykke → email droppes bevidst (anonymitet håndhævet, testfæstet), ukendte svar-værdier → 400,
   rate-limit.
 
 ## Del C — mail-materiale (birkenborg-agents, ingen kode)
