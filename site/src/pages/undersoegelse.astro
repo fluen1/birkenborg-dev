@@ -1,0 +1,194 @@
+---
+import Base from '../layouts/Base.astro';
+
+const PAGE_TITLE = 'Undersøgelse: jura og AI i danske SMV\'er · birkenborg.dev';
+
+type Q = { id: string; nr: number; titel: string; multi: boolean; note?: string; opts: [string, string][] };
+const questions: Q[] = [
+  { id: 'q1', nr: 1, titel: 'Hvor mange ansatte er I?', multi: false, opts: [
+    ['1-9', '1-9'], ['10-49', '10-49'], ['50-99', '50-99'], ['100-199', '100-199'], ['200+', '200+'],
+  ]},
+  { id: 'q2', nr: 2, titel: 'Har I en jurist ansat i virksomheden?', multi: false, opts: [
+    ['fuldtid', 'Ja, på fuld tid'],
+    ['deltid-kombineret', 'Ja, på deltid / kombineret rolle'],
+    ['nej-eksterne', 'Nej — vi bruger eksterne, når det brænder på'],
+    ['nej-selv', 'Nej — vi klarer det meste selv'],
+  ]},
+  { id: 'q3', nr: 3, titel: 'Hvem løser jeres juridiske opgaver i dag?', multi: true, note: 'vælg gerne flere', opts: [
+    ['advokatfirma', 'Advokatfirma'],
+    ['revisor-raadgiver', 'Revisor / rådgiver'],
+    ['brancheforening', 'Brancheforening'],
+    ['googler-skabeloner', 'Vi googler og bruger skabeloner'],
+    ['ai-vaerktoejer', 'AI-værktøjer (fx ChatGPT)'],
+  ]},
+  { id: 'q4', nr: 4, titel: 'Hvilke juridiske opgaver fylder mest hos jer?', multi: true, note: 'vælg gerne flere', opts: [
+    ['kontrakter', 'Kontrakter'], ['ansaettelsesret', 'Ansættelsesret'], ['gdpr-data', 'GDPR / data'],
+    ['selskabsforhold', 'Selskabsforhold'], ['tvister-inkasso', 'Tvister / inkasso'], ['udbud', 'Udbud'],
+  ]},
+  { id: 'q5', nr: 5, titel: 'Bruger I AI-værktøjer i driften i dag?', multi: false, opts: [
+    ['bredt', 'Ja, bredt i flere afdelinger'],
+    ['enkelte', 'Ja, men kun enkelte værktøjer / enkelte medarbejdere'],
+    ['nej-overvejer', 'Nej, men vi overvejer det'],
+    ['nej', 'Nej, og det er ikke på tegnebrættet'],
+  ]},
+  { id: 'q6', nr: 6, titel: 'Hvad bruger I (eller overvejer I) AI til?', multi: true, note: 'vælg gerne flere', opts: [
+    ['tekst-kommunikation', 'Tekst & kommunikation'], ['kundeservice', 'Kundeservice'],
+    ['sagsbehandling', 'Sagsbehandling'], ['oekonomi-bogholderi', 'Økonomi / bogholderi'], ['tilbud-salg', 'Tilbud & salg'],
+  ]},
+  { id: 'q7', nr: 7, titel: 'Har I overblik over jeres aftaler med AI-leverandører — hvem der ejer data, og hvem der har ansvaret, hvis noget går galt?', multi: false, opts: [
+    ['ja', 'Ja, det er på plads'], ['delvist', 'Delvist'],
+    ['nej', 'Nej — det har vi ikke kigget på'], ['ved-ikke', 'Ved ikke'],
+  ]},
+  { id: 'q8', nr: 8, titel: 'Hvad ville bekymre jer mest ved at bruge (mere) AI?', multi: true, note: 'vælg gerne flere', opts: [
+    ['datasikkerhed', 'Datasikkerhed'], ['fejl-i-output', 'Fejl i output'], ['jura-ansvar', 'Jura & ansvar'],
+    ['medarbejder-accept', 'Medarbejdernes accept'], ['ikke-noget', 'Ikke noget'],
+  ]},
+];
+---
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="8 spørgsmål om hvordan danske SMV'er bruger jura og AI. Anonymt, ca. 3 minutter, ingen cookies." />
+  </Fragment>
+  <main class="survey">
+    <div class="container">
+      <p class="ident">Philip Birkenborg Andersen · cand.merc.(jur.)</p>
+      <h1>Hvordan bruger danske SMV'er jura og AI i 2026?</h1>
+      <p class="intro">
+        8 spørgsmål om, hvordan jeres virksomhed løser juridiske opgaver, og hvor AI er på vej ind
+        i driften. Svarene behandles anonymt og indgår kun i samlet, statistisk form.
+      </p>
+      <p class="meta">ca. 3 minutter · anonymt · ingen cookies</p>
+
+      <form id="surveyForm" novalidate>
+        {questions.map((q) => (
+          <fieldset class="q" data-q={q.id} data-multi={q.multi ? '1' : '0'}>
+            <legend><span class="nr">{q.nr}.</span> {q.titel}{q.note && <span class="note"> ({q.note})</span>}</legend>
+            <div class="opts">
+              {q.opts.map(([value, label]) => (
+                <label class="opt">
+                  <input type={q.multi ? 'checkbox' : 'radio'} name={q.id} value={value} />
+                  <span>{label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ))}
+
+        <div class="consent">
+          <p class="c-head">Frivilligt · må vi følge op?</p>
+          <label class="opt">
+            <input type="checkbox" id="samtykke" name="samtykke" />
+            <span>Ja — send mig undersøgelsens resultater, og kontakt mig gerne med opfølgning,
+            der er relevant for mine svar. Samtykket kan til enhver tid trækkes tilbage.</span>
+          </label>
+          <label class="emailfield" for="email">
+            E-mail (kun hvis du har sagt ja tak ovenfor)
+            <input type="email" id="email" name="email" autocomplete="email" disabled />
+          </label>
+        </div>
+
+        <button type="submit">Send besvarelse</button>
+        <p class="status" aria-live="polite"></p>
+        <p class="foot">Besvarelser uden e-mail er fuldt anonyme. Ingen cookies, ingen tracking.</p>
+      </form>
+
+      <div class="tak" hidden>
+        <h2>Tak for hjælpen</h2>
+        <p>Din besvarelse er modtaget. Har du bedt om resultaterne, hører du fra mig, når undersøgelsen er gjort op.</p>
+      </div>
+    </div>
+  </main>
+</Base>
+
+<script>
+  const form = document.getElementById('surveyForm') as HTMLFormElement;
+  const consent = document.getElementById('samtykke') as HTMLInputElement;
+  const emailInput = document.getElementById('email') as HTMLInputElement;
+  const status = form.querySelector('.status') as HTMLElement;
+  const tak = document.querySelector('.tak') as HTMLElement;
+
+  consent.addEventListener('change', () => {
+    emailInput.disabled = !consent.checked;
+    if (!consent.checked) emailInput.value = '';
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const svar: Record<string, string | string[]> = {};
+    let missing = '';
+    for (const fs of Array.from(form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-q]'))) {
+      const id = fs.dataset.q as string;
+      if (fs.dataset.multi === '1') {
+        svar[id] = Array.from(fs.querySelectorAll<HTMLInputElement>('input:checked')).map((i) => i.value);
+      } else {
+        const sel = fs.querySelector<HTMLInputElement>('input:checked');
+        if (!sel) { missing = missing || id; fs.classList.add('mangler'); } else { fs.classList.remove('mangler'); svar[id] = sel.value; }
+      }
+    }
+    if (missing) {
+      status.textContent = 'Udfyld venligst de markerede spørgsmål — kun ét kryds pr. spørgsmål.';
+      document.querySelector(`[data-q="${missing}"]`)?.scrollIntoView({ block: 'center' });
+      return;
+    }
+    if (consent.checked && !emailInput.value) {
+      status.textContent = 'Skriv din e-mail, eller fjern krydset i samtykke-feltet.';
+      return;
+    }
+
+    const kildeParam = new URLSearchParams(location.search).get('k') ?? '';
+    const payload: Record<string, unknown> = {
+      svar,
+      samtykke: consent.checked,
+      ...(consent.checked && emailInput.value ? { email: emailInput.value } : {}),
+      ...(/^[a-z0-9-]{1,24}$/.test(kildeParam) ? { kilde: kildeParam } : {}),
+    };
+
+    const button = form.querySelector('button') as HTMLButtonElement;
+    button.disabled = true;
+    status.textContent = 'Sender…';
+    try {
+      const res = await fetch('https://bot.birkenborg.dev/internal/survey', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`status ${res.status}`);
+      form.hidden = true;
+      tak.hidden = false;
+      tak.scrollIntoView({ block: 'center' });
+    } catch {
+      status.textContent = 'Noget gik galt — prøv igen om et øjeblik.';
+      button.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .survey { padding: 56px 0 96px; }
+  .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+  .ident { font-size: 13px; letter-spacing: .06em; color: var(--gray-700); margin: 0 0 28px; }
+  h1 { font-family: var(--font-display); font-weight: 380; font-size: clamp(30px, 5vw, 44px); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 14px; }
+  .intro { font-size: 16.5px; line-height: 1.55; color: var(--gray-700); margin: 0 0 6px; }
+  .meta { font-size: 13px; font-weight: 600; color: var(--clay); margin: 0 0 36px; }
+  .q { border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 18px 20px; margin: 0 0 18px; }
+  .q.mangler { border-color: var(--clay); }
+  legend { font-weight: 650; font-size: 15px; padding: 0 6px; }
+  .nr { color: var(--clay); }
+  .note { font-weight: 400; color: var(--gray-700); font-size: 13px; }
+  .opts { display: flex; flex-direction: column; gap: 9px; margin-top: 10px; }
+  .opt { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; line-height: 1.45; cursor: pointer; }
+  .opt input { margin-top: 3px; accent-color: var(--clay); }
+  .consent { border: 1.5px solid var(--clay); border-radius: var(--r-md); padding: 18px 20px; margin: 28px 0 0; }
+  .c-head { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--clay); margin: 0 0 10px; }
+  .emailfield { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; font-size: 13.5px; color: var(--gray-700); }
+  .emailfield input { max-width: 340px; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: var(--r-sm); background: var(--cream); color: var(--ink); font-size: 15px; }
+  .emailfield input:disabled { opacity: .5; }
+  button[type="submit"] { margin-top: 26px; background: var(--clay); color: white; border: none; border-radius: var(--r-sm); padding: 12px 26px; font-size: 16px; font-family: inherit; cursor: pointer; }
+  button[type="submit"]:hover { background: var(--clay-deep); }
+  button[type="submit"]:disabled { opacity: .5; cursor: not-allowed; }
+  .status { font-size: 14px; color: var(--clay); min-height: 1.4em; margin: 10px 0 0; }
+  .foot { font-size: 12.5px; color: var(--gray-700); margin: 14px 0 0; }
+  .tak h2 { font-family: var(--font-display); font-weight: 400; font-size: 30px; margin: 0 0 10px; }
+  .tak p { color: var(--gray-700); }
+</style>

@@ -92,3 +92,34 @@ test('/arbejd-sammen viser 3 pakker med faste priser + timepris', async ({ page 
   await expect(page.locator('main')).toContainText('ekskl. moms');
   await expect(page.locator('form.lead-form')).toBeVisible();
 });
+
+test('/undersoegelse er nøgen: noindex, ingen nav, 8 spørgsmål, samtykke-blok', async ({ page }) => {
+  await page.goto('/undersoegelse/');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+  await expect(page.locator('nav')).toHaveCount(0);
+  // ingen interne links væk fra siden (kun eksterne/ingen): alle <a> skal pege på # eller mailto
+  const badLinks = await page.locator('a[href^="/"], a[href*="birkenborg.dev/"]').count();
+  expect(badLinks).toBe(0);
+  await expect(page.locator('[data-q]')).toHaveCount(8);
+  await expect(page.locator('#samtykke')).toBeVisible();
+  await expect(page.locator('button[type="submit"]')).toBeVisible();
+});
+
+test('/undersoegelse submitter payload og viser tak-tilstand', async ({ page }) => {
+  let posted: any = null;
+  await page.route('**/internal/survey', async (route) => {
+    posted = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+  });
+  await page.goto('/undersoegelse/?k=e2e-test');
+  // vælg én radio pr. radiospørgsmål (q1, q2, q5, q7)
+  for (const q of ['q1', 'q2', 'q5', 'q7']) {
+    await page.locator(`[data-q="${q}"] input[type="radio"]`).first().check();
+  }
+  await page.locator('button[type="submit"]').click();
+  await expect(page.locator('.tak')).toBeVisible();
+  expect(posted.svar.q1).toBe('1-9');
+  expect(posted.samtykke).toBe(false);
+  expect(posted.email).toBeUndefined();
+  expect(posted.kilde).toBe('e2e-test');
+});
