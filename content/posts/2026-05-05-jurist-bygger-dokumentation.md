@@ -1,15 +1,78 @@
 ---
-title: "Jurister dokumenterer for at det holder i retten. Jeg dokumenterer for at jeg kan huske hvad koden gør."
+title: >-
+  Jurister dokumenterer for at det holder i retten. Jeg dokumenterer for at jeg
+  kan huske hvad koden gør.
 slug: jurist-bygger-dokumentation
 theme_id: jurist-bygger-paradoks
-tags: ["jura", "kode", "dokumentation"]
+tags:
+  - jura
+  - kode
+  - dokumentation
 suggested_publish_day: friday
-rationale: "Bruger ikke inbox direkte men aktiverer jurist-bygger-paradoks-temaet med en konkret og morsom detalje (30 README'er) — risikoen er at den er lidt mere reflekterende end energisk, men åbningslinjen og slutningen er skarpe nok."
+rationale: >-
+  Bruger ikke inbox direkte men aktiverer jurist-bygger-paradoks-temaet med en
+  konkret og morsom detalje (30 README'er) — risikoen er at den er lidt mere
+  reflekterende end energisk, men åbningslinjen og slutningen er skarpe nok.
 privacy_flag: false
 status: published
-publish_at: 2026-05-08T09:00:00+02:00
-
-linkedin_url: "https://www.linkedin.com/feed/update/urn:li:share:7458430436244111361/"
+publish_at: 2026-05-08T07:00:00.000Z
+linkedin_url: 'https://www.linkedin.com/feed/update/urn:li:share:7458430436244111361/'
+marginalia:
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-07-01T21:54:45Z'
+    text: 55 jura-generalist-emner i 11 klynger + round-robin-rotation
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/70222dbd83c684f9c2b74d2b9d8bcfd41e4ac248
+  - ts: '2026-07-01T21:42:55Z'
+    text: implementeringsplan for jura-generalist-indholdsstrategi
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f652008850fab37a3c4f0eea4016d435190442dd
+  - ts: '2026-07-01T21:32:34Z'
+    text: jura-generalist-indholdsstrategi for birkenborg.dev
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4e24209fba84537e36339ddb0b02c20f92d685ff
+  - ts: '2026-06-22T18:02:36Z'
+    text: SMV-outreach (jura + anvendt AI) implementeringsplan
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/56a8d063d64509e51889209ab574ba225852ee82
+  - ts: '2026-06-22T17:52:55Z'
+    text: SMV-outreach (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2f29f7a58b3ef80c2e5128b8c470f86c56958db0
+  - ts: '2026-06-17T21:48:41Z'
+    text: 'retten JA-footer til ~09:30 + JSON.parse-guard i getLatestDigest'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/683ba80624e91029df0e20c8b77c2f51b849c66b
+  - ts: '2026-06-17T20:37:16Z'
+    text: 'scorer favoriserer AI+jura-identitet, filtrerer generisk fra'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/589063dce8a2f6a978de40b3f6487ef645a64a70
 ---
 
 
