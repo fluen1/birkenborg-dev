@@ -1,12 +1,58 @@
 ---
-title: "Kundeklausuler og konkurrenceklausuler: hvad der skal til for at de holder — og hvad de koster dig"
+title: >-
+  Kundeklausuler og konkurrenceklausuler: hvad der skal til for at de holder —
+  og hvad de koster dig
 slug: kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
-publish_at: 2026-07-13T09:03:10+02:00
+publish_at: 2026-07-13T07:03:10.000Z
 status: published
-tags: ["ansaettelsesret", "kundeklausul", "konkurrenceklausul", "ansættelsesklausuler", "videnvirksomhed"]
-excerpt: "Kunde- og konkurrenceklausuler i videnvirksomheder: gyldighedskrav, kompensationsomkostninger og de konkrete beslutninger HR skal tage — før medarbejderen siger op."
+tags:
+  - ansaettelsesret
+  - kundeklausul
+  - konkurrenceklausul
+  - ansættelsesklausuler
+  - videnvirksomhed
+excerpt: >-
+  Kunde- og konkurrenceklausuler i videnvirksomheder: gyldighedskrav,
+  kompensationsomkostninger og de konkrete beslutninger HR skal tage — før
+  medarbejderen siger op.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-07-01T22:53:02Z'
+    text: 'log faglig_trovaerdighed, defensiv proposals-parse, audience i gdpr-filter'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d3c7d71b62d7b6e68f8e078252e335ae4871a342
+  - ts: '2026-07-01T22:03:38Z'
+    text: in-house-analyse-prompts + faglig_trovaerdighed i dommer-verdict
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/5b2aae22ce418ac893d765a3a76a54362739fc13
+  - ts: '2026-06-24T17:56:47Z'
+    text: konsolidér digest+voice-drift crons ind på */10-tick
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8bbc9c4f2f832f6b2c7f4a1f1a5f5b8cd292b206
 ---
 
 Din bedste sælger siger op. Hun har relationer til halvdelen af jeres kundeportefølje, kender prisstrukturen indefra og ved præcis hvilke kunder der er utilfredse nok til at skifte leverandør. Om tre uger sidder hun hos konkurrenten. Du åbner hendes ansættelseskontrakt og finder en kundeklausul. Spørgsmålet er bare om den er noget værd.

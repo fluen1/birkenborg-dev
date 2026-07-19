@@ -1,12 +1,55 @@
 ---
-title: "Hvad sker der når din bestyrelse ikke kan miste noget"
+title: Hvad sker der når din bestyrelse ikke kan miste noget
 slug: hvad-sker-der-naar-din-bestyrelse-ikke-kan-miste-noget
-publish_at: 2026-06-08T08:59:49+02:00
+publish_at: 2026-06-08T06:59:49.000Z
 status: published
-tags: ["ai", "ledelse", "beslutninger", "agenter"]
-excerpt: "Bo Martinsen har bygget fem AI-agenter som bestyrelse og bedt dem om at sige ubehageligheder. Problemet er hvem der har defineret hvad der er ubehageligt at høre."
+tags:
+  - ai
+  - ledelse
+  - beslutninger
+  - agenter
+excerpt: >-
+  Bo Martinsen har bygget fem AI-agenter som bestyrelse og bedt dem om at sige
+  ubehageligheder. Problemet er hvem der har defineret hvad der er ubehageligt
+  at høre.
 privacy_flag: false
-linkedin_url: "https://www.linkedin.com/feed/update/urn:li:share:7469775279184461824/"
+linkedin_url: 'https://www.linkedin.com/feed/update/urn:li:share:7469775279184461824/'
+marginalia:
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-07-10T10:52:53Z'
+    text: LinkedIn-DM peger ogsaa paa pakkesiden
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/9fa09ff80db3c2f669f7fdcfeb6088a5e7190e58
+  - ts: '2026-06-22T21:50:55Z'
+    text: 'lead-finding playbook (ICP, kanaler, kvalificering)'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/62c370544727ee5d428cea12fc5d3ceeb8be5231
 ---
 
 Bo Martinsen, ejer og CEO i Norriq, har bygget fem AI-agenter med adgang til samtlige data i virksomheden og bedt dem om at være ubehagelige over for ham. Han kalder det bestyrelseserfaring på steroider.

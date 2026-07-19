@@ -1,12 +1,25 @@
 ---
-title: "Erhvervslejekontrakt: de faldgruber du opdager for sent"
+title: 'Erhvervslejekontrakt: de faldgruber du opdager for sent'
 slug: erhvervslejekontrakt-de-faldgruber-du-opdager-for-sent
-publish_at: 2026-07-17T09:03:04+02:00
+publish_at: 2026-07-17T07:03:04.000Z
 status: published
-tags: ["lejeret", "erhvervslejeret", "erhvervslejekontrakt", "vedligeholdelse"]
-excerpt: "Erhvervslejeloven er fravigelig — og det er dit problem. De faldgruber lejere opdager for sent, fra reguleringsklausuler til istandsættelseskrav ved fraflytning."
+tags:
+  - lejeret
+  - erhvervslejeret
+  - erhvervslejekontrakt
+  - vedligeholdelse
+excerpt: >-
+  Erhvervslejeloven er fravigelig — og det er dit problem. De faldgruber lejere
+  opdager for sent, fra reguleringsklausuler til istandsættelseskrav ved
+  fraflytning.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-17T07:03:05Z'
+    text: publish erhvervslejekontrakt-de-faldgruber-du-opdager-for-sent
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/be36bf5b648f50154756faed4f7632558844de98
 ---
 
 Du har fundet lokaler. Beliggenheden passer, kvadratmeterne er rigtige, og udlejer virker fornuftig. Nu skal du bare skrive under. Kontrakten er på atten sider, halvdelen er standardvilkår du har set før, og din CFO vil gerne have det lukket inden udgangen af måneden. Så du skimmer, nikker og underskriver.
