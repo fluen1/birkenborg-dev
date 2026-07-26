@@ -1,12 +1,60 @@
 ---
-title: "Hvad koster en AI-agent? En ærlig prisguide for små virksomheder"
+title: Hvad koster en AI-agent? En ærlig prisguide for små virksomheder
 slug: hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
-publish_at: 2026-06-29T09:02:12+02:00
+publish_at: 2026-06-29T07:02:12.000Z
 status: published
-tags: ["ai-agent", "prissætning", "open-source", "smv", "selvhosting"]
-excerpt: "En AI-agent koster fra ører per interaktion til sekscifrede udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting — og af om du bygger til den rigtige opgave."
+tags:
+  - ai-agent
+  - prissætning
+  - open-source
+  - smv
+  - selvhosting
+excerpt: >-
+  En AI-agent koster fra ører per interaktion til sekscifrede
+  udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting
+  — og af om du bygger til den rigtige opgave.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-07-23T13:23:56Z'
+    text: >-
+      sendDM returnerer leverings-bool så to-kanal-gaten er ærlig (slut-review
+      rest)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1a7f8c71513b5c0715be55a349dab8316220254c
+  - ts: '2026-07-10T12:01:56Z'
+    text: >-
+      accepter niche=smv i /internal/lead — /arbejd-sammen-formularen var afvist
+      med 4
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4ff0240d5361ce1c7c80bc7f571470479c3fc7bd
+  - ts: '2026-07-02T18:17:03Z'
+    text: 'Merge branch ''main'' of https://github.com/fluen1/birkenborg-agents'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1061e1c045312a9e716ad5a0d019718a94babd6b
 ---
 
 Det korte svar: det afhænger af. Det lidt længere svar: det afhænger af noget helt andet end du tror.
