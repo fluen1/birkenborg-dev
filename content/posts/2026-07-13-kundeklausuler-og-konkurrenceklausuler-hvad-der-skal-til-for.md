@@ -1,12 +1,38 @@
 ---
-title: "Kundeklausuler og konkurrenceklausuler: hvad der skal til for at de holder — og hvad de koster dig"
+title: >-
+  Kundeklausuler og konkurrenceklausuler: hvad der skal til for at de holder —
+  og hvad de koster dig
 slug: kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
-publish_at: 2026-07-13T09:03:10+02:00
+publish_at: 2026-07-13T07:03:10.000Z
 status: published
-tags: ["ansaettelsesret", "kundeklausul", "konkurrenceklausul", "ansættelsesklausuler", "videnvirksomhed"]
-excerpt: "Kunde- og konkurrenceklausuler i videnvirksomheder: gyldighedskrav, kompensationsomkostninger og de konkrete beslutninger HR skal tage — før medarbejderen siger op."
+tags:
+  - ansaettelsesret
+  - kundeklausul
+  - konkurrenceklausul
+  - ansættelsesklausuler
+  - videnvirksomhed
+excerpt: >-
+  Kunde- og konkurrenceklausuler i videnvirksomheder: gyldighedskrav,
+  kompensationsomkostninger og de konkrete beslutninger HR skal tage — før
+  medarbejderen siger op.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-28T15:24:45Z'
+    text: opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069
 ---
 
 Din bedste sælger siger op. Hun har relationer til halvdelen af jeres kundeportefølje, kender prisstrukturen indefra og ved præcis hvilke kunder der er utilfredse nok til at skifte leverandør. Om tre uger sidder hun hos konkurrenten. Du åbner hendes ansættelseskontrakt og finder en kundeklausul. Spørgsmålet er bare om den er noget værd.

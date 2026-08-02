@@ -1,12 +1,53 @@
 ---
-title: "Ejeraftale i anpartsselskab: det du skal have på plads før du skriver under"
+title: 'Ejeraftale i anpartsselskab: det du skal have på plads før du skriver under'
 slug: ejeraftale-i-anpartsselskab-det-du-skal-have-pa-plads-f-r-du
-publish_at: 2026-07-03T09:02:16+02:00
+publish_at: 2026-07-03T07:02:16.000Z
 status: published
-tags: ["selskabsret", "ejeraftale", "anpartsselskab", "exit-mekanismer", "ejerskifte"]
-excerpt: "En ejeraftale i et ApS regulerer det vedtægterne ikke kan: deadlock, exit, good/bad leaver og værdiansættelse. Her er hvad du skal have med — og hvad ejere typisk glemmer."
+tags:
+  - selskabsret
+  - ejeraftale
+  - anpartsselskab
+  - exit-mekanismer
+  - ejerskifte
+excerpt: >-
+  En ejeraftale i et ApS regulerer det vedtægterne ikke kan: deadlock, exit,
+  good/bad leaver og værdiansættelse. Her er hvad du skal have med — og hvad
+  ejere typisk glemmer.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-10T15:00:48Z'
+    text: undersoegelse ude af sitemap (noindex-konsistens)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/c59e9d96257cf40f80e7d91e11cb691b21e26f21
+  - ts: '2026-07-10T14:43:45Z'
+    text: undersoegelse — AT-fokus paa tak-blok + client-side email-validering
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/98fa0a6a6cb18cc814f652cc2a6b91b6c3a8f682
+  - ts: '2026-07-10T14:35:29Z'
+    text: '/undersoegelse — noegen survey-side m. samtykke-blok (noindex, ingen nav)'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/ba3b00cb54f4a70ed63ddd23c15b373b98872724
+  - ts: '2026-07-10T13:53:58Z'
+    text: survey-motoren — /undersoegelse + /internal/survey + neutral mail
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/d10abe0d6264fb6051be1746a5866ae626f75dfa
+  - ts: '2026-07-28T15:19:12Z'
+    text: >-
+      worker-klient m. KV-kø-fallback + dagligt LinkedIn-token-tjek som første
+      forbrug
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1da3961bf8b80e46defc9ef44575bc3c89ff5dff
+  - ts: '2026-07-27T15:43:06Z'
+    text: afsender besluttet (hotmail) + routing/DMARC paa plads
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c
 ---
 
 Du er ved at starte virksomhed med en eller flere partnere, eller du er allerede i gang og har aldrig fået lavet en ejeraftale. Begge situationer er normale. Den første er den billige at løse. Den anden bliver dyrere for hver måned der går.
