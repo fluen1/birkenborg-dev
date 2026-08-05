@@ -1,12 +1,74 @@
 ---
-title: "Hvad sker der når din bestyrelse ikke kan miste noget"
+title: Hvad sker der når din bestyrelse ikke kan miste noget
 slug: hvad-sker-der-naar-din-bestyrelse-ikke-kan-miste-noget
-publish_at: 2026-06-08T08:59:49+02:00
+publish_at: 2026-06-08T06:59:49.000Z
 status: published
-tags: ["ai", "ledelse", "beslutninger", "agenter"]
-excerpt: "Bo Martinsen har bygget fem AI-agenter som bestyrelse og bedt dem om at sige ubehageligheder. Problemet er hvem der har defineret hvad der er ubehageligt at høre."
+tags:
+  - ai
+  - ledelse
+  - beslutninger
+  - agenter
+excerpt: >-
+  Bo Martinsen har bygget fem AI-agenter som bestyrelse og bedt dem om at sige
+  ubehageligheder. Problemet er hvem der har defineret hvad der er ubehageligt
+  at høre.
 privacy_flag: false
-linkedin_url: "https://www.linkedin.com/feed/update/urn:li:share:7469775279184461824/"
+linkedin_url: 'https://www.linkedin.com/feed/update/urn:li:share:7469775279184461824/'
+marginalia:
+  - ts: '2026-07-31T07:02:25Z'
+    text: publish beslutningsoplaeg-til-bestyrelsen-det-dokument-der-afgoer-om
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/9e8b2c106fff5fda39a52df733f8ba6b1b17f39a
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-30T16:33:52Z'
+    text: >-
+      LinkedIn-generering kasseres ved kilden naar pauset + spoergsmaal spises
+      ikke
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/6fa0db5d51487b4b132ba94dbcace875356e2f87
+  - ts: '2026-07-28T15:55:41Z'
+    text: final-review C1 — dedup LinkedIn-token-sag pr. expiresAt-generation
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/340a7c7e9685717ef108e6587cdfbfb1a8a7bd49
+  - ts: '2026-07-28T15:19:12Z'
+    text: >-
+      worker-klient m. KV-kø-fallback + dagligt LinkedIn-token-tjek som første
+      forbrug
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1da3961bf8b80e46defc9ef44575bc3c89ff5dff
+  - ts: '2026-07-27T23:39:45Z'
+    text: 'Cloudflare Email Sending som primaer vej, Resend som fallback'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/3921d7334ca2f7296f56f3cb9101d809ecf88323
+  - ts: '2026-07-24T16:06:41Z'
+    text: afkobl LinkedIn-generering fra historie-pipeline naar pauset
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/ffbad6cd39cc578ca25c2be09ba609eaa16f0c56
+  - ts: '2026-07-24T14:42:21Z'
+    text: autopilot-pause bag KV-flag (T6 fase 1)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/a87ad9b95c2044a864ab14c7f433d3e573d061d7
+  - ts: '2026-07-10T10:52:53Z'
+    text: LinkedIn-DM peger ogsaa paa pakkesiden
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/9fa09ff80db3c2f669f7fdcfeb6088a5e7190e58
 ---
 
 Bo Martinsen, ejer og CEO i Norriq, har bygget fem AI-agenter med adgang til samtlige data i virksomheden og bedt dem om at være ubehagelige over for ham. Han kalder det bestyrelseserfaring på steroider.

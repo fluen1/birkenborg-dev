@@ -1,18 +1,54 @@
 ---
-title: "Hvorfor min M&A-agent fejlede på paragraf 30"
-slug: "ma-agent-paragraf-30"
-publish_at: 2026-05-12T09:00:00+02:00
+title: Hvorfor min M&A-agent fejlede på paragraf 30
+slug: ma-agent-paragraf-30
+publish_at: 2026-05-12T07:00:00.000Z
 status: published
-tags: ["ai", "agenter", "jura", "m-and-a", "fejl-rapport"]
+tags:
+  - ai
+  - agenter
+  - jura
+  - m-and-a
+  - fejl-rapport
 privacy_flag: false
-excerpt: "Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde fejl. Den fandt 14 — og overså den ene der havde betydet noget."
+excerpt: >-
+  Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde
+  fejl. Den fandt 14 — og overså den ene der havde betydet noget.
 marginalia:
-  - ts: "8/5 14:32"
-    text: "undersøgte det her i 3 dage før jeg gav op"
+  - ts: '8/5 14:32'
+    text: undersøgte det her i 3 dage før jeg gav op
     source: manual
-  - ts: "9/5 09:01"
-    text: "rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas"
+  - ts: '9/5 09:01'
+    text: 'rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas'
     source: manual
+  - ts: '2026-07-15T07:03:01Z'
+    text: publish momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8536f64660fbc8be6c9e86baf1257745ca51c2ef
+  - ts: '2026-07-28T15:24:45Z'
+    text: opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069
+  - ts: '2026-07-23T13:17:31Z'
+    text: >-
+      opdatér kun reminder-ur ved bekræftet alarm-levering (slut-review
+      Important)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/88dd6b5855df3c6b10982205ffbc0b24246c135f
+  - ts: '2026-07-23T12:57:18Z'
+    text: dæk probeSelftest-throw + 6t-påmindelse i alarm-watch (A2 review)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/7ee89ca4b3150ffe067e1eca1149f6cd7edb8c95
+  - ts: '2026-07-10T14:13:20Z'
+    text: >-
+      /internal/survey — valideret survey-endpoint m. samtykke-haandhaevelse og
+      DM
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/64c803abaa04e8d2617db512a64bbb63fb8ef453
 ---
 
 
