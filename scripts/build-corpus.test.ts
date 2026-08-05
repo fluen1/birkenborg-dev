@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { buildCorpus, buildCitations, buildVoiceSamples } from './build-corpus.mjs';
+import { buildCorpus, buildCitations, buildVoiceSamples, loadCuratedVoiceSamples } from './build-corpus.mjs';
+import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 
@@ -112,5 +113,56 @@ describe('buildVoiceSamples', () => {
       expect(s).toHaveProperty('body');
       expect(s).toHaveProperty('publishAt');
     }
+  });
+});
+
+// Hvorfor denne funktion findes: voice-samples.json blev tidligere bygget af
+// buildVoiceSamples(corpus, 3) — de 3 NYESTE posts, som bot'en selv havde skrevet.
+// Bot'en læste altså sin egen prosa som facit på Philips stemme og konvergerede mod
+// eget gennemsnit. Målt 5/8: alle tre samples var SEO-motorens automatiske artikler.
+// Nu læses et KURATERET korpus (Philip-godkendte tekster) i stedet, så nyt output
+// aldrig kan snige sig ind i facittet.
+describe('loadCuratedVoiceSamples', () => {
+  const FIXTURE = join(__dirname, 'build-corpus.fixtures', 'voice-korpus-test.json');
+
+  it('læser samples fra den kuraterede fil', async () => {
+    const samples = await loadCuratedVoiceSamples(FIXTURE);
+    expect(samples).toHaveLength(2);
+    expect(samples.map(s => s.slug)).toContain('oevelse-test-1');
+  });
+
+  it('bevarer emojis og æøå ubeskadiget', async () => {
+    const samples = await loadCuratedVoiceSamples(FIXTURE);
+    const body = samples.find(s => s.slug === 'oevelse-test-1').body;
+    expect(body).toContain('🔥');
+    expect(body).toContain('føles');
+  });
+
+  it('hver sample har slug, title, body, publishAt', async () => {
+    const samples = await loadCuratedVoiceSamples(FIXTURE);
+    for (const s of samples) {
+      expect(s).toHaveProperty('slug');
+      expect(s).toHaveProperty('title');
+      expect(s).toHaveProperty('body');
+      expect(s).toHaveProperty('publishAt');
+    }
+  });
+
+  it('kaster hvis filen mangler — tom stemme må ALDRIG passere i stilhed', async () => {
+    await expect(
+      loadCuratedVoiceSamples(join(__dirname, 'findes-ikke.json'))
+    ).rejects.toThrow(/voice-korpus/i);
+  });
+
+  it('kaster hvis korpus er tomt — ellers ville botten skrive uden stemme', async () => {
+    const tom = join(__dirname, 'build-corpus.fixtures', 'voice-korpus-tom.json');
+    await writeFile(tom, '[]', 'utf-8');
+    await expect(loadCuratedVoiceSamples(tom)).rejects.toThrow(/tomt/i);
+  });
+
+  it('kaster hvis en sample mangler body', async () => {
+    const defekt = join(__dirname, 'build-corpus.fixtures', 'voice-korpus-defekt.json');
+    await writeFile(defekt, JSON.stringify([{ slug: 'a', title: 'A', publishAt: '2026-01-01' }]), 'utf-8');
+    await expect(loadCuratedVoiceSamples(defekt)).rejects.toThrow(/body/i);
   });
 });
