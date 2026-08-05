@@ -1,12 +1,47 @@
 ---
-title: "Momsfradrag ved blandede aktiviteter: hvorfor \"vi tager bare det hele\" er en dyr strategi"
+title: >-
+  Momsfradrag ved blandede aktiviteter: hvorfor "vi tager bare det hele" er en
+  dyr strategi
 slug: momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
-publish_at: 2026-07-15T09:03:01+02:00
+publish_at: 2026-07-15T07:03:01.000Z
 status: published
-tags: ["moms-afgifter", "momsfradrag", "delvis fradragsret", "blandede aktiviteter"]
-excerpt: "Delvis momsfradragsret ved blandede aktiviteter kræver direkte henføring, korrekt omsætningsbrøk og løbende opfølgning. Ellers betaler du for meget — eller skylder mere end du tror."
+tags:
+  - moms-afgifter
+  - momsfradrag
+  - delvis fradragsret
+  - blandede aktiviteter
+excerpt: >-
+  Delvis momsfradragsret ved blandede aktiviteter kræver direkte henføring,
+  korrekt omsætningsbrøk og løbende opfølgning. Ellers betaler du for meget —
+  eller skylder mere end du tror.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-15T07:03:01Z'
+    text: publish momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8536f64660fbc8be6c9e86baf1257745ca51c2ef
+  - ts: '2026-06-20T16:11:27Z'
+    text: load-tids health-probe så badgen er ærlig ved page-load
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e390affb7ea4f192d598a77f96a06b850115287c
+  - ts: '2026-07-01T22:10:20Z'
+    text: genopfyldnings-DM ved lav emnebeholdning (refill.ts)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/714cf22b8ce88d2afff95fd5a07cd62d3cb23ed0
+  - ts: '2026-07-01T21:42:55Z'
+    text: implementeringsplan for jura-generalist-indholdsstrategi
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f652008850fab37a3c4f0eea4016d435190442dd
+  - ts: '2026-07-01T21:32:34Z'
+    text: jura-generalist-indholdsstrategi for birkenborg.dev
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4e24209fba84537e36339ddb0b02c20f92d685ff
 ---
 
 Du driver en virksomhed med både momspligtige og momsfrie aktiviteter. Måske er du en ejendomskoncern der både udlejer erhvervslokaler med moms og boliglejemål uden. Måske er du en uddannelsesinstitution der sælger kurser momsfrit og konsulentydelser med moms. Eller en finansiel virksomhed der har momspligtig IT-drift ved siden af den momsfrie kerneforretning. Uanset branchen står du med det samme grundproblem: du køber varer og ydelser ind, der bruges til begge dele. Og spørgsmålet om hvor meget moms du kan trække fra på de indkøb, er hverken trivielt eller risikofrit.

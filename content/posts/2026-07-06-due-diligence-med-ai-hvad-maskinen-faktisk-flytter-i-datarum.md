@@ -1,12 +1,41 @@
 ---
-title: "Due diligence med AI: hvad maskinen faktisk flytter i datarummet"
+title: 'Due diligence med AI: hvad maskinen faktisk flytter i datarummet'
 slug: due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
-publish_at: 2026-07-06T09:02:21+02:00
+publish_at: 2026-07-06T07:02:21.000Z
 status: published
-tags: ["ma-transaktioner", "due diligence", "ai-værktøjer", "kontraktanalyse", "virksomhedsoverdragelse"]
-excerpt: "AI kan scanne et datarum på timer i stedet for dage. Men den forstår ikke kontekst, og ansvaret for fejl lander hos dig. Sådan bruger du den rigtigt i en transaktion."
+tags:
+  - ma-transaktioner
+  - due diligence
+  - ai-værktøjer
+  - kontraktanalyse
+  - virksomhedsoverdragelse
+excerpt: >-
+  AI kan scanne et datarum på timer i stedet for dage. Men den forstår ikke
+  kontekst, og ansvaret for fejl lander hos dig. Sådan bruger du den rigtigt i
+  en transaktion.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
 ---
 
 Du sidder med et datarum på flere tusind dokumenter. Lejekontrakter, ansættelsesaftaler, leverandøraftaler, IP-licenser, selskabsdokumenter, garantierklæringer, forsikringspolicer og den bunke diverse som sælger har smidt i en mappe kaldet "Øvrige". Din opgave er at finde de ting der kan koste din klient penge — helst inden SPA'en bliver underskrevet.

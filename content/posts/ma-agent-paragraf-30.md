@@ -1,18 +1,87 @@
 ---
-title: "Hvorfor min M&A-agent fejlede på paragraf 30"
-slug: "ma-agent-paragraf-30"
-publish_at: 2026-05-12T09:00:00+02:00
+title: Hvorfor min M&A-agent fejlede på paragraf 30
+slug: ma-agent-paragraf-30
+publish_at: 2026-05-12T07:00:00.000Z
 status: published
-tags: ["ai", "agenter", "jura", "m-and-a", "fejl-rapport"]
+tags:
+  - ai
+  - agenter
+  - jura
+  - m-and-a
+  - fejl-rapport
 privacy_flag: false
-excerpt: "Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde fejl. Den fandt 14 — og overså den ene der havde betydet noget."
+excerpt: >-
+  Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde
+  fejl. Den fandt 14 — og overså den ene der havde betydet noget.
 marginalia:
-  - ts: "8/5 14:32"
-    text: "undersøgte det her i 3 dage før jeg gav op"
+  - ts: '8/5 14:32'
+    text: undersøgte det her i 3 dage før jeg gav op
     source: manual
-  - ts: "9/5 09:01"
-    text: "rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas"
+  - ts: '9/5 09:01'
+    text: 'rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas'
     source: manual
+  - ts: '2026-07-15T07:03:01Z'
+    text: publish momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8536f64660fbc8be6c9e86baf1257745ca51c2ef
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-07-10T14:13:20Z'
+    text: >-
+      /internal/survey — valideret survey-endpoint m. samtykke-haandhaevelse og
+      DM
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/64c803abaa04e8d2617db512a64bbb63fb8ef453
+  - ts: '2026-07-02T18:17:03Z'
+    text: 'Merge branch ''main'' of https://github.com/fluen1/birkenborg-agents'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1061e1c045312a9e716ad5a0d019718a94babd6b
+  - ts: '2026-07-01T22:30:21Z'
+    text: /emner-kommando til godkendelse af SEO-emneforslag
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8c80263acb774e4598d97619a729905f0e3eb4bf
+  - ts: '2026-07-01T22:22:33Z'
+    text: stub fetch i refill-fejl-test så ingen ægte Telegram-kald
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/3c060a33b23bbeef2eb353abf5982029c1577b29
+  - ts: '2026-07-01T21:54:45Z'
+    text: 55 jura-generalist-emner i 11 klynger + round-robin-rotation
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/70222dbd83c684f9c2b74d2b9d8bcfd41e4ac248
+  - ts: '2026-07-01T21:42:55Z'
+    text: implementeringsplan for jura-generalist-indholdsstrategi
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f652008850fab37a3c4f0eea4016d435190442dd
+  - ts: '2026-07-01T21:32:34Z'
+    text: jura-generalist-indholdsstrategi for birkenborg.dev
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4e24209fba84537e36339ddb0b02c20f92d685ff
+  - ts: '2026-06-22T18:02:36Z'
+    text: SMV-outreach (jura + anvendt AI) implementeringsplan
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/56a8d063d64509e51889209ab574ba225852ee82
+  - ts: '2026-06-22T17:52:55Z'
+    text: SMV-outreach (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2f29f7a58b3ef80c2e5128b8c470f86c56958db0
 ---
 
 
