@@ -19,3 +19,7 @@ site/public/voice-samples.json
 .superpowers/
 scripts/.tmp-test/
 scripts/.tmp-orchestrator-posts/
+
+# Genereres af build-corpus.test.ts (fejl-fixtures)
+scripts/build-corpus.fixtures/voice-korpus-tom.json
+scripts/build-corpus.fixtures/voice-korpus-defekt.json
