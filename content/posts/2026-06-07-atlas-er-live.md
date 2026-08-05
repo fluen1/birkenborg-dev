@@ -1,12 +1,57 @@
 ---
-title: "Atlas Assessments er live"
+title: Atlas Assessments er live
 slug: atlas-er-live
-publish_at: 2026-06-07T02:31:43+02:00
+publish_at: 2026-06-07T00:31:43.000Z
 status: published
-tags: ["konsulenter", "ai", "assessments", "produkter"]
-excerpt: "Atlas Assessments er live — en platform der tager konsulentens egne spørgerammer og returnerer analyserede rapporter i deres eget brand. Uden Excel-timerne imellem."
+tags:
+  - konsulenter
+  - ai
+  - assessments
+  - produkter
+excerpt: >-
+  Atlas Assessments er live — en platform der tager konsulentens egne
+  spørgerammer og returnerer analyserede rapporter i deres eget brand. Uden
+  Excel-timerne imellem.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-22T18:07:19Z'
+    text: udfas authority-sider (klinikker/konsulenter)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e11c94a17b9f869cfdf65ccf5c25052133f3b7cd
+  - ts: '2026-06-16T20:40:03Z'
+    text: tilføj Atlas Assessments som case-kort
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/eff2436050e4510d551cdb315988cc69ff97a6e7
+  - ts: '2026-06-08T16:02:40Z'
+    text: Atlas-post får rigtig titel + slug atlas-er-live
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/727a2707d46fe5d75b8f6039f1ed742422683e65
+  - ts: '2026-06-24T16:07:25Z'
+    text: tre-trins motor (generer->dom->omskriv->publicer live)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/66dc54f36c4a1e260f834bb6f25a14df1c472146
+  - ts: '2026-06-08T16:32:39Z'
+    text: wire tic-gate ind i simulate_draft for live-verifikation
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/3f4d27066a68626de0607497148bbb0389f7b07e
+  - ts: '2026-06-07T19:28:06Z'
+    text: live dashboard-besked — create/update med edit-fallback
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/90406597b1f32469c16d29357588bd178b28b174
+  - ts: '2026-06-07T18:23:21Z'
+    text: >-
+      design-spec for Telegram-bot UX-opgradering (knapper, HTML, live
+      pipeline-besked
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/b6bbd423394c9a6e81b1cb7425b914f0480148e4
 ---
 
 Jeg har de seneste uger bygget Atlas Assessments. Det er en spørgeskemaplatform til konsulenter der lever af deres egen metode. Den er åben nu på atlas-app.dk med 30 dages gratis prøveperiode uden betalingskort.
