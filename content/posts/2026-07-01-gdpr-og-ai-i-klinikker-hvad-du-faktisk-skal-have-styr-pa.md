@@ -1,12 +1,45 @@
 ---
-title: "GDPR og AI i klinikker: hvad du faktisk skal have styr på"
+title: 'GDPR og AI i klinikker: hvad du faktisk skal have styr på'
 slug: gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
-publish_at: 2026-07-01T09:01:32+02:00
+publish_at: 2026-07-01T07:01:32.000Z
 status: published
-tags: ["gdpr", "ai i sundhed", "klinikker", "persondata", "sundhedsdata"]
-excerpt: "Sundhedsdata og AI i klinikker kræver mere end god vilje. Her er de konkrete GDPR-krav du skal have styr på — uden panik, men uden genveje."
+tags:
+  - gdpr
+  - ai i sundhed
+  - klinikker
+  - persondata
+  - sundhedsdata
+excerpt: >-
+  Sundhedsdata og AI i klinikker kræver mere end god vilje. Her er de konkrete
+  GDPR-krav du skal have styr på — uden panik, men uden genveje.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-06-22T18:07:19Z'
+    text: udfas authority-sider (klinikker/konsulenter)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e11c94a17b9f869cfdf65ccf5c25052133f3b7cd
+  - ts: '2026-07-01T22:53:02Z'
+    text: 'log faglig_trovaerdighed, defensiv proposals-parse, audience i gdpr-filter'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d3c7d71b62d7b6e68f8e078252e335ae4871a342
 ---
 
 Du driver en klinik — fysioterapi, tandlæge, psykolog, kiropraktik, hvad som helst — og du overvejer at bruge AI til noget med dine patientdata. Måske en agent der sorterer henvendelser, et værktøj der hjælper med journalnotater, eller noget der analyserer behandlingsforløb på tværs af patienter.

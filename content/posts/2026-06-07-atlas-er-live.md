@@ -1,12 +1,35 @@
 ---
-title: "Atlas Assessments er live"
+title: Atlas Assessments er live
 slug: atlas-er-live
-publish_at: 2026-06-07T02:31:43+02:00
+publish_at: 2026-06-07T00:31:43.000Z
 status: published
-tags: ["konsulenter", "ai", "assessments", "produkter"]
-excerpt: "Atlas Assessments er live — en platform der tager konsulentens egne spørgerammer og returnerer analyserede rapporter i deres eget brand. Uden Excel-timerne imellem."
+tags:
+  - konsulenter
+  - ai
+  - assessments
+  - produkter
+excerpt: >-
+  Atlas Assessments er live — en platform der tager konsulentens egne
+  spørgerammer og returnerer analyserede rapporter i deres eget brand. Uden
+  Excel-timerne imellem.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-22T18:07:19Z'
+    text: udfas authority-sider (klinikker/konsulenter)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e11c94a17b9f869cfdf65ccf5c25052133f3b7cd
+  - ts: '2026-06-16T20:40:03Z'
+    text: tilføj Atlas Assessments som case-kort
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/eff2436050e4510d551cdb315988cc69ff97a6e7
+  - ts: '2026-06-24T16:07:25Z'
+    text: tre-trins motor (generer->dom->omskriv->publicer live)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/66dc54f36c4a1e260f834bb6f25a14df1c472146
 ---
 
 Jeg har de seneste uger bygget Atlas Assessments. Det er en spørgeskemaplatform til konsulenter der lever af deres egen metode. Den er åben nu på atlas-app.dk med 30 dages gratis prøveperiode uden betalingskort.
