@@ -1,12 +1,87 @@
 ---
-title: "GDPR i klinikkæder — tre ting jeg lærte på den hårde måde"
-slug: "gdpr-klinikkaeder"
-publish_at: 2026-05-04T09:00:00+02:00
+title: GDPR i klinikkæder — tre ting jeg lærte på den hårde måde
+slug: gdpr-klinikkaeder
+publish_at: 2026-05-04T07:00:00.000Z
 status: published
-tags: ["jura", "gdpr", "sundhedsret"]
+tags:
+  - jura
+  - gdpr
+  - sundhedsret
 privacy_flag: false
-excerpt: "Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på tværs af 50 klinikker."
-marginalia: []
+excerpt: >-
+  Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på
+  tværs af 50 klinikker.
+marginalia:
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-06-20T16:39:36Z'
+    text: tag-filtrering med chip-bar + deep-link
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0ff4305b1c56c1ad764cbdb82521b2a7074dcc61
+  - ts: '2026-06-24T16:07:25Z'
+    text: tre-trins motor (generer->dom->omskriv->publicer live)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/66dc54f36c4a1e260f834bb6f25a14df1c472146
+  - ts: '2026-06-22T22:01:16Z'
+    text: reklamebeskyttelse gater kun freelance + PE-kanal bevist
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/232342c66321afd4b03c276c954096129645a832
+  - ts: '2026-06-22T21:50:55Z'
+    text: 'lead-finding playbook (ICP, kanaler, kvalificering)'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/62c370544727ee5d428cea12fc5d3ceeb8be5231
+  - ts: '2026-06-22T20:10:42Z'
+    text: README peger på datacvr.virk.dk i stedet for cvrapi.dk
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1e62318876c74820beb51771e99dd9f6284fe0ee
+  - ts: '2026-06-22T20:10:15Z'
+    text: 'drop cvrapi.dk-tooling (single-lookup, ikke bulk)'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/769afc184f927d9f36a3a8b7b3459f2d447afa8d
+  - ts: '2026-06-22T18:13:53Z'
+    text: 'arkivér authority-sites-templates, opdatér README'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/59f881fdacdcc0c7f1f716e51bfb18a056f03372
+  - ts: '2026-06-22T18:11:06Z'
+    text: SMV-templates for ansættelse + freelance (A/B)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4478560d851992000c8f3b93442b3a79f0b8cc4e
+  - ts: '2026-06-22T18:08:32Z'
+    text: SMV-prompt med A/B-variant + segment i draft_outreach
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/9ab240fb9880beea465353a2c686ba094010703e
+  - ts: '2026-06-22T18:04:49Z'
+    text: SMV-segmenter + A/B-kolonner i cvr_leads + tracker
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d97fb9e6000490b5287c172fe67c5064cdd81b06
+  - ts: '2026-06-22T18:02:36Z'
+    text: SMV-outreach (jura + anvendt AI) implementeringsplan
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/56a8d063d64509e51889209ab574ba225852ee82
+  - ts: '2026-06-22T17:52:55Z'
+    text: SMV-outreach (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2f29f7a58b3ef80c2e5128b8c470f86c56958db0
+  - ts: '2026-06-17T20:37:16Z'
+    text: 'scorer favoriserer AI+jura-identitet, filtrerer generisk fra'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/589063dce8a2f6a978de40b3f6487ef645a64a70
 ---
 
 Forestil dig en situation: to klinikker i samme kæde vil dele patientjournaler — ikke fordi det er praktisk, men fordi det er nødvendigt for behandlingskontinuitet. Fornuftigt. Begge klinikker er ejet af samme holdingselskab. Begge bruger samme journalsystem. Begge kalder sig selv del af samme organisation.
