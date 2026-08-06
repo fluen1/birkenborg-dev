@@ -1,13 +1,31 @@
 ---
-title: "Digital suverænitet møder AI — kommunerne har et valg de ikke har taget"
+title: Digital suverænitet møder AI — kommunerne har et valg de ikke har taget
 slug: digital-suveraenittet-moeder-ai
-publish_at: 2026-05-24T10:18:00+02:00
+publish_at: 2026-05-24T08:18:00.000Z
 status: published
-tags: ["ai", "offentlig-it", "udbud", "suverænitet", "governance"]
-excerpt: "Kommunernes regionale it-klynger skal undgå Strukturreformens fejl. Men open source og digital suverænitet løser ikke automatisk spørgsmålet om AI-modeller."
+tags:
+  - ai
+  - offentlig-it
+  - udbud
+  - suverænitet
+  - governance
+excerpt: >-
+  Kommunernes regionale it-klynger skal undgå Strukturreformens fejl. Men open
+  source og digital suverænitet løser ikke automatisk spørgsmålet om
+  AI-modeller.
 privacy_flag: false
 linkedin_url: null
-marginalia: []
+marginalia:
+  - ts: '2026-06-17T20:57:05Z'
+    text: selvbærende default + ægte-spørgsmål-slut + artikel-deling som valg
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f3578b608eae0f6187ac5206fb4ebec8ad9e5a0b
+  - ts: '2026-06-07T19:26:31Z'
+    text: fejlede seeds viser 'Seed modtaget' som nået i dashboard
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/27d9d5dea5db0e45f2f698f15389fcc77c842944
 ---
 
 De 11 nordjyske kommuner og de 9 fynske kommuner er ved at forme regionale it-klynger. Morten Kjærsgaard fra Magenta har skrevet om hvad de ikke må gentage: Strukturreformens fejl fra 2007, da 271 kommuner blev til 98 og big tech var klar med løsninger der fyldte tomrummet. Resultatet var årtiers afhængighed af KMD, Netcompany og Microsoft. Hans pointe er open source og lokal kontrol denne gang.

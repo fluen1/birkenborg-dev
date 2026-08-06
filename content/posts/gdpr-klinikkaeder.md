@@ -1,12 +1,42 @@
 ---
-title: "GDPR i klinikkæder — tre ting jeg lærte på den hårde måde"
-slug: "gdpr-klinikkaeder"
-publish_at: 2026-05-04T09:00:00+02:00
+title: GDPR i klinikkæder — tre ting jeg lærte på den hårde måde
+slug: gdpr-klinikkaeder
+publish_at: 2026-05-04T07:00:00.000Z
 status: published
-tags: ["jura", "gdpr", "sundhedsret"]
+tags:
+  - jura
+  - gdpr
+  - sundhedsret
 privacy_flag: false
-excerpt: "Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på tværs af 50 klinikker."
-marginalia: []
+excerpt: >-
+  Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på
+  tværs af 50 klinikker.
+marginalia:
+  - ts: '2026-06-20T16:39:36Z'
+    text: tag-filtrering med chip-bar + deep-link
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0ff4305b1c56c1ad764cbdb82521b2a7074dcc61
+  - ts: '2026-05-25T09:37:47Z'
+    text: write full gdpr-klinikkaeder article
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/696cbe7be09716dc8011abd816d408760e694bf6
+  - ts: '2026-05-24T22:28:35Z'
+    text: WritingItem clay border + arrow micro-interaction
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/c7cd56e398e6e325cdcc62489e7df17eb144cb65
+  - ts: '2026-06-17T20:37:16Z'
+    text: 'scorer favoriserer AI+jura-identitet, filtrerer generisk fra'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/589063dce8a2f6a978de40b3f6487ef645a64a70
+  - ts: '2026-05-28T22:20:07Z'
+    text: 'cron-streng match, fjern dobbelt-ack, slug-specifik pending_yes'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8cea9aabdac3eaa5d3559b0ee67f29f83d9d12a3
 ---
 
 Forestil dig en situation: to klinikker i samme kæde vil dele patientjournaler — ikke fordi det er praktisk, men fordi det er nødvendigt for behandlingskontinuitet. Fornuftigt. Begge klinikker er ejet af samme holdingselskab. Begge bruger samme journalsystem. Begge kalder sig selv del af samme organisation.
