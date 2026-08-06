@@ -18,12 +18,6 @@
     "publishAt": "2026-08-05"
   },
   {
-    "slug": "oevelse-artikel-deling-01",
-    "title": "Artikel-deling (Philip-godkendt øvelse)",
-    "body": "Jeg stoppede i sidste uge et udkast fra min egen bot. Den havde skrevet noget der lød helt rigtigt, men som ikke stod i den artikel den henviste til.\n\nI dag læser jeg så at store konsulenthuse har sendt rapporter ud med præcis den slags i 😅\n\nMå nok indrømme jeg havde regnet med at de havde flere led der kiggede efter, end jeg har.\n\nDet er vist ikke størrelsen der afgør det 😉",
-    "publishAt": "2026-08-05"
-  },
-  {
     "slug": "oevelse-succes-01",
     "title": "Succes (Philip-godkendt øvelse)",
     "body": "Efter måneders arbejde ramte en af mine sider endelig side 1 på Google.\n\nPosition 9,1 🥉 Altså sidste plads, lige før man klikker videre.\n\nSøgeordet var \"bedste tracker til hund\". Ikke ligefrem der jeg havde forestillet mig gennembruddet 🤷\n\nMen den tæller.",
@@ -48,12 +42,6 @@
     "publishAt": "2026-08-05"
   },
   {
-    "slug": "oevelse-artikel-deling-02",
-    "title": "Artikel-deling (Philip-godkendt øvelse)",
-    "body": "Nyt trick: en side du har slettet ved en migrering kan hentes tilbage fra Wayback Machine og genudgives med opdateret SEO.\n\nJeg lukkede to projekter ned i onsdags uden at kigge efter om noget af det rankede.\n\nJeg går tilbage og graver i aften ⏪",
-    "publishAt": "2026-08-05"
-  },
-  {
     "slug": "oevelse-karriere-nyhed-01",
     "title": "Karriere (Philip-godkendt øvelse)",
     "body": "Jeg begyndte at lege med ChatGPT i 2022 for at spare tid.\n\nI dag har jeg en vagt der har oprettet flere sager mod mig, end jeg nogensinde har ført for en klient ⚖️",
@@ -68,31 +56,91 @@
   {
     "slug": "oevelse-eget-rod-04",
     "title": "Eget rod (Philip-godkendt øvelse)",
-    "body": "Skrivebordet føles endnu en gang som om det skal bryde i brand 🔥\n\nGrafen siger 87 grader...\n\nJeg havde ellers sat mig for at få den under 81. Fik 16 procent mere computing power, så jeg regnede med temperaturen fulgte med.\n\nViste sig det var et rengøringsproblem. Støv er ikke force majeure — det er egen skyld.\n\nFrem med skruetrækkeren 🧹",
+    "body": "Skrivebordet føles endnu en gang som om det skal bryde i brand 🔥\n\nGrafen siger 87 grader...\n\nJeg havde ellers sat mig for at få den under 81. Fik 16 procent mere computing power, så jeg regnede med temperaturen fulgte med.\n\nViste sig det var et rengøringsproblem. Der findes ingen force majeure-klausul for eget støv.\n\nFrem med skruetrækkeren 🧹",
     "publishAt": "2026-08-05"
+  },
+  {
+    "slug": "oevelse-artikel-deling-01",
+    "title": "Artikel-deling (Philip-godkendt øvelse)",
+    "body": "Jeg læste i weekenden om folk der finder gratis penge på Polymarket. Køb begge sider for 47 cent, få en dollar tilbage, uanset hvem der vinder.\n\nForsøgte med egen handelsbot, der brugte tre dage i sidste uge på ikke at kunne logge ind.\n\nJeg er vist ikke helt i samme liga endnu 😅😂",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-artikel-deling-02",
+    "title": "Artikel-deling (Philip-godkendt øvelse)",
+    "body": "Gratis penge findes åbenbart. Køb begge sider af et væddemål på Polymarket for 47 cent, få en dollar tilbage uanset udfaldet.\n\nHagen er at du skal ramme begge sider samtidig. Rammer du kun den ene, har du købt et almindeligt væddemål til fuld pris.\n\nHam der forklarede tricket tabte penge på det i tre måneder først, så det er en tilgang for de risikovillige og velbevandrede i AI og enarmede tyveknægte",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-eget-rod-05",
+    "title": "Eget rod (Philip-godkendt øvelse)",
+    "body": "Jeg fik en ide om at bygge en handelsbot en aften. Et par timers arbejde, tænkte jeg.\n\nNu har jeg en bot, en vagt der holder øje med botten, og en alarm der holder øje med vagten.\n\nDen har stadig ikke tjent en krone. Men den er blevet virkelig god til at fortælle mig om det 😅",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-personligt-01",
+    "title": "personligt (Philip-godkendt øvelse)",
+    "body": "Der hang et skilt i Valby om at klubben havde vundet noget for bedste kammeratskab. Så er det vel et meget godt sted at begynde på fodbold igen, tænkte jeg.\n\nPlanen var: spille lidt bold, drikke nogle bajere, få nogle venner, komme i byen med dem, og tabe mig lidt for damerne.\n\nJeg fik fire ud af fem. Der gik for meget tredje halvleg i den 😅\n\nNu er jeg blevet for gammel til kampholdet. Jeg møder op til træning, hygger mig, og lader de andre om at stå tidligt op om søndagen.",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-personligt-02",
+    "title": "personligt (Philip-godkendt øvelse)",
+    "body": "Jeg så et skilt i Valby om at klubben var kåret til bedste kammeratskab. Der begynder jeg, tænkte jeg.\n\nBold, bajere, nye venner, byture. Og så skulle jeg tabe mig lidt.\n\nDet hele gik i opfyldelse. Undtagen det sidste, og det er der en ret god forklaring på 😅\n\nJeg er efterhånden for gammel til kampholdet. Men tredje halvleg holder jeg stadig ved lige.",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-personligt-03",
+    "title": "personligt (Philip-godkendt øvelse)",
+    "body": "En kollega roste Bornholm så meget at jeg tog alene afsted. Jeg havde tiden, og alternativet var at kukkelure hjemme på Sjælland.\n\nPlanen var at vandre øen rundt. Så mødtes jeg med kollegaen derovre, og hun ville hellere cykle. Så kom vi øen rundt på cykel 😂\n\nJeg sov i telt for første gang i årevis. Jeg havde ikke forberedt mig på noget af det.\n\nJeg skal tilbage næste sommer. Så går jeg.",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-personligt-04",
+    "title": "personligt (Philip-godkendt øvelse)",
+    "body": "Jeg havde ferie, ingen planer, og en kollega der ikke kunne holde op med at rose Bornholm. Så tog jeg afsted alene.\n\nJeg skulle vandre øen rundt. Jeg kom øen rundt. Bare på cykel, fordi kollegaen jeg mødtes med derovre ikke havde tænkt sig at gå nogen steder 😂\n\nSov i telt for første gang i mange år, uden at have forberedt mig på det overhovedet.\n\nNæste sommer tager jeg tilbage. Så går jeg, og så skal jeg forbi Dueodde igen.",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-personligt-05",
+    "title": "personligt (Philip-godkendt øvelse)",
+    "body": "En kollega roste Bornholm så meget at jeg tog alene afsted uden at planlægge noget.\n\nJeg skulle vandre øen rundt. Jeg kom øen rundt — på cykel, fordi kollegaen jeg mødte derovre ikke gad gå 😂\n\nNæste sommer går jeg. Og så skal jeg forbi Dueodde.",
+    "publishAt": "2026-08-06"
   },
   {
     "slug": "oevelse-artikel-deling-03",
     "title": "Artikel-deling (Philip-godkendt øvelse)",
-    "body": "Jeg har brugt måneder på at bygge min egen infrastruktur i hånden.\n\nI dag faldt jeg over folk der bare giver en agent et app password til deres WordPress-site og lader den ordne resten. Tema, plugins, caching. 46 millisekunder i demoen.\n\nDet kaldes et app password. Det er en fuldmagt uden beløbsgrænse 📜",
-    "publishAt": "2026-08-05"
+    "body": "Jeg brugte en hel weekend på at få caching til at virke på et af mine sites. Læste dokumentation, prøvede fire plugins, lukkede computeren to gange.\n\nI dag så jeg en fyr give en AI-agent adgangskoden til sin WordPress-side og bede den ordne det. Færdig på et minut.\n\nDet var ikke for smart af mig at bruge en weekend på det.\n\nSå kiggede jeg på hvad han egentlig havde givet den nøglerne til. Nu har jeg det fint med min weekend igen 🔑",
+    "publishAt": "2026-08-06"
   },
   {
     "slug": "oevelse-artikel-deling-04",
     "title": "Artikel-deling (Philip-godkendt øvelse)",
-    "body": "Jeg har brugt måneder på at bygge min egen infrastruktur i hånden.\n\nI dag faldt jeg over folk der bare giver en agent et app password til deres WordPress-site og lader den ordne resten. Tema, plugins, caching. 46 millisekunder i demoen.\n\nIngen af dem har tænkt over hvem der hæfter når agenten sletter det forkerte plugin 🔑",
-    "publishAt": "2026-08-05"
+    "body": "Jeg sad og læste korrektur på noget min egen bot havde skrevet. Den havde fundet en kilde der lød helt rigtig, men som ikke fandtes.\n\nJeg regnede med at jeg selv havde rodet noget i opsætningen.\n\nI dag læser jeg at store konsulenthuse har sendt rapporter ud med præcis den slags i.\n\nDe har åbenbart heller ikke nogen der kigger efter 😅",
+    "publishAt": "2026-08-06"
   },
   {
     "slug": "oevelse-artikel-deling-05",
     "title": "Artikel-deling (Philip-godkendt øvelse)",
-    "body": "Jeg har brugt måneder på at bygge min egen infrastruktur i hånden.\n\nI dag faldt jeg over folk der bare giver en agent et app password til deres WordPress-site og lader den ordne resten. Tema, plugins, caching. 46 millisekunder i demoen.\n\nAlle andre kalder det en integration. Jeg kan ikke lade være med at se en fuldmagt uden tilbagekaldelsesfrist ⚖️",
-    "publishAt": "2026-08-05"
+    "body": "Jeg lukkede to projekter ned i onsdags. Slettede sider, fjernede domæner, følte mig færdig med det.\n\nI dag læser jeg at man kan hente slettede sider tilbage fra Wayback Machine og udgive dem igen, hvis de rankede godt.\n\nDet faldt mig ikke ind at kigge efter først. Det var ikke for smart ⏪",
+    "publishAt": "2026-08-06"
   },
   {
     "slug": "oevelse-artikel-deling-06",
     "title": "Artikel-deling (Philip-godkendt øvelse)",
-    "body": "Jeg har brugt måneder på at bygge min egen infrastruktur i hånden.\n\nI dag faldt jeg over folk der bare giver en agent et app password til deres WordPress-site og lader den ordne resten. Tema, plugins, caching. 46 millisekunder i demoen.\n\nIngen af dem har læst hvad de har skrevet under på. Det plejer ellers at være mit job at minde folk om ✍️",
-    "publishAt": "2026-08-05"
+    "body": "Jeg ledte efter noget jeg havde skrevet for et halvt år siden. Fandt det i min ChatGPT-historik. Ordret, med dato.\n\nJeg tager ellers ikke backup af noget som helst.\n\nEn medarbejder hos Kriminalforsorgen har lige fået sin læst højt i en sag om personfølsomme oplysninger om indsatte 🗄️",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-artikel-deling-07",
+    "title": "Artikel-deling (Philip-godkendt øvelse)",
+    "body": "Jeg scrollede tilbage i min ChatGPT-historik forleden. Alt ligger der. Tidsstemplet, søgbart, ordret.\n\nJeg har brugt en hel karriere på at føre dårligere beviser end det.\n\nHos Kriminalforsorgen er den slags log nu blevet til en sag om oplysninger om indsatte 📎",
+    "publishAt": "2026-08-06"
+  },
+  {
+    "slug": "oevelse-artikel-deling-08",
+    "title": "Artikel-deling (Philip-godkendt øvelse)",
+    "body": "Jeg satte en agent i gang med at undersøge noget i mandags. Da jeg kiggede til den om onsdagen, var den stadig i gang.\n\nJeg gik ud fra at det var sådan de virkede.\n\nSå så jeg en fyr skrive \"find tre hypoteser, arbejd til du har tre\" ind i selve opgaven. Seksten minutter, så stoppede den af sig selv.\n\nDet havde jeg ikke lige tænkt på 😐",
+    "publishAt": "2026-08-06"
   }
 ]
