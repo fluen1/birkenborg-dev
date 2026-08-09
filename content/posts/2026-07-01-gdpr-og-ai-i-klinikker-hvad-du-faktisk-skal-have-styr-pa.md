@@ -1,12 +1,35 @@
 ---
-title: "GDPR og AI i klinikker: hvad du faktisk skal have styr på"
+title: 'GDPR og AI i klinikker: hvad du faktisk skal have styr på'
 slug: gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
-publish_at: 2026-07-01T09:01:32+02:00
+publish_at: 2026-07-01T07:01:32.000Z
 status: published
-tags: ["gdpr", "ai i sundhed", "klinikker", "persondata", "sundhedsdata"]
-excerpt: "Sundhedsdata og AI i klinikker kræver mere end god vilje. Her er de konkrete GDPR-krav du skal have styr på — uden panik, men uden genveje."
+tags:
+  - gdpr
+  - ai i sundhed
+  - klinikker
+  - persondata
+  - sundhedsdata
+excerpt: >-
+  Sundhedsdata og AI i klinikker kræver mere end god vilje. Her er de konkrete
+  GDPR-krav du skal have styr på — uden panik, men uden genveje.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-07-31T07:02:25Z'
+    text: publish beslutningsoplaeg-til-bestyrelsen-det-dokument-der-afgoer-om
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/9e8b2c106fff5fda39a52df733f8ba6b1b17f39a
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
 ---
 
 Du driver en klinik — fysioterapi, tandlæge, psykolog, kiropraktik, hvad som helst — og du overvejer at bruge AI til noget med dine patientdata. Måske en agent der sorterer henvendelser, et værktøj der hjælper med journalnotater, eller noget der analyserer behandlingsforløb på tværs af patienter.

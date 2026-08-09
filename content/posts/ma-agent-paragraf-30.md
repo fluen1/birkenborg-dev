@@ -1,18 +1,67 @@
 ---
-title: "Hvorfor min M&A-agent fejlede på paragraf 30"
-slug: "ma-agent-paragraf-30"
-publish_at: 2026-05-12T09:00:00+02:00
+title: Hvorfor min M&A-agent fejlede på paragraf 30
+slug: ma-agent-paragraf-30
+publish_at: 2026-05-12T07:00:00.000Z
 status: published
-tags: ["ai", "agenter", "jura", "m-and-a", "fejl-rapport"]
+tags:
+  - ai
+  - agenter
+  - jura
+  - m-and-a
+  - fejl-rapport
 privacy_flag: false
-excerpt: "Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde fejl. Den fandt 14 — og overså den ene der havde betydet noget."
+excerpt: >-
+  Jeg fodrede den med en hel virksomhedsoverdragelsesaftale og bad den finde
+  fejl. Den fandt 14 — og overså den ene der havde betydet noget.
 marginalia:
-  - ts: "8/5 14:32"
-    text: "undersøgte det her i 3 dage før jeg gav op"
+  - ts: '8/5 14:32'
+    text: undersøgte det her i 3 dage før jeg gav op
     source: manual
-  - ts: "9/5 09:01"
-    text: "rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas"
+  - ts: '9/5 09:01'
+    text: 'rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas'
     source: manual
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-05T12:41:51Z'
+    text: ignorér fejl-fixtures genereret af build-corpus-testen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b
+  - ts: '2026-08-03T07:01:58Z'
+    text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
+  - ts: '2026-07-15T07:03:01Z'
+    text: publish momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8536f64660fbc8be6c9e86baf1257745ca51c2ef
+  - ts: '2026-08-05T11:47:03Z'
+    text: skriv kun KV ved aendring — heartbeat hver 20. min i stedet for hvert tick
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
+  - ts: '2026-07-28T15:24:45Z'
+    text: opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069
+  - ts: '2026-07-23T13:17:31Z'
+    text: >-
+      opdatér kun reminder-ur ved bekræftet alarm-levering (slut-review
+      Important)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/88dd6b5855df3c6b10982205ffbc0b24246c135f
+  - ts: '2026-07-23T12:57:18Z'
+    text: dæk probeSelftest-throw + 6t-påmindelse i alarm-watch (A2 review)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/7ee89ca4b3150ffe067e1eca1149f6cd7edb8c95
 ---
 
 

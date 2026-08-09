@@ -1,12 +1,31 @@
 ---
-title: "Due diligence med AI: hvad maskinen faktisk flytter i datarummet"
+title: 'Due diligence med AI: hvad maskinen faktisk flytter i datarummet'
 slug: due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
-publish_at: 2026-07-06T09:02:21+02:00
+publish_at: 2026-07-06T07:02:21.000Z
 status: published
-tags: ["ma-transaktioner", "due diligence", "ai-værktøjer", "kontraktanalyse", "virksomhedsoverdragelse"]
-excerpt: "AI kan scanne et datarum på timer i stedet for dage. Men den forstår ikke kontekst, og ansvaret for fejl lander hos dig. Sådan bruger du den rigtigt i en transaktion."
+tags:
+  - ma-transaktioner
+  - due diligence
+  - ai-værktøjer
+  - kontraktanalyse
+  - virksomhedsoverdragelse
+excerpt: >-
+  AI kan scanne et datarum på timer i stedet for dage. Men den forstår ikke
+  kontekst, og ansvaret for fejl lander hos dig. Sådan bruger du den rigtigt i
+  en transaktion.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
 ---
 
 Du sidder med et datarum på flere tusind dokumenter. Lejekontrakter, ansættelsesaftaler, leverandøraftaler, IP-licenser, selskabsdokumenter, garantierklæringer, forsikringspolicer og den bunke diverse som sælger har smidt i en mappe kaldet "Øvrige". Din opgave er at finde de ting der kan koste din klient penge — helst inden SPA'en bliver underskrevet.

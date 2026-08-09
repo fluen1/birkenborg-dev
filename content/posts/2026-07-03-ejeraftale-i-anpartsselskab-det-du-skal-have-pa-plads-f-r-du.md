@@ -1,12 +1,33 @@
 ---
-title: "Ejeraftale i anpartsselskab: det du skal have på plads før du skriver under"
+title: 'Ejeraftale i anpartsselskab: det du skal have på plads før du skriver under'
 slug: ejeraftale-i-anpartsselskab-det-du-skal-have-pa-plads-f-r-du
-publish_at: 2026-07-03T09:02:16+02:00
+publish_at: 2026-07-03T07:02:16.000Z
 status: published
-tags: ["selskabsret", "ejeraftale", "anpartsselskab", "exit-mekanismer", "ejerskifte"]
-excerpt: "En ejeraftale i et ApS regulerer det vedtægterne ikke kan: deadlock, exit, good/bad leaver og værdiansættelse. Her er hvad du skal have med — og hvad ejere typisk glemmer."
+tags:
+  - selskabsret
+  - ejeraftale
+  - anpartsselskab
+  - exit-mekanismer
+  - ejerskifte
+excerpt: >-
+  En ejeraftale i et ApS regulerer det vedtægterne ikke kan: deadlock, exit,
+  good/bad leaver og værdiansættelse. Her er hvad du skal have med — og hvad
+  ejere typisk glemmer.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-28T15:19:12Z'
+    text: >-
+      worker-klient m. KV-kø-fallback + dagligt LinkedIn-token-tjek som første
+      forbrug
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1da3961bf8b80e46defc9ef44575bc3c89ff5dff
+  - ts: '2026-07-27T15:43:06Z'
+    text: afsender besluttet (hotmail) + routing/DMARC paa plads
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c
 ---
 
 Du er ved at starte virksomhed med en eller flere partnere, eller du er allerede i gang og har aldrig fået lavet en ejeraftale. Begge situationer er normale. Den første er den billige at løse. Den anden bliver dyrere for hver måned der går.

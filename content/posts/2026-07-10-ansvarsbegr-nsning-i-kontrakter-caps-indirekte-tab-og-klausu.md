@@ -1,12 +1,27 @@
 ---
-title: "Ansvarsbegrænsning i kontrakter: caps, indirekte tab og klausuler der folder sammen under pres"
+title: >-
+  Ansvarsbegrænsning i kontrakter: caps, indirekte tab og klausuler der folder
+  sammen under pres
 slug: ansvarsbegr-nsning-i-kontrakter-caps-indirekte-tab-og-klausu
-publish_at: 2026-07-10T09:02:39+02:00
+publish_at: 2026-07-10T07:02:39.000Z
 status: published
-tags: ["kontrakter", "ansvarsbegrænsning", "erstatningsret", "kontraktforhandling"]
-excerpt: "Caps, fraskrivelse af indirekte tab og undtagelser lyder som beskyttelse. Men de folder ofte sammen under pres. Her er hvad du reelt aftaler — og hvad du bør beslutte inden."
+tags:
+  - kontrakter
+  - ansvarsbegrænsning
+  - erstatningsret
+  - kontraktforhandling
+excerpt: >-
+  Caps, fraskrivelse af indirekte tab og undtagelser lyder som beskyttelse. Men
+  de folder ofte sammen under pres. Her er hvad du reelt aftaler — og hvad du
+  bør beslutte inden.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
 ---
 
 Du har forhandlet en kontrakt. Den har en ansvarsbegrænsning. Måske en cap på kontraktværdien, måske en fraskrivelse af indirekte tab, måske begge dele. Du føler dig tryg. Din modpart føler sig tryg. Alle er glade — lige indtil den dag nogen misligholder, og begge parter opdager at klausulen ikke gør det de troede den gjorde.
