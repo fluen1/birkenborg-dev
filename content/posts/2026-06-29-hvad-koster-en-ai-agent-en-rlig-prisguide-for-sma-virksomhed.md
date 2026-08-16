@@ -1,12 +1,40 @@
 ---
-title: "Hvad koster en AI-agent? En ærlig prisguide for små virksomheder"
+title: Hvad koster en AI-agent? En ærlig prisguide for små virksomheder
 slug: hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
-publish_at: 2026-06-29T09:02:12+02:00
+publish_at: 2026-06-29T07:02:12.000Z
 status: published
-tags: ["ai-agent", "prissætning", "open-source", "smv", "selvhosting"]
-excerpt: "En AI-agent koster fra ører per interaktion til sekscifrede udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting — og af om du bygger til den rigtige opgave."
+tags:
+  - ai-agent
+  - prissætning
+  - open-source
+  - smv
+  - selvhosting
+excerpt: >-
+  En AI-agent koster fra ører per interaktion til sekscifrede
+  udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting
+  — og af om du bygger til den rigtige opgave.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-07-30T16:33:52Z'
+    text: >-
+      LinkedIn-generering kasseres ved kilden naar pauset + spoergsmaal spises
+      ikke
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/6fa0db5d51487b4b132ba94dbcace875356e2f87
+  - ts: '2026-07-23T13:23:56Z'
+    text: >-
+      sendDM returnerer leverings-bool så to-kanal-gaten er ærlig (slut-review
+      rest)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1a7f8c71513b5c0715be55a349dab8316220254c
 ---
 
 Det korte svar: det afhænger af. Det lidt længere svar: det afhænger af noget helt andet end du tror.

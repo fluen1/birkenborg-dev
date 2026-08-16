@@ -1,12 +1,55 @@
 ---
-title: "Ingen ved hvad en AI-agent koster"
+title: Ingen ved hvad en AI-agent koster
 slug: ingen-ved-hvad-en-ai-agent-koster
-publish_at: 2026-06-02T12:55:17+02:00
+publish_at: 2026-06-02T10:55:17.000Z
 status: published
-tags: ["ai", "agenter", "prissætning", "jura", "indkøb"]
-excerpt: "Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'. Han har ret."
+tags:
+  - ai
+  - agenter
+  - prissætning
+  - jura
+  - indkøb
+excerpt: >-
+  Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning
+  eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'.
+  Han har ret.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-05T11:47:03Z'
+    text: skriv kun KV ved aendring — heartbeat hver 20. min i stedet for hvert tick
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
+  - ts: '2026-07-30T16:33:52Z'
+    text: >-
+      LinkedIn-generering kasseres ved kilden naar pauset + spoergsmaal spises
+      ikke
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/6fa0db5d51487b4b132ba94dbcace875356e2f87
+  - ts: '2026-07-29T14:20:29Z'
+    text: Altinget-kilden peger nu på hoved-feedet
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e7e9aac0ac8c2a2ca9b9fdcd2653567b3d351963
+  - ts: '2026-07-27T21:48:55Z'
+    text: loeftet om resultater gjort holdbart ved ethvert antal svar
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c2f9031f47b63fb02c2388fe9afeef783d3c1245
+  - ts: '2026-07-23T13:17:31Z'
+    text: >-
+      opdatér kun reminder-ur ved bekræftet alarm-levering (slut-review
+      Important)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/88dd6b5855df3c6b10982205ffbc0b24246c135f
 ---
 
 Herbert Nathan kalder det 'det store spørgsmål lige nu'. Det er en præcis beskrivelse.

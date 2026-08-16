@@ -1,12 +1,42 @@
 ---
-title: "GDPR i klinikkæder — tre ting jeg lærte på den hårde måde"
-slug: "gdpr-klinikkaeder"
-publish_at: 2026-05-04T09:00:00+02:00
+title: GDPR i klinikkæder — tre ting jeg lærte på den hårde måde
+slug: gdpr-klinikkaeder
+publish_at: 2026-05-04T07:00:00.000Z
 status: published
-tags: ["jura", "gdpr", "sundhedsret"]
+tags:
+  - jura
+  - gdpr
+  - sundhedsret
 privacy_flag: false
-excerpt: "Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på tværs af 50 klinikker."
-marginalia: []
+excerpt: >-
+  Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på
+  tværs af 50 klinikker.
+marginalia:
+  - ts: '2026-08-06T22:19:59Z'
+    text: korpus til 27 — tre lange opslag tilfoejet
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2851cd3c385719f105b2f37d126313a73f99a370
+  - ts: '2026-07-29T14:20:29Z'
+    text: Altinget-kilden peger nu på hoved-feedet
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e7e9aac0ac8c2a2ca9b9fdcd2653567b3d351963
+  - ts: '2026-07-27T21:48:55Z'
+    text: loeftet om resultater gjort holdbart ved ethvert antal svar
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c2f9031f47b63fb02c2388fe9afeef783d3c1245
+  - ts: '2026-07-27T15:43:06Z'
+    text: afsender besluttet (hotmail) + routing/DMARC paa plads
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c
+  - ts: '2026-07-27T14:13:29Z'
+    text: 'ordlyds-QA af survey-batch #1 + nulstil aldrig-sendt status'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f4584a52862cac793fe125f20a3c976361d51c58
 ---
 
 Forestil dig en situation: to klinikker i samme kæde vil dele patientjournaler — ikke fordi det er praktisk, men fordi det er nødvendigt for behandlingskontinuitet. Fornuftigt. Begge klinikker er ejet af samme holdingselskab. Begge bruger samme journalsystem. Begge kalder sig selv del af samme organisation.

@@ -1,12 +1,64 @@
 ---
-title: "Omstødelse i konkurs: den betaling du troede var din"
+title: 'Omstødelse i konkurs: den betaling du troede var din'
 slug: omstoedelse-i-konkurs-den-betaling-du-troede-var-din
-publish_at: 2026-08-05T09:03:02+02:00
+publish_at: 2026-08-05T07:03:02.000Z
 status: published
-tags: ["insolvens", "omstødelse", "konkurs", "kreditrisiko", "konkursret"]
-excerpt: "Omstødelsesreglerne lader kurator kræve betalinger og sikkerheder tilbage. Forstå logikken, tidsvinduerne og hvordan du beskytter dig som kreditor."
+tags:
+  - insolvens
+  - omstødelse
+  - konkurs
+  - kreditrisiko
+  - konkursret
+excerpt: >-
+  Omstødelsesreglerne lader kurator kræve betalinger og sikkerheder tilbage.
+  Forstå logikken, tidsvinduerne og hvordan du beskytter dig som kreditor.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-05T07:03:03Z'
+    text: publish omstoedelse-i-konkurs-den-betaling-du-troede-var-din
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/b8afa99ce8d21c79ce5605bb859ef06b8fb7d299
+  - ts: '2026-08-06T22:15:39Z'
+    text: LinkedIn i eget kald + tic-cap 0 + humor som krav
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e25f4211cf33c8c3295a82de12ce12f0c14c9c5e
+  - ts: '2026-07-30T16:33:52Z'
+    text: >-
+      LinkedIn-generering kasseres ved kilden naar pauset + spoergsmaal spises
+      ikke
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/6fa0db5d51487b4b132ba94dbcace875356e2f87
+  - ts: '2026-07-28T15:55:41Z'
+    text: final-review C1 — dedup LinkedIn-token-sag pr. expiresAt-generation
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/340a7c7e9685717ef108e6587cdfbfb1a8a7bd49
+  - ts: '2026-07-28T15:19:12Z'
+    text: >-
+      worker-klient m. KV-kø-fallback + dagligt LinkedIn-token-tjek som første
+      forbrug
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1da3961bf8b80e46defc9ef44575bc3c89ff5dff
+  - ts: '2026-07-27T23:39:45Z'
+    text: 'Cloudflare Email Sending som primaer vej, Resend som fallback'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/3921d7334ca2f7296f56f3cb9101d809ecf88323
+  - ts: '2026-07-24T16:06:41Z'
+    text: afkobl LinkedIn-generering fra historie-pipeline naar pauset
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/ffbad6cd39cc578ca25c2be09ba609eaa16f0c56
+  - ts: '2026-07-24T14:42:21Z'
+    text: autopilot-pause bag KV-flag (T6 fase 1)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/a87ad9b95c2044a864ab14c7f433d3e573d061d7
 ---
 
 Din kunde har betalt sin faktura. Pengene står på kontoen, bogføringen er afstemt, og du har glemt alt om den uro der var omkring samhandlen de sidste måneder. Seks uger senere går kunden konkurs. Og tre måneder efter det lander der et brev fra kurator: betalingen skal tilbage.
