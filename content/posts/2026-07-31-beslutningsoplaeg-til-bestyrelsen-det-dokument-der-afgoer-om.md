@@ -1,12 +1,25 @@
 ---
-title: "Beslutningsoplæg til bestyrelsen: det dokument der afgør om du bliver hørt"
+title: 'Beslutningsoplæg til bestyrelsen: det dokument der afgør om du bliver hørt'
 slug: beslutningsoplaeg-til-bestyrelsen-det-dokument-der-afgoer-om
-publish_at: 2026-07-31T09:02:24+02:00
+publish_at: 2026-07-31T07:02:24.000Z
 status: published
-tags: ["bestyrelse-ledelse", "beslutningsoplæg", "corporate governance", "in-house jura"]
-excerpt: "Et beslutningsoplæg bestyrelsen faktisk læser kræver indstilling først, gradueret risiko og protokolklart sprog — ikke juridisk analyse forklædt som rådgivning."
+tags:
+  - bestyrelse-ledelse
+  - beslutningsoplæg
+  - corporate governance
+  - in-house jura
+excerpt: >-
+  Et beslutningsoplæg bestyrelsen faktisk læser kræver indstilling først,
+  gradueret risiko og protokolklart sprog — ikke juridisk analyse forklædt som
+  rådgivning.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-31T07:02:25Z'
+    text: publish beslutningsoplaeg-til-bestyrelsen-det-dokument-der-afgoer-om
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/9e8b2c106fff5fda39a52df733f8ba6b1b17f39a
 ---
 
 Du har brugt tre uger på analysen. Juridisk er sagen klar, risiciene er kortlagt, og du har en anbefaling du kan stå på mål for. Du sender oplægget til bestyrelsesformanden torsdag eftermiddag. Bestyrelsesmødet er mandag. Dit oplæg er på tolv sider.

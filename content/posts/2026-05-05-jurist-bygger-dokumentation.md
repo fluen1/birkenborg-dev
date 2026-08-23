@@ -1,15 +1,38 @@
 ---
-title: "Jurister dokumenterer for at det holder i retten. Jeg dokumenterer for at jeg kan huske hvad koden gør."
+title: >-
+  Jurister dokumenterer for at det holder i retten. Jeg dokumenterer for at jeg
+  kan huske hvad koden gør.
 slug: jurist-bygger-dokumentation
 theme_id: jurist-bygger-paradoks
-tags: ["jura", "kode", "dokumentation"]
+tags:
+  - jura
+  - kode
+  - dokumentation
 suggested_publish_day: friday
-rationale: "Bruger ikke inbox direkte men aktiverer jurist-bygger-paradoks-temaet med en konkret og morsom detalje (30 README'er) — risikoen er at den er lidt mere reflekterende end energisk, men åbningslinjen og slutningen er skarpe nok."
+rationale: >-
+  Bruger ikke inbox direkte men aktiverer jurist-bygger-paradoks-temaet med en
+  konkret og morsom detalje (30 README'er) — risikoen er at den er lidt mere
+  reflekterende end energisk, men åbningslinjen og slutningen er skarpe nok.
 privacy_flag: false
 status: published
-publish_at: 2026-05-08T09:00:00+02:00
-
-linkedin_url: "https://www.linkedin.com/feed/update/urn:li:share:7458430436244111361/"
+publish_at: 2026-05-08T07:00:00.000Z
+linkedin_url: 'https://www.linkedin.com/feed/update/urn:li:share:7458430436244111361/'
+marginalia:
+  - ts: '2026-08-19T07:02:09Z'
+    text: publish bortvisning-grundlaget-holder-oftere-end-du-tror-processen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/eaefa0dc74e63b66a41c13625f65fd95d75aa22a
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-07-28T15:24:45Z'
+    text: opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069
 ---
 
 

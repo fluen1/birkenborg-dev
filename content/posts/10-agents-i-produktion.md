@@ -1,12 +1,21 @@
 ---
-title: "10 agents i produktion — sådan er de organiseret"
-slug: "10-agents-i-produktion"
-publish_at: 2026-04-28T09:00:00+02:00
+title: 10 agents i produktion — sådan er de organiseret
+slug: 10-agents-i-produktion
+publish_at: 2026-04-28T07:00:00.000Z
 status: published
-tags: ["agenter", "arkitektur"]
+tags:
+  - agenter
+  - arkitektur
 privacy_flag: false
-excerpt: "Et nørdet kig ind i mit Claude Code-setup: hvilke agenter, hvad de kan, og hvad jeg har lært om at orkestrere dem."
-marginalia: []
+excerpt: >-
+  Et nørdet kig ind i mit Claude Code-setup: hvilke agenter, hvad de kan, og
+  hvad jeg har lært om at orkestrere dem.
+marginalia:
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
 ---
 
 Ti agents lyder som mange. Det er det også, i den forstand at det er ti ting der kan gå galt på ti forskellige måder. Men de kom til gradvist — én ad gangen, over omtrent et år — og det er nok den eneste grund til at de stadig kører.

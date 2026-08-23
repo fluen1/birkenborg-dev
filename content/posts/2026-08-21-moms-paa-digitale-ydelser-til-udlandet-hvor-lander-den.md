@@ -1,12 +1,46 @@
 ---
-title: "Moms på digitale ydelser til udlandet — hvor lander den egentlig?"
+title: Moms på digitale ydelser til udlandet — hvor lander den egentlig?
 slug: moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
-publish_at: 2026-08-21T09:02:07+02:00
+publish_at: 2026-08-21T07:02:07.000Z
 status: published
-tags: ["moms-afgifter", "digitale ydelser", "oss-ordningen", "saas", "leveringssted"]
-excerpt: "Sælger du SaaS eller digitale ydelser til udlandet? Leveringsstedsreglerne afgør, hvor momsen lander — og OSS kan spare dig for momsregistrering i hvert EU-land."
+tags:
+  - moms-afgifter
+  - digitale ydelser
+  - oss-ordningen
+  - saas
+  - leveringssted
+excerpt: >-
+  Sælger du SaaS eller digitale ydelser til udlandet? Leveringsstedsreglerne
+  afgør, hvor momsen lander — og OSS kan spare dig for momsregistrering i hvert
+  EU-land.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-21T07:02:08Z'
+    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-03T07:01:58Z'
+    text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
+  - ts: '2026-07-27T15:43:06Z'
+    text: afsender besluttet (hotmail) + routing/DMARC paa plads
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c
 ---
 
 Du sælger software, adgang til en platform eller en anden digital ydelse. Kunderne sidder i Tyskland, Frankrig, måske USA. Du fakturerer, pengene tikker ind, og alt ser fint ud — indtil nogen spørger, om I har styr på momsen. Det spørgsmål har det med at komme på et ubehageligt tidspunkt, typisk når virksomheden er vokset forbi det punkt, hvor man bare kunne håbe på at ingen kiggede.

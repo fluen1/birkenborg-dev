@@ -1,12 +1,28 @@
 ---
-title: "Informationsudveksling mellem konkurrenter: brancheforeningsmødet som risikozone"
+title: >-
+  Informationsudveksling mellem konkurrenter: brancheforeningsmødet som
+  risikozone
 slug: informationsudveksling-mellem-konkurrenter
-publish_at: 2026-08-14T09:02:23+02:00
+publish_at: 2026-08-14T07:02:23.000Z
 status: published
-tags: ["konkurrenceret", "informationsudveksling", "brancheforeninger", "karteller", "compliance"]
-excerpt: "Brancheforeningsmøder samler konkurrenter i ét rum — og det skaber konkurrenceretlige risici, de fleste undervurderer. Her er grænsen mellem lovlig vidensdeling og ulovlig koordinering."
+tags:
+  - konkurrenceret
+  - informationsudveksling
+  - brancheforeninger
+  - karteller
+  - compliance
+excerpt: >-
+  Brancheforeningsmøder samler konkurrenter i ét rum — og det skaber
+  konkurrenceretlige risici, de fleste undervurderer. Her er grænsen mellem
+  lovlig vidensdeling og ulovlig koordinering.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-14T07:02:23Z'
+    text: publish informationsudveksling-mellem-konkurrenter
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/9230ebe370bd7adf1d8576774ce7a27170a5ce7b
 ---
 
 De fleste kartelaftaler starter ikke med et hemmeligt møde i et parkeringshus. De starter med en branchemiddag, en kaffe efter et fagligt indlæg, eller et punkt på dagsordenen der hedder "markedsopdatering". Netop fordi rammen føles uskyldig, er brancheforeningsmødet en af de mest konsistente risikozoner i dansk og europæisk konkurrenceret.
