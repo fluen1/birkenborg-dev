@@ -1,12 +1,30 @@
 ---
-title: "Omstødelse i konkurs: den betaling du troede var din"
+title: 'Omstødelse i konkurs: den betaling du troede var din'
 slug: omstoedelse-i-konkurs-den-betaling-du-troede-var-din
-publish_at: 2026-08-05T09:03:02+02:00
+publish_at: 2026-08-05T07:03:02.000Z
 status: published
-tags: ["insolvens", "omstødelse", "konkurs", "kreditrisiko", "konkursret"]
-excerpt: "Omstødelsesreglerne lader kurator kræve betalinger og sikkerheder tilbage. Forstå logikken, tidsvinduerne og hvordan du beskytter dig som kreditor."
+tags:
+  - insolvens
+  - omstødelse
+  - konkurs
+  - kreditrisiko
+  - konkursret
+excerpt: >-
+  Omstødelsesreglerne lader kurator kræve betalinger og sikkerheder tilbage.
+  Forstå logikken, tidsvinduerne og hvordan du beskytter dig som kreditor.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-05T07:03:03Z'
+    text: publish omstoedelse-i-konkurs-den-betaling-du-troede-var-din
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/b8afa99ce8d21c79ce5605bb859ef06b8fb7d299
+  - ts: '2026-08-06T22:15:39Z'
+    text: LinkedIn i eget kald + tic-cap 0 + humor som krav
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e25f4211cf33c8c3295a82de12ce12f0c14c9c5e
 ---
 
 Din kunde har betalt sin faktura. Pengene står på kontoen, bogføringen er afstemt, og du har glemt alt om den uro der var omkring samhandlen de sidste måneder. Seks uger senere går kunden konkurs. Og tre måneder efter det lander der et brev fra kurator: betalingen skal tilbage.

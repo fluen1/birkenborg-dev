@@ -1,12 +1,31 @@
 ---
-title: "Ingen ved hvad en AI-agent koster"
+title: Ingen ved hvad en AI-agent koster
 slug: ingen-ved-hvad-en-ai-agent-koster
-publish_at: 2026-06-02T12:55:17+02:00
+publish_at: 2026-06-02T10:55:17.000Z
 status: published
-tags: ["ai", "agenter", "prissætning", "jura", "indkøb"]
-excerpt: "Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'. Han har ret."
+tags:
+  - ai
+  - agenter
+  - prissætning
+  - jura
+  - indkøb
+excerpt: >-
+  Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning
+  eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'.
+  Han har ret.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-05T11:47:03Z'
+    text: skriv kun KV ved aendring — heartbeat hver 20. min i stedet for hvert tick
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
 ---
 
 Herbert Nathan kalder det 'det store spørgsmål lige nu'. Det er en præcis beskrivelse.

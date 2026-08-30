@@ -1,12 +1,40 @@
 ---
-title: "Earn-out aftaler: Hvorfor de ender i konflikt — og hvordan du undgår det"
+title: 'Earn-out aftaler: Hvorfor de ender i konflikt — og hvordan du undgår det'
 slug: earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
-publish_at: 2026-08-12T09:02:22+02:00
+publish_at: 2026-08-12T07:02:22.000Z
 status: published
-tags: ["ma-transaktioner", "earn-out", "virksomhedsoverdragelse", "købesumsregulering", "kontraktforhandling"]
-excerpt: "Earn-out aftaler udskyder prisforhandlingen — og ofte konflikten. Her er de tre typiske fejl og de konkrete greb der får mekanismen til at virke."
+tags:
+  - ma-transaktioner
+  - earn-out
+  - virksomhedsoverdragelse
+  - købesumsregulering
+  - kontraktforhandling
+excerpt: >-
+  Earn-out aftaler udskyder prisforhandlingen — og ofte konflikten. Her er de
+  tre typiske fejl og de konkrete greb der får mekanismen til at virke.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
+  - ts: '2026-08-17T07:01:32Z'
+    text: publish kan-ai-indgaa-aftaler-fuldmagtslaeren-har-aldrig-vaeret-mere
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/dfde455f44193427f28e4b16d3cea2f0bd087d35
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-03T07:01:58Z'
+    text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
 ---
 
 En earn-out lyder som den perfekte kompromis-mekanisme. Sælger mener virksomheden er mere værd end køber vil betale kontant på closing. Køber er nervøs for om de lyserøde budgetter holder. Løsningen? En del af købesummen gøres betinget af fremtidig performance. Alle er glade — indtil de ikke er det mere.

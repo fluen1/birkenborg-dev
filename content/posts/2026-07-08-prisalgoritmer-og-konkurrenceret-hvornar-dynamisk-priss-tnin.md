@@ -1,12 +1,28 @@
 ---
-title: "Prisalgoritmer og konkurrenceret: hvornår dynamisk prissætning bliver et kartelproblem"
+title: >-
+  Prisalgoritmer og konkurrenceret: hvornår dynamisk prissætning bliver et
+  kartelproblem
 slug: prisalgoritmer-og-konkurrenceret-hvornar-dynamisk-priss-tnin
-publish_at: 2026-07-08T09:02:20+02:00
+publish_at: 2026-07-08T07:02:20.000Z
 status: published
-tags: ["konkurrenceret", "prisalgoritmer", "dynamisk prissætning", "e-commerce", "kartelret"]
-excerpt: "Prisalgoritmer kan skabe kartelagtig adfærd uden nogen aftale. Her er de konkurrenceretlige faldgruber ved dynamisk prissætning — og hvad du skal have styr på."
+tags:
+  - konkurrenceret
+  - prisalgoritmer
+  - dynamisk prissætning
+  - e-commerce
+  - kartelret
+excerpt: >-
+  Prisalgoritmer kan skabe kartelagtig adfærd uden nogen aftale. Her er de
+  konkurrenceretlige faldgruber ved dynamisk prissætning — og hvad du skal have
+  styr på.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-26T07:01:36Z'
+    text: publish bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8cf89094a92843f72a7b9ba00cd0d367cec60de9
 ---
 
 Du har en prisalgoritme. Den overvåger konkurrenternes priser og justerer dine egne — op eller ned, afhængigt af hvad markedet gør. Måske har du bygget den selv, måske køber du den som en del af dit e-commerce-setup. Den er effektiv, den reagerer hurtigere end noget menneske, og den sikrer at du aldrig ligger markant over eller under markedet.

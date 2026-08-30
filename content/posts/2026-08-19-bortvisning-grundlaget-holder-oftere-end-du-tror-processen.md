@@ -1,12 +1,45 @@
 ---
-title: "Bortvisning: Grundlaget holder oftere end du tror — processen gør det ikke"
+title: 'Bortvisning: Grundlaget holder oftere end du tror — processen gør det ikke'
 slug: bortvisning-grundlaget-holder-oftere-end-du-tror-processen
-publish_at: 2026-08-19T09:02:09+02:00
+publish_at: 2026-08-19T07:02:09.000Z
 status: published
-tags: ["ansaettelsesret", "bortvisning", "misligholdelse", "hr-proces", "arbejdsgiverrisiko"]
-excerpt: "Grundlaget for bortvisning holder oftere end arbejdsgivere tror. Det er reaktionstid, dokumentation og proces der afgør, om sagen vinder eller taber."
+tags:
+  - ansaettelsesret
+  - bortvisning
+  - misligholdelse
+  - hr-proces
+  - arbejdsgiverrisiko
+excerpt: >-
+  Grundlaget for bortvisning holder oftere end arbejdsgivere tror. Det er
+  reaktionstid, dokumentation og proces der afgør, om sagen vinder eller taber.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-26T07:01:36Z'
+    text: publish bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8cf89094a92843f72a7b9ba00cd0d367cec60de9
+  - ts: '2026-08-19T07:02:09Z'
+    text: publish bortvisning-grundlaget-holder-oftere-end-du-tror-processen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/eaefa0dc74e63b66a41c13625f65fd95d75aa22a
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-03T07:01:58Z'
+    text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
+  - ts: '2026-08-05T11:47:03Z'
+    text: skriv kun KV ved aendring — heartbeat hver 20. min i stedet for hvert tick
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
 ---
 
 Du har en medarbejder der har gjort noget, der ikke kan stå. Tyveri, vold, grov illoyalitet, bevidst sabotage af en kundeaftale — listen over ting der intuitivt skriger "ud" er lang. Og din intuition har som regel ret: det *er* groft nok til bortvisning. Problemet er bare, at det sjældent er grundlaget der vælter sagen. Det er alt det, der sker mellem opdagelsen og det øjeblik medarbejderen står med brevet i hånden.

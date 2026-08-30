@@ -1,13 +1,26 @@
 ---
-title: "Digital suverænitet møder AI — kommunerne har et valg de ikke har taget"
+title: Digital suverænitet møder AI — kommunerne har et valg de ikke har taget
 slug: digital-suveraenittet-moeder-ai
-publish_at: 2026-05-24T10:18:00+02:00
+publish_at: 2026-05-24T08:18:00.000Z
 status: published
-tags: ["ai", "offentlig-it", "udbud", "suverænitet", "governance"]
-excerpt: "Kommunernes regionale it-klynger skal undgå Strukturreformens fejl. Men open source og digital suverænitet løser ikke automatisk spørgsmålet om AI-modeller."
+tags:
+  - ai
+  - offentlig-it
+  - udbud
+  - suverænitet
+  - governance
+excerpt: >-
+  Kommunernes regionale it-klynger skal undgå Strukturreformens fejl. Men open
+  source og digital suverænitet løser ikke automatisk spørgsmålet om
+  AI-modeller.
 privacy_flag: false
 linkedin_url: null
-marginalia: []
+marginalia:
+  - ts: '2026-08-21T07:02:08Z'
+    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
 ---
 
 De 11 nordjyske kommuner og de 9 fynske kommuner er ved at forme regionale it-klynger. Morten Kjærsgaard fra Magenta har skrevet om hvad de ikke må gentage: Strukturreformens fejl fra 2007, da 271 kommuner blev til 98 og big tech var klar med løsninger der fyldte tomrummet. Resultatet var årtiers afhængighed af KMD, Netcompany og Microsoft. Hans pointe er open source og lokal kontrol denne gang.

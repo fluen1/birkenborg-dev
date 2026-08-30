@@ -1,12 +1,31 @@
 ---
-title: "AI-agenter på juridisk arbejde: hvad der faktisk sker i produktion"
+title: 'AI-agenter på juridisk arbejde: hvad der faktisk sker i produktion'
 slug: ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
-publish_at: 2026-08-07T09:02:06+02:00
+publish_at: 2026-08-07T07:02:06.000Z
 status: published
-tags: ["ai-maskinrum", "ai-agenter", "kontraktgennemgang", "legal tech", "in-house jura"]
-excerpt: "Hvad sker der egentlig når man sætter AI-agenter i produktion på juridiske opgaver? En in-house jurists erfaringer med kontraktgennemgang, hallucinationer og vedligeholdelse."
+tags:
+  - ai-maskinrum
+  - ai-agenter
+  - kontraktgennemgang
+  - legal tech
+  - in-house jura
+excerpt: >-
+  Hvad sker der egentlig når man sætter AI-agenter i produktion på juridiske
+  opgaver? En in-house jurists erfaringer med kontraktgennemgang,
+  hallucinationer og vedligeholdelse.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-21T07:02:08Z'
+    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
 ---
 
 De fleste artikler om AI i juridisk praksis handler om potentiale. Denne handler om hvad der sker når man rent faktisk bygger agenter, sætter dem på rigtige opgaver og lader dem køre dag efter dag. Ikke som tankeeksperiment, men som værktøj der skal levere noget brugbart til en forretning der ikke har tid til at vente.

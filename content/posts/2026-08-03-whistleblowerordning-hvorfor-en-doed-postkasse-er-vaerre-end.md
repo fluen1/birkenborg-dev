@@ -1,12 +1,45 @@
 ---
-title: "Whistleblowerordning: hvorfor en død postkasse er værre end ingen ordning"
+title: 'Whistleblowerordning: hvorfor en død postkasse er værre end ingen ordning'
 slug: whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
-publish_at: 2026-08-03T09:01:57+02:00
+publish_at: 2026-08-03T07:01:57.000Z
 status: published
-tags: ["compliance-risiko", "whistleblowerordning", "intern kontrol", "ansættelsesret"]
-excerpt: "En whistleblowerordning der ikke bruges, er ikke et tegn på fravær af problemer — den er selv problemet. Sådan får du ordningen til at fungere i praksis."
+tags:
+  - compliance-risiko
+  - whistleblowerordning
+  - intern kontrol
+  - ansættelsesret
+excerpt: >-
+  En whistleblowerordning der ikke bruges, er ikke et tegn på fravær af
+  problemer — den er selv problemet. Sådan får du ordningen til at fungere i
+  praksis.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
+  - ts: '2026-08-19T07:02:09Z'
+    text: publish bortvisning-grundlaget-holder-oftere-end-du-tror-processen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/eaefa0dc74e63b66a41c13625f65fd95d75aa22a
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-03T07:01:58Z'
+    text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
+  - ts: '2026-08-05T11:47:03Z'
+    text: skriv kun KV ved aendring — heartbeat hver 20. min i stedet for hvert tick
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
 ---
 
 Du har en whistleblowerordning. Den står på intranettet, et sted mellem kantinemenuen og retningslinjerne for firmabiler. Der er en e-mailadresse — måske endda en ekstern portal. HR oprettede den i 2023 fordi loven krævede det. Siden da er der kommet nul indberetninger.

@@ -1,12 +1,22 @@
 ---
-title: "GDPR i klinikkæder — tre ting jeg lærte på den hårde måde"
-slug: "gdpr-klinikkaeder"
-publish_at: 2026-05-04T09:00:00+02:00
+title: GDPR i klinikkæder — tre ting jeg lærte på den hårde måde
+slug: gdpr-klinikkaeder
+publish_at: 2026-05-04T07:00:00.000Z
 status: published
-tags: ["jura", "gdpr", "sundhedsret"]
+tags:
+  - jura
+  - gdpr
+  - sundhedsret
 privacy_flag: false
-excerpt: "Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på tværs af 50 klinikker."
-marginalia: []
+excerpt: >-
+  Persondata-reglerne ser meget anderledes ud når man håndterer patientdata på
+  tværs af 50 klinikker.
+marginalia:
+  - ts: '2026-08-06T22:19:59Z'
+    text: korpus til 27 — tre lange opslag tilfoejet
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2851cd3c385719f105b2f37d126313a73f99a370
 ---
 
 Forestil dig en situation: to klinikker i samme kæde vil dele patientjournaler — ikke fordi det er praktisk, men fordi det er nødvendigt for behandlingskontinuitet. Fornuftigt. Begge klinikker er ejet af samme holdingselskab. Begge bruger samme journalsystem. Begge kalder sig selv del af samme organisation.

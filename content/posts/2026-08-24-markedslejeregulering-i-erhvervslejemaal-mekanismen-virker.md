@@ -1,12 +1,33 @@
 ---
-title: "Markedslejeregulering i erhvervslejemål: mekanismen virker — hvis varslingen holder"
+title: >-
+  Markedslejeregulering i erhvervslejemål: mekanismen virker — hvis varslingen
+  holder
 slug: markedslejeregulering-i-erhvervslejemaal-mekanismen-virker
-publish_at: 2026-08-24T09:02:05+02:00
+publish_at: 2026-08-24T07:02:05.000Z
 status: published
-tags: ["lejeret", "markedsleje", "erhvervslejemål", "erhvervslejeloven", "varsling"]
-excerpt: "Markedslejeregulering kræver både korrekt vurdering af markedslejen og et varsel, der rammer lovens formkrav præcist. Fejl i varslingen kan skyde hele kravet ned."
+tags:
+  - lejeret
+  - markedsleje
+  - erhvervslejemål
+  - erhvervslejeloven
+  - varsling
+excerpt: >-
+  Markedslejeregulering kræver både korrekt vurdering af markedslejen og et
+  varsel, der rammer lovens formkrav præcist. Fejl i varslingen kan skyde hele
+  kravet ned.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-24T07:02:05Z'
+    text: publish markedslejeregulering-i-erhvervslejemaal-mekanismen-virker
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e49cef8398db480634282ac508529d38555fb2ac
+  - ts: '2026-08-19T07:02:09Z'
+    text: publish bortvisning-grundlaget-holder-oftere-end-du-tror-processen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/eaefa0dc74e63b66a41c13625f65fd95d75aa22a
 ---
 
 De fleste erhvervslejeforhold kører i årevis uden at nogen rører ved lejen ud over den årlige nettoprisindeksering. Det er bekvemt for begge parter. Problemet er bare, at markedet ikke venter på, at du får tjekket din lejekontrakt. Og når forskellen mellem den aftalte leje og det faktiske markedsniveau bliver stor nok, ender én af parterne med et incitament til at trykke på knappen — og den anden med et brev, der føles som et overfald.

@@ -1,12 +1,47 @@
 ---
-title: "Momsfradrag ved blandede aktiviteter: hvorfor \"vi tager bare det hele\" er en dyr strategi"
+title: >-
+  Momsfradrag ved blandede aktiviteter: hvorfor "vi tager bare det hele" er en
+  dyr strategi
 slug: momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
-publish_at: 2026-07-15T09:03:01+02:00
+publish_at: 2026-07-15T07:03:01.000Z
 status: published
-tags: ["moms-afgifter", "momsfradrag", "delvis fradragsret", "blandede aktiviteter"]
-excerpt: "Delvis momsfradragsret ved blandede aktiviteter kræver direkte henføring, korrekt omsætningsbrøk og løbende opfølgning. Ellers betaler du for meget — eller skylder mere end du tror."
+tags:
+  - moms-afgifter
+  - momsfradrag
+  - delvis fradragsret
+  - blandede aktiviteter
+excerpt: >-
+  Delvis momsfradragsret ved blandede aktiviteter kræver direkte henføring,
+  korrekt omsætningsbrøk og løbende opfølgning. Ellers betaler du for meget —
+  eller skylder mere end du tror.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
+  - ts: '2026-08-21T07:02:08Z'
+    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-03T07:01:58Z'
+    text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
+  - ts: '2026-08-05T11:47:03Z'
+    text: skriv kun KV ved aendring — heartbeat hver 20. min i stedet for hvert tick
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
 ---
 
 Du driver en virksomhed med både momspligtige og momsfrie aktiviteter. Måske er du en ejendomskoncern der både udlejer erhvervslokaler med moms og boliglejemål uden. Måske er du en uddannelsesinstitution der sælger kurser momsfrit og konsulentydelser med moms. Eller en finansiel virksomhed der har momspligtig IT-drift ved siden af den momsfrie kerneforretning. Uanset branchen står du med det samme grundproblem: du køber varer og ydelser ind, der bruges til begge dele. Og spørgsmålet om hvor meget moms du kan trække fra på de indkøb, er hverken trivielt eller risikofrit.

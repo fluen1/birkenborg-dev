@@ -1,12 +1,30 @@
 ---
-title: "GDPR og AI i klinikker: hvad du faktisk skal have styr på"
+title: 'GDPR og AI i klinikker: hvad du faktisk skal have styr på'
 slug: gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
-publish_at: 2026-07-01T09:01:32+02:00
+publish_at: 2026-07-01T07:01:32.000Z
 status: published
-tags: ["gdpr", "ai i sundhed", "klinikker", "persondata", "sundhedsdata"]
-excerpt: "Sundhedsdata og AI i klinikker kræver mere end god vilje. Her er de konkrete GDPR-krav du skal have styr på — uden panik, men uden genveje."
+tags:
+  - gdpr
+  - ai i sundhed
+  - klinikker
+  - persondata
+  - sundhedsdata
+excerpt: >-
+  Sundhedsdata og AI i klinikker kræver mere end god vilje. Her er de konkrete
+  GDPR-krav du skal have styr på — uden panik, men uden genveje.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-26T07:01:36Z'
+    text: publish bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8cf89094a92843f72a7b9ba00cd0d367cec60de9
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
 ---
 
 Du driver en klinik — fysioterapi, tandlæge, psykolog, kiropraktik, hvad som helst — og du overvejer at bruge AI til noget med dine patientdata. Måske en agent der sorterer henvendelser, et værktøj der hjælper med journalnotater, eller noget der analyserer behandlingsforløb på tværs af patienter.

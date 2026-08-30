@@ -1,12 +1,36 @@
 ---
-title: "Kapitalejerlån: Reglerne efter lovliggørelsen — og de fejl der stadig koster"
+title: 'Kapitalejerlån: Reglerne efter lovliggørelsen — og de fejl der stadig koster'
 slug: kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
-publish_at: 2026-08-10T09:01:59+02:00
+publish_at: 2026-08-10T07:01:59.000Z
 status: published
-tags: ["selskabsret", "kapitalejerlån", "aktionærlån", "ejerledelse", "selskabsskat"]
-excerpt: "Kapitalejerlån er lovliggjort — men kun inden for en snæver korridor. Her er betingelserne, de skatteretlige konsekvenser og de fejl, der stadig koster ejerledere dyrt."
+tags:
+  - selskabsret
+  - kapitalejerlån
+  - aktionærlån
+  - ejerledelse
+  - selskabsskat
+excerpt: >-
+  Kapitalejerlån er lovliggjort — men kun inden for en snæver korridor. Her er
+  betingelserne, de skatteretlige konsekvenser og de fejl, der stadig koster
+  ejerledere dyrt.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
+  - ts: '2026-08-10T07:01:59Z'
+    text: publish kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2f0246cf4bf9f43bf66dd356c587a85a2dd35b01
+  - ts: '2026-08-05T12:41:51Z'
+    text: ignorér fejl-fixtures genereret af build-corpus-testen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b
 ---
 
 Du har et selskab med fri likviditet, og du vil gerne trække penge ud. Udbytte kræver en generalforsamling, løn koster AM-bidrag og topskat, og du har brug for pengene nu — ikke til næste ordinære generalforsamling. Så du lader selskabet låne dig pengene. Det lyder enkelt. Det er det bare ikke altid.

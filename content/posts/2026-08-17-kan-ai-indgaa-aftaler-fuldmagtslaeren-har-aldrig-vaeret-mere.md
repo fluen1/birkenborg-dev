@@ -1,12 +1,36 @@
 ---
-title: "Kan AI indgå aftaler? Fuldmagtslæren har aldrig været mere relevant"
+title: Kan AI indgå aftaler? Fuldmagtslæren har aldrig været mere relevant
 slug: kan-ai-indgaa-aftaler-fuldmagtslaeren-har-aldrig-vaeret-mere
-publish_at: 2026-08-17T09:01:31+02:00
+publish_at: 2026-08-17T07:01:31.000Z
 status: published
-tags: ["kontrakter", "ai-agenter", "aftaleret", "fuldmagt", "automatisering"]
-excerpt: "En AI-agent kan ikke selv blive bundet af en aftale — men din virksomhed kan. Fuldmagtslæren afgør, hvornår en maskines handlinger forpligter dig over for tredjemand."
+tags:
+  - kontrakter
+  - ai-agenter
+  - aftaleret
+  - fuldmagt
+  - automatisering
+excerpt: >-
+  En AI-agent kan ikke selv blive bundet af en aftale — men din virksomhed kan.
+  Fuldmagtslæren afgør, hvornår en maskines handlinger forpligter dig over for
+  tredjemand.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-17T07:01:32Z'
+    text: publish kan-ai-indgaa-aftaler-fuldmagtslaeren-har-aldrig-vaeret-mere
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/dfde455f44193427f28e4b16d3cea2f0bd087d35
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
 ---
 
 Der sidder lige nu et stigende antal virksomheder, hvor en AI-agent bestiller kontorartikler, bekræfter bookinger eller sender tilbud til kunder — uden at et menneske godkender hver enkelt handling. Det virker effektivt. Det er det også. Men spørgsmålet, der sjældent bliver stillet før det går galt, er brutalt simpelt: er de aftaler juridisk bindende?

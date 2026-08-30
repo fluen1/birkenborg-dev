@@ -1,12 +1,25 @@
 ---
-title: "Bestyrelsesansvar når AI leverer beslutningsgrundlaget"
+title: Bestyrelsesansvar når AI leverer beslutningsgrundlaget
 slug: bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
-publish_at: 2026-08-26T09:01:36+02:00
+publish_at: 2026-08-26T07:01:36.000Z
 status: published
-tags: ["bestyrelse-ledelse", "bestyrelsesansvar", "ai i beslutningsprocesser", "selskabsledelse", "business judgment"]
-excerpt: "AI ændrer ikke hvem der bærer ansvaret — men det ændrer hvad der kræves for at løfte det. Forsvarlig beslutningsproces når modellen sidder i kæden."
+tags:
+  - bestyrelse-ledelse
+  - bestyrelsesansvar
+  - ai i beslutningsprocesser
+  - selskabsledelse
+  - business judgment
+excerpt: >-
+  AI ændrer ikke hvem der bærer ansvaret — men det ændrer hvad der kræves for at
+  løfte det. Forsvarlig beslutningsproces når modellen sidder i kæden.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-26T07:01:36Z'
+    text: publish bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8cf89094a92843f72a7b9ba00cd0d367cec60de9
 ---
 
 En direktion præsenterer bestyrelsen for en analyse af et potentielt opkøbsmål. Tallene ser solide ud, konklusionen er klar, og anbefalingen er entydig. Det usagte i rummet: analysen er i væsentligt omfang genereret af en sprogmodel. Bestyrelsen nikker. Opkøbet viser sig at være en katastrofe — modellen havde hallucineret nøgletal, og ingen havde tjekket dem. Hvem hænger på den?

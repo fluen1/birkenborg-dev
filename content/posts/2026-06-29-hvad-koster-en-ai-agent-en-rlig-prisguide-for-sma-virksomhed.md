@@ -1,12 +1,26 @@
 ---
-title: "Hvad koster en AI-agent? En ærlig prisguide for små virksomheder"
+title: Hvad koster en AI-agent? En ærlig prisguide for små virksomheder
 slug: hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
-publish_at: 2026-06-29T09:02:12+02:00
+publish_at: 2026-06-29T07:02:12.000Z
 status: published
-tags: ["ai-agent", "prissætning", "open-source", "smv", "selvhosting"]
-excerpt: "En AI-agent koster fra ører per interaktion til sekscifrede udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting — og af om du bygger til den rigtige opgave."
+tags:
+  - ai-agent
+  - prissætning
+  - open-source
+  - smv
+  - selvhosting
+excerpt: >-
+  En AI-agent koster fra ører per interaktion til sekscifrede
+  udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting
+  — og af om du bygger til den rigtige opgave.
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
 ---
 
 Det korte svar: det afhænger af. Det lidt længere svar: det afhænger af noget helt andet end du tror.
