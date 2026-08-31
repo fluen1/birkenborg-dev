@@ -3,11 +3,15 @@ import {
   extractKeywords,
   matchCommit,
   fetchCommits,
+  isNoiseCommit,
   buildSuggestions,
+  assignCommitsToPosts,
   dedupAgainstExisting,
+  spliceMarginalia,
   writePostWithMarginalia,
   runAutoMarginalia,
 } from "./build-marginalia.mjs";
+import matter from "gray-matter";
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -74,6 +78,20 @@ describe("matchCommit", () => {
 
   it("matcher case-insensitive", () => {
     expect(matchCommit("FEAT: AGENT virker", ["agent"])).toEqual(["agent"]);
+  });
+
+  // Med delstrengs-match landede vilkårlige commits på vilkårlige artikler:
+  // "din" fra slug'et hvad-sker-der-naar-DIN-bestyrelse ramte "LinkedIn",
+  // "readiness" og "gradient". Det var hovedkilden til ubrugelige forslag.
+  it("matcher IKKE et keyword der blot optræder inde i et andet ord", () => {
+    expect(matchCommit("add remark-strip-linkedin plugin", ["din"])).toEqual([]);
+    expect(matchCommit("add project CLAUDE.md for auto-mode readiness", ["din"])).toEqual([]);
+    expect(matchCommit("drop-caps on posts, gradient dividers", ["din", "tab"])).toEqual([]);
+  });
+
+  it("matcher stadig et keyword der står som eget ord i en sammensætning", () => {
+    expect(matchCommit("feat: agent-fix til paragraf", ["agent", "paragraf"]))
+      .toEqual(["agent", "paragraf"]);
   });
 });
 
@@ -171,10 +189,177 @@ describe("buildSuggestions", () => {
     const commits = [
       { message: longMessage, authorDate: "2026-05-09T00:00:00Z", htmlUrl: "https://x.com/c" },
     ];
-    const postWithMatch = { ...post, title: "aaaaa" };
+    const postWithMatch = { ...post, title: "a".repeat(200) };
     const suggestions = buildSuggestions(postWithMatch, commits);
     expect(suggestions[0].text.length).toBeLessThanOrEqual(80);
     expect(suggestions[0].text).not.toMatch(/^feat\(scope\):/);
+  });
+});
+
+describe("isNoiseCommit", () => {
+  // En margin-note skal fortælle læseren noget om arbejdet bag artiklen.
+  // Sitets egne udgivelses-commits fortæller kun at sitet udgav noget — de
+  // udgjorde 104 af 363 forslag i PR #14 og gjorde bunken ulæselig.
+  it("kasserer sitets egne publish-commits", () => {
+    expect(isNoiseCommit("publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal")).toBe(true);
+    expect(isNoiseCommit("news: publish bestyrelsesansvar-naar-ai-leverer")).toBe(true);
+  });
+
+  it("kasserer merge-commits", () => {
+    expect(isNoiseCommit("Merge branch 'main' of https://github.com/fluen1/birkenborg-agents")).toBe(true);
+    expect(isNoiseCommit("Merge pull request #12 from fluen1/x")).toBe(true);
+    expect(isNoiseCommit("Merge remote-tracking branch 'origin/main'")).toBe(true);
+  });
+
+  it("kasserer scriptets egne commits, så bunken ikke fodrer sig selv", () => {
+    expect(isNoiseCommit("auto-marginalia: ugens noter (2026-08-30)")).toBe(true);
+  });
+
+  it("beholder rigtige arbejds-commits", () => {
+    expect(isNoiseCommit("feat: agent-fix til paragraf 30")).toBe(false);
+    expect(isNoiseCommit("opretSag sluger også KV-fejl")).toBe(false);
+    // Ordet 'publish' inde i en sætning er ikke et publish-commit.
+    expect(isNoiseCommit("fix: retry når publish-endpoint svarer 502")).toBe(false);
+  });
+});
+
+describe("assignCommitsToPosts", () => {
+  const posts = [
+    { slug: "ma-agent-paragraf-30", tags: [], title: "M&A-agenten fejlede på paragraf 30", marginalia: [] },
+    { slug: "agent-priser", tags: [], title: "Hvad koster en AI-agent", marginalia: [] },
+  ];
+
+  // Kernen i fejlen: dedup'en var pr. post, så en commit der matchede to
+  // artiklers keywords blev foreslået begge steder. Én commit = én note.
+  it("giver en commit til præcis én post, ikke til alle der matcher", () => {
+    const commits = [
+      { message: "feat: agent virker", authorDate: "2026-07-01T10:00:00Z", htmlUrl: "https://x/1" },
+    ];
+    const byPost = assignCommitsToPosts(posts, commits);
+    const total = [...byPost.values()].reduce((n, v) => n + v.length, 0);
+    expect(total).toBe(1);
+  });
+
+  it("vælger den post der matcher mest af commit-teksten", () => {
+    const commits = [
+      { message: "fix: paragraf-tjek i agenten", authorDate: "2026-07-01T10:00:00Z", htmlUrl: "https://x/1" },
+    ];
+    const byPost = assignCommitsToPosts(posts, commits);
+    expect(byPost.get("ma-agent-paragraf-30")).toHaveLength(1);
+    expect(byPost.get("agent-priser")).toHaveLength(0);
+  });
+
+  it("frasorterer støj-commits før fordelingen", () => {
+    const commits = [
+      { message: "publish ma-agent-paragraf-30", authorDate: "2026-07-01T10:00:00Z", htmlUrl: "https://x/1" },
+      { message: "Merge branch 'main'", authorDate: "2026-07-01T11:00:00Z", htmlUrl: "https://x/2" },
+    ];
+    const byPost = assignCommitsToPosts(posts, commits);
+    expect([...byPost.values()].reduce((n, v) => n + v.length, 0)).toBe(0);
+  });
+
+  it("foreslår ikke en tekst der allerede står som note på en ANDEN post", () => {
+    const withExisting = [
+      { ...posts[0], marginalia: [{ ts: "x", text: "agent virker", source: "manual" }] },
+      posts[1],
+    ];
+    const commits = [
+      { message: "feat: agent virker", authorDate: "2026-07-01T10:00:00Z", htmlUrl: "https://x/1" },
+    ];
+    const byPost = assignCommitsToPosts(withExisting, commits);
+    expect([...byPost.values()].reduce((n, v) => n + v.length, 0)).toBe(0);
+  });
+
+  it("er deterministisk uanset postenes rækkefølge", () => {
+    const commits = [
+      { message: "feat: agent virker", authorDate: "2026-07-01T10:00:00Z", htmlUrl: "https://x/1" },
+    ];
+    const a = assignCommitsToPosts(posts, commits);
+    const b = assignCommitsToPosts([...posts].reverse(), commits);
+    const winner = (m: Map<string, unknown[]>) =>
+      [...m.entries()].find(([, v]) => v.length > 0)?.[0];
+    expect(winner(a)).toBe(winner(b));
+  });
+});
+
+describe("spliceMarginalia", () => {
+  // matter.stringify() skrev hele frontmatteren om: titler skiftede
+  // citationstegn og lange felter blev til '>-'. Resultatet var en PR hvor 31
+  // artikler så ændrede ud selvom kun marginalia-feltet var nyt.
+  const raw = `---
+title: "Hvorfor min M&A-agent fejlede på paragraf 30"
+slug: ma-agent-paragraf-30
+excerpt: En lang linje der ellers ville blive foldet om til et blok-scalar af YAML-serializeren når den skrives tilbage
+status: published
+privacy_flag: false
+---
+
+# Body
+
+Tekst.
+`;
+
+  it("rører intet andet end marginalia-feltet", () => {
+    const out = spliceMarginalia(raw, [
+      { ts: "2026-07-01T10:00:00Z", text: "ny note", source: "auto-commit", commit_url: "https://x/1" },
+    ]);
+    expect(out).toContain(`title: "Hvorfor min M&A-agent fejlede på paragraf 30"`);
+    expect(out).toContain("excerpt: En lang linje der ellers ville blive foldet");
+    expect(out).not.toContain(">-");
+    expect(out).toContain("# Body");
+    expect(out).toContain("text: 'ny note'");
+  });
+
+  it("lader Philips egne, håndskrevne noter stå tegn for tegn", () => {
+    const withManual = `---
+title: "Test"
+slug: test
+status: published
+marginalia:
+  - ts: "8/5 14:32"
+    text: "undersøgte det her i 3 dage før jeg gav op"
+    source: manual
+---
+
+Body.
+`;
+    const out = spliceMarginalia(withManual, [
+      { ts: "b", text: "ny auto-note", source: "auto-commit" },
+    ]);
+    expect(out).toContain(`  - ts: "8/5 14:32"`);
+    expect(out).toContain(`    text: "undersøgte det her i 3 dage før jeg gav op"`);
+    expect(out).toContain("    source: manual");
+    expect(out.match(/^marginalia:/gm)).toHaveLength(1);
+    expect(matter(out).data.marginalia).toHaveLength(2);
+    expect(matter(out).data.marginalia[1].text).toBe("ny auto-note");
+  });
+
+  it("erstatter en tom 'marginalia: []' med en rigtig blok", () => {
+    const empty = `---
+title: "Test"
+slug: test
+marginalia: []
+status: published
+---
+
+Body.
+`;
+    const out = spliceMarginalia(empty, [{ ts: "b", text: "ny", source: "auto-commit" }]);
+    expect(out).not.toContain("marginalia: []");
+    expect(out).toContain("status: published");
+    expect(matter(out).data.marginalia).toHaveLength(1);
+  });
+
+  it("returnerer filen uændret når der ikke er nye noter", () => {
+    expect(spliceMarginalia(raw, [])).toBe(raw);
+  });
+
+  it("escaper apostroffer så YAML ikke knækker", () => {
+    const out = spliceMarginalia(raw, [
+      { ts: "a", text: "Merge branch 'main' i agenten", source: "auto-commit" },
+    ]);
+    expect(out).toContain("text: 'Merge branch ''main'' i agenten'");
+    expect(matter(out).data.marginalia[0].text).toBe("Merge branch 'main' i agenten");
   });
 });
 
@@ -228,7 +413,7 @@ describe("writePostWithMarginalia", () => {
     const updated = await readFile(tmpPath, "utf-8");
     expect(updated).toContain("marginalia:");
     expect(updated).toContain("ny feature");
-    expect(updated).toContain("source: auto-commit");
+    expect(updated).toContain("source: 'auto-commit'");
     expect(updated).toContain("commit_url:");
     expect(updated).toContain("# Test post");
     expect(updated).toContain("Body content.");
