@@ -7,6 +7,15 @@ tags: ["ansaettelsesret", "bortvisning", "misligholdelse", "hr-proces", "arbejds
 excerpt: "Grundlaget for bortvisning holder oftere end arbejdsgivere tror. Det er reaktionstid, dokumentation og proces der afgør, om sagen vinder eller taber."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-17T23:11:51+02:00'
+    text: 'plumb format end-to-end — draftPrompt + ARTIKEL re-generates draft'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/673cd9f6a2811b3b11733058c0479d4d468630e1'
+  - ts: '2026-07-28T17:24:45+02:00'
+    text: 'opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069'
 ---
 
 Du har en medarbejder der har gjort noget, der ikke kan stå. Tyveri, vold, grov illoyalitet, bevidst sabotage af en kundeaftale — listen over ting der intuitivt skriger "ud" er lang. Og din intuition har som regel ret: det *er* groft nok til bortvisning. Problemet er bare, at det sjældent er grundlaget der vælter sagen. Det er alt det, der sker mellem opdagelsen og det øjeblik medarbejderen står med brevet i hånden.

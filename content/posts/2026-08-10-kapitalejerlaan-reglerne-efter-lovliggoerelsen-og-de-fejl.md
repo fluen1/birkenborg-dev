@@ -7,6 +7,23 @@ tags: ["selskabsret", "kapitalejerlån", "aktionærlån", "ejerledelse", "selska
 excerpt: "Kapitalejerlån er lovliggjort — men kun inden for en snæver korridor. Her er betingelserne, de skatteretlige konsekvenser og de fejl, der stadig koster ejerledere dyrt."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-07T15:54:52+02:00'
+    text: 'Telegram-alarm ved deploy-fejl + Node 24 opt-in + checkout/setup-node v5'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/d8fecf3f5858f5800e5e58977969c7f359158d14'
+  - ts: '2026-06-07T21:03:51+02:00'
+    text: 'HTML-help grupperet efter domæne + budget med progress-bar'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/3df9f5b08cd177fac0e80f082eab59b78b6c7a25'
+  - ts: '2026-06-22T20:18:07+02:00'
+    text: 'opdatér E2E 200-tjek efter authority-sider fjernet'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/cb318288f9899e0b361abb149d4daca6c50ea8d3'
+  - ts: '2026-07-02T00:18:05+02:00'
+    text: '6000 writer-tokens + refill-hook efter publish'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/6f1e644ca04745ec9e3c8795175476d3e7aa2a12'
 ---
 
 Du har et selskab med fri likviditet, og du vil gerne trække penge ud. Udbytte kræver en generalforsamling, løn koster AM-bidrag og topskat, og du har brug for pengene nu — ikke til næste ordinære generalforsamling. Så du lader selskabet låne dig pengene. Det lyder enkelt. Det er det bare ikke altid.

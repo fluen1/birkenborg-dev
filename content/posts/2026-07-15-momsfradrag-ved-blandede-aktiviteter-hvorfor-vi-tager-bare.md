@@ -7,6 +7,11 @@ tags: ["moms-afgifter", "momsfradrag", "delvis fradragsret", "blandede aktivitet
 excerpt: "Delvis momsfradragsret ved blandede aktiviteter kræver direkte henføring, korrekt omsætningsbrøk og løbende opfølgning. Ellers betaler du for meget — eller skylder mere end du tror."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-05-25T02:59:34+02:00'
+    text: 'update help text, /news bare command, STOP excerpt'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/d37846769abfe044bffaa57ae271ad74540a7888'
 ---
 
 Du driver en virksomhed med både momspligtige og momsfrie aktiviteter. Måske er du en ejendomskoncern der både udlejer erhvervslokaler med moms og boliglejemål uden. Måske er du en uddannelsesinstitution der sælger kurser momsfrit og konsulentydelser med moms. Eller en finansiel virksomhed der har momspligtig IT-drift ved siden af den momsfrie kerneforretning. Uanset branchen står du med det samme grundproblem: du køber varer og ydelser ind, der bruges til begge dele. Og spørgsmålet om hvor meget moms du kan trække fra på de indkøb, er hverken trivielt eller risikofrit.

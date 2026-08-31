@@ -6,7 +6,15 @@ status: published
 tags: ["agenter", "arkitektur"]
 privacy_flag: false
 excerpt: "Et nørdet kig ind i mit Claude Code-setup: hvilke agenter, hvad de kan, og hvad jeg har lært om at orkestrere dem."
-marginalia: []
+marginalia:
+  - ts: '2026-05-25T11:37:29+02:00'
+    text: 'write full 10-agents-i-produktion article'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/68a07ab706f2e6f3ab892d7198e4cb7370a49c08'
+  - ts: '2026-06-12T00:57:32+02:00'
+    text: 'enable Workers Logs — workeren havde 0 produktion-logs'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/810baf8ad3cbe781581fd583bf822ace43605dd7'
 ---
 
 Ti agents lyder som mange. Det er det også, i den forstand at det er ti ting der kan gå galt på ti forskellige måder. Men de kom til gradvist — én ad gangen, over omtrent et år — og det er nok den eneste grund til at de stadig kører.
