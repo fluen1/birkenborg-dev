@@ -20,36 +20,200 @@ marginalia:
   - ts: '9/5 09:01'
     text: 'rettelse: agenten ramte 11 ud af 10 paragraffer — men spillede pas'
     source: manual
-  - ts: '2026-08-28T07:01:35Z'
-    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+  - ts: '2026-05-24T22:39:21Z'
+    text: update for data-reveal + add dark mode and reduced-motion tests
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
-  - ts: '2026-08-21T07:02:08Z'
-    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+      https://github.com/fluen1/birkenborg-dev/commit/8847b2ff961db0d934abc09139b6d14e7cb3b68a
+  - ts: '2026-05-25T00:59:18Z'
+    text: add /budget command showing daily API spend
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
-  - ts: '2026-08-12T07:02:23Z'
-    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+      https://github.com/fluen1/birkenborg-agents/commit/5efc8b91b298b3c3c89cac3742504e641f2d4713
+  - ts: '2026-05-25T00:59:26Z'
+    text: add /linkedin command showing pending queue
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
-  - ts: '2026-08-10T07:01:59Z'
-    text: publish kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
+      https://github.com/fluen1/birkenborg-agents/commit/84d1d9c85235b5ccf96f314b7dec2eb20d6125ba
+  - ts: '2026-05-25T00:59:34Z'
+    text: 'update help text, /news bare command, STOP excerpt'
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/2f0246cf4bf9f43bf66dd356c587a85a2dd35b01
-  - ts: '2026-08-07T07:02:06Z'
-    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+      https://github.com/fluen1/birkenborg-agents/commit/d37846769abfe044bffaa57ae271ad74540a7888
+  - ts: '2026-05-25T01:19:55Z'
+    text: 'add re-eval branch coverage (win, lose, error)'
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
-  - ts: '2026-08-05T12:41:51Z'
-    text: ignorér fejl-fixtures genereret af build-corpus-testen
+      https://github.com/fluen1/birkenborg-agents/commit/dde759f37537517f92bf347de5d16e3c558f2364
+  - ts: '2026-05-25T09:36:49Z'
+    text: proper title and slug for seed-f280c3b3 article
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b
+      https://github.com/fluen1/birkenborg-dev/commit/1366584fc704d070ad21baabce6cdecf357b9055
+  - ts: '2026-05-25T09:37:12Z'
+    text: 'update frontmatter title, slug, marginalia and LinkedIn link'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8e31c376c6ae911ec4fa207a2bc69d69173c9511
+  - ts: '2026-05-25T09:37:29Z'
+    text: write full 10-agents-i-produktion article
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/68a07ab706f2e6f3ab892d7198e4cb7370a49c08
+  - ts: '2026-05-25T09:38:01Z'
+    text: write full ma-agent-paragraf-30 article
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/90e5cc290724022e092ba41521e82163e8325e73
+  - ts: '2026-05-25T11:38:20Z'
+    text: weekly craft-move and anti-tic analysis via cron
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/a255c1c9ec97094c11726d3a2f4db3dcec6b5034
+  - ts: '2026-05-26T14:38:40Z'
+    text: wire processLinkedInQueue into cron + callback handlers
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c7ab34624c1bcb9db875da8bd453f3365e6407cf
+  - ts: '2026-06-07T13:54:52Z'
+    text: Telegram-alarm ved deploy-fejl + Node 24 opt-in + checkout/setup-node v5
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/d8fecf3f5858f5800e5e58977969c7f359158d14
+  - ts: '2026-06-07T19:00:33Z'
+    text: setMyCommands-script — autocomplete-menu for alle kommandoer
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/449a0a76dc0e6dd01c31418ecd5637c509596bf2
+  - ts: '2026-06-07T19:16:56Z'
+    text: drift-rapport rendres i ui.ts med HTML — rå-fallback bevares
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4abdf52e9ba0581e4562a3d0a2ca469a67539442
+  - ts: '2026-06-07T19:26:31Z'
+    text: fejlede seeds viser 'Seed modtaget' som nået i dashboard
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/27d9d5dea5db0e45f2f698f15389fcc77c842944
+  - ts: '2026-06-07T19:58:00Z'
+    text: ensartet fejlbesked-konvention — hvad gik galt + næste skridt
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/25489507fa34f3d2fae3becda802e2c1788a5d79
+  - ts: '2026-06-08T15:30:12Z'
+    text: tilføj requeue_linkedin for at gendanne BOM-fejlede krydsposter
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e48a8d9139f283660189792d7e64b574ff3e4b13
+  - ts: '2026-06-08T16:21:49Z'
+    text: deterministisk tic-gate på LinkedIn-versionen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1ff7ae3f17cb0131d1dfaa195c888b315e47dcce
+  - ts: '2026-06-11T00:18:38Z'
+    text: hæv STALE_THRESHOLD_S fra 5 til 16 min
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/be15fd57f99d45a9fe3b9c32b68a67f6f0b0e782
+  - ts: '2026-06-11T00:18:54Z'
+    text: router-bug + TAGS excerpt-tab
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2ba7b06c190c26735bc62efcda4fa2af621252c7
+  - ts: '2026-06-17T20:22:37Z'
+    text: 'parameterisér publish-tid (default 08:20 -> lander ~09:30)'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4c0b7c8f0f410c84df072c4075311e7999f92136
+  - ts: '2026-06-17T20:37:16Z'
+    text: 'scorer favoriserer AI+jura-identitet, filtrerer generisk fra'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/589063dce8a2f6a978de40b3f6487ef645a64a70
+  - ts: '2026-06-17T22:32:50Z'
+    text: hæv job-timeout 5→10 min (suite-vækst sprængte loftet)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8ed6042f05dc2382685cc1b08146d110ad81667d
+  - ts: '2026-06-22T17:52:55Z'
+    text: SMV-outreach (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/2f29f7a58b3ef80c2e5128b8c470f86c56958db0
+  - ts: '2026-06-22T18:02:36Z'
+    text: SMV-outreach (jura + anvendt AI) implementeringsplan
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/56a8d063d64509e51889209ab574ba225852ee82
+  - ts: '2026-06-22T18:04:28Z'
+    text: /smv landingsside (jura + anvendt AI)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/685832f83af43c95123cf19d71db5f3b6429e292
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-07-01T21:32:34Z'
+    text: jura-generalist-indholdsstrategi for birkenborg.dev
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/4e24209fba84537e36339ddb0b02c20f92d685ff
+  - ts: '2026-07-01T21:42:55Z'
+    text: implementeringsplan for jura-generalist-indholdsstrategi
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f652008850fab37a3c4f0eea4016d435190442dd
+  - ts: '2026-07-01T21:54:45Z'
+    text: 55 jura-generalist-emner i 11 klynger + round-robin-rotation
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/70222dbd83c684f9c2b74d2b9d8bcfd41e4ac248
+  - ts: '2026-07-01T22:22:33Z'
+    text: stub fetch i refill-fejl-test så ingen ægte Telegram-kald
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/3c060a33b23bbeef2eb353abf5982029c1577b29
+  - ts: '2026-07-01T22:30:21Z'
+    text: /emner-kommando til godkendelse af SEO-emneforslag
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/8c80263acb774e4598d97619a729905f0e3eb4bf
+  - ts: '2026-07-02T18:17:03Z'
+    text: 'Merge branch ''main'' of https://github.com/fluen1/birkenborg-agents'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1061e1c045312a9e716ad5a0d019718a94babd6b
+  - ts: '2026-07-10T14:13:20Z'
+    text: >-
+      /internal/survey — valideret survey-endpoint m. samtykke-haandhaevelse og
+      DM
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/64c803abaa04e8d2617db512a64bbb63fb8ef453
+  - ts: '2026-07-15T07:03:01Z'
+    text: publish momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8536f64660fbc8be6c9e86baf1257745ca51c2ef
+  - ts: '2026-07-23T12:57:18Z'
+    text: dæk probeSelftest-throw + 6t-påmindelse i alarm-watch (A2 review)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/7ee89ca4b3150ffe067e1eca1149f6cd7edb8c95
+  - ts: '2026-07-23T13:17:31Z'
+    text: >-
+      opdatér kun reminder-ur ved bekræftet alarm-levering (slut-review
+      Important)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/88dd6b5855df3c6b10982205ffbc0b24246c135f
+  - ts: '2026-07-28T15:24:45Z'
+    text: opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069
   - ts: '2026-08-03T07:01:58Z'
     text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
     source: auto-commit
@@ -60,6 +224,36 @@ marginalia:
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
+  - ts: '2026-08-05T12:41:51Z'
+    text: ignorér fejl-fixtures genereret af build-corpus-testen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b
+  - ts: '2026-08-07T07:02:06Z'
+    text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-10T07:01:59Z'
+    text: publish kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2f0246cf4bf9f43bf66dd356c587a85a2dd35b01
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-21T07:02:08Z'
+    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
 ---
 
 

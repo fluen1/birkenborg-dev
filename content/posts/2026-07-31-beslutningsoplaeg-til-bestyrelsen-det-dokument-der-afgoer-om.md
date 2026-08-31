@@ -15,6 +15,11 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
+  - ts: '2026-07-31T07:02:25Z'
+    text: publish beslutningsoplaeg-til-bestyrelsen-det-dokument-der-afgoer-om
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/9e8b2c106fff5fda39a52df733f8ba6b1b17f39a
   - ts: '2026-08-26T07:01:36Z'
     text: publish bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
     source: auto-commit

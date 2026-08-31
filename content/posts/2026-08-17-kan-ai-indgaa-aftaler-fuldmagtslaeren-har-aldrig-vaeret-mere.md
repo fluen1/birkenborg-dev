@@ -16,21 +16,31 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-17T07:01:32Z'
-    text: publish kan-ai-indgaa-aftaler-fuldmagtslaeren-har-aldrig-vaeret-mere
+  - ts: '2026-07-27T14:13:29Z'
+    text: 'ordlyds-QA af survey-batch #1 + nulstil aldrig-sendt status'
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/dfde455f44193427f28e4b16d3cea2f0bd087d35
-  - ts: '2026-08-12T07:02:23Z'
-    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+      https://github.com/fluen1/birkenborg-agents/commit/f4584a52862cac793fe125f20a3c976361d51c58
+  - ts: '2026-07-28T15:24:45Z'
+    text: opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+      https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069
   - ts: '2026-08-07T07:02:06Z'
     text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-17T07:01:32Z'
+    text: publish kan-ai-indgaa-aftaler-fuldmagtslaeren-har-aldrig-vaeret-mere
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/dfde455f44193427f28e4b16d3cea2f0bd087d35
 ---
 
 Der sidder lige nu et stigende antal virksomheder, hvor en AI-agent bestiller kontorartikler, bekræfter bookinger eller sender tilbud til kunder — uden at et menneske godkender hver enkelt handling. Det virker effektivt. Det er det også. Men spørgsmålet, der sjældent bliver stillet før det går galt, er brutalt simpelt: er de aftaler juridisk bindende?

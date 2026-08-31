@@ -11,6 +11,21 @@ excerpt: >-
   Et nørdet kig ind i mit Claude Code-setup: hvilke agenter, hvad de kan, og
   hvad jeg har lært om at orkestrere dem.
 marginalia:
+  - ts: '2026-05-25T09:37:29Z'
+    text: write full 10-agents-i-produktion article
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/68a07ab706f2e6f3ab892d7198e4cb7370a49c08
+  - ts: '2026-06-11T22:57:32Z'
+    text: enable Workers Logs — workeren havde 0 produktion-logs
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/810baf8ad3cbe781581fd583bf822ace43605dd7
+  - ts: '2026-07-02T18:17:03Z'
+    text: 'Merge branch ''main'' of https://github.com/fluen1/birkenborg-agents'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/1061e1c045312a9e716ad5a0d019718a94babd6b
   - ts: '2026-08-07T07:02:06Z'
     text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
     source: auto-commit

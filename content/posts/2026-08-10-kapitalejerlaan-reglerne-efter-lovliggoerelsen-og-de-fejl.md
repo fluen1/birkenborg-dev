@@ -16,21 +16,26 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-28T07:01:35Z'
-    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+  - ts: '2026-07-28T15:24:45Z'
+    text: opretSag sluger også KV-fejl — aldrig-kaster-kontrakten holder
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
-  - ts: '2026-08-10T07:01:59Z'
-    text: publish kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
-    source: auto-commit
-    commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/2f0246cf4bf9f43bf66dd356c587a85a2dd35b01
+      https://github.com/fluen1/birkenborg-agents/commit/b468ffdd183c9f4f2e1755bd701c3db1e105f069
   - ts: '2026-08-05T12:41:51Z'
     text: ignorér fejl-fixtures genereret af build-corpus-testen
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b
+  - ts: '2026-08-10T07:01:59Z'
+    text: publish kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2f0246cf4bf9f43bf66dd356c587a85a2dd35b01
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
 ---
 
 Du har et selskab med fri likviditet, og du vil gerne trække penge ud. Udbytte kræver en generalforsamling, løn koster AM-bidrag og topskat, og du har brug for pengene nu — ikke til næste ordinære generalforsamling. Så du lader selskabet låne dig pengene. Det lyder enkelt. Det er det bare ikke altid.

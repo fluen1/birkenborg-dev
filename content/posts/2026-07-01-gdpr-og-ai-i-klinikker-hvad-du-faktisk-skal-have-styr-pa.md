@@ -15,16 +15,56 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-26T07:01:36Z'
-    text: publish bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
+  - ts: '2026-06-07T19:58:00Z'
+    text: ensartet fejlbesked-konvention — hvad gik galt + næste skridt
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/8cf89094a92843f72a7b9ba00cd0d367cec60de9
+      https://github.com/fluen1/birkenborg-agents/commit/25489507fa34f3d2fae3becda802e2c1788a5d79
+  - ts: '2026-06-22T18:07:19Z'
+    text: udfas authority-sider (klinikker/konsulenter)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/e11c94a17b9f869cfdf65ccf5c25052133f3b7cd
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-07-01T22:53:02Z'
+    text: 'log faglig_trovaerdighed, defensiv proposals-parse, audience i gdpr-filter'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d3c7d71b62d7b6e68f8e078252e335ae4871a342
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-31T07:02:25Z'
+    text: publish beslutningsoplaeg-til-bestyrelsen-det-dokument-der-afgoer-om
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/9e8b2c106fff5fda39a52df733f8ba6b1b17f39a
   - ts: '2026-08-07T07:02:06Z'
     text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-26T07:01:36Z'
+    text: publish bestyrelsesansvar-naar-ai-leverer-beslutningsgrundlaget
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8cf89094a92843f72a7b9ba00cd0d367cec60de9
 ---
 
 Du driver en klinik — fysioterapi, tandlæge, psykolog, kiropraktik, hvad som helst — og du overvejer at bruge AI til noget med dine patientdata. Måske en agent der sorterer henvendelser, et værktøj der hjælper med journalnotater, eller noget der analyserer behandlingsforløb på tværs af patienter.

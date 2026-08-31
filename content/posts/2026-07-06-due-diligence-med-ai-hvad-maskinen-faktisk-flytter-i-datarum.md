@@ -16,6 +16,31 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
+  - ts: '2026-06-17T20:15:48Z'
+    text: /seed falder tilbage til seneste digest + 5-dages RSS-vindue
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/a454cd9f409db6d468a63589dd6324a5a0c17a9d
+  - ts: '2026-06-29T07:02:12Z'
+    text: publish hvad-koster-en-ai-agent-en-rlig-prisguide-for-sma-virksomhed
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/4d21403cd33b46d1523163481520af6cfc082c59
+  - ts: '2026-07-01T07:01:32Z'
+    text: publish gdpr-og-ai-i-klinikker-hvad-du-faktisk-skal-have-styr-pa
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/a4c704c51579365e53e9b394202a811a9a07d8ac
+  - ts: '2026-07-06T07:02:22Z'
+    text: publish due-diligence-med-ai-hvad-maskinen-faktisk-flytter-i-datarum
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/fc0b359a3a8fb212468911971f7a55b58f53743c
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
   - ts: '2026-08-07T07:02:06Z'
     text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
     source: auto-commit

@@ -16,16 +16,26 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-21T07:02:08Z'
-    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+  - ts: '2026-07-13T07:03:11Z'
+    text: publish kundeklausuler-og-konkurrenceklausuler-hvad-der-skal-til-for
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
+      https://github.com/fluen1/birkenborg-dev/commit/8b1042d13dfc600c05c4e71355d0947f2f5cf2e6
+  - ts: '2026-07-27T15:43:06Z'
+    text: afsender besluttet (hotmail) + routing/DMARC paa plads
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c
   - ts: '2026-08-07T07:02:06Z'
     text: publish ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-dev/commit/0b7ff669dded1af7971395c7df4a7f7c014a7038
+  - ts: '2026-08-21T07:02:08Z'
+    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
 ---
 
 De fleste artikler om AI i juridisk praksis handler om potentiale. Denne handler om hvad der sker når man rent faktisk bygger agenter, sætter dem på rigtige opgaver og lader dem køre dag efter dag. Ikke som tankeeksperiment, men som værktøj der skal levere noget brugbart til en forretning der ikke har tid til at vente.

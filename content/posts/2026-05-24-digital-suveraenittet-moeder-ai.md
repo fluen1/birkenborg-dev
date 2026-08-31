@@ -16,6 +16,23 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
+  - ts: '2026-06-07T19:26:31Z'
+    text: fejlede seeds viser 'Seed modtaget' som nået i dashboard
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/27d9d5dea5db0e45f2f698f15389fcc77c842944
+  - ts: '2026-06-17T20:57:05Z'
+    text: selvbærende default + ægte-spørgsmål-slut + artikel-deling som valg
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/f3578b608eae0f6187ac5206fb4ebec8ad9e5a0b
+  - ts: '2026-07-10T14:05:08Z'
+    text: >-
+      CORS-preflight + ACAO paa offentlige internal-endpoints — browser-submits
+      var bl
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/bfb848ad344e26a569afbefbe725259341c80f5b
   - ts: '2026-08-21T07:02:08Z'
     text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
     source: auto-commit

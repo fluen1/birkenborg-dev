@@ -18,31 +18,31 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-28T07:01:35Z'
-    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
-    source: auto-commit
-    commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
-  - ts: '2026-08-12T07:02:23Z'
-    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
-    source: auto-commit
-    commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
-  - ts: '2026-08-10T07:01:59Z'
-    text: publish kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
-    source: auto-commit
-    commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/2f0246cf4bf9f43bf66dd356c587a85a2dd35b01
-  - ts: '2026-08-05T12:41:51Z'
-    text: ignorér fejl-fixtures genereret af build-corpus-testen
-    source: auto-commit
-    commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b
   - ts: '2026-08-03T07:01:58Z'
     text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
+  - ts: '2026-08-05T12:41:51Z'
+    text: ignorér fejl-fixtures genereret af build-corpus-testen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b
+  - ts: '2026-08-10T07:01:59Z'
+    text: publish kapitalejerlaan-reglerne-efter-lovliggoerelsen-og-de-fejl
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2f0246cf4bf9f43bf66dd356c587a85a2dd35b01
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
 ---
 
 Din marketingafdeling har fået nyt legetøj. Et AI-værktøj spytter annoncer, produkttekster og SoMe-opslag ud på en brøkdel af den tid, det tog før. Outputtet er flot, overbevisende og formuleret med en selvsikkerhed, der ville få selv den mest erfarne tekstforfatter til at blegne. Problemet er bare, at selvsikkerhed og korrekthed ikke er det samme — og markedsføringsloven er ligeglad med, om det var en person eller en sprogmodel, der fandt på påstanden.

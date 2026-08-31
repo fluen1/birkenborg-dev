@@ -15,26 +15,46 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-28T07:01:35Z'
-    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+  - ts: '2026-07-26T14:18:03Z'
+    text: 'T21: tving JSON-svaret via output_config i stedet for prosa + regex'
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
-  - ts: '2026-08-17T07:01:32Z'
-    text: publish kan-ai-indgaa-aftaler-fuldmagtslaeren-har-aldrig-vaeret-mere
+      https://github.com/fluen1/birkenborg-agents/commit/acde5216f7e9fccc6ca09fcc02ad8b22219134a1
+  - ts: '2026-07-27T14:13:29Z'
+    text: 'ordlyds-QA af survey-batch #1 + nulstil aldrig-sendt status'
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/dfde455f44193427f28e4b16d3cea2f0bd087d35
-  - ts: '2026-08-12T07:02:23Z'
-    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+      https://github.com/fluen1/birkenborg-agents/commit/f4584a52862cac793fe125f20a3c976361d51c58
+  - ts: '2026-07-27T15:43:06Z'
+    text: afsender besluttet (hotmail) + routing/DMARC paa plads
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+      https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c
+  - ts: '2026-07-27T21:48:55Z'
+    text: loeftet om resultater gjort holdbart ved ethvert antal svar
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c2f9031f47b63fb02c2388fe9afeef783d3c1245
   - ts: '2026-08-03T07:01:58Z'
     text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-dev/commit/4f64c4abd886b55e1b396911c22cea9f16f39a56
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-17T07:01:32Z'
+    text: publish kan-ai-indgaa-aftaler-fuldmagtslaeren-har-aldrig-vaeret-mere
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/dfde455f44193427f28e4b16d3cea2f0bd087d35
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
 ---
 
 En earn-out lyder som den perfekte kompromis-mekanisme. Sælger mener virksomheden er mere værd end køber vil betale kontant på closing. Køber er nervøs for om de lyserøde budgetter holder. Løsningen? En del af købesummen gøres betinget af fremtidig performance. Alle er glade — indtil de ikke er det mere.

@@ -15,21 +15,38 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-28T07:01:35Z'
-    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+  - ts: '2026-07-15T07:03:01Z'
+    text: publish momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
-  - ts: '2026-08-19T07:02:09Z'
-    text: publish bortvisning-grundlaget-holder-oftere-end-du-tror-processen
+      https://github.com/fluen1/birkenborg-dev/commit/8536f64660fbc8be6c9e86baf1257745ca51c2ef
+  - ts: '2026-07-23T13:23:56Z'
+    text: >-
+      sendDM returnerer leverings-bool så to-kanal-gaten er ærlig (slut-review
+      rest)
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/eaefa0dc74e63b66a41c13625f65fd95d75aa22a
-  - ts: '2026-08-12T07:02:23Z'
-    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+      https://github.com/fluen1/birkenborg-agents/commit/1a7f8c71513b5c0715be55a349dab8316220254c
+  - ts: '2026-07-27T14:13:29Z'
+    text: 'ordlyds-QA af survey-batch #1 + nulstil aldrig-sendt status'
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+      https://github.com/fluen1/birkenborg-agents/commit/f4584a52862cac793fe125f20a3c976361d51c58
+  - ts: '2026-07-27T15:43:06Z'
+    text: afsender besluttet (hotmail) + routing/DMARC paa plads
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c
+  - ts: '2026-07-27T23:39:45Z'
+    text: 'Cloudflare Email Sending som primaer vej, Resend som fallback'
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/3921d7334ca2f7296f56f3cb9101d809ecf88323
+  - ts: '2026-07-28T00:32:02Z'
+    text: selftest-endpoint saa noedkanalen kan bevises uden nedbrud
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/413e0aa3f9a52c4162be9e1ae853f921bc00bf35
   - ts: '2026-08-03T07:01:58Z'
     text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
     source: auto-commit
@@ -40,6 +57,21 @@ marginalia:
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-19T07:02:09Z'
+    text: publish bortvisning-grundlaget-holder-oftere-end-du-tror-processen
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/eaefa0dc74e63b66a41c13625f65fd95d75aa22a
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
 ---
 
 Du har en whistleblowerordning. Den står på intranettet, et sted mellem kantinemenuen og retningslinjerne for firmabiler. Der er en e-mailadresse — måske endda en ekstern portal. HR oprettede den i 2023 fordi loven krævede det. Siden da er der kommet nul indberetninger.

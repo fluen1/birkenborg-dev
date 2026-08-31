@@ -17,21 +17,55 @@ excerpt: >-
 privacy_flag: false
 linkedin_url: null
 marginalia:
-  - ts: '2026-08-28T07:01:35Z'
-    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+  - ts: '2026-06-20T16:11:27Z'
+    text: load-tids health-probe så badgen er ærlig ved page-load
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
-  - ts: '2026-08-21T07:02:08Z'
-    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+      https://github.com/fluen1/birkenborg-dev/commit/e390affb7ea4f192d598a77f96a06b850115287c
+  - ts: '2026-07-01T21:32:34Z'
+    text: jura-generalist-indholdsstrategi for birkenborg.dev
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
-  - ts: '2026-08-12T07:02:23Z'
-    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+      https://github.com/fluen1/birkenborg-agents/commit/4e24209fba84537e36339ddb0b02c20f92d685ff
+  - ts: '2026-07-01T21:42:55Z'
+    text: implementeringsplan for jura-generalist-indholdsstrategi
     source: auto-commit
     commit_url: >-
-      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+      https://github.com/fluen1/birkenborg-agents/commit/f652008850fab37a3c4f0eea4016d435190442dd
+  - ts: '2026-07-01T22:10:20Z'
+    text: genopfyldnings-DM ved lav emnebeholdning (refill.ts)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/714cf22b8ce88d2afff95fd5a07cd62d3cb23ed0
+  - ts: '2026-07-15T07:03:01Z'
+    text: publish momsfradrag-ved-blandede-aktiviteter-hvorfor-vi-tager-bare
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/8536f64660fbc8be6c9e86baf1257745ca51c2ef
+  - ts: '2026-07-23T13:17:31Z'
+    text: >-
+      opdatér kun reminder-ur ved bekræftet alarm-levering (slut-review
+      Important)
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/88dd6b5855df3c6b10982205ffbc0b24246c135f
+  - ts: '2026-07-27T21:48:55Z'
+    text: loeftet om resultater gjort holdbart ved ethvert antal svar
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/c2f9031f47b63fb02c2388fe9afeef783d3c1245
+  - ts: '2026-07-29T14:20:29Z'
+    text: Altinget-kilden peger nu på hoved-feedet
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/e7e9aac0ac8c2a2ca9b9fdcd2653567b3d351963
+  - ts: '2026-07-30T16:33:52Z'
+    text: >-
+      LinkedIn-generering kasseres ved kilden naar pauset + spoergsmaal spises
+      ikke
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-agents/commit/6fa0db5d51487b4b132ba94dbcace875356e2f87
   - ts: '2026-08-03T07:01:58Z'
     text: publish whistleblowerordning-hvorfor-en-doed-postkasse-er-vaerre-end
     source: auto-commit
@@ -42,6 +76,21 @@ marginalia:
     source: auto-commit
     commit_url: >-
       https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092
+  - ts: '2026-08-12T07:02:23Z'
+    text: publish earn-out-aftaler-hvorfor-de-ender-i-konflikt-og-hvordan-du
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/7d5a01982986a603cbd0b2cc393ae70f6d78a3d1
+  - ts: '2026-08-21T07:02:08Z'
+    text: publish moms-paa-digitale-ydelser-til-udlandet-hvor-lander-den
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/2e62cec6fb00fee77f9d21fb87f7898077f16e5e
+  - ts: '2026-08-28T07:01:35Z'
+    text: publish vildledning-efter-markedsfoeringsloven-og-hvorfor-ai
+    source: auto-commit
+    commit_url: >-
+      https://github.com/fluen1/birkenborg-dev/commit/305d7db50ce00b9100155e6dfaa6e36e2b5959fc
 ---
 
 Du driver en virksomhed med både momspligtige og momsfrie aktiviteter. Måske er du en ejendomskoncern der både udlejer erhvervslokaler med moms og boliglejemål uden. Måske er du en uddannelsesinstitution der sælger kurser momsfrit og konsulentydelser med moms. Eller en finansiel virksomhed der har momspligtig IT-drift ved siden af den momsfrie kerneforretning. Uanset branchen står du med det samme grundproblem: du køber varer og ydelser ind, der bruges til begge dele. Og spørgsmålet om hvor meget moms du kan trække fra på de indkøb, er hverken trivielt eller risikofrit.
