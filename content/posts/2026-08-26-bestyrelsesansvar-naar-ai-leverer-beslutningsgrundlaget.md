@@ -7,6 +7,15 @@ tags: ["bestyrelse-ledelse", "bestyrelsesansvar", "ai i beslutningsprocesser", "
 excerpt: "AI ændrer ikke hvem der bærer ansvaret — men det ændrer hvad der kræves for at løfte det. Forsvarlig beslutningsproces når modellen sidder i kæden."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-07-24T18:06:41+02:00'
+    text: 'afkobl LinkedIn-generering fra historie-pipeline naar pauset'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/ffbad6cd39cc578ca25c2be09ba609eaa16f0c56'
+  - ts: '2026-07-30T18:33:52+02:00'
+    text: 'LinkedIn-generering kasseres ved kilden naar pauset + spoergsmaal spises ikke'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/6fa0db5d51487b4b132ba94dbcace875356e2f87'
 ---
 
 En direktion præsenterer bestyrelsen for en analyse af et potentielt opkøbsmål. Tallene ser solide ud, konklusionen er klar, og anbefalingen er entydig. Det usagte i rummet: analysen er i væsentligt omfang genereret af en sprogmodel. Bestyrelsen nikker. Opkøbet viser sig at være en katastrofe — modellen havde hallucineret nøgletal, og ingen havde tjekket dem. Hvem hænger på den?
