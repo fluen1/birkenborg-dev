@@ -12,6 +12,10 @@ marginalia:
     text: 'update help text, /news bare command, STOP excerpt'
     source: 'auto-commit'
     commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/d37846769abfe044bffaa57ae271ad74540a7888'
+  - ts: '2026-08-31T01:07:42Z'
+    text: 'match på hele ord, én note pr. commit, rør kun marginalia-feltet'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/04e65290b31ce24dff454458d883c7cfca7feabc'
 ---
 
 Du driver en virksomhed med både momspligtige og momsfrie aktiviteter. Måske er du en ejendomskoncern der både udlejer erhvervslokaler med moms og boliglejemål uden. Måske er du en uddannelsesinstitution der sælger kurser momsfrit og konsulentydelser med moms. Eller en finansiel virksomhed der har momspligtig IT-drift ved siden af den momsfrie kerneforretning. Uanset branchen står du med det samme grundproblem: du køber varer og ydelser ind, der bruges til begge dele. Og spørgsmålet om hvor meget moms du kan trække fra på de indkøb, er hverken trivielt eller risikofrit.

@@ -15,6 +15,10 @@ marginalia:
     text: 'enable Workers Logs — workeren havde 0 produktion-logs'
     source: 'auto-commit'
     commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/810baf8ad3cbe781581fd583bf822ace43605dd7'
+  - ts: '2026-09-06T12:48:57Z'
+    text: 'erstat AGENTS.md-kopi med henvisning til CLAUDE.md'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/6c5b823d9aca0d9a967e8e984e4cb4ca045c59ca'
 ---
 
 Ti agents lyder som mange. Det er det også, i den forstand at det er ti ting der kan gå galt på ti forskellige måder. Men de kom til gradvist — én ad gangen, over omtrent et år — og det er nok den eneste grund til at de stadig kører.
