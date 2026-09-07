@@ -9,7 +9,7 @@ order: 15
 
 # Kernebyg
 
-Håndværkere taber udbud på tid, ikke på pris — fristen er overskredet, før tilbuddet er skrevet. Kernebyg finder relevante udbud automatisk, trækker tilbudsfrist og krav ud af udbudsmaterialet, og genererer et førsteudkast til tilbud med AI. På private sager håndterer den også forbrugerjuraen: fortrydelsesret, seks-dages-reglen, korrekt sidefod.
+Håndværkere taber udbud på tid, ikke på pris — fristen er overskredet, før tilbuddet er skrevet. Kernebyg finder relevante udbud automatisk, trækker tilbudsfrist og krav ud af udbudsmaterialet, og genererer et førsteudkast til tilbud med AI. På private sager håndterer den også forbrugerjuraen: fortrydelsesret, seks-dages-reglen, sidefod.
 
 ## Status
 
