@@ -16,7 +16,7 @@ Håndværkere taber udbud på tid, ikke på pris — fristen er overskredet, fø
 Teknisk stabilt, men uden rigtige brugere endnu til at teste det i praksis:
 
 - Udbudsradar, AI-tilbudsgenerering og privat-sagsflow bygget og testet
-- Backend- og frontendtest kører grønt i produktionsgrenen (nørdesprog for: koden er efterprøvet, ikke bare skrevet)
+- Backend- og frontendtest kører grønt i den kode der nu er lagt i produktion (nørdesprog for: koden er efterprøvet, ikke bare skrevet)
 - Databasemigrationerne er kørt mod produktion — det er den rigtige, driftsklare database, ikke en test-udgave
 - Ingen brugere endnu — produktet er ikke færdigbygget
 
