@@ -121,7 +121,7 @@ jobs:
           curl -s -X POST "https://bot.birkenborg.dev/internal/notify" \
             -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
             -H "Content-Type: application/json" \
-            -d '{"level":"kraever-dig","source":"marginalia","what":"Der ligger nye forslag til margin-noter på bloggen og venter på dit ja. Indtil du har set dem, står der ikke noget nyt på sitet.","action":"Læs forslagene igennem, slet dem du ikke vil have, og godkend resten.","ref":"marginalia-ugens-forslag"}'
+            -d '{"level":"kraever-dig","source":"marginalia","what":"Der ligger nye forslag til margin-noter på bloggen og venter på dit ja. Indtil du har set dem, står der ikke noget nyt på sitet.","action":"Læs forslagene igennem, slet dem du ikke vil have, og godkend resten."}'
 
       - name: Notify on failure
         if: failure()
