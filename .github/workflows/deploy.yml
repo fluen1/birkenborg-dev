@@ -54,7 +54,7 @@ jobs:
         env:
           BOT_INTERNAL_TOKEN: ${{ secrets.BOT_INTERNAL_TOKEN }}
         run: |
-          PAYLOAD='{"level":"risiko","source":"birkenborg.dev","what":"birkenborg.dev kunne ikke opdateres — sitet viser stadig den gamle udgave, og det du senest har ændret er ikke gået i luften.","action":"Sig til, så finder jeg fejlen og sender det live igen."}'
+          PAYLOAD='{"text":"birkenborg.dev kunne ikke opdateres — sitet viser stadig den gamle udgave. Sig til, så finder jeg fejlen.","level":"risiko","source":"birkenborg.dev","what":"birkenborg.dev kunne ikke opdateres — sitet viser stadig den gamle udgave, og det du senest har ændret er ikke gået i luften.","action":"Sig til, så finder jeg fejlen og sender det live igen."}'
           if curl -fsS -X POST "https://bot.birkenborg.dev/internal/notify" \
                -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
                -H "Content-Type: application/json" \

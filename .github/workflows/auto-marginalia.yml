@@ -112,6 +112,9 @@ jobs:
             echo "Opdaterede eksisterende PR på $BRANCH"
           fi
 
+      # "text" er en overgangs-sikring: kører den gamle worker endnu, forstår
+      # den kun det felt, og uden det ville pinget forsvinde i tavshed. Den nye
+      # worker ser bort fra det. Feltet kan fjernes når workeren er deployet.
       # Kun ping når der faktisk kom noget nyt. En uge uden nye forslag er tavs.
       - name: Notify Telegram
         if: success() && steps.commit.outputs.changed == 'true'
@@ -121,7 +124,7 @@ jobs:
           curl -s -X POST "https://bot.birkenborg.dev/internal/notify" \
             -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
             -H "Content-Type: application/json" \
-            -d '{"level":"kraever-dig","source":"marginalia","what":"Der ligger nye forslag til margin-noter på bloggen og venter på dit ja. Indtil du har set dem, står der ikke noget nyt på sitet.","action":"Læs forslagene igennem, slet dem du ikke vil have, og godkend resten."}'
+            -d '{"text":"Der ligger nye forslag til margin-noter på bloggen og venter på dit ja. Læs dem igennem, slet dem du ikke vil have, og godkend resten.","level":"kraever-dig","source":"marginalia","what":"Der ligger nye forslag til margin-noter på bloggen og venter på dit ja. Indtil du har set dem, står der ikke noget nyt på sitet.","action":"Læs forslagene igennem, slet dem du ikke vil have, og godkend resten."}'
 
       - name: Notify on failure
         if: failure()
@@ -131,4 +134,4 @@ jobs:
           curl -s -X POST "https://bot.birkenborg.dev/internal/notify" \
             -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
             -H "Content-Type: application/json" \
-            -d '{"level":"intern","source":"marginalia","what":"Den ugentlige indsamling af margin-noter til bloggen gik galt. Der kom ingen nye forslag ind denne uge, og intet er ændret på sitet. Den prøver igen af sig selv næste søndag."}'
+            -d '{"text":"Den ugentlige indsamling af margin-noter til bloggen gik galt. Der kom ingen nye forslag ind denne uge, og intet er ændret på sitet. Den prøver igen af sig selv næste søndag.","level":"intern","source":"marginalia","what":"Den ugentlige indsamling af margin-noter til bloggen gik galt. Der kom ingen nye forslag ind denne uge, og intet er ændret på sitet. Den prøver igen af sig selv næste søndag."}'
