@@ -121,7 +121,7 @@ jobs:
           curl -s -X POST "https://bot.birkenborg.dev/internal/notify" \
             -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
             -H "Content-Type: application/json" \
-            -d '{"text":"Der er kommet nye forslag til margin-noter på bloggen. De ligger samlet ét sted og venter på at du siger god for dem — indtil da er der ikke ændret noget på sitet."}'
+            -d '{"level":"kraever-dig","source":"marginalia","what":"Der ligger nye forslag til margin-noter på bloggen og venter på dit ja. Indtil du har set dem, står der ikke noget nyt på sitet.","action":"Læs forslagene igennem, slet dem du ikke vil have, og godkend resten.","ref":"marginalia-ugens-forslag"}'
 
       - name: Notify on failure
         if: failure()
@@ -131,4 +131,4 @@ jobs:
           curl -s -X POST "https://bot.birkenborg.dev/internal/notify" \
             -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "{\"text\":\"Den ugentlige indsamling af margin-noter til bloggen gik galt i nat. Der er ikke kommet nye forslag ind denne uge, og intet er ændret på sitet. Detaljer: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}"
+            -d '{"level":"intern","source":"marginalia","what":"Den ugentlige indsamling af margin-noter til bloggen gik galt. Der kom ingen nye forslag ind denne uge, og intet er ændret på sitet. Den prøver igen af sig selv næste søndag."}'

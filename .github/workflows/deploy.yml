@@ -45,12 +45,23 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      # Går via den erklærede vej, så alarmen bliver logget og sorteret som
+      # "risiko". Nødvejen nedenunder er ikke pynt: fejler denne deploy fordi
+      # Cloudflare er nede, kan bot.birkenborg.dev være nede af samme grund, og
+      # så skal alarmen stadig frem. En tavs fejlet deploy opdages aldrig.
       - name: Telegram-alarm ved fejl
         if: failure()
         env:
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          BOT_INTERNAL_TOKEN: ${{ secrets.BOT_INTERNAL_TOKEN }}
         run: |
-          FIRST_LINE="${COMMIT_MSG%%$'\n'*}"
+          PAYLOAD='{"level":"risiko","source":"birkenborg.dev","what":"birkenborg.dev kunne ikke opdateres — sitet viser stadig den gamle udgave, og det du senest har ændret er ikke gået i luften.","action":"Sig til, så finder jeg fejlen og sender det live igen."}'
+          if curl -fsS -X POST "https://bot.birkenborg.dev/internal/notify" \
+               -H "Authorization: Bearer $BOT_INTERNAL_TOKEN" \
+               -H "Content-Type: application/json" \
+               -d "$PAYLOAD" > /dev/null; then
+            exit 0
+          fi
+          echo "Erklæret vej svarede ikke — bruger nødvejen direkte til Telegram."
           curl -fsS -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            --data-urlencode text="🔴 birkenborg.dev deploy FEJLEDE: ${FIRST_LINE:-manuel kørsel} — https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" > /dev/null
+            --data-urlencode text="birkenborg.dev kunne ikke opdateres — sitet viser stadig den gamle udgave. Sig til, så finder jeg fejlen." > /dev/null
