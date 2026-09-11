@@ -10,6 +10,11 @@ status: published
 publish_at: 2026-05-08T09:00:00+02:00
 
 linkedin_url: "https://www.linkedin.com/feed/update/urn:li:share:7458430436244111361/"
+marginalia:
+  - ts: '2026-06-17T23:48:41+02:00'
+    text: 'retten JA-footer til ~09:30 + JSON.parse-guard i getLatestDigest'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/683ba80624e91029df0e20c8b77c2f51b849c66b'
 ---
 
 
