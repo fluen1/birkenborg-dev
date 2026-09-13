@@ -24,6 +24,10 @@ marginalia:
     text: '6000 writer-tokens + refill-hook efter publish'
     source: 'auto-commit'
     commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/6f1e644ca04745ec9e3c8795175476d3e7aa2a12'
+  - ts: '2026-09-11T17:15:57Z'
+    text: 'flyt taellingen efter gaten, saa en maaling ikke kan vaelte den'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/cf69edb6b200027a2287989547a3f63c6cf36b79'
 ---
 
 Du har et selskab med fri likviditet, og du vil gerne trække penge ud. Udbytte kræver en generalforsamling, løn koster AM-bidrag og topskat, og du har brug for pengene nu — ikke til næste ordinære generalforsamling. Så du lader selskabet låne dig pengene. Det lyder enkelt. Det er det bare ikke altid.
