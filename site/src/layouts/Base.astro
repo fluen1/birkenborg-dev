@@ -17,6 +17,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
     <title>{title}</title>
+    <!-- Google tag (GA4) — measurement ID is public site configuration. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ED5CV08513"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ED5CV08513');
+    </script>
     <script is:inline>
       (function() {
         var t = localStorage.getItem('theme');
