@@ -7,6 +7,31 @@ tags: ["ai-agent", "prissætning", "open-source", "smv", "selvhosting"]
 excerpt: "En AI-agent koster fra ører per interaktion til sekscifrede udviklingsbudgetter. Forskellen afhænger af om du vælger API eller selvhosting — og af om du bygger til den rigtige opgave."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-17T21:36:25+02:00'
+    text: 'resolve LinkedIn v2 open questions (Tue/Thu ~09:30, D1, fidelity-loosen)'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/76474fe92d3108e5ef1af052a771db492c2f32fb'
+  - ts: '2026-06-20T18:11:27+02:00'
+    text: 'load-tids health-probe så badgen er ærlig ved page-load'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/e390affb7ea4f192d598a77f96a06b850115287c'
+  - ts: '2026-06-22T20:04:49+02:00'
+    text: 'SMV-segmenter + A/B-kolonner i cvr_leads + tracker'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/d97fb9e6000490b5287c172fe67c5064cdd81b06'
+  - ts: '2026-06-22T20:08:32+02:00'
+    text: 'SMV-prompt med A/B-variant + segment i draft_outreach'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/9ab240fb9880beea465353a2c686ba094010703e'
+  - ts: '2026-06-22T20:11:06+02:00'
+    text: 'SMV-templates for ansættelse + freelance (A/B)'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/4478560d851992000c8f3b93442b3a79f0b8cc4e'
+  - ts: '2026-07-23T15:23:56+02:00'
+    text: 'sendDM returnerer leverings-bool så to-kanal-gaten er ærlig (slut-review rest)'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/1a7f8c71513b5c0715be55a349dab8316220254c'
 ---
 
 Det korte svar: det afhænger af. Det lidt længere svar: det afhænger af noget helt andet end du tror.
