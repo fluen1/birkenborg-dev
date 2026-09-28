@@ -7,6 +7,11 @@ tags: ["ai", "uddannelse", "arbejdsmarked", "automation"]
 excerpt: "Uddannelserne integrerer AI for at undgå at uddanne til ledighed. Men rutineopgaverne er præcis dem der normalt giver erfaring nok til at bedømme hvornår AI tager fejl."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-05-25T17:52:04+02:00'
+    text: 'auto-update /now, content nudge, auto-highlight on publish'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/eef3086ccb8da05abfee3b29281217ce53b298a6'
 ---
 
 Stig Salskov Iversen, uddannelseschef på Syddansk Erhvervsakademi, kalder det en tsunami. Første bølge rammer de udsatte dele af it. Næste bølge rammer alt vidensarbejde. Siden august er AI skrevet ind i uddannelsesordningen på flere it-uddannelser — ikke som et eksperiment, men som et krav. Uddannelserne vil ikke uddanne til ledighed.

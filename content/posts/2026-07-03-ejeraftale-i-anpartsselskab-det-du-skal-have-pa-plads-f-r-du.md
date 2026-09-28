@@ -7,6 +7,15 @@ tags: ["selskabsret", "ejeraftale", "anpartsselskab", "exit-mekanismer", "ejersk
 excerpt: "En ejeraftale i et ApS regulerer det vedtægterne ikke kan: deadlock, exit, good/bad leaver og værdiansættelse. Her er hvad du skal have med — og hvad ejere typisk glemmer."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-08T17:22:24+02:00'
+    text: 'strip BOM/whitespace fra author-URN før publish'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/e9d77ed199a4a0925695d86820e7b2b4370fa0dd'
+  - ts: '2026-07-27T17:43:06+02:00'
+    text: 'afsender besluttet (hotmail) + routing/DMARC paa plads'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/d261ae2ae335e1ffc5aaaf9ca0f9453a7e32ba2c'
 ---
 
 Du er ved at starte virksomhed med en eller flere partnere, eller du er allerede i gang og har aldrig fået lavet en ejeraftale. Begge situationer er normale. Den første er den billige at løse. Den anden bliver dyrere for hver måned der går.

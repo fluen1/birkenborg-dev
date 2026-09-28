@@ -7,6 +7,11 @@ tags: ["compliance-risiko", "markedsføringsloven", "vildledning", "sammenlignen
 excerpt: "AI-genererede marketingtekster skalerer ikke bare produktionen — de skalerer også risikoen for vildledning. Her er hvad markedsføringsloven kræver, og hvad ledelsen skal beslutte."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-08-05T14:41:51+02:00'
+    text: 'ignorér fejl-fixtures genereret af build-corpus-testen'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/b8d76af6226ab76fbf5e4e8ebb7af5954203fb9b'
 ---
 
 Din marketingafdeling har fået nyt legetøj. Et AI-værktøj spytter annoncer, produkttekster og SoMe-opslag ud på en brøkdel af den tid, det tog før. Outputtet er flot, overbevisende og formuleret med en selvsikkerhed, der ville få selv den mest erfarne tekstforfatter til at blegne. Problemet er bare, at selvsikkerhed og korrekthed ikke er det samme — og markedsføringsloven er ligeglad med, om det var en person eller en sprogmodel, der fandt på påstanden.

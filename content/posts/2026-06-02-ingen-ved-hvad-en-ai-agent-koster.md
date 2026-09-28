@@ -7,6 +7,35 @@ tags: ["ai", "agenter", "prissætning", "jura", "indkøb"]
 excerpt: "Ingen har bestemt sig for om AI-agenter faktureres per kald, per beslutning eller per resultat. Herbert Nathan kalder det 'det store spørgsmål lige nu'. Han har ret."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-07T21:40:26+02:00'
+    text: 'dashboard-besked opdateres ved alle state-transitions'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/754b02e4fa7d9f81ef9b0e174851e11da8e143ad'
+  - ts: '2026-07-02T00:10:20+02:00'
+    text: 'genopfyldnings-DM ved lav emnebeholdning (refill.ts)'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/714cf22b8ce88d2afff95fd5a07cd62d3cb23ed0'
+  - ts: '2026-07-02T00:22:33+02:00'
+    text: 'stub fetch i refill-fejl-test så ingen ægte Telegram-kald'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/3c060a33b23bbeef2eb353abf5982029c1577b29'
+  - ts: '2026-07-10T16:35:29+02:00'
+    text: '/undersoegelse — noegen survey-side m. samtykke-blok (noindex, ingen nav)'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/ba3b00cb54f4a70ed63ddd23c15b373b98872724'
+  - ts: '2026-07-23T15:17:31+02:00'
+    text: 'opdatér kun reminder-ur ved bekræftet alarm-levering (slut-review Important)'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/88dd6b5855df3c6b10982205ffbc0b24246c135f'
+  - ts: '2026-07-27T23:48:55+02:00'
+    text: 'loeftet om resultater gjort holdbart ved ethvert antal svar'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/c2f9031f47b63fb02c2388fe9afeef783d3c1245'
+  - ts: '2026-08-05T13:47:03+02:00'
+    text: 'skriv kun KV ved aendring — heartbeat hver 20. min i stedet for hvert tick'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/8e3e67d35d8a2409317b538b8f01a9a29c0e0092'
 ---
 
 Herbert Nathan kalder det 'det store spørgsmål lige nu'. Det er en præcis beskrivelse.
