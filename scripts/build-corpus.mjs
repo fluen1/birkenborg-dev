@@ -2,6 +2,10 @@ import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
+
+// gray-matter evaluerer `---js`-frontmatter med eval som standard. En post er data: kun YAML/JSON-frontmatter læses.
+const refuseCode = () => { throw new Error('frontmatter-language-refused'); };
+const SAFE_MATTER = { engines: { js: refuseCode, javascript: refuseCode } };
 // Shared with the site renderer's remark-strip-linkedin plugin so the
 // marker contract lives in one place. This couples scripts/ to site/src/
 // on disk — if either moves, this import path must be updated.
@@ -14,7 +18,7 @@ export async function buildCorpus(postsDir) {
   for (const file of files) {
     if (!file.endsWith('.md')) continue;
     const raw = await readFile(join(postsDir, file), 'utf-8');
-    const { data, content } = matter(raw);
+    const { data, content } = matter(raw, SAFE_MATTER);
 
     // Default-deny: privacy_flag skal eksplicit være false
     if (data.privacy_flag !== false) continue;

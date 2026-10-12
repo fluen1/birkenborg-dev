@@ -29,11 +29,26 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      # TRUSTED_CHECKOUT (hq/decisions/2026-09-26-trusted-boundary.md): jobbet holder PUBLIC_REPO_PAT og kører repo-kode, så
+      # kun stier HQ ikke kan skrive (rod-manifester, scripts/) plus posts som data (*.md). Any change needs a supervised re-pin.
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.PUBLIC_REPO_PAT }}
           # Hele historikken: vi skal kunne checke en eksisterende PR-branch ud.
           fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /package.json
+            /package-lock.json
+            /scripts/
+            /content/posts/*.md
+            !/content/posts/*.md/
+
+      - name: Assert trusted tree
+        run: |
+          test ! -e site
+          test ! -e worker
+          if { find content -type f ! -name '*.md' 2>/dev/null || true; } | grep .; then exit 1; fi
 
       # Én åben PR ad gangen. Findes der allerede en, arbejder vi videre på DEN
       # branch — så dedup'en i build-marginalia.mjs kører mod de forslag der
@@ -52,6 +67,8 @@ jobs:
           if [ -n "$EXISTING" ]; then
             echo "Genbruger åben PR-branch: $EXISTING"
             git checkout "$EXISTING"
+            # Grenen må kun bære forslag (posts): koden og manifesterne, der kører med nøglen, skal være mains.
+            git diff --quiet origin/main -- scripts package.json package-lock.json || { echo "PR-grenens kode afviger fra main: afvist"; exit 1; }
             echo "branch=$EXISTING" >> "$GITHUB_OUTPUT"
             echo "is_new=false" >> "$GITHUB_OUTPUT"
           else
@@ -65,10 +82,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Run auto-marginalia
         id: run
