@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { buildCorpus, buildCitations, buildVoiceSamples, loadCuratedVoiceSamples } from './build-corpus.mjs';
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 const FIXTURES = join(__dirname, 'build-corpus.fixtures', 'posts');
 
@@ -58,6 +59,14 @@ describe('buildCorpus', () => {
     mkdirSync(empty, { recursive: true });
     const corpus = await buildCorpus(empty);
     expect(corpus).toEqual([]);
+  });
+
+  // gray-matter evaluerer `---js`-frontmatter med eval som standard: en post må aldrig kunne køre kode i et byggejob.
+  it('afviser JavaScript-frontmatter i stedet for at køre den', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'js-frontmatter-'));
+    await writeFile(join(dir, 'evil.md'), '---js\n{ privacy_flag: (globalThis.__ranJs = true, false), title: "x" }\n---\nbody\n');
+    await expect(buildCorpus(dir)).rejects.toThrow(/frontmatter-language-refused/);
+    expect((globalThis as { __ranJs?: boolean }).__ranJs).toBeUndefined();
   });
 });
 

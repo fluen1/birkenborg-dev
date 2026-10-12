@@ -5,6 +5,14 @@ name: Deploy to Cloudflare
 #   CLOUDFLARE_API_TOKEN (Workers Edit + Account Read)
 #   TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (fejl-alarm — tilføjet 2026-06-07
 #   efter 13 dages ubemærket rød CI; botten publicerede uden at noget kom live)
+#
+# TRUSTED BOUNDARY (hq/decisions/2026-09-26-trusted-boundary.md, samme princip som birkenborg-sites):
+# - `build` bygger sitet og chat-korpusset uden nogen hemmelighed. Kun her kører kode, HQ kan skrive (site/src/).
+# - `deploy` holder CLOUDFLARE_API_TOKEN og kører ingen kode, HQ kan skrive: et betroet sparse træ (worker/, wrangler.toml,
+#   rod-manifesterne), et assert-trin der fejler hvis andet er på disken, install med --ignore-scripts, en pinnet wrangler
+#   og byggets artefakter; den deployer med en kopi af wrangler.toml uden [build] (korpusset er bygget i `build`).
+# - `alarm` holder alarm-nøglerne og checker intet ud.
+# Enhver ændring her kræver en overvåget gen-godkendelse af grænsen (hq/organisation/trusted-boundary.json).
 
 on:
   push:
@@ -13,8 +21,10 @@ on:
       - 'site/**'
       - 'worker/**'
       - 'content/**'
+      - 'scripts/**'
       - 'wrangler.toml'
       - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -22,35 +32,107 @@ env:
   # Node 20-actions deprecates 2026-06-16 — opt-in til Node 24 nu
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+permissions: {}
+
 jobs:
-  deploy:
+  build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
-          cache: npm
-          cache-dependency-path: site/package-lock.json
       - name: Install root dependencies (gray-matter til build-corpus.mjs)
-        run: npm ci
+        run: npm ci --ignore-scripts
       - name: Install site dependencies
         working-directory: site
         run: npm ci
-      - name: Build site
+      - name: Build site (prebuild bygger chat-korpusset)
         working-directory: site
         run: npm run build
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
+      # Byggets identitet: HQ's live-verifikation læser /hq-build.json og binder den til netop denne kørsel på main.
+      - name: Build marker
+        run: printf '{"sha":"%s","run_id":"%s"}\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > site/dist/hq-build.json
+      - name: Refuse edge code in dist
+        run: |
+          if [ -e site/dist/_worker.js ] || [ -e site/dist/_routes.json ] || [ -d site/dist/functions ]; then echo "edge code in dist: refused"; exit 1; fi
+      - uses: actions/upload-artifact@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      # Går via den erklærede vej, så alarmen bliver logget og sorteret som
-      # "risiko". Nødvejen nedenunder er ikke pynt: fejler denne deploy fordi
-      # Cloudflare er nede, kan bot.birkenborg.dev være nede af samme grund, og
-      # så skal alarmen stadig frem. En tavs fejlet deploy opdages aldrig.
+          name: site-dist
+          path: site/dist/
+          if-no-files-found: error
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chat-corpus
+          path: worker/data/chat-corpus.json
+          if-no-files-found: error
+          retention-days: 3
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: [build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      # TRUSTED_CHECKOUT — do not widen. Only paths HQ cannot write. Any change needs a supervised re-pin.
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /wrangler.toml
+            /package.json
+            /package-lock.json
+            /worker/
+      - name: Assert trusted tree
+        run: |
+          test ! -e site
+          test ! -e content
+          test ! -e scripts
+      # wrangler.toml's [build] (til lokal `wrangler deploy`) kører scripts/, som ikke findes i dette træ: deploy bruger en kopi
+      # uden. Korpusset er bygget i `build`.
+      - name: Deploy config without the build command
+        run: |
+          awk '/^\[/{skip=($0=="[build]")} !skip' wrangler.toml > wrangler.deploy.toml
+          if grep -q -E '^\[build\]|^command' wrangler.deploy.toml; then echo "deploy config still runs a build command"; exit 1; fi
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: site/dist/
+      - uses: actions/download-artifact@v4
+        with:
+          name: chat-corpus
+          path: worker/data/
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Install worker dependencies (marked)
+        run: npm ci --ignore-scripts
+      - name: Deploy to Cloudflare Workers
+        run: npx --yes wrangler@4.131.1 deploy --config wrangler.deploy.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+  # Går via den erklærede vej, så alarmen bliver logget og sorteret som
+  # "risiko". Nødvejen nedenunder er ikke pynt: fejler denne deploy fordi
+  # Cloudflare er nede, kan bot.birkenborg.dev være nede af samme grund, og
+  # så skal alarmen stadig frem. En tavs fejlet deploy opdages aldrig.
+  alarm:
+    needs: [build, deploy]
+    if: always() && github.ref == 'refs/heads/main' && (needs.build.result == 'failure' || needs.deploy.result == 'failure')
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
       - name: Telegram-alarm ved fejl
-        if: failure()
         env:
           BOT_INTERNAL_TOKEN: ${{ secrets.BOT_INTERNAL_TOKEN }}
         run: |

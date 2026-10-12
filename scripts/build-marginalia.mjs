@@ -1,4 +1,8 @@
 import matter from "gray-matter";
+
+// gray-matter evaluerer `---js`-frontmatter med eval som standard. En post er data: kun YAML/JSON-frontmatter læses.
+const refuseCode = () => { throw new Error("frontmatter-language-refused"); };
+const SAFE_MATTER = { engines: { js: refuseCode, javascript: refuseCode } };
 import { readFile as readFileNode, writeFile as writeFileNode, readdir } from "node:fs/promises";
 
 const STOP_WORDS_DA = new Set([
@@ -218,7 +222,7 @@ export async function runAutoMarginalia({ postsDir, repos, githubToken, sinceDay
     if (!f.endsWith(".md")) continue;
     const filePath = `${postsDir}/${f}`;
     const raw = await readFileNode(filePath, "utf-8");
-    const parsed = matter(raw);
+    const parsed = matter(raw, SAFE_MATTER);
     if (parsed.data.status !== "published") continue;
     if (parsed.data.privacy_flag === true) continue;
     posts.push({

@@ -1,0 +1,43 @@
+name: pr-verify
+
+# The check a pull request must pass before it is merged (HQ's integration hand reads this workflow's result on the PR
+# head). Holds no secret and no write token: it runs the PR's code, so it may run anything that PR wrote.
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-verify-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts
+      - name: Build the chat corpus (the worker tests read it)
+        run: node scripts/build-corpus.mjs
+      - name: Worker and script tests
+        run: npm test
+      - name: Install site dependencies
+        working-directory: site
+        run: npm ci
+      - name: Site tests
+        working-directory: site
+        run: npm test
+      - name: Build site
+        working-directory: site
+        run: npm run build
