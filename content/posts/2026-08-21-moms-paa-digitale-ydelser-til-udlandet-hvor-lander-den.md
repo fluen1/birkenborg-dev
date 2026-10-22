@@ -7,6 +7,11 @@ tags: ["moms-afgifter", "digitale ydelser", "oss-ordningen", "saas", "leveringss
 excerpt: "Sælger du SaaS eller digitale ydelser til udlandet? Leveringsstedsreglerne afgør, hvor momsen lander — og OSS kan spare dig for momsregistrering i hvert EU-land."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-06-17T22:22:37+02:00'
+    text: 'parameterisér publish-tid (default 08:20 -> lander ~09:30)'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/4c0b7c8f0f410c84df072c4075311e7999f92136'
 ---
 
 Du sælger software, adgang til en platform eller en anden digital ydelse. Kunderne sidder i Tyskland, Frankrig, måske USA. Du fakturerer, pengene tikker ind, og alt ser fint ud — indtil nogen spørger, om I har styr på momsen. Det spørgsmål har det med at komme på et ubehageligt tidspunkt, typisk når virksomheden er vokset forbi det punkt, hvor man bare kunne håbe på at ingen kiggede.

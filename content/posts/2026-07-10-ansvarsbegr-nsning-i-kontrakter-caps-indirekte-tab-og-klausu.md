@@ -7,6 +7,39 @@ tags: ["kontrakter", "ansvarsbegrænsning", "erstatningsret", "kontraktforhandli
 excerpt: "Caps, fraskrivelse af indirekte tab og undtagelser lyder som beskyttelse. Men de folder ofte sammen under pres. Her er hvad du reelt aftaler — og hvad du bør beslutte inden."
 privacy_flag: false
 linkedin_url: null
+marginalia:
+  - ts: '2026-05-25T00:37:45+02:00'
+    text: 'drop-caps on posts, gradient dividers, opsz tuning'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/1717c432e1cef91fcdf609b6668149cc0500afc5'
+  - ts: '2026-06-11T02:18:54+02:00'
+    text: 'router-bug + TAGS excerpt-tab'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/2ba7b06c190c26735bc62efcda4fa2af621252c7'
+  - ts: '2026-06-24T19:01:07+02:00'
+    text: 'goer konverteringssiden synlig — /smv/ -> /arbejd-sammen/ i nav'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/c88bfe9634364d0999f4d205077736d45dc088b3'
+  - ts: '2026-07-09T22:25:37+02:00'
+    text: '/arbejd-sammen v2 pakker + outreach-batch #1 design'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/b01895d77d98210a5391ee1a64a3e4301cb2d376'
+  - ts: '2026-07-10T10:48:19+02:00'
+    text: 'implementeringsplan for /arbejd-sammen v2 + outreach-batch #1'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/3ab9fce7dd79ff750c1b849bf7e341b0d5e10483'
+  - ts: '2026-07-10T12:46:50+02:00'
+    text: '/arbejd-sammen v2 — 3 fastpris-pakker + timepris'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-dev/commit/59158206d61b3b91df5f89f0fb529bd756cff322'
+  - ts: '2026-07-10T12:51:12+02:00'
+    text: 'freelance-template peger paa /arbejd-sammen-pakker med UTM'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/c7d0a37af3955ace07022adea50c2042ac514b54'
+  - ts: '2026-07-10T14:01:56+02:00'
+    text: 'accepter niche=smv i /internal/lead — /arbejd-sammen-formularen var afvist med 4'
+    source: 'auto-commit'
+    commit_url: 'https://github.com/fluen1/birkenborg-agents/commit/4ff0240d5361ce1c7c80bc7f571470479c3fc7bd'
 ---
 
 Du har forhandlet en kontrakt. Den har en ansvarsbegrænsning. Måske en cap på kontraktværdien, måske en fraskrivelse af indirekte tab, måske begge dele. Du føler dig tryg. Din modpart føler sig tryg. Alle er glade — lige indtil den dag nogen misligholder, og begge parter opdager at klausulen ikke gør det de troede den gjorde.
