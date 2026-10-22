@@ -5,6 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import WritingItem from '../../components/WritingItem.astro';
 import MetaTags from '../../components/MetaTags.astro';
+import StructuredData from '../../components/StructuredData.astro';
 
 const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
 const sorted = allPosts.sort((a, b) => +b.data.publish_at - +a.data.publish_at);
@@ -34,6 +35,26 @@ const PAGE_DESC = `Korte essays om jura, AI-systemer i drift og fejl jeg er løb
       description={PAGE_DESC}
       url={PAGE_URL}
       type="website"
+    />
+    <StructuredData
+      type="Blog"
+      data={{
+        name: PAGE_TITLE,
+        description: PAGE_DESC,
+        url: PAGE_URL,
+        inLanguage: 'da-DK',
+        publisher: {
+          '@type': 'Person',
+          name: 'Philip Birkenborg',
+          url: 'https://birkenborg.dev/',
+        },
+        blogPost: sorted.slice(0, 10).map(p => ({
+          '@type': 'BlogPosting',
+          headline: p.data.title,
+          url: `https://birkenborg.dev/skrifter/${p.data.slug ?? p.id.replace(/\.md$/, '')}/`,
+          datePublished: p.data.publish_at.toISOString(),
+        })),
+      }}
     />
   </Fragment>
   <Header />
