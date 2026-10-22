@@ -69,12 +69,27 @@ const related: RelatedPost[] = allPosts
           name: 'Philip Birkenborg',
         },
         description: post.data.excerpt ?? post.data.title,
-        url: `https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}`,
-        image: `https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`,
+        url: `https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`,
+        image: post.data.image_url ?? `https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`,
         keywords: (post.data.tags ?? []).join(', '),
         wordCount,
         inLanguage: 'da-DK',
         articleSection: 'Skrifter',
+      }}
+    />
+    <StructuredData
+      type="BreadcrumbList"
+      data={{
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Forside', item: 'https://birkenborg.dev/' },
+          { '@type': 'ListItem', position: 2, name: 'Skrifter', item: 'https://birkenborg.dev/skrifter/' },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.data.title,
+            item: `https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`,
+          },
+        ],
       }}
     />
   </Fragment>
