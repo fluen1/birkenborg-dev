@@ -7,10 +7,12 @@ name: Deploy to Cloudflare
 #   efter 13 dages ubemærket rød CI; botten publicerede uden at noget kom live)
 #
 # TRUSTED BOUNDARY (hq/decisions/2026-09-26-trusted-boundary.md, samme princip som birkenborg-sites):
-# - `build` bygger sitet og chat-korpusset uden nogen hemmelighed. Kun her kører kode, HQ kan skrive (site/src/).
+# - `build` bygger sitet uden nogen hemmelighed. Kun her kører kode, HQ kan skrive (site/).
 # - `deploy` holder CLOUDFLARE_API_TOKEN og kører ingen kode, HQ kan skrive: et betroet sparse træ (worker/, wrangler.toml,
-#   rod-manifesterne), et assert-trin der fejler hvis andet er på disken, install med --ignore-scripts, en pinnet wrangler
-#   og byggets artefakter; den deployer med en kopi af wrangler.toml uden [build] (korpusset er bygget i `build`).
+#   rod-manifesterne, scripts/build-corpus.mjs + scripts/linkedin-block.mjs og content/), et assert-trin der fejler hvis
+#   andet er på disken, install med --ignore-scripts og en pinnet wrangler. Chat-korpusset — ejerens offentlige stemme,
+#   som botten bruger i sin systemprompt — bygger deploy selv fra scripts/ og content/ (hq pin v20, kritik af W1a
+#   2026-10-22): det hentes aldrig fra det ubetroede build. Sitets artefakt er data; domænebeviser i det afvises her.
 # - `alarm` holder alarm-nøglerne og checker intet ud.
 # Enhver ændring her kræver en overvåget gen-godkendelse af grænsen (hq/organisation/trusted-boundary.json).
 
@@ -53,7 +55,7 @@ jobs:
       - name: Install site dependencies
         working-directory: site
         run: npm ci
-      - name: Build site (prebuild bygger chat-korpusset)
+      - name: Build site (prebuild bygger korpusset til sitets egne citater; chat-korpusset bygger deploy selv)
         working-directory: site
         run: npm run build
       # Byggets identitet: HQ's live-verifikation læser /hq-build.json og binder den til netop denne kørsel på main.
@@ -66,12 +68,6 @@ jobs:
         with:
           name: site-dist
           path: site/dist/
-          if-no-files-found: error
-          retention-days: 3
-      - uses: actions/upload-artifact@v4
-        with:
-          name: chat-corpus
-          path: worker/data/chat-corpus.json
           if-no-files-found: error
           retention-days: 3
 
@@ -93,11 +89,14 @@ jobs:
             /package.json
             /package-lock.json
             /worker/
+            /content/
+            /scripts/build-corpus.mjs
+            /scripts/linkedin-block.mjs
       - name: Assert trusted tree
         run: |
           test ! -e site
-          test ! -e content
-          test ! -e scripts
+          test "$(ls -A scripts | sort | tr '\n' ' ')" = "build-corpus.mjs linkedin-block.mjs "
+          test ! -e worker/data/chat-corpus.json
       # wrangler.toml's [build] (til lokal `wrangler deploy`) kører scripts/, som ikke findes i dette træ: deploy bruger en kopi
       # uden. Korpusset er bygget i `build`.
       - name: Deploy config without the build command
@@ -108,15 +107,23 @@ jobs:
         with:
           name: site-dist
           path: site/dist/
-      - uses: actions/download-artifact@v4
-        with:
-          name: chat-corpus
-          path: worker/data/
+      - name: Refuse domain proofs in the site artifact
+        run: |
+          files=$(find site/dist \( -path 'site/dist/.well-known' -o -path 'site/dist/.well-known/*' \) -print -o -regextype posix-extended -iregex '.*/(google[0-9a-f]+\.html|BingSiteAuth\.xml|(app-)?ads\.txt|yandex_[0-9a-f]+\.html|pinterest-[0-9a-f]+\.html)' -print | head -20)
+          if [ -n "$files" ]; then echo "domain proof in artifact: refused"; echo "$files"; exit 1; fi
+          tags=$(grep -rliE --include='*.htm' --include='*.html' '<meta[^>]*(google-site-verification|msvalidate\.01|p:domain_verify|yandex-verification|facebook-domain-verification|google-adsense-account|seznam-wmt|verify-admitad|fo-verify|(site|domain)[-_]verif)' site/dist | head -20 || true)
+          if [ -n "$tags" ]; then echo "verification meta tag in artifact: refused"; echo "$tags"; exit 1; fi
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
-      - name: Install worker dependencies (marked)
+      - name: Install worker dependencies (marked, gray-matter)
         run: npm ci --ignore-scripts
+      # The owner's public voice for the chat's system prompt, from the trusted tree only (scripts/ and content/, which HQ's
+      # hand cannot write), never from the untrusted build's artifact.
+      - name: Build the chat corpus from the trusted tree
+        run: |
+          node scripts/build-corpus.mjs
+          test -s worker/data/chat-corpus.json
       - name: Deploy to Cloudflare Workers
         run: npx --yes wrangler@4.131.1 deploy --config wrangler.deploy.toml
         env:
