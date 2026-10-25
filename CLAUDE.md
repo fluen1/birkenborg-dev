@@ -58,7 +58,6 @@ Disse filer bygges af `scripts/build-corpus.mjs` (kører som npm `predev` / `pre
 
 Hvis content skal opdateres: edit kilde-markdown i `content/posts/`, kør `node scripts/build-corpus.mjs`.
 
-Tilsvarende for marginalia: `scripts/build-marginalia*` er kilden — output må ikke editeres direkte.
 
 ## Definition of Done
 
