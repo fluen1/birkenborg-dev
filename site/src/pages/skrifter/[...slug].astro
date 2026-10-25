@@ -18,6 +18,18 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const plainBody = (post.body ?? '')
+  .split('\n')
+  .filter((line) => !line.trimStart().startsWith('#') && line.trim() !== '---')
+  .join(' ')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/[*_`>]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+const snippetCut = plainBody.lastIndexOf(' ', 157) > 100 ? plainBody.lastIndexOf(' ', 157) : 157;
+const snippet = plainBody.length > 160 ? `${plainBody.slice(0, snippetCut).trim()}…` : plainBody;
+const metaDescription = post.data.excerpt ?? (plainBody.length >= 70 ? snippet : post.data.title);
 const rawBody = post.body ?? '';
 const wordCount = rawBody.replace(/[*#`>\[\]_]/g, '').trim().split(/\s+/).filter(Boolean).length;
 
@@ -47,7 +59,7 @@ const related: RelatedPost[] = allPosts
   <Fragment slot="head">
     <MetaTags
       title={`${post.data.title} · birkenborg.dev`}
-      description={post.data.excerpt ?? post.data.title}
+      description={metaDescription}
       url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`}
       type="article"
       publishedTime={post.data.publish_at.toISOString()}
@@ -68,7 +80,7 @@ const related: RelatedPost[] = allPosts
           '@type': 'Person',
           name: 'Philip Birkenborg',
         },
-        description: post.data.excerpt ?? post.data.title,
+        description: metaDescription,
         url: `https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`,
         image: post.data.image_url ?? `https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`,
         keywords: (post.data.tags ?? []).join(', '),
