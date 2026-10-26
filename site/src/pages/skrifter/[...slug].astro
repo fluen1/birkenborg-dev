@@ -8,9 +8,13 @@ import MetaTags from '../../components/MetaTags.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import { formatDate } from '../../lib/format-date';
 import seoOverridesJson from '../../data/seo-overrides.json';
+import seoOverridesExtra from '../../data/seo-overrides-2026-10-26.json';
 
 type SeoOverride = { title?: string; description?: string };
-const seoOverrides = seoOverridesJson as unknown as Record<string, SeoOverride>;
+const seoOverrides = {
+  ...seoOverridesJson,
+  ...seoOverridesExtra,
+} as unknown as Record<string, SeoOverride>;
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => data.status === 'published');
