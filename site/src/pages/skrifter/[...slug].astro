@@ -7,6 +7,10 @@ import Marginalia from '../../components/Marginalia.astro';
 import MetaTags from '../../components/MetaTags.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import { formatDate } from '../../lib/format-date';
+import seoOverridesJson from '../../data/seo-overrides.json';
+
+type SeoOverride = { title?: string; description?: string };
+const seoOverrides = seoOverridesJson as unknown as Record<string, SeoOverride>;
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => data.status === 'published');
@@ -19,6 +23,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+// Redaktionelle SERP-overrides: én fil styrer title/meta pr. skrift.
+const contentSlug = post.id.replace(/\.md$/, '');
+const urlSlug = post.data.slug ?? contentSlug;
+const seoOverride = seoOverrides[urlSlug] ?? seoOverrides[contentSlug];
+
 const plainBody = (post.body ?? '')
   .split('\n')
   .filter((line) => !line.trimStart().startsWith('#') && line.trim() !== '---')
@@ -29,7 +38,8 @@ const plainBody = (post.body ?? '')
   .trim();
 const snippetCut = plainBody.lastIndexOf(' ', 157) > 100 ? plainBody.lastIndexOf(' ', 157) : 157;
 const snippet = plainBody.length > 160 ? `${plainBody.slice(0, snippetCut).trim()}…` : plainBody;
-const metaDescription = post.data.excerpt ?? (plainBody.length >= 70 ? snippet : post.data.title);
+const metaDescription = seoOverride?.description ?? post.data.excerpt ?? (plainBody.length >= 70 ? snippet : post.data.title);
+const pageTitle = `${seoOverride?.title ?? post.data.title} · birkenborg.dev`;
 const rawBody = post.body ?? '';
 const wordCount = rawBody.replace(/[*#`>\[\]_]/g, '').trim().split(/\s+/).filter(Boolean).length;
 
@@ -55,10 +65,10 @@ const related: RelatedPost[] = allPosts
   .sort((a, b) => b.score - a.score || +b.publishAt - +a.publishAt)
   .slice(0, 3);
 ---
-<Base title={`${post.data.title} · birkenborg.dev`}>
+<Base title={pageTitle}>
   <Fragment slot="head">
     <MetaTags
-      title={`${post.data.title} · birkenborg.dev`}
+      title={pageTitle}
       description={metaDescription}
       url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`}
       type="article"
