@@ -77,7 +77,7 @@ const related: RelatedPost[] = allPosts
       url={`https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`}
       type="article"
       publishedTime={post.data.publish_at.toISOString()}
-      imageUrl={post.data.image_url ?? `https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`}
+      imageUrl={post.data.image_url ?? 'https://birkenborg.dev/og/default.png'}
     />
     <StructuredData
       type="Article"
@@ -96,7 +96,7 @@ const related: RelatedPost[] = allPosts
         },
         description: metaDescription,
         url: `https://birkenborg.dev/skrifter/${post.data.slug ?? post.id.replace(/\.md$/, '')}/`,
-        image: post.data.image_url ?? `https://birkenborg.dev/og/posts/${post.id.replace(/\.md$/, '')}.png`,
+        image: post.data.image_url ?? 'https://birkenborg.dev/og/default.png',
         keywords: (post.data.tags ?? []).join(', '),
         wordCount,
         inLanguage: 'da-DK',
