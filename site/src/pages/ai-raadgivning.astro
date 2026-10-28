@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LeadForm from '../components/LeadForm.astro';
+import MetaTags from '../components/MetaTags.astro';
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/ai-raadgivning/`;
+const PAGE_TITLE = 'AI-rådgivning og implementering · birkenborg.dev';
+const PAGE_DESC =
+  'AI-rådgivning og implementering af AI-løsninger til virksomheder: tre faste pakker med faste priser — AI-kontrakt-tjek, AI+jura sundhedstjek og automatiserings-audit.';
+
+const pakker = [
+  {
+    navn: 'AI-kontrakt-tjek',
+    pris: '7.500 kr.',
+    hvad: 'Jeres AI- eller SaaS-leverandøraftale og leverandørens AI-/databehandlingsvilkår gennemgået: ansvar, data, IP og exit.',
+    faar: 'Rød/gul/grøn-rapport med konkrete rettelser — klar til forhandlingen.',
+    tid: 'Levering: 5 hverdage.',
+  },
+  {
+    navn: 'AI+jura sundhedstjek',
+    pris: '12.500 kr.',
+    hvad: 'Jeres AI-brug holdt op mod GDPR, AI Act og jeres kontraktgrundlag.',
+    faar: 'Prioriteret handlingsliste: hvad der haster, hvad der kan vente, hvad der er fint.',
+    tid: 'Levering: 2 uger.',
+  },
+  {
+    navn: 'Automatiserings-audit',
+    pris: '20.000 kr.',
+    hvad: '2-3 gentagne arbejdsgange kortlagt med automatiseringsforslag og juridisk risikovurdering.',
+    faar: 'Beslutningsklar rapport: hvad der kan automatiseres, hvad det kræver, og hvor jura sætter grænser.',
+    tid: 'Levering: 3 uger.',
+  },
+];
+
+const trin = [
+  {
+    navn: 'Afklaring',
+    tekst: 'En kort samtale om jeres AI-brug, jeres systemer og hvad der skal besluttes. I får skriftligt med, hvad jeg har forstået, og hvad næste skridt er.',
+  },
+  {
+    navn: 'Leverance',
+    tekst: 'Jeg gennemgår aftaler, data og arbejdsgange og leverer den rapport, pakken indeholder — med konkrete rettelser og prioritering.',
+  },
+  {
+    navn: 'Implementering',
+    tekst: 'Skal løsningen også bygges, gør jeg det selv: agenter, automationer og opsætning, der fjerner det gentagne arbejde inden for de juridiske rammer.',
+  },
+];
+
+const strukturdata = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'AI-rådgivning og implementering',
+  serviceType: 'AI-rådgivning, digitalisering og implementering af AI-løsninger',
+  url: PAGE_URL,
+  provider: { '@type': 'Person', name: 'Philip Birkenborg', url: `${SITE_URL}/` },
+  areaServed: 'DK',
+  offers: pakker.map((p) => ({
+    '@type': 'Offer',
+    name: p.navn,
+    price: p.pris.replace(/[^0-9]/g, ''),
+    priceCurrency: 'DKK',
+    url: PAGE_URL,
+  })),
+};
+---
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags title={PAGE_TITLE} description={PAGE_DESC} url={PAGE_URL} type="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(strukturdata)} />
+  </Fragment>
+  <Header />
+  <main class="page">
+    <div class="container">
+      <header class="page-head">
+        <p class="meta">AI-rådgivning</p>
+        <h1>AI-rådgivning, der også bliver bygget</h1>
+        <p class="lead">
+          Jeg rådgiver om AI med juraen inde i billedet — og bygger selv de løsninger,
+          der fjerner det gentagne arbejde. Tre faste pakker, faste priser. Rådgivning
+          og implementering i én profil.
+        </p>
+      </header>
+
+      <section class="pakker" aria-label="Pakker med fast pris">
+        {pakker.map((p) => (
+          <article>
+            <h2>{p.navn}</h2>
+            <p class="pris">{p.pris}</p>
+            <p>{p.hvad}</p>
+            <p><strong>I får:</strong> {p.faar}</p>
+            <p class="detalje">{p.tid}</p>
+          </article>
+        ))}
+      </section>
+
+      <p class="adhoc">
+        Andet på hjerte? Ad-hoc sparring til <strong>1.800 kr./t</strong> — AI-projekter,
+        leverandørvalg eller det juridiske. Alle priser er ekskl. moms.
+      </p>
+
+      <section class="trin" aria-label="Sådan foregår et forløb">
+        <h2>Sådan foregår et forløb</h2>
+        <div class="trin-grid">
+          {trin.map((t) => (
+            <article>
+              <h3>{t.navn}</h3>
+              <p>{t.tekst}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <p class="kryds">
+        Området hører sammen med <a href="/juridisk-raadgivning/">juridisk rådgivning til virksomheder</a>,
+        og den samlede oversigt over pakkerne står på <a href="/arbejd-sammen/">Arbejd sammen</a>.
+      </p>
+
+      <section class="contact">
+        <h2>Skriv om jeres AI-projekt</h2>
+        <p>
+          Fortæl kort, hvad I bruger AI til i dag, eller hvad I gerne vil have automatiseret.
+          Jeg vender tilbage inden for 24 timer på hverdage. Ingen sælger-flow.
+        </p>
+        <LeadForm niche="smv" ctaLabel="Send forespørgsel" />
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .page-head { max-width: 720px; margin: 0 auto 48px; }
+  .meta { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray-700); margin: 0 0 16px; }
+  .page-head h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 350; letter-spacing: -.02em; margin: 0 0 16px; }
+  .lead { font-size: 18px; line-height: 1.5; color: var(--gray-700); }
+  .pakker { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 48px 0 24px; }
+  .pakker article { padding: 24px; border: 1px solid var(--gray-200); border-radius: var(--r-md); display: flex; flex-direction: column; gap: 10px; }
+  .pakker h2 { font-size: 18px; margin: 0; }
+  .pakker p { margin: 0; color: var(--gray-700); font-size: 15px; line-height: 1.5; }
+  .pakker .pris { font-family: var(--font-display); font-size: 26px; color: var(--ink); }
+  .pakker .detalje { font-size: 13px; }
+  .adhoc { max-width: 720px; margin: 0 0 24px; color: var(--gray-700); font-size: 15px; }
+  .trin { margin: 48px 0 24px; }
+  .trin h2 { font-size: 24px; margin: 0 0 16px; }
+  .trin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .trin-grid article { padding: 20px; border: 1px solid var(--gray-100); border-radius: var(--r-md); background: var(--cream-warm); }
+  .trin-grid h3 { font-size: 15px; margin: 0 0 8px; }
+  .trin-grid p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--gray-700); }
+  .kryds { max-width: 720px; margin: 0 0 24px; font-size: 15px; color: var(--gray-700); }
+  .contact { margin-top: 48px; max-width: 720px; }
+  .contact h2 { font-size: 24px; margin: 0 0 16px; }
+</style>

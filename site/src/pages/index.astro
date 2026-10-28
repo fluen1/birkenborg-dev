@@ -84,6 +84,26 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
       )}
     </div>
 
+    <section class="container raadgivning">
+      <div class="section-head" data-reveal>
+        <h2>Rådgivning</h2>
+      </div>
+      <div class="raadgivning-grid">
+        <a class="raadgivning-card" href="/juridisk-raadgivning/" data-reveal>
+          <div class="tag">Jura</div>
+          <h3>Juridisk rådgivning til virksomheder</h3>
+          <p>Kontrakter, selskabsret, compliance og ledelsesansvar — rådgivning fra en cand.merc.(jur.) og Legal Counsel.</p>
+          <span class="more">Se området →</span>
+        </a>
+        <a class="raadgivning-card" href="/ai-raadgivning/" data-reveal>
+          <div class="tag">AI</div>
+          <h3>AI-rådgivning og implementering</h3>
+          <p>Tre faste pakker: AI-kontrakt-tjek, AI+jura sundhedstjek og automatiserings-audit — rådgivning og eksekvering i én profil.</p>
+          <span class="more">Se området →</span>
+        </a>
+      </div>
+    </section>
+
     <section class="container">
       <ActivityFeed projectCount={sortedProjects.length} />
     </section>
@@ -171,6 +191,30 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
   }
   .more:hover { color: var(--ink); }
 
+  .raadgivning { padding: 48px 0 8px; }
+  .raadgivning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .raadgivning-card {
+    display: block;
+    background: var(--cream-warm);
+    border: 1px solid var(--gray-100);
+    padding: 22px 24px;
+    border-radius: var(--r-md);
+    transition: border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .raadgivning-card:hover {
+    border-color: var(--clay);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hov);
+  }
+  .raadgivning-card .tag {
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--clay-xdeep); font-weight: 600; margin-bottom: 10px;
+  }
+  .raadgivning-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 400; margin: 0 0 8px; }
+  .raadgivning-card p { margin: 0 0 12px; font-size: 14px; line-height: 1.5; color: var(--gray-700); }
+
   .projekter { padding: 24px 0 80px; }
   .pill-grid {
     display: grid;
@@ -198,5 +242,6 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
     .hero-row { grid-template-columns: 1fr; gap: 8px; }
     .hero-margin { padding-top: 0; }
     .pill-grid { grid-template-columns: 1fr; }
+    .raadgivning-grid { grid-template-columns: 1fr; }
   }
 </style>

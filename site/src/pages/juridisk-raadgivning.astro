@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LeadForm from '../components/LeadForm.astro';
+import MetaTags from '../components/MetaTags.astro';
+
+const SITE_URL = 'https://birkenborg.dev';
+const PAGE_URL = `${SITE_URL}/juridisk-raadgivning/`;
+const PAGE_TITLE = 'Juridisk rådgivning til virksomheder · birkenborg.dev';
+const PAGE_DESC =
+  'Juridisk rådgivning til virksomheder: kontrakter, selskabsret, M&A, ansættelsesret, erhvervslejeret og ledelsesansvar — ad-hoc sparring til 1.800 kr./t.';
+
+const omraader = [
+  {
+    navn: 'Kontraktret',
+    tekst: 'Kommercielle kontrakter, leverandøraftaler og samarbejdsaftaler — udarbejdet eller gennemgået, med blik for ansvar, data og exit.',
+  },
+  {
+    navn: 'Selskabsret',
+    tekst: 'Selskabsdokumenter, kapitalforhold, vedtægter og aftaler mellem ejerne.',
+  },
+  {
+    navn: 'M&A og virksomhedsoverdragelser',
+    tekst: 'Dokumentation og gennemgang ved køb og salg af virksomhed.',
+  },
+  {
+    navn: 'Ansættelsesret',
+    tekst: 'Ansættelsesaftaler, fratrædelsesforløb og personalejuridiske spørgsmål.',
+  },
+  {
+    navn: 'Erhvervslejeret',
+    tekst: 'Lejekontrakter, vilkår og uenigheder om erhvervslejemål.',
+  },
+  {
+    navn: 'Bestyrelsesarbejde og ledelsesansvar',
+    tekst: 'Ledelsesansvar, forretningsgang og beslutningsgrundlag i bestyrelsen.',
+  },
+  {
+    navn: 'Konkurrenceret',
+    tekst: 'Konkurrencebegrænsende aftaler, markedsadfærd og samhandel mellem virksomheder.',
+  },
+  {
+    navn: 'Moms og afgifter',
+    tekst: 'Moms- og afgiftsmæssige spørgsmål i den løbende drift.',
+  },
+  {
+    navn: 'Insolvensret',
+    tekst: 'Rekonstruktion, betalingsstandsning og krav i insolvens.',
+  },
+  {
+    navn: 'AI og legal tech',
+    tekst: 'De juridiske spørgsmål, der følger med AI: GDPR, AI Act og leverandørvilkår.',
+  },
+];
+
+const strukturdata = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Juridisk rådgivning til virksomheder',
+  serviceType: 'Juridisk rådgivning til virksomheder',
+  url: PAGE_URL,
+  provider: { '@type': 'Person', name: 'Philip Birkenborg', url: `${SITE_URL}/` },
+  areaServed: 'DK',
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Ad-hoc juridisk sparring',
+      price: '1800',
+      priceCurrency: 'DKK',
+      url: PAGE_URL,
+    },
+  ],
+};
+---
+<Base title={PAGE_TITLE}>
+  <Fragment slot="head">
+    <MetaTags title={PAGE_TITLE} description={PAGE_DESC} url={PAGE_URL} type="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(strukturdata)} />
+  </Fragment>
+  <Header />
+  <main class="page">
+    <div class="container">
+      <header class="page-head">
+        <p class="meta">Juridisk rådgivning</p>
+        <h1>Juridisk rådgivning til virksomheder</h1>
+        <p class="lead">
+          Jeg er cand.merc.(jur.) og Legal Counsel. Jeg rådgiver virksomheder om
+          kontrakter, selskabsforhold og den jura, der sidder tæt på driften — og jeg
+          bygger selv de løsninger, der fjerner det gentagne arbejde.
+        </p>
+      </header>
+
+      <section class="omraader" aria-label="Rådgivningsområder">
+        {omraader.map((o) => (
+          <article>
+            <h2>{o.navn}</h2>
+            <p>{o.tekst}</p>
+          </article>
+        ))}
+      </section>
+
+      <p class="pris">
+        Ad-hoc sparring: <strong>1.800 kr./t</strong> — kontrakter, selskabsret, compliance
+        eller det tekniske. Alle priser er ekskl. moms.
+      </p>
+
+      <p class="kryds">
+        Skal AI og jura ses under ét, er der tre faste pakker på
+        <a href="/ai-raadgivning/">AI-rådgivning og implementering</a> — den samlede
+        oversigt står på <a href="/arbejd-sammen/">Arbejd sammen</a>.
+      </p>
+
+      <section class="contact">
+        <h2>Tag en kort samtale</h2>
+        <p>
+          Skriv hvilket område eller hvilket problem det handler om. Jeg vender tilbage
+          inden for 24 timer på hverdage. Ingen sælger-flow.
+        </p>
+        <LeadForm niche="smv" ctaLabel="Send forespørgsel" />
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .page { padding: 64px 0 96px; }
+  .page-head { max-width: 720px; margin: 0 auto 48px; }
+  .meta { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray-700); margin: 0 0 16px; }
+  .page-head h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 350; letter-spacing: -.02em; margin: 0 0 16px; }
+  .lead { font-size: 18px; line-height: 1.5; color: var(--gray-700); }
+  .omraader { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 48px 0 24px; }
+  .omraader article { padding: 20px; border: 1px solid var(--gray-200); border-radius: var(--r-md); }
+  .omraader h2 { font-size: 16px; margin: 0 0 8px; }
+  .omraader p { margin: 0; color: var(--gray-700); font-size: 14px; line-height: 1.5; }
+  .pris { max-width: 720px; margin: 0 0 24px; color: var(--gray-700); font-size: 15px; }
+  .kryds { max-width: 720px; margin: 0 0 24px; font-size: 15px; color: var(--gray-700); }
+  .contact { margin-top: 48px; max-width: 720px; }
+  .contact h2 { font-size: 24px; margin: 0 0 16px; }
+</style>
