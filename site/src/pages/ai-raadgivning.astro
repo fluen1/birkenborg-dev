@@ -7,9 +7,9 @@ import MetaTags from '../components/MetaTags.astro';
 
 const SITE_URL = 'https://birkenborg.dev';
 const PAGE_URL = `${SITE_URL}/ai-raadgivning/`;
-const PAGE_TITLE = 'AI-rådgivning og implementering · birkenborg.dev';
+const PAGE_TITLE = 'AI-konsulent, AI-rådgivning og implementering · birkenborg.dev';
 const PAGE_DESC =
-  'AI-rådgivning og implementering af AI-løsninger til virksomheder: tre faste pakker med faste priser — AI-kontrakt-tjek, AI+jura sundhedstjek og automatiserings-audit.';
+  'AI-konsulent og AI-rådgivning til virksomheder: rådgivning og implementering af AI-løsninger i én profil — tre faste pakker med faste priser.';
 
 const pakker = [
   {
@@ -54,7 +54,7 @@ const strukturdata = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'AI-rådgivning og implementering',
-  serviceType: 'AI-rådgivning, digitalisering og implementering af AI-løsninger',
+  serviceType: 'AI-konsulent, AI-rådgivning, digitalisering og implementering af AI-løsninger',
   url: PAGE_URL,
   provider: { '@type': 'Person', name: 'Philip Birkenborg', url: `${SITE_URL}/` },
   areaServed: 'DK',
@@ -123,6 +123,28 @@ const strukturdata = {
         og den samlede oversigt over pakkerne står på <a href="/arbejd-sammen/">Arbejd sammen</a>.
       </p>
 
+      <section class="ai-konsulent" aria-label="AI-konsulent">
+        <h2>AI-konsulent — hvad det dækker</h2>
+        <p>
+          En AI-konsulent hjælper med at vælge, indføre og drive AI i en virksomhed. Her er
+          rådgivning og byggeri ikke delt mellem to leverandører: jeg kortlægger arbejdsgangen,
+          vurderer jura og data — og bygger selv den agent eller automation, der skal køre bagefter.
+        </p>
+        <p>
+          I praksis betyder det tre ting: en beslutning om, hvad der er værd at automatisere,
+          et kontrakt- og datagrundlag der holder, og en løsning der bliver ved med at virke,
+          når den første begejstring har lagt sig.
+        </p>
+        <p>
+          Skal I bruge en AI-konsulent på et afgrænset forløb, er de faste pakker ovenfor den
+          nemmeste start. Skal der løbende sparring til, kører det som ad-hoc timer.
+        </p>
+        <p class="kryds">
+          Læs med videre: <a href="/skrifter/ai-agenter-paa-juridisk-arbejde-hvad-der-faktisk-sker-i/">AI-agenter på juridisk arbejde</a>
+          og <a href="/skrifter/medarbejdere-bruger-ai-vaerktoejer-din-politik-afgoer-om-det/">medarbejdere, der bruger AI-værktøjer</a>.
+        </p>
+      </section>
+
       <section class="contact">
         <h2>Skriv om jeres AI-projekt</h2>
         <p>
@@ -158,5 +180,8 @@ const strukturdata = {
   .trin-grid p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--gray-700); }
   .kryds { max-width: 720px; margin: 0 0 24px; font-size: 15px; color: var(--gray-700); }
   .contact { margin-top: 48px; max-width: 720px; }
+  .ai-konsulent { max-width: 720px; margin: 48px 0 0; }
+  .ai-konsulent h2 { font-size: 24px; margin: 0 0 16px; }
+  .ai-konsulent p { margin: 0 0 16px; color: var(--gray-700); font-size: 15px; line-height: 1.6; }
   .contact h2 { font-size: 24px; margin: 0 0 16px; }
 </style>
