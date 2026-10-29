@@ -65,6 +65,14 @@ const { niche, ctaLabel = 'Send' } = Astro.props;
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error(`status ${res.status}`);
+      // Konverteringsmål: sendes først når henvendelsen er modtaget, så hvert lead tælles én gang.
+      const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          form_niche: data.niche,
+          lead_source: data.utm_source || 'direct',
+        });
+      }
       status.textContent = 'Tak — jeg vender tilbage hurtigst muligt.';
       form.reset();
     } catch (err) {
