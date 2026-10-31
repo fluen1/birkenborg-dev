@@ -2,12 +2,14 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import LeadForm from '../components/LeadForm.astro';
 import MetaTags from '../components/MetaTags.astro';
 
 const SITE_URL = 'https://birkenborg.dev';
 const PAGE_URL = `${SITE_URL}/kontakt/`;
 const PAGE_TITLE = 'Kontakt · birkenborg.dev';
-const PAGE_DESC = 'Skriv til Philip Birkenborg via email, LinkedIn eller GitHub. Specifikt om AI-systemer, jurist-arbejde og legal-tech-projekter.';
+const PAGE_DESC =
+  'Skriv til Philip Birkenborg om juridisk rådgivning og AI. Se de tre faste pakker og timeprisen — svar inden for 24 timer på hverdage.';
 ---
 <Base title={PAGE_TITLE}>
   <Fragment slot="head">
@@ -25,8 +27,47 @@ const PAGE_DESC = 'Skriv til Philip Birkenborg via email, LinkedIn eller GitHub.
         <h1>Kontakt</h1>
       </header>
       <div class="body">
-        <p>Skriv en mail til <a href="mailto:birkenborg.p@hotmail.com">birkenborg.p@hotmail.com</a> hvis du vil snakke om jura, AI-systemer i drift, eller noget tredje du tænker jeg bør have en mening om.</p>
-        <p>Du kan også finde mig på <a href="https://linkedin.com/in/philip-birkenborg-509794172/" target="_blank" rel="noopener">LinkedIn</a> — jeg er der lidt for ofte.</p>
+        <p>
+          Skriv til <a href="mailto:philip@birkenborg.dev">philip@birkenborg.dev</a>, eller brug
+          formularen nedenfor. Jeg vender tilbage inden for 24 timer på hverdage — ingen sælger-flow.
+        </p>
+
+        <h2>De tre pakker</h2>
+        <p>
+          Jeg arbejder med jura og anvendt AI i faste pakker —
+          <a href="/arbejd-sammen/">se indhold, levering og det hele på /arbejd-sammen/</a>:
+        </p>
+        <ul class="pakker">
+          <li>
+            <strong>AI-kontrakt-tjek</strong> — 7.500 kr. Jeres AI- eller SaaS-leverandøraftale og
+            leverandørens AI- og databehandlingsvilkår gennemgået: ansvar, data, IP og exit.
+          </li>
+          <li>
+            <strong>AI+jura sundhedstjek</strong> — 12.500 kr. Jeres AI-brug holdt op mod GDPR,
+            AI Act og jeres kontraktgrundlag.
+          </li>
+          <li>
+            <strong>Automatiserings-audit</strong> — 20.000 kr. 2-3 gentagne arbejdsgange kortlagt
+            med automatiseringsforslag og juridisk risikovurdering.
+          </li>
+        </ul>
+        <p class="detalje">
+          Alle priser er ekskl. moms, og rådgivningen er rettet mod virksomheder. Har du noget andet
+          på hjerte, er ad-hoc sparring <strong>1.800 kr./t</strong> — kontrakter, selskabsret,
+          compliance eller det tekniske.
+        </p>
+
+        <h2>Tag en kort samtale</h2>
+        <p>
+          Skriv hvilken pakke (eller hvilket problem) det handler om, så vender jeg tilbage inden
+          for 24 timer på hverdage.
+        </p>
+        <LeadForm niche="smv" />
+
+        <p>
+          Du kan også finde mig på
+          <a href="https://linkedin.com/in/philip-birkenborg-509794172/" target="_blank" rel="noopener">LinkedIn</a>.
+        </p>
       </div>
     </div>
   </main>
@@ -50,5 +91,9 @@ const PAGE_DESC = 'Skriv til Philip Birkenborg via email, LinkedIn eller GitHub.
     font-size: 19px; line-height: 1.65;
   }
   .body p { margin: 0 0 20px; }
+  .body h2 { font-size: 24px; font-weight: 500; margin: 40px 0 12px; }
+  .body ul.pakker { margin: 0 0 20px; padding-left: 22px; }
+  .body ul.pakker li { margin: 0 0 12px; }
+  .body .detalje { font-size: 15px; color: var(--gray-700); }
   .body a { color: var(--clay-deep); text-decoration: underline; text-underline-offset: 3px; }
 </style>
