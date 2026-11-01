@@ -66,11 +66,26 @@ const strukturdata = {
     url: PAGE_URL,
   })),
 };
+
+const faq = [
+  { q: 'Hvad koster AI-rådgivning?', a: 'De tre pakker har fast pris: AI-kontrakt-tjek 7.500 kr., AI+jura sundhedstjek 12.500 kr. og automatiserings-audit 20.000 kr. — alle ekskl. moms. Løbende sparring koster 1.800 kr./t.' },
+  { q: 'Hvad laver en AI-konsulent?', a: 'En AI-konsulent hjælper med at vælge, indføre og drive AI: hvilke arbejdsgange der er værd at automatisere, hvilke krav jura og data stiller, og hvordan løsningen bygges og holdes i drift.' },
+  { q: 'Kan I både rådgive og bygge løsningen?', a: 'Ja. Rådgivning og implementering er i én profil — jeg kortlægger arbejdsgangen, vurderer jura og data og bygger selv agenten eller automationen bagefter.' },
+  { q: 'Hvilke virksomheder rådgiver I?', a: 'Ejerledede SMV’er og vækstvirksomheder, der vil i gang med AI uden at tabe jura og data på gulvet.' },
+  { q: 'Hvordan kommer vi i gang?', a: 'Skriv kort, hvad I bruger AI til i dag, eller hvad I gerne vil have automatiseret. Så tager vi en kort afklaringssamtale og finder ud af, om en af pakkerne passer.' },
+];
+
+const faqStruktur = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
 ---
 <Base title={PAGE_TITLE}>
   <Fragment slot="head">
     <MetaTags title={PAGE_TITLE} description={PAGE_DESC} url={PAGE_URL} type="website" />
     <script type="application/ld+json" set:html={JSON.stringify(strukturdata)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqStruktur)} />
   </Fragment>
   <Header />
   <main class="page">
@@ -145,6 +160,29 @@ const strukturdata = {
         </p>
       </section>
 
+      <section class="ai-raadgivning" aria-label="AI rådgivning til virksomheder">
+        <h2>AI rådgivning til virksomheder — hvad I får ud af det</h2>
+        <p>
+          AI rådgivning skal ende et sted, hvor beslutningen kan træffes. Derfor begynder et forløb
+          med at kortlægge arbejdsgangen og slutter med en løsning, der kan køre: hvad der skal
+          automatiseres, hvilke data der må bruges, og hvad kontrakterne tillader.
+        </p>
+        <p>
+          Jeg rådgiver virksomheder om valg af værktøj, om AI i den daglige drift og om den jura, der
+          følger med — GDPR, AI Act og leverandørvilkår. Skal der bygges, bygger jeg.
+        </p>
+      </section>
+
+      <section class="faq" aria-label="Ofte stillede spørgsmål">
+        <h2>Ofte stillede spørgsmål om AI-rådgivning</h2>
+        {faq.map((f) => (
+          <article>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </article>
+        ))}
+      </section>
+
       <section class="contact">
         <h2>Skriv om jeres AI-projekt</h2>
         <p>
@@ -183,5 +221,13 @@ const strukturdata = {
   .ai-konsulent { max-width: 720px; margin: 48px 0 0; }
   .ai-konsulent h2 { font-size: 24px; margin: 0 0 16px; }
   .ai-konsulent p { margin: 0 0 16px; color: var(--gray-700); font-size: 15px; line-height: 1.6; }
+  .ai-raadgivning { max-width: 720px; margin: 48px 0 0; }
+  .ai-raadgivning h2 { font-size: 24px; margin: 0 0 16px; }
+  .ai-raadgivning p { margin: 0 0 16px; color: var(--gray-700); font-size: 15px; line-height: 1.6; }
+  .faq { max-width: 720px; margin: 48px 0 0; }
+  .faq h2 { font-size: 24px; margin: 0 0 16px; }
+  .faq article { padding: 16px 0; border-top: 1px solid var(--gray-200); }
+  .faq h3 { font-size: 16px; margin: 0 0 6px; }
+  .faq p { margin: 0; color: var(--gray-700); font-size: 15px; line-height: 1.6; }
   .contact h2 { font-size: 24px; margin: 0 0 16px; }
 </style>

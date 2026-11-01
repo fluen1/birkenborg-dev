@@ -72,11 +72,26 @@ const strukturdata = {
     },
   ],
 };
+
+const faq = [
+  { q: 'Hvad koster juridisk rådgivning?', a: 'Ad-hoc juridisk sparring koster 1.800 kr./t ekskl. moms. Der er ingen binding — du betaler kun for den tid, der bliver brugt.' },
+  { q: 'Kan jeg få hjælp til en enkelt kontrakt?', a: 'Ja. Mange forløb er én leverandøraftale, en ansættelsesaftale eller et afgrænset spørgsmål om selskabsforhold.' },
+  { q: 'Hvilke virksomheder rådgiver I?', a: 'Ejerledede SMV’er og vækstvirksomheder uden egen juridisk afdeling, hvor beslutningerne bliver truffet tæt på driften.' },
+  { q: 'Rådgiver I også om AI og legal tech?', a: 'Ja — GDPR, AI Act, leverandørvilkår og ansvar, når værktøjerne træffer beslutninger. Jeg rådgiver om indkøb og drift og bygger selv løsningerne.' },
+  { q: 'Hvor hurtigt får jeg svar?', a: 'Inden for 24 timer på hverdage. Skriv kort, hvad sagen drejer sig om, så vender jeg tilbage med næste skridt.' },
+];
+
+const faqStruktur = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
 ---
 <Base title={PAGE_TITLE}>
   <Fragment slot="head">
     <MetaTags title={PAGE_TITLE} description={PAGE_DESC} url={PAGE_URL} type="website" />
     <script type="application/ld+json" set:html={JSON.stringify(strukturdata)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqStruktur)} />
   </Fragment>
   <Header />
   <main class="page">
@@ -118,6 +133,35 @@ const strukturdata = {
         oversigt står på <a href="/arbejd-sammen/">Arbejd sammen</a>.
       </p>
 
+      <section class="raadgivning" aria-label="Sådan foregår juridisk rådgivning">
+        <h2>Juridisk rådgivning til virksomheder — sådan foregår det</h2>
+        <p>
+          Juridisk rådgivning i en virksomhed handler sjældent om én stor sag. Den handler om de
+          aftaler, der bliver indgået, og de beslutninger der bliver truffet — og om at få svar, mens
+          spørgsmålet stadig er lille. Jeg går ind som juridisk rådgiver på det område, I har brug
+          for, i den tid I har brug for.
+        </p>
+        <p>
+          Det foregår som ad-hoc sparring: du skriver, hvad sagen drejer sig om, og jeg vender tilbage
+          med en vurdering, et udkast eller en gennemgang — uden et længere forløb og uden binding.
+        </p>
+        <p>
+          Fordi jeg både er jurist og bygger løsningerne selv, stopper rådgivningen ikke ved
+          anbefalingen. Juridisk rådgivning, der ender i et dokument ingen kan bruge i praksis, er
+          spildt arbejde.
+        </p>
+      </section>
+
+      <section class="faq" aria-label="Ofte stillede spørgsmål">
+        <h2>Ofte stillede spørgsmål om juridisk rådgivning</h2>
+        {faq.map((f) => (
+          <article>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </article>
+        ))}
+      </section>
+
       <section class="contact">
         <h2>Tag en kort samtale</h2>
         <p>
@@ -143,6 +187,14 @@ const strukturdata = {
   .omraader p { margin: 0; color: var(--gray-700); font-size: 14px; line-height: 1.5; }
   .pris { max-width: 720px; margin: 0 0 24px; color: var(--gray-700); font-size: 15px; }
   .kryds { max-width: 720px; margin: 0 0 24px; font-size: 15px; color: var(--gray-700); }
+  .raadgivning { max-width: 720px; margin: 48px 0 0; }
+  .raadgivning h2 { font-size: 24px; margin: 0 0 16px; }
+  .raadgivning p { margin: 0 0 16px; color: var(--gray-700); font-size: 15px; line-height: 1.6; }
+  .faq { max-width: 720px; margin: 48px 0 0; }
+  .faq h2 { font-size: 24px; margin: 0 0 16px; }
+  .faq article { padding: 16px 0; border-top: 1px solid var(--gray-200); }
+  .faq h3 { font-size: 16px; margin: 0 0 6px; }
+  .faq p { margin: 0; color: var(--gray-700); font-size: 15px; line-height: 1.6; }
   .contact { margin-top: 48px; max-width: 720px; }
   .contact h2 { font-size: 24px; margin: 0 0 16px; }
 </style>
