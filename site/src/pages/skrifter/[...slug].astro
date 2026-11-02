@@ -9,11 +9,13 @@ import StructuredData from '../../components/StructuredData.astro';
 import { formatDate } from '../../lib/format-date';
 import seoOverridesJson from '../../data/seo-overrides.json';
 import seoOverridesExtra from '../../data/seo-overrides-2026-10-26.json';
+import seoOverrides20261102 from '../../data/seo-overrides-2026-11-02.json';
 
 type SeoOverride = { title?: string; description?: string };
 const seoOverrides = {
   ...seoOverridesJson,
   ...seoOverridesExtra,
+  ...seoOverrides20261102,
 } as unknown as Record<string, SeoOverride>;
 
 export async function getStaticPaths() {
