@@ -165,6 +165,11 @@ const related: RelatedPost[] = allPosts
           <a href={`/chat/?about=${currentSlug}`}>
             Spørg Philip-bot om <em>dette skrift</em> →
           </a>
+          <p class="raadgivning-links">
+            Har du brug for hjælp i din virksomhed?
+            <a href="/juridisk-raadgivning/">Juridisk rådgivning</a> ·
+            <a href="/ai-raadgivning/">AI-rådgivning og implementering</a>
+          </p>
         </aside>
       </article>
       <aside class="post-margin">
@@ -307,6 +312,14 @@ const related: RelatedPost[] = allPosts
   }
   .ask-cta a:hover { color: var(--ink); }
   .ask-cta a:hover em { text-decoration-color: var(--clay-deep); }
+  .raadgivning-links {
+    margin: 14px 0 0;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--gray-700);
+  }
+  .raadgivning-links a { color: var(--clay-deep); }
 
   @media (max-width: 900px) {
     .post-layout { grid-template-columns: 1fr; gap: 16px; }
