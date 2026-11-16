@@ -141,6 +141,13 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
           </a>
         ))}
       </div>
+      <p class="projekt-note" data-reveal>
+        Jeg har også samlet et <a
+          href="https://birkenborg.gumroad.com/l/wuashc?utm_source=birkenborg.dev&amp;utm_medium=site&amp;utm_campaign=promptbibliotek"
+          target="_blank"
+          rel="noopener">dansk promptbibliotek</a
+        >: 56 færdige prompts og en kort guide til almindelige arbejdsopgaver, skrevet på dansk. 99 kr.
+      </p>
     </section>
   </main>
   <Footer />
@@ -237,6 +244,14 @@ const PAGE_DESC = 'Cand.merc.jur. der bygger AI-agenter til jurist-arbejde. Skri
   }
   .pill .nm { font-weight: 500; color: var(--ink); margin-bottom: 4px; }
   .pill .desc { font-size: 13px; color: var(--gray-700); }
+  .projekt-note {
+    margin: 16px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--gray-700);
+  }
+  .projekt-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .projekt-note a:hover { color: var(--clay); }
 
   @media (max-width: 900px) {
     .hero-row { grid-template-columns: 1fr; gap: 8px; }
